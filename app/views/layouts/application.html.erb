@@ -8,11 +8,11 @@
     <%= yield(:head) %>
   </head>
   <body>
-    <div id="container">
+    <div class="container">
       <%= render 'layouts/header' %>
       <section class="round">
       <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <div class="flash name"><%= msg %></div>
       <% end %>
       <%= content_tag :h1, yield(:title) if show_title? %>
       <%= yield %>
