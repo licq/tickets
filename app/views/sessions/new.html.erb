@@ -1,0 +1,16 @@
+#coding: utf-8
+<% title "登陆" %>
+
+<p>如果您是旅行社，还没有帐户?<%= link_to "注册!", signup_path %></p>
+
+<%= form_tag sessions_path do %>
+  <p>
+    <%= label_tag :login, "用户名" %><br />
+    <%= text_field_tag :login, params[:login] %>
+  </p>
+  <p>
+    <%= label_tag :password, "密码" %><br />
+    <%= password_field_tag :password %>
+  </p>
+  <p><%= submit_tag "登陆"%></p>
+<% end %>

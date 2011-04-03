@@ -8,6 +8,7 @@ gem 'rails', '3.0.5'
 gem 'sqlite3'
 group :development do
   gem 'jquery-rails'
+  gem 'nifty-generators'
 end
 group :development, :test do
   gem 'rspec-rails'
@@ -35,3 +36,5 @@ end
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem "bcrypt-ruby", :require => "bcrypt"
+gem "mocha", :group => :test
