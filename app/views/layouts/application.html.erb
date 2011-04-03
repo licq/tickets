@@ -12,7 +12,7 @@
       <%= render 'layouts/header' %>
       <section class="round">
       <% flash.each do |name, msg| %>
-        <div class="flash name"><%= msg %></div>
+        <div class="flash <%= name %>"><%= msg %></div>
       <% end %>
       <%= content_tag :h1, yield(:title) if show_title? %>
       <%= yield %>

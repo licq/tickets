@@ -3,10 +3,9 @@
 <%= link_to logo, root_path %>
 <nav class="round">
 <ul>
-  <li><%= link_to "Home", root_path %></li>
   <% if logged_in? %>
    欢迎 <%= current_user.username %>.
-    <%= link_to "修改个人信息", edit_current_user_path %> or
+    <%= link_to "修改个人信息", edit_current_user_path %> 
     <%= link_to "登出", logout_path %>
   <% end %>
 </ul>
