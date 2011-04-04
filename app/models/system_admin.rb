@@ -1,0 +1,3 @@
+class SystemAdmin < User
+  
+end

@@ -3,6 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe User do
   def new_user(attributes = {})
     attributes[:username] ||= 'foo'
+    attributes[:name] ||= "foo bar"
     attributes[:email] ||= 'foo@example.com'
     attributes[:password] ||= 'abc123'
     attributes[:password_confirmation] ||= attributes[:password]
@@ -19,6 +20,10 @@ describe User do
 
   it "should require username" do
     new_user(:username => '').should have(1).error_on(:username)
+  end
+
+  it "should require name" do
+    new_user(:name => '').should have(1).error_on(:name)
   end
 
   it "should require password" do

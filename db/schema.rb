@@ -10,7 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110403060055) do
+ActiveRecord::Schema.define(:version => 20110404024958) do
+
+  create_table "spots", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "spots", ["code"], :name => "index_spots_on_code", :unique => true
+  add_index "spots", ["name"], :name => "index_spots_on_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "username"
@@ -19,6 +30,9 @@ ActiveRecord::Schema.define(:version => 20110403060055) do
     t.string   "password_salt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.string   "type"
+    t.integer  "spot_id"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true

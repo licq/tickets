@@ -1,0 +1,20 @@
+<% title "Spot" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @spot.name %>
+</p>
+<p>
+  <strong>Code:</strong>
+  <%= @spot.code %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @spot.description %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_spot_path(@spot) %> |
+  <%= link_to "Destroy", @spot, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", spots_path %>
+</p>

@@ -1,4 +1,6 @@
 Tickets::Application.routes.draw do
+  resources :spots
+
   match 'user/edit' => 'users#edit', :as => :edit_current_user
 
   match 'signup' => 'users#new', :as => :signup
