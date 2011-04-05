@@ -45,7 +45,8 @@ describe Spot do
     it "should create an administrator" do
       spot = new_spot
       spot.save!
-      spot.administrator.should_not be_nil
+      spot.users.reload
+      spot.users.size.should == 1
     end
   end
 end
