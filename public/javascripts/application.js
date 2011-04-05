@@ -1,2 +1,11 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+$(function(){
+    $("#spot_city_tokens").tokenInput("/cities.json",{
+        crossDomain: false,
+        prePopulate: $("#spot_city_tokens").data("pre"),
+        theme: "facebook",
+        hintText: "输入城市名或拼音",
+        preventDuplicates: true,
+        searchingText: "查询中",
+        noResultsText: "无结果"
+    });
+});

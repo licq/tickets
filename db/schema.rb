@@ -10,7 +10,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110404024958) do
+ActiveRecord::Schema.define(:version => 20110405120642) do
+
+  create_table "cities", :force => true do |t|
+    t.string   "code"
+    t.string   "name"
+    t.string   "pinyin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cities", ["code"], :name => "index_cities_on_code", :unique => true
+  add_index "cities", ["name"], :name => "index_cities_on_name", :unique => true
+
+  create_table "cities_spots", :id => false, :force => true do |t|
+    t.integer "city_id"
+    t.integer "spot_id"
+  end
 
   create_table "spots", :force => true do |t|
     t.string   "name"

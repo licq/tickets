@@ -2,16 +2,42 @@
     <%= f.error_messages %>
 
     <p>
-      <%= f.label :code %><br/>
+      <%= f.label :code %>
       <%= f.text_field :code %>
     </p>
     <p>
-      <%= f.label :name %><br/>
+      <%= f.label :name %>
       <%= f.text_field :name %>
     </p>
     <p>
-      <%= f.label :description %><br/>
+      <%= f.label :city_tokens, "所在城市" %>
+      <%= f.text_field :city_tokens , "data-pre"=> @spot.cities.map(&:attributes).to_json  %>
+    </p>
+    <p>
+      <%= f.label :description %>
       <%= f.text_area :description %>
     </p>
+    <%= f.fields_for :admin do |af| %>
+        <p>
+          <%= af.label :username,"用户名" %>
+          <%= af.text_field :username %>
+        </p>
+        <p>
+          <%= af.label :name, "姓名" %>
+          <%= af.text_field :name %>
+        </p>
+        <p>
+          <%= af.label :email ,"邮箱"%>
+          <%= af.text_field :email %>
+        </p>
+        <p>
+          <%= af.label :password, "密码" %>
+          <%= af.password_field :password %>
+        </p>
+        <p>
+          <%= af.label :password_confirmation,"重复密码" %>
+          <%= af.password_field :password_confirmation %>
+        </p>
+    <% end %>
     <p><%= f.submit %></p>
 <% end %>

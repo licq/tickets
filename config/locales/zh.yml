@@ -185,6 +185,8 @@ zh:
         name: "景区名称"
         code: "景区编码"
         description: "描述"
+        admin: ""
+        cities: ""
 
   activemodel:
     errors:

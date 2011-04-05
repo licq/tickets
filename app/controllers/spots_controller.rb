@@ -9,6 +9,7 @@ class SpotsController < ApplicationController
 
   def new
     @spot = Spot.new
+    @spot.admin = SpotAdmin.new
   end
 
   def create

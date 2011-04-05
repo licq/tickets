@@ -1,3 +1,4 @@
+#coding: utf-8
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Spot do
@@ -6,12 +7,19 @@ describe Spot do
     attributes[:name] ||= 'spot'
     attributes[:description] ||= "description"
     attributes[:admin_attributes] ||= {}
+    attributes[:city_ids] ||= [@beijing.id, @shanghai.id]
     attributes[:admin_attributes][:username] = "username"
     attributes[:admin_attributes][:name] = "name"
     attributes[:admin_attributes][:email] = "email@email.com"
     attributes[:admin_attributes][:password] = "password"
     attributes[:admin_attributes][:password_confirmation] = "password"
     Spot.new(attributes)
+  end
+
+  before(:all) do
+    City.delete_all
+    @beijing = City.create!(:name => "北京", :code => "001", :pinyin => "beijing")
+    @shanghai = City.create!(:name => "上海", :code => "002", :pinyin => "shanghai")
   end
 
   before(:each) do
@@ -52,6 +60,12 @@ describe Spot do
       spot = Spot.new(:name => "spotname", :code => "003")
       spot.should_not be_valid
       spot.should have(1).error_on(:admin)
+    end
+  end
+
+  describe "cities" do
+    it "should require at least one city" do
+      new_spot(:city_ids => []).should have(1).error_on(:cities)
     end
   end
 end
