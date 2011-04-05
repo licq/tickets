@@ -5,12 +5,12 @@ describe Spot do
     attributes[:code] ||= '003'
     attributes[:name] ||= 'spot'
     attributes[:description] ||= "description"
-    attributes[:administrator_attributes] ||= {}
-    attributes[:administrator_attributes][:username] = "username"
-    attributes[:administrator_attributes][:name] = "name"
-    attributes[:administrator_attributes][:email] = "email@email.com"
-    attributes[:administrator_attributes][:password] = "password"
-    attributes[:administrator_attributes][:password_confirmation] = "password"
+    attributes[:admin_attributes] ||= {}
+    attributes[:admin_attributes][:username] = "username"
+    attributes[:admin_attributes][:name] = "name"
+    attributes[:admin_attributes][:email] = "email@email.com"
+    attributes[:admin_attributes][:password] = "password"
+    attributes[:admin_attributes][:password_confirmation] = "password"
     Spot.new(attributes)
   end
 
@@ -41,12 +41,17 @@ describe Spot do
     end
   end
 
-  describe "administrator" do
-    it "should create an administrator" do
+  describe "admin" do
+    it "should create an admin" do
       spot = new_spot
       spot.save!
-      spot.users.reload
-      spot.users.size.should == 1
+      spot.admin.should_not be_nil
+    end
+
+    it "should require an admin to create spot" do
+      spot = Spot.new(:name => "spotname", :code => "003")
+      spot.should_not be_valid
+      spot.should have(1).error_on(:admin)
     end
   end
 end

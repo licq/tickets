@@ -1,14 +1,12 @@
 class Spot < ActiveRecord::Base
-  attr_accessible :name, :code, :description
-
   validates :name, :presence => true, :uniqueness => true
   validates :code, :presence => true, :uniqueness => true
+  validates_associated :admin
+  validates_presence_of :admin, :on => :create
 
   has_many :users
-  has_one :administrator,  :class_name => 'SpotAdmin', :conditions => {:type => "SpotAdmin"}
+  has_one :admin,:class_name => 'SpotAdmin'
+  has_one :operators,:class_name => 'SpotOperator'
 
-  def administrator_attibures=(attributes)
-    logger.error(attributes)
-    self.users << SpotAdmin.new(attributes)
-  end
+  accepts_nested_attributes_for :admin
 end
