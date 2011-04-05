@@ -1,9 +1,23 @@
-<% if logged_in? %>
-  <div id="navigation">
-    <ul> 
-      <li><a href="#">景区管理</a></li>
-      <li><a href="#">旅行社管理</a></li>
-      <li><a href="#">订单管理</a></li>
-    </ul>
-  </div>
-<% end %>
+<div id="navigation">
+  <ul>
+    <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
+      <div class="list">
+        <a href="#">景区管理</a>
+        <br/>
+        <a href="<%= new_spot_path %>">新建景区</a><br/>
+        <a href="<%= spots_path %>">景区查询</a><br/>
+      </div>
+    </li>
+    <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
+      <div class="list">
+        <a href="#">旅行社管理</a>
+      </div>
+    </li>
+    <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
+      <div class="list">
+        <a href="#">订单管理</a>
+      </div>
+    </li>
+  </ul>
+</div>
+

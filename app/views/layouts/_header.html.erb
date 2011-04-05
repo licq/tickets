@@ -1,13 +1,14 @@
 <header>
-<% logo = image_tag "logo.png", :alt => "景区网络营销系统", :class => "round" %>
-<%= link_to logo, root_path %>
-<nav class="round">
-<ul>
-  <% if logged_in? %>
-   欢迎 <%= current_user.username %>.
-    <%= link_to "修改个人信息", edit_current_user_path %> 
-    <%= link_to "登出", logout_path %>
-  <% end %>
-</ul>
-</nav>
+  <% logo = image_tag "logo.png", :alt => "景区网络营销系统", :class => "round" %>
+  <%= link_to logo, root_path %>
+  <nav class="round">
+    <ul>
+      <% if logged_in? %>
+          欢迎 <%= current_user.name %>.
+          <%= link_to "修改个人信息", edit_user_path(current_user) %>
+          <%= link_to "登出", logout_path %>
+      <% end %>
+    </ul>
+  </nav>
+  <%= render 'layouts/navigation' %>
 </header>

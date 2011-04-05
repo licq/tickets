@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update_attributes(params[:user])
-      redirect_to root_url, :notice => "您的个人信息更新已成功."
+      redirect_to edit_user_path, :notice => "您的个人信息更新已成功."
     else
       render :action => 'edit'
     end

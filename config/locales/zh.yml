@@ -173,12 +173,18 @@ zh:
       header: "发生错误"
     models:
       user:  "用户"
+      spot:  "景区"
     attributes:
       user:
         username: "用户名"
         password: "密码"        
         password_confirmation: "重复密码"        
         email: "邮箱"
+        name: "姓名"
+      spot:
+        name: "景区名称"
+        code: "景区编码"
+        description: "描述"
 
   activemodel:
     errors:
