@@ -76,19 +76,6 @@ nav ul li a:hover {
   text-decoration: underline;
 }
 
-a.signup_button {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  text-align: center;
-  width: 190px;
-  color: #fff;
-  background: #006400;
-  font-size: 150%;
-  font-weight: bold;
-  padding: 20px;
-}
-
 .round {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -122,11 +109,6 @@ td.sidebar{
   padding: 1em;
   vertical-align: top;
   background: #ffc;
-}
-
-.profile img.gravater{
-  border: 1px solid #999;
-  margin-bottom: -15px;
 }
 
 div.field div.actions{

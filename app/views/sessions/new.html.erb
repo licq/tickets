@@ -1,16 +1,54 @@
-#coding: utf-8
-<% title "登陆" %>
+<!DOCTYPE html>
 
-<p>如果您是旅行社，还没有帐户?<%= link_to "注册!", signup_path %></p>
+<html>
+<head>
+  <title>景区网络营销系统</title>
+  <%= render 'layouts/stylesheets' %>
+  <%= stylesheet_link_tag 'login', :media => 'screen' %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+<div class="container">
+  <div id="main">
+    <h3>景区网络营销系统</h3>
 
-<%= form_tag sessions_path do %>
-  <p>
-    <%= label_tag :login, "用户名" %><br />
-    <%= text_field_tag :login, params[:login] %>
-  </p>
-  <p>
-    <%= label_tag :password, "密码" %><br />
-    <%= password_field_tag :password %>
-  </p>
-  <p><%= submit_tag "登陆"%></p>
-<% end %>
+
+    <% flash.each do |name, msg| %>
+        <div class="flash <%= name %>"><%= msg %></div>
+    <% end %>
+    <%= form_tag sessions_path do %>
+        <table id="login_table" cellpadding="1" border="0">
+          <tr>
+            <td>
+              <%= label_tag :login, "用户名:" %>
+            </td>
+            <td>
+              <%= text_field_tag :login, params[:login] %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= label_tag :password, "密码:" %>
+            </td>
+            <td>
+              <%= password_field_tag :password %>
+            </td>
+          </tr>
+
+          <tr>
+            <td></td>
+            <td><%= submit_tag "登陆" %></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="signup_td">
+              <p>如果您是旅行社，还没有帐户?<%= link_to "注册!", signup_path %></p>
+            </td>
+          </tr>
+        </table>
+    <% end %>
+  </div>
+  <%= debug(params) if Rails.env.development? %>
+</div>
+</body>
+</html>
+

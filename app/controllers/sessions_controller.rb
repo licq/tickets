@@ -1,5 +1,7 @@
 #coding: utf-8
 class SessionsController < ApplicationController
+  layout false
+
   def new
   end
 
