@@ -1,20 +1,36 @@
-<% title "Spot" %>
+<% title "景区" %>
 
 <p>
-  <strong>Name:</strong>
+  <strong>景区名称:</strong>
   <%= @spot.name %>
 </p>
 <p>
-  <strong>Code:</strong>
+  <strong>景区编码:</strong>
   <%= @spot.code %>
 </p>
 <p>
-  <strong>Description:</strong>
+  <strong>所在城市:</strong>
+  <%= @spot.cities.map(&:name).join(",") %>
+</p>
+<p>
+  <strong>描述:</strong>
   <%= @spot.description %>
 </p>
+<p>
+  <strong>管理员姓名:</strong>
+  <%= @spot.admin.name %>
+</p>
+<p>
+  <strong>管理员用户名:</strong>
+  <%= @spot.admin.username %>
+</p>
+<p>
+  <strong>管理员邮箱:</strong>
+  <%= @spot.admin.email %>
+</p>
+
 
 <p>
-  <%= link_to "Edit", edit_spot_path(@spot) %> |
-  <%= link_to "Destroy", @spot, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", spots_path %>
+  <%= link_to "修改", edit_spot_path(@spot) %> |
+  <%= link_to "景区列表", spots_path %>
 </p>

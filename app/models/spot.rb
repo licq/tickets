@@ -14,6 +14,9 @@ class Spot < ActiveRecord::Base
 
   accepts_nested_attributes_for :admin
 
+  scope :name_with, lambda{|q| where('name like ?', "%#{q}%")}
+  scope :status, lambda{|b| where('disabled = ? ' , b)}
+
   def city_tokens=(ids)
     self.city_ids = ids.split(",")
   end

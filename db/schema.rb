@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110405120642) do
+ActiveRecord::Schema.define(:version => 20110405152243) do
 
   create_table "cities", :force => true do |t|
     t.string   "code"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20110405120642) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "disabled"
   end
 
   add_index "spots", ["code"], :name => "index_spots_on_code", :unique => true

@@ -68,4 +68,12 @@ describe Spot do
       new_spot(:city_ids => []).should have(1).error_on(:cities)
     end
   end
+
+  describe "name scope" do
+    it "should return the correct result with name search" do
+      new_spot.save!
+      Spot.name_with("sp").count.should == 1
+      Spot.name_with("").count.should == 1
+    end
+  end
 end

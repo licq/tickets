@@ -187,6 +187,7 @@ zh:
         description: "描述"
         admin: ""
         cities: ""
+        disabled: "状态"
 
   activemodel:
     errors:
@@ -226,3 +227,8 @@ zh:
       create: "新增%{model}"
       update: "更新%{model}"
       submit: "储存%{model}"
+
+  views:
+     pagination:
+       previous: "上一页"
+       next: "下一页"

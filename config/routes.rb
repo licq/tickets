@@ -1,6 +1,10 @@
 Tickets::Application.routes.draw do
   resources :cities
-  resources :spots
+  resources :spots do
+    collection do
+      get 'search'
+    end
+  end
   resources :sessions
   resources :users
 
