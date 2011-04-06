@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20110405152243) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "disabled"
+    t.boolean  "disabled",    :default => false, :null => false
   end
 
   add_index "spots", ["code"], :name => "index_spots_on_code", :unique => true
