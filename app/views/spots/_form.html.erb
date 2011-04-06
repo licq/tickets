@@ -1,43 +1,18 @@
-<%= form_for @spot do |f| %>
-    <%= f.error_messages %>
+<%= simple_form_for @spot,:html => {:novalidate => true} do |f| %>
+    <!--<%= f.error_messages %>-->
 
-    <p>
-      <%= f.label :code %>
-      <%= f.text_field :code %>
-    </p>
-    <p>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-    </p>
-    <p>
-      <%= f.label :city_tokens, "所在城市" %>
-      <%= f.text_field :city_tokens , "data-pre"=> @spot.cities.map(&:attributes).to_json  %>
-    </p>
-    <p>
-      <%= f.label :description %>
-      <%= f.text_area :description %>
-    </p>
-    <%= f.fields_for :admin do |af| %>
-        <p>
-          <%= af.label :username,"用户名" %>
-          <%= af.text_field :username %>
-        </p>
-        <p>
-          <%= af.label :name, "姓名" %>
-          <%= af.text_field :name %>
-        </p>
-        <p>
-          <%= af.label :email ,"邮箱"%>
-          <%= af.text_field :email %>
-        </p>
-        <p>
-          <%= af.label :password, "密码" %>
-          <%= af.password_field :password %>
-        </p>
-        <p>
-          <%= af.label :password_confirmation,"重复密码" %>
-          <%= af.password_field :password_confirmation %>
-        </p>
+    <%= f.input :code %>
+    <%= f.input :name %>
+    <%= f.input :city_tokens, :label =>"所在城市", :required => true, :hint => "至少选择一个城市，可以多选",
+                :input_html => {"data-pre"=> @spot.cities.map(&:attributes).to_json} %>
+    <%= f.input :description %>
+    <%= f.simple_fields_for :admin do |af| %>
+        <%= af.input :username %>
+        <%= af.input :name %>
+        <%= af.input :email %>
+        <%= af.input :password %>
+        <%= af.input :password_confirmation, :required => true %>
     <% end %>
-    <p><%= f.submit %></p>
+
+    <%= f.button :submit %>
 <% end %>

@@ -6,6 +6,7 @@ class City < ActiveRecord::Base
   has_and_belongs_to_many :spots
 
   def self.search(word)
-    where("name LIKE :word OR pinyin LIKE :word", :word => "#{word}%")
+#    where("name LIKE :word OR pinyin LIKE :word", :word => "#{word}%")
+    where(:name.matches % "#{word}%" | :pinyin.matches % "#{word}%")
   end
 end

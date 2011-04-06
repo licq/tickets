@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'kaminari'
 gem 'meta_where'
 gem 'meta_search'
+gem 'simple_form'
 
 group :development do
   gem 'jquery-rails'
