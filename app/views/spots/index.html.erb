@@ -1,22 +1,20 @@
 <% title "景区列表" %>
 <div id="search">
-  <%= form_for :search, :url => spots_path,:html => {:method => :get} do |f| %>
-      <p>
-        景区名称:<%= f.text_field :name, :value => params[:search][:name] %>
-      </p>
+  <%= form_for @search do |f| %>
+      <div>
+        景区名称:<%= f.text_field :name_contains %>
+      </div>
 
-      <p>
-        所在城市:<%= f.text_field :city_id %>
-      </p>
+      <div>
+        所在城市:<%= f.text_field :cities_name_contains %>
+      </div>
 
-      <p>
-        状态:<%= f.select :disabled, [["正常", false], ["已禁用", true]], :value => params[:search][:diabled] %>
-      </p>
+      <div>
+        状态:<%= f.select :disabled_eq, [["正常", false], ["已禁用", true]] %>
+      </div>
 
-      <p>
-      </p>
       <%= f.submit("查询") %>
-      </p>
+
   <% end %>
 </div>
 <%= paginate @spots %>

@@ -7,6 +7,9 @@ gem 'rails', '3.0.5'
 
 gem 'sqlite3'
 gem 'kaminari'
+gem 'meta_where'
+gem 'meta_search'
+
 group :development do
   gem 'jquery-rails'
   gem 'nifty-generators'

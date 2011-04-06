@@ -14,22 +14,7 @@ class Spot < ActiveRecord::Base
 
   accepts_nested_attributes_for :admin
 
-  scope :name_like, lambda{|q| where('name like ?', "%#{q}%")}
-  scope :city_like, lambda{|cn| where()}
-  scope :status, lambda{|b| where('disabled = ? ' , b)}
-
   def city_tokens=(ids)
     self.city_ids = ids.split(",")
-  end
-
-  def self.search(name,city_name,disabled_value)
-    where_string = "spots.id=cities_spots.spot_id and cities.id=cities_spots.city_id "
-    where_string += " and spots.name like :name" unless name.blank?
-    where_string += " and cities.name like :city_name" unless city_name.blank?
-    disabled_value = false if disabled_value.nil?
-    where_string += " and spots.disabled = :disabled"
-      
-    select(:*).from("spots,cities,cities_spots").where(where_string,:name => "%#{name}%",:city_name => "%#{city_name}%",
-                                                       :disabled => disabled_value)
   end
 end

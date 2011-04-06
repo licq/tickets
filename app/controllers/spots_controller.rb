@@ -1,7 +1,8 @@
+#coding: utf-8
 class SpotsController < ApplicationController
   def index
-    @condition = params[:condition] || {}
-    @spots= Spot.search(@condition.name,@condition.city_ids,@condition.disabled)
+    @search = Spot.search(params[:search])
+    @spots= @search.page(params[:page]).per(2)
   end
 
   def show
@@ -16,7 +17,7 @@ class SpotsController < ApplicationController
   def create
     @spot = Spot.new(params[:spot])
     if @spot.save
-      redirect_to @spot, :notice => "Successfully created spot."
+      redirect_to @spot, :notice => "景区已创建."
     else
       render :action => 'new'
     end
@@ -29,15 +30,9 @@ class SpotsController < ApplicationController
   def update
     @spot = Spot.find(params[:id])
     if @spot.update_attributes(params[:spot])
-      redirect_to @spot, :notice  => "Successfully updated spot."
+      redirect_to @spot, :notice  => "修改已成功."
     else
       render :action => 'edit'
     end
-  end
-
-  def destroy
-    @spot = Spot.find(params[:id])
-    @spot.destroy
-    redirect_to spots_url, :notice => "Successfully destroyed spot."
   end
 end
