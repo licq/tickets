@@ -1,16 +1,7 @@
 class SpotsController < ApplicationController
   def index
-    search = Spot.scoped
-    if params[:search]
-      search = search.name_with(params[:search][:name])
-      if params[:search][:disabled] == "true"
-         search = search.status(true)
-      else
-         search = search.status(false)
-      end
-
-    end
-    @spots= search.page(params[:page]).per(2)
+    @condition = params[:condition] || {}
+    @spots= Spot.search(@condition.name,@condition.city_ids,@condition.disabled)
   end
 
   def show

@@ -48,6 +48,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     mocha (0.9.12)
+    mysql (2.8.1)
     nifty-generators (0.4.6)
     polyglot (0.3.1)
     rack (1.2.2)
@@ -98,6 +99,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mocha
+  mysql
   nifty-generators
   rails (= 3.0.5)
   rspec-rails

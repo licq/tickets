@@ -8,11 +8,11 @@ describe Spot do
     attributes[:description] ||= "description"
     attributes[:admin_attributes] ||= {}
     attributes[:city_ids] ||= [@beijing.id, @shanghai.id]
-    attributes[:admin_attributes][:username] = "username"
-    attributes[:admin_attributes][:name] = "name"
-    attributes[:admin_attributes][:email] = "email@email.com"
-    attributes[:admin_attributes][:password] = "password"
-    attributes[:admin_attributes][:password_confirmation] = "password"
+    attributes[:admin_attributes][:username] ||= "username"
+    attributes[:admin_attributes][:name] ||= "name"
+    attributes[:admin_attributes][:email] ||= "email@email.com"
+    attributes[:admin_attributes][:password] ||= "password"
+    attributes[:admin_attributes][:password_confirmation] ||= "password"
     Spot.new(attributes)
   end
 
@@ -23,6 +23,7 @@ describe Spot do
   end
 
   before(:each) do
+    User.delete_all
     Spot.delete_all
   end
 
@@ -72,8 +73,19 @@ describe Spot do
   describe "name scope" do
     it "should return the correct result with name search" do
       new_spot.save!
-      Spot.name_with("sp").count.should == 1
-      Spot.name_with("").count.should == 1
+      Spot.name_like("sp").count.should == 1
+      Spot.name_like("").count.should == 1
+    end
+  end
+
+  describe "search" do
+    it "should return the correct results with search" do
+      new_spot.save!
+
+      new_spot(:city_ids => [@beijing.id],:name => "jingqu1",:code => "011", :admin_attributes => {:username => "admintest"}).save!
+      new_spot(:city_ids => [@shanghai.id],:name => "jingqu2",:code => "012",:admin_attributes => {:username => "admintest2"}).save!
+      spots = Spot.search("jingqu",nil,nil)
+      spots.size.should == 2
     end
   end
 end
