@@ -4,15 +4,15 @@ describe SpotsController do
   fixtures :all
   render_views
 
-  it "index action should render index template" do
-    get :index
-    response.should render_template(:index)
-  end
-
-  it "show action should render show template" do
-    get :show, :id => Spot.first
-    response.should render_template(:show)
-  end
+#  it "index action should render index template" do
+#    get :index
+#    response.should render_template(:index)
+#  end
+#
+#  it "show action should render show template" do
+#    get :show, :id => Spot.first
+#    response.should render_template(:show)
+#  end
 
   it "new action should render new template" do
     get :new
@@ -46,12 +46,5 @@ describe SpotsController do
     Spot.any_instance.stubs(:valid?).returns(true)
     put :update, :id => Spot.first
     response.should redirect_to(spot_url(assigns[:spot]))
-  end
-
-  it "destroy action should destroy model and redirect to index action" do
-    spot = Spot.first
-    delete :destroy, :id => spot
-    response.should redirect_to(spots_url)
-    Spot.exists?(spot.id).should be_false
   end
 end
