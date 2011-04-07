@@ -23,10 +23,10 @@
     <th>管理员用户名</th>
     <th>管理员邮箱</th>
     <th>状态</th>
-    <th></th>
+    <th colspan="3">操作</th>
   </tr>
   <% for spot in @spots %>
-      <tr>
+      <tr id="spot<%=spot.id%>_row">
         <td><%= spot.name %></td>
         <td><%= spot.code %></td>
         <td> <%= spot.cities.map(&:name).join(",") %>  </td>
@@ -36,6 +36,11 @@
         <td><%= spot.disabled? ? "已禁用" : "正常" %></td>
         <td><%= link_to "查看", spot %></td>
         <td><%= link_to "修改", edit_spot_path(spot) %></td>
+        <% if spot.disabled? %>
+            <td><%= link_to "启用", enable_spot_path(spot), :method => :put, :remote=> true %></td>
+        <% else %>
+            <td><%= link_to "禁用", disable_spot_path(spot), :method => :put, :remote => true %></td>
+        <% end %>
       </tr>
   <% end %>
 </table>

@@ -15,6 +15,7 @@
 
 
 class Spot < ActiveRecord::Base
+  paginates_per 10
   validates :name, :presence => true, :uniqueness => true
   validates :code, :presence => true, :uniqueness => true
   validates_associated :admin

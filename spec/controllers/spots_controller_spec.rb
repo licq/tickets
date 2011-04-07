@@ -53,4 +53,5 @@ describe SpotsController do
     put :update, :id => @spot
     response.should redirect_to(spot_url(assigns[:spot]))
   end
+
 end

@@ -1,8 +1,9 @@
 Tickets::Application.routes.draw do
   resources :cities
   resources :spots do
-    collection do
-      get 'search'
+    member do
+      put 'disable'
+      put 'enable'
     end
   end
   resources :sessions
