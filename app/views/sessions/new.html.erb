@@ -3,51 +3,46 @@
 <html>
 <head>
   <title>景区网络营销系统</title>
-  <%= render 'layouts/stylesheets' %>
-  <%= stylesheet_link_tag 'login', :media => 'screen' %>
+  <%= stylesheet_link_tag :flutie, 'login', :media => 'screen' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
 <div class="container">
   <div id="main">
-    <h3>景区网络营销系统</h3>
-
-
+    <h1>景区网络营销系统</h1>
     <% flash.each do |name, msg| %>
         <div class="flash <%= name %>"><%= msg %></div>
     <% end %>
-    <%= form_tag sessions_path do %>
-        <table id="login_table" cellpadding="1" border="0">
-          <tr>
-            <td>
-              <%= label_tag :login, "用户名:" %>
-            </td>
-            <td>
-              <%= text_field_tag :login, params[:login] %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= label_tag :password, "密码:" %>
-            </td>
-            <td>
-              <%= password_field_tag :password %>
-            </td>
-          </tr>
+    <%= form_tag sessions_path, :class => "simple_form" do %>
+        <fieldset class="inputs">
+          <div class="input string">
+            <label>用户名:</label>
+            <%= text_field_tag :login, params[:login] %>
+          </div>
+          <div>
+            <label>密码:</label>
+            <%= password_field_tag :password %>
+          </div>
 
-          <tr>
-            <td></td>
-            <td><%= submit_tag "登陆" %></td>
-          </tr>
-          <tr>
-            <td colspan="2" class="signup_td">
-              <p>如果您是旅行社，还没有帐户?<%= link_to "注册!", signup_path %></p>
-            </td>
-          </tr>
-        </table>
+
+        <!--<tr>-->
+        <!--<td></td>-->
+        <!--<td><%= submit_tag "登陆" %></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td colspan="2" class="signup_td">-->
+        <!--<p>如果您是旅行社，还没有帐户?<%= link_to "注册!", signup_path %></p>-->
+        <!--</td>-->
+        <!--</tr>-->
+        <!--</table>-->
+        <div class="hint">如果您是旅行社，还没有帐户?<%= link_to "注册!", signup_path %></div>
+        <div class="buttons">
+          <%= submit_tag "登陆" %>
+        </div>
+        </fieldset>
     <% end %>
-  </div>
-  <%= debug(params) if Rails.env.development? %>
+    </div>
+<%= debug(params) if Rails.env.development? %>
 </div>
 </body>
 </html>

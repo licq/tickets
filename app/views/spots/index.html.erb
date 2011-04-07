@@ -1,20 +1,16 @@
 <% title "景区列表" %>
 <div id="search">
-  <%= form_for @search do |f| %>
-      <div>
-        景区名称:<%= f.text_field :name_contains %>
-      </div>
-
-      <div>
-        所在城市:<%= f.text_field :cities_name_contains %>
-      </div>
-
-      <div>
-        状态:<%= f.select :disabled_eq, [["正常", false], ["已禁用", true]] %>
-      </div>
-
-      <%= f.submit("查询") %>
-
+  <%= simple_form_for @search do |f| %>
+      <fieldset class="inputs">
+        <%= f.input :name_contains, :label => "景区名称", :required => false %>
+        <%= f.input :cities_name_contains, :label => "城市名", :required => false %>
+        <%= f.input :disabled_eq, :collection => [[false, "正常"], [true, "已禁用"]],
+                    :label_method => :last, :value_method => :first,
+                    :as => :select, :label => "状态", :required => false, :include_blank => false %>
+      </fieldset>
+      <fieldset class="buttons">
+        <%= f.button :submit, :value => "查询" %>
+      </fieldset>
   <% end %>
 </div>
 <%= paginate @spots %>
@@ -27,6 +23,7 @@
     <th>管理员用户名</th>
     <th>管理员邮箱</th>
     <th>状态</th>
+    <th></th>
   </tr>
   <% for spot in @spots %>
       <tr>

@@ -19,34 +19,12 @@ header img {
 
 section {
     margin-top: 1em;
-    font-size: 120%;
     padding: 20px;
     background: #fff;
 }
 
-section h1 {
-    font-size: 200%
-}
-
-a {
-    color: #09c;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #069;
-    text-decoration: underline;
-}
-
-a:visited {
-    color: #069;
-}
-
 nav {
     float: right;
-}
-
-nav {
     background-color: white;
     padding: 0 0.7em;
     white-space: nowrap;
@@ -140,7 +118,6 @@ div.field div.actions {
 }
 
 #navigation {
-    font-size: 90%;
     float: right;
 }
 
@@ -153,28 +130,27 @@ div.field div.actions {
 #navigation li {
     display: inline;
     float: left;
+    margin: 5px 0;
 }
 
 #navigation a:link, #navigation a:visited {
     margin-right:5px;
     padding:5px 10px 5px 8px;
     color: #FFFFFF;
-    /*background-color: #BCFF1D;*/
+    background-color: #513768;
     text-decoration: none;
-    border-left: 1px solid #fc0;
+    border-left: 1px solid #3e340d;
 }
 
 #navigation a:hover {
-    color:#060;
     border-left: 5px solid #f60;
-    /*color: #FFFFFF;*/
-    /*background-color: #711515;*/
+    color: #FFFFFF;
 }
 
 #navigation .menu1 {
     height: auto;
     overflow-y: hidden;
-    filter: Alpha(opacity = 70);
+    /*filter: Alpha(opacity = 70);*/
 }
 
 #navigation .menu2 {
@@ -199,7 +175,7 @@ div.field div.actions {
 }
 
 .simple_form div.input {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .simple_form div.boolean, .simple_form input[type='submit'] {

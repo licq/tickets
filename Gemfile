@@ -10,6 +10,7 @@ gem 'kaminari'
 gem 'meta_where'
 gem 'meta_search'
 gem 'simple_form'
+gem 'flutie'
 
 group :development do
   gem 'jquery-rails'
