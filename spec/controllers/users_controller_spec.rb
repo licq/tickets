@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe UsersController do
-  fixtures :all
   render_views
 
   it "new action should render new template" do
@@ -28,7 +27,7 @@ describe UsersController do
   end
 
   it "edit action should render edit template" do
-    @controller.stubs(:current_user).returns(User.first)
+    @controller.stubs(:current_user).returns(Factory(:user))
     get :edit, :id => "ignored"
     response.should render_template(:edit)
   end
@@ -39,14 +38,14 @@ describe UsersController do
   end
 
   it "update action should render edit template when user is invalid" do
-    @controller.stubs(:current_user).returns(User.first)
+    @controller.stubs(:current_user).returns(Factory(:user))
     User.any_instance.stubs(:valid?).returns(false)
     put :update, :id => "ignored"
     response.should render_template(:edit)
   end
 
   it "update action should redirect when user is valid" do
-    @controller.stubs(:current_user).returns(User.first)
+    @controller.stubs(:current_user).returns(Factory(:user))
     User.any_instance.stubs(:valid?).returns(true)
     put :update, :id => "ignored"
     response.should redirect_to(root_url)

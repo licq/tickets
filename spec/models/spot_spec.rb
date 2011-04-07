@@ -2,58 +2,36 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Spot do
-  def new_spot(attributes = {})
-    attributes[:code] ||= '003'
-    attributes[:name] ||= 'spot'
-    attributes[:description] ||= "description"
-    attributes[:admin_attributes] ||= {}
-    attributes[:city_ids] ||= [@beijing.id, @shanghai.id]
-    attributes[:admin_attributes][:username] ||= "username"
-    attributes[:admin_attributes][:name] ||= "name"
-    attributes[:admin_attributes][:email] ||= "email@email.com"
-    attributes[:admin_attributes][:password] ||= "password"
-    attributes[:admin_attributes][:password_confirmation] ||= "password"
-    Spot.new(attributes)
-  end
-
-  before(:all) do
-    City.delete_all
-    @beijing = City.create!(:name => "北京", :code => "001", :pinyin => "beijing")
-    @shanghai = City.create!(:name => "上海", :code => "002", :pinyin => "shanghai")
-  end
-
   before(:each) do
-    User.delete_all
     Spot.delete_all
   end
 
   describe "validation" do
     it "should be valid" do
-      new_spot.should be_valid
+      Factory.build(:spot).should be_valid
     end
 
     it "should require name" do
-      new_spot(:name => "").should have(1).error_on(:name)
+      Factory.build(:spot,:name => "").should have(1).error_on(:name)
     end
 
     it "should reject spot with same name" do
-      new_spot.save!
-      new_spot(:code => "002").should have(1).error_on(:name)
+      spot = Factory(:spot)
+      Factory.build(:spot,:name => spot.name).should have(1).error_on(:name)
     end
     it "should require code" do
-      new_spot(:code => "").should have(1).error_on(:code)
+      Factory.build(:spot,:code => "").should have(1).error_on(:code)
     end
 
     it "should reject spot with same code" do
-      new_spot.save!
-      new_spot(:name => "name2").should have(1).error_on(:code)
+      spot = Factory(:spot)
+      Factory.build(:spot,:code => spot.code).should have(1).error_on(:code)
     end
   end
 
   describe "admin" do
     it "should create an admin" do
-      spot = new_spot
-      spot.save!
+      spot = Factory(:spot)
       spot.admin.should_not be_nil
     end
 
@@ -66,7 +44,7 @@ describe Spot do
 
   describe "cities" do
     it "should require at least one city" do
-      new_spot(:city_ids => []).should have(1).error_on(:cities)
+      Factory.build(:spot,:cities => []).should have(1).error_on(:cities)
     end
   end
 end

@@ -15,9 +15,14 @@ gem 'flutie'
 group :development do
   gem 'jquery-rails'
   gem 'nifty-generators'
+  gem 'annotate-models'
 end
 group :development, :test do
   gem 'rspec-rails'
+end
+
+group :test do
+  gem 'factory_girl_rails'
 end
 
 # Use unicorn as the web server

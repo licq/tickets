@@ -1,18 +1,24 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe SpotsController do
-  fixtures :all
   render_views
 
-#  it "index action should render index template" do
-#    get :index
-#    response.should render_template(:index)
-#  end
-#
-#  it "show action should render show template" do
-#    get :show, :id => Spot.first
-#    response.should render_template(:show)
-#  end
+  before(:all) do
+    User.delete_all
+    Spot.delete_all
+    City.delete_all
+    @spot = Factory(:spot)
+  end
+
+  it "index action should render index template" do
+    get :index
+    response.should render_template(:index)
+  end
+
+  it "show action should render show template" do
+    get :show, :id => @spot
+    response.should render_template(:show)
+  end
 
   it "new action should render new template" do
     get :new
@@ -32,19 +38,19 @@ describe SpotsController do
   end
 
   it "edit action should render edit template" do
-    get :edit, :id => Spot.first
+    get :edit, :id => @spot
     response.should render_template(:edit)
   end
 
   it "update action should render edit template when model is invalid" do
     Spot.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => Spot.first
+    put :update, :id => @spot
     response.should render_template(:edit)
   end
 
   it "update action should redirect when model is valid" do
     Spot.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Spot.first
+    put :update, :id => @spot
     response.should redirect_to(spot_url(assigns[:spot]))
   end
 end

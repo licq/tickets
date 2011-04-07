@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 20110405152243
+#
+# Table name: cities
+#
+#  id         :integer         not null, primary key
+#  code       :string(255)
+#  name       :string(255)
+#  pinyin     :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class City < ActiveRecord::Base
   validates :name, :presence => true
   validates :code, :presence => true

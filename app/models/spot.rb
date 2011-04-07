@@ -1,4 +1,19 @@
 #coding: utf-8
+# == Schema Information
+# Schema version: 20110405152243
+#
+# Table name: spots
+#
+#  id          :integer         not null, primary key
+#  name        :string(255)
+#  code        :string(255)
+#  description :text
+#  created_at  :datetime
+#  updated_at  :datetime
+#  disabled    :boolean         not null
+#
+
+
 class Spot < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
   validates :code, :presence => true, :uniqueness => true
