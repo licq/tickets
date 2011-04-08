@@ -1,5 +1,10 @@
 Tickets::Application.routes.draw do
-  resources :agents
+  resources :agents do
+    member do
+      put 'disable'
+      put 'enable'
+    end
+  end
   resources :cities
   resources :spots do
     member do

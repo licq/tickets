@@ -1,21 +1,44 @@
-<% title "Agents" %>
+<% title "旅行社列表" %>
+<div id="search">
+  <%= simple_form_for @search do |f| %>
+      <fieldset class="inputs">
+        <%= f.input :name_contains, :label => "旅行社名称", :required => false %>
+        <%= f.input :disabled_eq, :collection => [[false, "正常"], [true, "已禁用"]],
+                    :label_method => :last, :value_method => :first,
+                    :as => :select, :label => "状态", :required => false, :include_blank => false %>
+      </fieldset>
+      <fieldset class="buttons">
+        <%= f.button :submit, :value => "查询" %>
+      </fieldset>
+  <% end %>
+</div>
+<%= paginate @agents %>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Disabled</th>
+    <th>名称</th>
+    <th>操作员姓名</th>
+    <th>操作员用户名</th>
+    <th>操作员邮箱</th>
+    <th>状态</th>
+    <th colspan="3">操作</th>
   </tr>
   <% for agent in @agents %>
     <tr>
       <td><%= agent.name %></td>
-      <td><%= agent.description %></td>
-      <td><%= agent.disabled %></td>
-      <td><%= link_to "Show", agent %></td>
-      <td><%= link_to "Edit", edit_agent_path(agent) %></td>
-      <td><%= link_to "Destroy", agent, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= agent.operator.name %></td>
+      <td><%= agent.operator.username %></td>
+      <td><%= agent.operator.email %></td>
+      <td><%=show_disabled agent.disabled %></td>
+      <td><%= link_to "查看", agent %></td>
+      <td><%= link_to "修改", edit_agent_path(agent) %></td>
+       <% if agent.disabled? %>
+            <td><%= link_to "启用", enable_agent_path(agent), :method => :put, :remote=> true %></td>
+        <% else %>
+            <td><%= link_to "禁用", disable_agent_path(agent), :method => :put, :remote => true %></td>
+        <% end %>
     </tr>
   <% end %>
 </table>
 
-<p><%= link_to "New Agent", new_agent_path %></p>
+<p><%= link_to "新建旅行社", new_agent_path %></p>

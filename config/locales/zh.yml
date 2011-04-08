@@ -174,6 +174,7 @@ zh:
     models:
       user:  "用户"
       spot:  "景区"
+      agent: "旅行社"
     attributes:
       user:
         username: "用户名"
@@ -188,6 +189,11 @@ zh:
         admin: ""
         cities: ""
         disabled: "状态"
+      agent:
+        name: "旅行社名称"
+        description: "描述"
+        disabled: "状态"
+        operator: ""
 
   activemodel:
     errors:

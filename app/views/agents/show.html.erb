@@ -1,20 +1,30 @@
-<% title "Agent" %>
+<% title "旅行社" %>
 
 <p>
-  <strong>Name:</strong>
+  <strong>名称:</strong>
   <%= @agent.name %>
 </p>
 <p>
-  <strong>Description:</strong>
+  <strong>描述:</strong>
   <%= @agent.description %>
 </p>
 <p>
-  <strong>Disabled:</strong>
-  <%= @agent.disabled %>
+  <strong>状态:</strong>
+  <%= show_disabled(@agent.disabled?) %>
 </p>
-
 <p>
-  <%= link_to "Edit", edit_agent_path(@agent) %> |
-  <%= link_to "Destroy", @agent, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", agents_path %>
+  <strong>操作员姓名:</strong>
+  <%= @agent.operator.name %>
+</p>
+<p>
+  <strong>操作员用户名:</strong>
+  <%= @agent.operator.username %>
+</p>
+<p>
+  <strong>操作员邮箱:</strong>
+  <%= @agent.operator.email %>
+</p>
+<p>
+  <%= link_to "修改", edit_agent_path(@agent) %> |
+  <%= link_to "旅行社列表", agents_path %>
 </p>

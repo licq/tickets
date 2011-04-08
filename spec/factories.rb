@@ -51,5 +51,5 @@ end
 Factory.define :agent do |a|
   a.name "agent_name"
   a.description "agent description"
-  a.operator :agent_operator
+  a.association :operator, :factory => :agent_operator
 end

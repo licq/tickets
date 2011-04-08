@@ -1,6 +1,9 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe User do
+  before(:each) do
+    User.delete_all
+  end
   it "should be valid" do
     Factory.build(:user).should be_valid
   end

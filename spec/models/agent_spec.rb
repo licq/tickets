@@ -1,6 +1,11 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Agent do
+  before(:each) do
+    Agent.delete_all
+    User.delete_all
+  end
+
   it "should be valid" do
     Factory.build(:agent).should be_valid
   end

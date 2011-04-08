@@ -33,7 +33,7 @@
         <td><%= spot.admin.name %></td>
         <td><%= spot.admin.username %></td>
         <td><%= spot.admin.email %></td>
-        <td><%= spot.disabled? ? "已禁用" : "正常" %></td>
+        <td><%= show_disabled(spot.disabled?) %></td>
         <td><%= link_to "查看", spot %></td>
         <td><%= link_to "修改", edit_spot_path(spot) %></td>
         <% if spot.disabled? %>

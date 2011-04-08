@@ -1,16 +1,18 @@
-<%= form_for @agent do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </p>
-  <p>
-    <%= f.label :disabled %><br />
-    <%= f.check_box :disabled %>
-  </p>
-  <p><%= f.submit %></p>
+<%= simple_form_for @agent,:html => {:novalidate => true} do |f| %>
+
+    <fieldset class="inputs">
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.simple_fields_for :operator do |af| %>
+        <%= af.input :username %>
+        <%= af.input :name %>
+        <%= af.input :email %>
+        <%= af.input :password %>
+        <%= af.input :password_confirmation, :required => true %>
+    <% end %>
+  </fieldset>
+
+  <fieldset class="buttons">
+    <%= f.button :submit %>
+    </fieldset>
 <% end %>

@@ -1,6 +1,12 @@
+#coding: utf-8
 class AgentsController < ApplicationController
   def index
-    @agents = Agent.all
+    @search = Agent.search(params[:search] || {:disabled_eq => false})
+    page = params[:page].to_i
+    @agents= @search.page(page)
+    if (@agents.all.empty?) && (page > 1)
+      @agents = @search.page(page -1)
+    end
   end
 
   def show
@@ -9,12 +15,13 @@ class AgentsController < ApplicationController
 
   def new
     @agent = Agent.new
+    @agent.operator = AgentOperator.new
   end
 
   def create
     @agent = Agent.new(params[:agent])
     if @agent.save
-      redirect_to @agent, :notice => "Successfully created agent."
+      redirect_to @agent, :notice => "旅行社已创建."
     else
       render :action => 'new'
     end
@@ -27,15 +34,31 @@ class AgentsController < ApplicationController
   def update
     @agent = Agent.find(params[:id])
     if @agent.update_attributes(params[:agent])
-      redirect_to @agent, :notice  => "Successfully updated agent."
+      redirect_to @agent, :notice => "修改已成功"
     else
       render :action => 'edit'
     end
   end
 
-  def destroy
-    @agent = Agent.find(params[:id])
-    @agent.destroy
-    redirect_to agents_url, :notice => "Successfully destroyed agent."
+  def disable
+    respond_to do |format|
+      format.js do
+        @agent = Agent.find(params[:id])
+        @agent.disabled = true
+        @agent.save
+        flash[:notice] = "禁用#{@agent.name}已成功"
+      end
+    end
+  end
+
+  def enable
+    respond_to do |format|
+      format.js do
+        @agent = Agent.find(params[:id])
+        @agent.disabled = false
+        @agent.save
+        flash[:notice] = "启用#{@agent.name}已成功"
+      end
+    end
   end
 end
