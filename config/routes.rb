@@ -1,4 +1,5 @@
 Tickets::Application.routes.draw do
+  resources :agents
   resources :cities
   resources :spots do
     member do

@@ -39,3 +39,17 @@ Factory.define :spot do |s|
   s.association :admin, :factory => :spot_admin
   s.cities { |cities| [cities.association(:city)] }
 end
+
+Factory.define :agent_operator do |u|
+  u.username { Factory.next(:username) }
+  u.name "name"
+  u.email { |ur| "#{ur.username}@example.com" }
+  u.password "foobar"
+  u.password_confirmation { |ur| ur.password }
+end
+
+Factory.define :agent do |a|
+  a.name "agent_name"
+  a.description "agent description"
+  a.operator :agent_operator
+end

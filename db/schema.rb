@@ -10,7 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110405152243) do
+ActiveRecord::Schema.define(:version => 20110408141103) do
+
+  create_table "agents", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "disabled",    :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "agents", ["name"], :name => "index_agents_on_name", :unique => true
 
   create_table "cities", :force => true do |t|
     t.string   "code"
@@ -50,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20110405152243) do
     t.string   "name"
     t.string   "type"
     t.integer  "spot_id"
+    t.integer  "agent_id"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
