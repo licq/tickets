@@ -26,10 +26,6 @@ describe Season do
     Factory.build(:season, :name => "unique_season").should be_valid
   end
 
-  it "should require a spot with one season" do
-    Factory.build(:season, :spot => nil).should have(1).error_on(:spot)
-  end
-
   it "should require a timespan with one season" do
     Factory.build(:season, :timespans => []).should have(1).error_on(:timespans)
   end
