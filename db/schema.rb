@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110408141103) do
+ActiveRecord::Schema.define(:version => 20110409063058) do
 
   create_table "agents", :force => true do |t|
     t.string   "name"
@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(:version => 20110408141103) do
     t.integer "spot_id"
   end
 
+  create_table "seasons", :force => true do |t|
+    t.string   "name"
+    t.integer  "spot_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "spots", :force => true do |t|
     t.string   "name"
     t.string   "code"
@@ -49,6 +56,14 @@ ActiveRecord::Schema.define(:version => 20110408141103) do
 
   add_index "spots", ["code"], :name => "index_spots_on_code", :unique => true
   add_index "spots", ["name"], :name => "index_spots_on_name", :unique => true
+
+  create_table "timespans", :force => true do |t|
+    t.date     "from"
+    t.date     "to"
+    t.integer  "season_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "username"

@@ -26,6 +26,8 @@ class Spot < ActiveRecord::Base
   has_one :admin,:class_name => 'SpotAdmin',:dependent => :delete
   has_one :operators,:class_name => 'SpotOperator'
   has_and_belongs_to_many :cities
+  has_many :seasons
+  has_many :timespans, :through => :seasons
   attr_reader :city_tokens
 
   accepts_nested_attributes_for :admin

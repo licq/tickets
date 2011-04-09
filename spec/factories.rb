@@ -53,3 +53,21 @@ Factory.define :agent do |a|
   a.description "agent description"
   a.association :operator, :factory => :agent_operator
 end
+
+Factory.sequence :season_name do |n|
+   "season#{n}"
+end
+
+Factory.define :timespan do |t|
+  t.from Date.today
+  t.to {Date.today + 30}
+end
+
+Factory.define :season do |s|
+  s.name {Factory.next(:season_name)}
+  s.association :spot
+  s.timespans {|ts| [ts.association(:timespan)]}
+end
+
+
+

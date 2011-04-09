@@ -1,0 +1,17 @@
+<% title "Seasons" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+  <% for season in @seasons %>
+    <tr>
+      <td><%= season.name %></td>
+      <td><%= link_to "Show", season %></td>
+      <td><%= link_to "Edit", edit_season_path(season) %></td>
+      <td><%= link_to "Destroy", season, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Season", new_season_path %></p>

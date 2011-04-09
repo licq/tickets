@@ -1,4 +1,6 @@
 Tickets::Application.routes.draw do
+  resources :seasons
+
   resources :agents do
     member do
       put 'disable'
