@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(:version => 20110409063058) do
   add_index "spots", ["name"], :name => "index_spots_on_name", :unique => true
 
   create_table "timespans", :force => true do |t|
-    t.date     "from"
-    t.date     "to"
+    t.date     "from_date"
+    t.date     "to_date"
     t.integer  "season_id"
     t.datetime "created_at"
     t.datetime "updated_at"

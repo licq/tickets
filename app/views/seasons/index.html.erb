@@ -1,17 +1,26 @@
-<% title "Seasons" %>
+<% title "淡旺季" %>
 
 <table>
   <tr>
-    <th>Name</th>
+    <th width="20%">名称</th>
+    <th width="50%">时间段</th>
+    <th width="30%" colspan="3">操作</th>
   </tr>
   <% for season in @seasons %>
-    <tr>
-      <td><%= season.name %></td>
-      <td><%= link_to "Show", season %></td>
-      <td><%= link_to "Edit", edit_season_path(season) %></td>
-      <td><%= link_to "Destroy", season, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
+      <tr>
+        <td><%= season.name %></td>
+        <td>
+          <% season.timespans.each do |timespan| %>
+              <%= timespan.from_date %>----<%= timespan.to_date %>
+              <br/>
+          <% end %>
+        </td>
+        <td><%= link_to "查看", season %></td>
+        <td><%= link_to "修改", edit_season_path(season) %></td>
+        <td><%= link_to "删除", season, :confirm => '你确认删除吗?', :method => :delete %></td>
+      </tr>
   <% end %>
 </table>
 
-<p><%= link_to "New Season", new_season_path %></p>
+<%= link_to "新建淡旺季", new_season_path %>
+

@@ -59,8 +59,8 @@ Factory.sequence :season_name do |n|
 end
 
 Factory.define :timespan do |t|
-  t.from Date.today
-  t.to {Date.today + 30}
+  t.from_date Date.today
+  t.to_date {Date.today + 30}
 end
 
 Factory.define :season do |s|

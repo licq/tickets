@@ -5,5 +5,7 @@ class Season < ActiveRecord::Base
   validates_associated :timespans
 
   belongs_to :spot
-  has_many :timespans,:conditions => proc{"'#{Date.today.to_s(:db)}' BETWEEN from AND to"}
+  has_many :timespans, :dependent => :destroy
+  accepts_nested_attributes_for :timespans,:reject_if => lambda { |a| a[:from_date].blank? || a[:to_date].blank? },
+                                :allow_destroy => true
 end

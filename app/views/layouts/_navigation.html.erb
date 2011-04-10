@@ -16,6 +16,15 @@
         <a href="<%= agents_path %>">旅行社查询</a><br/>
       </div>
     </li>
+    <% if current_user.type == "SpotAdmin" %>
+        <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
+          <div class="list">
+            <a href="#">基础设置&nbsp;</a>
+            <br/>
+            <a href="<%= seasons_path %>">淡旺季设置</a><br/>
+          </div>
+        </li>
+    <% end %>
     <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
       <div class="list">
         <a href="#">订单管理</a>

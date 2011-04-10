@@ -175,6 +175,8 @@ zh:
       user:  "用户"
       spot:  "景区"
       agent: "旅行社"
+      season: "淡旺季"
+      timespan: "时间段"
     attributes:
       user:
         username: "用户名"
@@ -194,7 +196,11 @@ zh:
         description: "描述"
         disabled: "状态"
         operator: ""
-
+      season:
+        name: "名称"
+      timespan:
+        from_date: "起始时间"
+        to_date: "截止时间"
   activemodel:
     errors:
       template:
