@@ -1,3 +1,4 @@
+#coding=utf-8
 class SeasonsController < ApplicationController
   before_filter :set_spot
 
@@ -5,19 +6,15 @@ class SeasonsController < ApplicationController
     @seasons = @spot.seasons.all
   end
 
-  def show
-    @season = @spot.seasons.find(params[:id])
-  end
-
   def new
     @season = @spot.seasons.build
-    3.times { @season.timespans.build }
+    @season.timespans.build
   end
 
   def create
     @season = @spot.seasons.build(params[:season])
     if @season.save
-      redirect_to seasons_path, :notice => "Successfully created season."
+      redirect_to seasons_path, :notice => "创建已成功."
     else
       render :action => 'new'
     end
@@ -29,9 +26,13 @@ class SeasonsController < ApplicationController
 
   def update
     @season = @spot.seasons.find(params[:id])
-    if @season.update_attributes(params[:season])
-      redirect_to seasons_path, :notice => "Successfully updated season."
-    else
+    begin
+      if @season.update_attributes(params[:season]) && @season.reload.valid?
+        redirect_to seasons_path, :notice => "修改已成功."
+      else
+        render :action => 'edit'
+      end
+    rescue
       render :action => 'edit'
     end
   end
@@ -39,7 +40,7 @@ class SeasonsController < ApplicationController
   def destroy
     @season = @spot.seasons.find(params[:id])
     @season.destroy
-    redirect_to seasons_url, :notice => "Successfully destroyed season."
+    redirect_to seasons_url, :notice => "删除已成功."
   end
 
   private

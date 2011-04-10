@@ -1,12 +1,8 @@
-<%= simple_form_for @season do |f| %>
-    <%= f.error_messages %>
-    <p>
-      <%= f.label :name  %><br/>
-      <%= f.text_field :name %>
-    </p>
+<%= simple_form_for @season,:html => {:novalidate => true} do |f| %>
+      <%= f.input :name %>
     <% f.simple_fields_for :timespans do |tf| %>
         <%= render 'timespan_fields', :tf => tf %>
     <% end %>
-    <p><%= link_to_add_fields "新增时间段", f, :timespans %></p>
-    <p><%= f.submit %></p>
+    <div class="add_timespan"><%= link_to_add_fields "新增时间段", f, :timespans %></div>
+    <%= f.submit %>
 <% end %>

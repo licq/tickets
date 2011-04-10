@@ -1,7 +1,6 @@
 #coding: utf-8
 class Timespan < ActiveRecord::Base
-#  scope :valid_timespans,lambda{ where(:from_date <= Date.today, :to_date >= Date.today)}
-  default_scope where(":to_date >= ?",Date.today)
+  default_scope where("to_date >= ?",Date.today)
   belongs_to :season
   validates :from_date, :presence => true
   validates :to_date, :presence => true

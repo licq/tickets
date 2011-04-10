@@ -208,3 +208,11 @@ div.field div.actions {
   display: block;
   font-style: italic;
 }
+
+div.timespan_right {
+  margin-left: 75px;
+}
+
+div.add_timespan{
+    margin-left:800px;
+}

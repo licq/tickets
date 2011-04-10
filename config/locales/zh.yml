@@ -198,9 +198,10 @@ zh:
         operator: ""
       season:
         name: "名称"
+        timespans: ""
       timespan:
-        from_date: "起始时间"
-        to_date: "截止时间"
+        from_date: "开始日期"
+        to_date: "结束日期"
   activemodel:
     errors:
       template:
