@@ -41,6 +41,17 @@ module ControllerAuthentication
     session[:return_to] = nil
   end
 
+  def current_user=(user)
+    @current_user = user
+  end
+
+  def login(user)
+    session[:user_id] = user.id
+    self.current_user = user
+  end
+
+
+
   private
 
   def store_target_location

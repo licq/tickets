@@ -14,6 +14,7 @@ $(function() {
 function set_datepicker() {
     $(".start_datepicker").datepicker({
         minDate: new Date(),
+        changeYear: true,
         onClose: function(dateText, inst) {
             $(this).siblings(".end_datepicker").datepicker("option", "minDate", dateText);
             $(this).siblings(".end_datepicker").datepicker("show");
@@ -23,7 +24,8 @@ function set_datepicker() {
 
 
     $(".end_datepicker").datepicker({
-        minDate: new Date()
+        minDate: new Date(),
+        changeYear: true
     });
 }
 

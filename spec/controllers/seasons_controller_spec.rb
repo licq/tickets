@@ -7,18 +7,16 @@ describe SeasonsController do
     Spot.delete_all
     User.delete_all
     City.delete_all
-    spot = Factory(:spot)
+    Season.delete_all
+    Timespan.delete_all
     @season = Factory(:season)
+    @spot_admin = Factory(:spot_admin, :spot => @season.spot)
+    test_login(@spot_admin)
   end
 
   it "index action should render index template" do
     get :index
     response.should render_template(:index)
-  end
-
-  it "show action should render show template" do
-    get :show, :id => @season
-    response.should render_template(:show)
   end
 
   it "new action should render new template" do
@@ -35,7 +33,7 @@ describe SeasonsController do
   it "create action should redirect when model is valid" do
     Season.any_instance.stubs(:valid?).returns(true)
     post :create
-    response.should redirect_to(season_url(assigns[:season]))
+    response.should redirect_to(seasons_url)
   end
 
   it "edit action should render edit template" do
@@ -52,13 +50,12 @@ describe SeasonsController do
   it "update action should redirect when model is valid" do
     Season.any_instance.stubs(:valid?).returns(true)
     put :update, :id => @season
-    response.should redirect_to(season_url(assigns[:season]))
+    response.should redirect_to(seasons_url)
   end
 
   it "destroy action should destroy model and redirect to index action" do
-    season = @season
-    delete :destroy, :id => season
+    delete :destroy, :id => @season
     response.should redirect_to(seasons_url)
-    Season.exists?(season.id).should be_false
+    Season.exists?(@season.id).should be_false
   end
 end

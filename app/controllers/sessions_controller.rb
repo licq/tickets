@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   def create
     user = User.authenticate(params[:login], params[:password])
     if user
-      session[:user_id] = user.id
+      login(user)
       redirect_to_target_or_default root_url, :notice => "登陆已成功."
     else
       flash.now[:alert] = "不正确的用户名或密码."
