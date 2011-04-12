@@ -24,11 +24,6 @@ describe SeasonsController do
     response.should render_template(:new)
   end
 
-  it "create action should render new template when model is invalid" do
-    Season.any_instance.stubs(:valid?).returns(false)
-    post :create
-    response.should render_template(:new)
-  end
 
   it "create action should redirect when model is valid" do
     Season.any_instance.stubs(:valid?).returns(true)
@@ -41,11 +36,6 @@ describe SeasonsController do
     response.should render_template(:edit)
   end
 
-  it "update action should render edit template when model is invalid" do
-    Season.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => @season
-    response.should render_template(:edit)
-  end
 
   it "update action should redirect when model is valid" do
     Season.any_instance.stubs(:valid?).returns(true)

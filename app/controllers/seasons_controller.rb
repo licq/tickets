@@ -17,9 +17,10 @@ class SeasonsController < ApplicationController
     Season.transaction do
       if @season.save
         timespans = @spot.timespans
-        if Timespan.has_overlap(timespans)
+        overlaped_timespans = Timespan.has_overlap(timespans)
+        if (overlaped_timespans)
           error_happened = true
-          flash.now[:error] = "时间段冲突"
+          flash.now[:error] = "时间段#{overlaped_timespans[0]}与#{overlaped_timespans[1]}冲突"
           raise ActiveRecord::Rollback
         end
       end
