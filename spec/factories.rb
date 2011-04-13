@@ -69,5 +69,7 @@ Factory.define :season do |s|
   s.timespans {|ts| [ts.association(:timespan)]}
 end
 
-
+Factory.define :ticket do |t|
+  t.name "ticketname"
+end
 

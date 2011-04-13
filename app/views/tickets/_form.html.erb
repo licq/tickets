@@ -1,0 +1,13 @@
+<%= simple_form_for @ticket do |f| %>
+    <%= f.error_messages %>
+    <div class="inputs">
+      <%= f.input :name %>
+      <%= f.simple_fields_for :rates do |rf| %>
+          <div class="right75"> <%= rf.object.season.name %></div>
+          <%= rf.input :adult_price, :as => :integer %>
+          <%= rf.input :child_price, :as => :integer %>
+          <%= rf.input :season_id, :as => :hidden %>
+      <% end %>
+    </div>
+    <p><%= f.submit %></p>
+<% end %>

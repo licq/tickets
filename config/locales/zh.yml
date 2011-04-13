@@ -177,6 +177,8 @@ zh:
       agent: "旅行社"
       season: "淡旺季"
       timespan: "时间段"
+      ticket: "门票"
+      rate: "价格"
     attributes:
       user:
         username: "用户名"
@@ -202,6 +204,11 @@ zh:
       timespan:
         from_date: "开始日期"
         to_date: "结束日期"
+      ticket:
+        name: "名称"
+      rate:
+        adult_price: "成人价格"
+        child_price: "儿童价格"
   activemodel:
     errors:
       template:

@@ -28,6 +28,7 @@ class Spot < ActiveRecord::Base
   has_and_belongs_to_many :cities
   has_many :seasons
   has_many :timespans, :through => :seasons
+  has_many :tickets
   attr_reader :city_tokens
 
   accepts_nested_attributes_for :admin

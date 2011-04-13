@@ -64,12 +64,4 @@ class SeasonsController < ApplicationController
     redirect_to seasons_url, :notice => "删除已成功."
   end
 
-  private
-  def set_spot
-    if current_user && (current_user.type = "SpotAdmin")
-      @spot ||= current_user.spot
-    else
-      redirect_to login_url
-    end
-  end
 end

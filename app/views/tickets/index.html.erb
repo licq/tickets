@@ -1,0 +1,25 @@
+<% title "门票" %>
+
+<table>
+  <tr>
+    <th>名称</th>
+    <% for season in @spot.seasons %>
+        <th><%= season.name %></th>
+    <% end %>
+    <th colspan="2">操作</th>
+  </tr>
+  <% for ticket in @tickets %>
+      <tr>
+        <td><%= ticket.name %></td>
+        <% for season in @spot.seasons %>
+            <td>
+              <%= raw(show_rate(ticket.rate_for(season.name))) %>
+            </td>
+        <% end %>
+        <td><%= link_to "修改", edit_ticket_path(ticket) %></td>
+        <td><%= link_to "删除", ticket, :confirm => '你确认删除吗?', :method => :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "新建门票", new_ticket_path %></p>

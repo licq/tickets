@@ -16,4 +16,10 @@ module ApplicationHelper
     link_to_function(name, ("add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")"))
   end
 
+  def show_rate(rate)
+    if rate
+      "成人价格:#{rate.adult_price}<br/>儿童价格:#{rate.child_price}"
+    end
+  end
+
 end
