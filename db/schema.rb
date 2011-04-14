@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110413131158) do
+ActiveRecord::Schema.define(:version => 20110414155155) do
+
+  create_table "agent_prices", :force => true do |t|
+    t.integer  "spot_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "agents", :force => true do |t|
     t.string   "name"
@@ -38,12 +45,23 @@ ActiveRecord::Schema.define(:version => 20110413131158) do
     t.integer "spot_id"
   end
 
-  create_table "rates", :force => true do |t|
+  create_table "individual_rates", :force => true do |t|
+    t.integer  "child_sale_price"
+    t.integer  "child_purchase_price"
+    t.integer  "adult_sale_price"
+    t.integer  "adult_purchase_price"
+    t.integer  "agent_price_id"
+    t.integer  "season_id"
+    t.integer  "ticket_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "public_rates", :force => true do |t|
     t.integer  "season_id"
     t.integer  "adult_price"
     t.integer  "child_price"
-    t.integer  "ratable_id"
-    t.string   "ratable_type"
+    t.integer  "ticket_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -66,6 +84,16 @@ ActiveRecord::Schema.define(:version => 20110413131158) do
 
   add_index "spots", ["code"], :name => "index_spots_on_code", :unique => true
   add_index "spots", ["name"], :name => "index_spots_on_name", :unique => true
+
+  create_table "team_rates", :force => true do |t|
+    t.integer  "adult_price"
+    t.integer  "child_price"
+    t.integer  "agent_price_id"
+    t.integer  "season_id"
+    t.integer  "ticket_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "tickets", :force => true do |t|
     t.string   "name"

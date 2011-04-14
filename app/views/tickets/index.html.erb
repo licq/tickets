@@ -13,7 +13,7 @@
         <td><%= ticket.name %></td>
         <% for season in @spot.seasons %>
             <td>
-              <%= raw(show_rate(ticket.rate_for(season.name))) %>
+              <%= raw(show_public_rate(ticket.public_rate_for(season.name))) %>
             </td>
         <% end %>
         <td><%= link_to "修改", edit_ticket_path(ticket) %></td>

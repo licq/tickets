@@ -5,7 +5,7 @@ class Season < ActiveRecord::Base
 
   belongs_to :spot
   has_many :timespans, :dependent => :delete_all
-  has_many :rates, :dependent => :delete_all
+  has_many :public_rates, :dependent => :delete_all
   accepts_nested_attributes_for :timespans,
                                 :reject_if => lambda { |a| a[:from_date].blank? || a[:to_date].blank? },
                                 :allow_destroy => true

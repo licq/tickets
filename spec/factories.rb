@@ -73,3 +73,7 @@ Factory.define :ticket do |t|
   t.name "ticketname"
 end
 
+Factory.define :agent_price do |t|
+  t.name "agentpricename"
+end
+

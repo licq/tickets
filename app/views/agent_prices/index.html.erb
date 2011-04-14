@@ -1,0 +1,54 @@
+<% title "旅行社价格" %>
+
+<% season_size = @spot.seasons.size %>
+<% ticket_size = @spot.tickets.size %>
+<table>
+  <tr>
+    <th rowspan="3">名称</th>
+    <th rowspan="3">门票</th>
+    <th colspan=<%= 4*season_size %>>散客价</th>
+    <th colspan=<%= 2*season_size %>>团队价</th>
+  </tr>
+  <tr>
+    <% for season in @spot.seasons %>
+        <th colspan="4"><%= season.name %></th>
+    <% end %>
+    <% for season in @spot.seasons %>
+        <th colspan="2"><%= season.name %></th>
+    <% end %>
+  </tr>
+  <tr>
+    <% season_size.times do %>
+        <th>成人结算价</th>
+        <th>成人售价</th>
+        <th>儿童结算价</th>
+        <th>儿童售价</th>
+    <% end %>
+    <% season_size.times do %>
+        <th>成人售价</th>
+        <th>儿童售价</th>
+    <% end %>
+
+  </tr>
+  <% for agent_price in @agent_prices %>
+      <tr>
+        <td rowspan="<%= ticket_size %>"><%= agent_price.name %></td>
+
+        <td></td>
+        <% for season in @spot.seasons %>
+            <td>
+              <%= raw(show_double_rate(agent_price.double_rate_for(season.name))) %>
+            </td>
+        <% end %>
+        <% for season in @spot.seasons %>
+            <td>
+              <%= raw(show_public_rate(agent_price.public_rate_for(season.name))) %>
+            </td>
+        <% end %>
+        <td><%= link_to "修改", edit_agent_price_path(agent_price) %></td>
+        <td><%= link_to "删除", agent_price, :confirm => '你确认删除吗?', :method => :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "新建旅行社价格", new_agent_price_path %></p>

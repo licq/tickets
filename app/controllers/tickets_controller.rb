@@ -10,7 +10,7 @@ class TicketsController < ApplicationController
 
   def new
     @ticket = @spot.tickets.build
-    @ticket.rates = @spot.seasons.map { |season| @ticket.rates.new(:season => season) }
+    @ticket.public_rates = @spot.seasons.map { |season| @ticket.public_rates.new(:season => season) }
   end
 
   def create
@@ -25,8 +25,8 @@ class TicketsController < ApplicationController
   def edit
     @ticket = @spot.tickets.find(params[:id])
     @spot.seasons.each do |season|
-      unless @ticket.rate_for(season.name)
-        @ticket.rates << @ticket.rates.build(:season => season)
+      unless @ticket.public_rate_for(season.name)
+        @ticket.public_rates << @ticket.public_rates.build(:season => season)
       end
     end
   end

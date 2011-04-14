@@ -1,0 +1,12 @@
+<%= form_for @agent_price do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :spot_id %><br />
+    <%= f.text_field :spot_id %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

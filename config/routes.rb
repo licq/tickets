@@ -1,4 +1,6 @@
 Tickets::Application.routes.draw do
+  resources :agent_prices
+
   resources :tickets
 
   resources :seasons

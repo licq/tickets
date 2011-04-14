@@ -24,9 +24,9 @@ describe Ticket do
   it "should return the rate for the season" do
     season1 = Factory.build(:season, :name => "season1")
     season2 = Factory.build(:season, :name => "season2")
-    rate1 = Rate.new(:adult_price => 100, :child_price => 40, :season => season1)
-    rate2 = Rate.new(:adult_price => 55, :child_price => 20, :season => season2)
-    ticket = Factory.build(:ticket, :rates => [rate1, rate2])
-    ticket.rate_for("season1").adult_price.should == 100
+    rate1 = PublicRate.new(:adult_price => 100, :child_price => 40, :season => season1)
+    rate2 = PublicRate.new(:adult_price => 55, :child_price => 20, :season => season2)
+    ticket = Factory.build(:ticket, :public_rates => [rate1, rate2])
+    ticket.public_rate_for("season1").adult_price.should == 100
   end
 end

@@ -178,7 +178,7 @@ zh:
       season: "淡旺季"
       timespan: "时间段"
       ticket: "门票"
-      rate: "价格"
+      public_rate: "价格"
     attributes:
       user:
         username: "用户名"
@@ -206,7 +206,7 @@ zh:
         to_date: "结束日期"
       ticket:
         name: "名称"
-      rate:
+      public_rate:
         adult_price: "成人价格"
         child_price: "儿童价格"
   activemodel:
