@@ -8,9 +8,11 @@ describe AgentPricesController do
     City.delete_all
     Season.delete_all
     Ticket.delete_all
+    AgentPrice.delete_all
     @season = Factory(:season)
     @spot_admin = Factory(:spot_admin, :spot => @season.spot)
     @ticket = Factory(:ticket, :spot_id => @season.spot.id)
+    @agent_price = Factory(:agent_price, :spot_id => @season.spot.id)
     test_login(@spot_admin)
   end
 
@@ -34,7 +36,7 @@ describe AgentPricesController do
   it "create action should redirect when model is valid" do
     AgentPrice.any_instance.stubs(:valid?).returns(true)
     post :create
-    response.should redirect_to(agent_price_url(assigns[:agent_price]))
+    response.should redirect_to(agent_prices_url)
   end
 
   it "edit action should render edit template" do
@@ -51,7 +53,7 @@ describe AgentPricesController do
   it "update action should redirect when model is valid" do
     AgentPrice.any_instance.stubs(:valid?).returns(true)
     put :update, :id => AgentPrice.first
-    response.should redirect_to(agent_price_url(assigns[:agent_price]))
+    response.should redirect_to(agent_prices_url)
   end
 
   it "destroy action should destroy model and redirect to index action" do

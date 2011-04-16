@@ -8,6 +8,7 @@
     <th rowspan="3">门票</th>
     <th colspan=<%= 4*season_size %>>散客价</th>
     <th colspan=<%= 2*season_size %>>团队价</th>
+    <th rowspan="3" colspan="2">操作</th>
   </tr>
   <tr>
     <% for season in @spot.seasons %>
@@ -30,24 +31,39 @@
     <% end %>
 
   </tr>
-  <% for agent_price in @agent_prices %>
-      <tr>
-        <td rowspan="<%= ticket_size %>"><%= agent_price.name %></td>
 
-        <td></td>
-        <% for season in @spot.seasons %>
-            <td>
-              <%= raw(show_double_rate(agent_price.double_rate_for(season.name))) %>
-            </td>
-        <% end %>
-        <% for season in @spot.seasons %>
-            <td>
-              <%= raw(show_public_rate(agent_price.public_rate_for(season.name))) %>
-            </td>
-        <% end %>
-        <td><%= link_to "修改", edit_agent_price_path(agent_price) %></td>
-        <td><%= link_to "删除", agent_price, :confirm => '你确认删除吗?', :method => :delete %></td>
+  <% for agent_price in @agent_prices %>
+      <% count = 1 %>
+      <tr>
+        <th rowspan="<%= ticket_size %>"><%= agent_price.name %></th>
+        <% for ticket in @spot.tickets %>
+            <% if (count > 1) %>
+              <tr>
+          <% end %>
+          <th><%= ticket.name %></th>
+          <% for season in @spot.seasons %>
+              <% individual_rate = agent_price.individual_rate_for(season.name, ticket.name) %>
+              <th> <%= individual_rate.adult_purchase_price %> </th>
+              <th> <%= individual_rate.adult_sale_price %></th>
+              <th> <%= individual_rate.child_purchase_price %> </th>
+              <th> <%= individual_rate.child_sale_price %></th>
+              <% team_rate = agent_price.team_rate_for(season.name, ticket.name) %>
+              <th>
+                <%= team_rate.adult_price %>
+              </th>
+              <th>
+                <%= team_rate.child_price %>
+              </th>
+          <% end %>
+           <% if (count == 1) %>
+          <th rowspan="<%= ticket_size %>"><%= link_to "修改", edit_agent_price_path(agent_price) %></th>
+          <th rowspan="<%= ticket_size %>"><%= link_to "删除", agent_price, :confirm => '你确认删除吗?', :method => :delete %></th>
+           <%end%>
+          <% count += 1 %>
+      <% end %>
+
       </tr>
+
   <% end %>
 </table>
 

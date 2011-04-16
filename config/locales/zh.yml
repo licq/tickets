@@ -179,6 +179,9 @@ zh:
       timespan: "时间段"
       ticket: "门票"
       public_rate: "价格"
+      team_rate: "团队价"
+      individual_rate: "散客价"
+      agent_price: "旅行社价格"
     attributes:
       user:
         username: "用户名"
@@ -209,6 +212,16 @@ zh:
       public_rate:
         adult_price: "成人价格"
         child_price: "儿童价格"
+      agent_price:
+        name: "名称"
+      team_rate:
+        adult_price: "成人价格"
+        child_price: "儿童价格"
+      individual_rate:
+        child_sale_price: "儿童售价"
+        adult_sale_price: "成人售价"
+        child_purchase_price: "儿童结算价"
+        adult_purchase_price: "成人结算价"
   activemodel:
     errors:
       template:
