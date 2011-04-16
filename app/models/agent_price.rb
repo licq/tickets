@@ -1,7 +1,6 @@
 class AgentPrice < ActiveRecord::Base
 
   belongs_to :spot
-  belongs_to :season
   has_many :individual_rates, :dependent => :delete_all
   has_many :team_rates,  :dependent => :delete_all
 

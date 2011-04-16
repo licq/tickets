@@ -1,18 +1,24 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe AgentPricesController do
-  fixtures :all
-  render_views
+
+  before(:each) do
+    Spot.delete_all
+    User.delete_all
+    City.delete_all
+    Season.delete_all
+    Ticket.delete_all
+    @season = Factory(:season)
+    @spot_admin = Factory(:spot_admin, :spot => @season.spot)
+    @ticket = Factory(:ticket, :spot_id => @season.spot.id)
+    test_login(@spot_admin)
+  end
 
   it "index action should render index template" do
     get :index
     response.should render_template(:index)
   end
 
-  it "show action should render show template" do
-    get :show, :id => AgentPrice.first
-    response.should render_template(:show)
-  end
 
   it "new action should render new template" do
     get :new

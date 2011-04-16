@@ -16,10 +16,10 @@ describe AgentPrice do
   it "should return the rate for the season" do
     season1 = Factory.build(:season, :name => "season1")
     season2 = Factory.build(:season, :name => "season2")
-    rate1 = Rate.new(:adult_price => 100, :child_price => 40, :season => season1)
-    rate2 = Rate.new(:adult_price => 55, :child_price => 20, :season => season2)
-    agent_price = Factory.build(:agent_price, :rates => [rate1, rate2])
-    agent_price.public_rate_for("season1").adult_price.should == 100
+    teamrate1 = TeamRate.new(:adult_price => 100, :child_price => 40, :season => season1)
+    teamrate2 = TeamRate.new(:adult_price => 55, :child_price => 20, :season => season2)
+    agent_price = Factory.build(:agent_price, :team_rates => [teamrate1, teamrate2])
+    agent_price.team_rate_for("season1").adult_price.should == 100
   end
 
 end
