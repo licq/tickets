@@ -1,0 +1,49 @@
+<% title "价格关联" %>
+
+<h2>已关联</h2>
+<table>
+  <tr>
+    <th>旅行社</th>
+    <th>价格</th>
+  </tr>
+  <% for rfp in @rfps.connected %>
+    <tr>
+      <td><%= rfp.agent.name %></td>
+      <td><%= rfp.agent_price.name %></td>
+      <td><%= link_to "修改", edit_rfp_path(rfp) %></td>
+      <td><%= link_to "删除", rfp, :confirm => '你确认删除吗?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h2>已申请</h2>
+<table>
+  <tr>
+    <th>旅行社</th>
+    <th>价格</th>
+  </tr>
+  <% for rfp in @rfps.applied_by_spot %>
+    <tr>
+      <td><%= rfp.agent.name %></td>
+      <td><%= rfp.agent_price.name %></td>
+      <td><%= link_to "修改", edit_rfp_path(rfp) %></td>
+      <td><%= link_to "删除", rfp, :confirm => '你确认删除吗?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h2>待确认</h2>
+<table>
+  <tr>
+    <th>旅行社</th>
+  </tr>
+  <% for rfp in @rfps.applied_by_agent %>
+    <tr>
+      <td><%= rfp.agent.name %></td>
+      <td><%= link_to "接受", edit_rfp_path(rfp) %></td>
+      <td><%= link_to "拒绝", rfp, :confirm => '你确认删除吗?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Rfp", new_rfp_path %></p>

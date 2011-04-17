@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110414155155) do
+ActiveRecord::Schema.define(:version => 20110417140347) do
 
   create_table "agent_prices", :force => true do |t|
     t.integer  "spot_id"
@@ -62,6 +62,16 @@ ActiveRecord::Schema.define(:version => 20110414155155) do
     t.integer  "adult_price"
     t.integer  "child_price"
     t.integer  "ticket_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rfps", :force => true do |t|
+    t.integer  "agent_id"
+    t.integer  "spot_id"
+    t.integer  "agent_price_id"
+    t.string   "status",         :limit => 1, :default => "a"
+    t.boolean  "from_spot",                   :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

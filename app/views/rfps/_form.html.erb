@@ -1,0 +1,16 @@
+<%= form_for @rfp do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :agent_id %><br />
+    <%= f.text_field :agent_id %>
+  </p>
+  <p>
+    <%= f.label :spot_id %><br />
+    <%= f.text_field :spot_id %>
+  </p>
+  <p>
+    <%= f.label :agent_price_id %><br />
+    <%= f.text_field :agent_price_id %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

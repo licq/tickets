@@ -1,0 +1,9 @@
+one:
+  agent_id: 1
+  spot_id: 1
+  agent_price_id: 1
+
+two:
+  agent_id: 1
+  spot_id: 1
+  agent_price_id: 1

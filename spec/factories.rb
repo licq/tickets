@@ -77,3 +77,9 @@ Factory.define :agent_price do |t|
   t.name "agentpricename"
 end
 
+Factory.define :rfp do |r|
+  r.association :spot
+  r.association :agent
+  r.association :agent_price
+end
+
