@@ -31,7 +31,7 @@ describe AgentPrice do
     teamrate1 = TeamRate.new(:adult_price => 100, :child_price => 40, :season => season1, :ticket => ticket1)
     teamrate2 = TeamRate.new(:adult_price => 55, :child_price => 20, :season => season2, :ticket => ticket2)
     agent_price = Factory.build(:agent_price, :team_rates => [teamrate1, teamrate2])
-    agent_price.team_rate_for("season1", "ticket1").adult_price.should == 100
+    agent_price.team_rate_for(season1, ticket1).adult_price.should == 100
   end
 
 end

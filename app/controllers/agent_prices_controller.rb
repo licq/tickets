@@ -12,11 +12,9 @@ class AgentPricesController < ApplicationController
 
   def new
     @agent_price = @spot.agent_prices.build
-    @spot.seasons.each do |s|
-      @spot.tickets.each do |t|
-        @agent_price.team_rates << @agent_price.team_rates.build(:season => s, :ticket => t)
-        @agent_price.individual_rates << @agent_price.individual_rates.build(:season => s, :ticket => t)
-      end
+    @spot.seasons.product(@spot.tickets) do |s, t|
+      @agent_price.team_rates << @agent_price.team_rates.build(:season => s, :ticket => t)
+      @agent_price.individual_rates << @agent_price.individual_rates.build(:season => s, :ticket => t)
     end
   end
 
@@ -31,16 +29,6 @@ class AgentPricesController < ApplicationController
 
   def edit
     @agent_price = @spot.agent_prices.find(params[:id])
-    @spot.seasons.each do |season|
-      @spot.tickets.each do |ticket|
-        unless @agent_price.team_rate_for(season.name, ticket.name)
-          @agent_price.team_rates << @agent_price.team_rates.build(:season => season, :ticket => ticket)
-        end
-        unless @agent_price.individual_rate_for(season.name, ticket.name)
-          @agent_price.individual_rates << @agent_price.individual_rates.build(:season => season, :ticket => ticket)
-        end
-      end
-    end
   end
 
   def update
