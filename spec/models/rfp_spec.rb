@@ -7,6 +7,7 @@ describe Rfp do
     User.delete_all
     City.delete_all
     Spot.delete_all
+    Season.delete_all
     Agent.delete_all
     AgentPrice.delete_all
     Rfp.delete_all
@@ -29,13 +30,13 @@ describe Rfp do
   end
 
   it "should validate uniqueness of spot and agent when status is applied" do
-    Factory(:rfp, :spot_id => 3, :agent_id => 3, :status => "a")
-    Factory.build(:rfp, :spot_id => 3, :agent_id => 3, :status => "a").should_not be_valid
+    rfp = Factory(:rfp, :spot_id => 3, :agent_id => 3, :status => "a")
+    Factory.build(:rfp, :spot => rfp.spot, :agent => rfp.agent, :status => "a").should_not be_valid
   end
 
   it "should accept same spot and agent when status is rejected" do
-    Factory(:rfp, :spot_id => 3, :agent_id => 3, :status => "r")
-    Factory.build(:rfp, :spot_id => 3, :agent_id => 3, :status => "a").should_not be_valid
+    rfp = Factory(:rfp, :spot_id => 3, :agent_id => 3, :status => "r")
+    Factory.build(:rfp, :spot => rfp.spot, :agent => rfp.agent, :status => "a").should_not be_valid
   end
 
 end

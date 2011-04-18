@@ -73,8 +73,12 @@ Factory.define :ticket do |t|
   t.name "ticketname"
 end
 
+Factory.sequence :agentpricename do |n|
+  "agentpricename#{n}"
+end
+
 Factory.define :agent_price do |t|
-  t.name "agentpricename"
+  t.name { Factory.next(:agentpricename) }
 end
 
 Factory.define :rfp do |r|
