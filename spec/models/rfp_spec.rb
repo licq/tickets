@@ -39,4 +39,16 @@ describe Rfp do
     Factory.build(:rfp, :spot => rfp.spot, :agent => rfp.agent, :status => "a").should_not be_valid
   end
 
+   it "should return correct connected size when status is c" do
+    spot1 = Factory.build(:spot)
+    spot2 = Factory.build(:spot)
+    agent1 = Factory.build(:agent)
+    agent2 = Factory.build(:agent)
+    agent_price1 = Factory.build(:agent_price , :spot => spot1)
+    agent_price2 = Factory.build(:agent_price , :spot => spot2)
+    Factory.build(:rfp, :spot => spot1, :agent => agent1, :agent_price =>agent_price1 , :status => "c")
+    Factory.build(:rfp, :spot => spot2, :agent => agent2, :agent_price =>agent_price2 , :status => "c")
+    Rfp.connected.size.should == 2
+  end
+
 end

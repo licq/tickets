@@ -82,8 +82,8 @@ Factory.define :agent_price do |t|
 end
 
 Factory.define :rfp do |r|
-  r.association :spot
   r.association :agent
   r.association :agent_price
+  r.association :spot
 end
 

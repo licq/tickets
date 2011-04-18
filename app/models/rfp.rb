@@ -8,4 +8,7 @@ class Rfp < ActiveRecord::Base
   belongs_to :agent
   belongs_to :agent_price
   belongs_to :spot
+
+  scope :connected, where("status = 'c'")
+
 end
