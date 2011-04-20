@@ -1,10 +1,9 @@
+#coding: utf-8
 class RfpsController < ApplicationController
-  def index
-    @rfps = Rfp.all
-  end
+  before_filter :set_spot
 
-  def show
-    @rfp = Rfp.find(params[:id])
+  def index
+    @rfps = @spot.rfps
   end
 
   def new
@@ -13,8 +12,9 @@ class RfpsController < ApplicationController
 
   def create
     @rfp = Rfp.new(params[:rfp])
+    @rfp.from_spot = true
     if @rfp.save
-      redirect_to @rfp, :notice => "Successfully created rfp."
+      redirect_to rfps_path, :notice => "创建已成功"
     else
       render :action => 'new'
     end
@@ -27,7 +27,7 @@ class RfpsController < ApplicationController
   def update
     @rfp = Rfp.find(params[:id])
     if @rfp.update_attributes(params[:rfp])
-      redirect_to @rfp, :notice  => "Successfully updated rfp."
+      redirect_to rfps_path, :notice  => "修改已成功"
     else
       render :action => 'edit'
     end

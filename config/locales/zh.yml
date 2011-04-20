@@ -182,6 +182,7 @@ zh:
       team_rate: "团队价"
       individual_rate: "散客价"
       agent_price: "旅行社价格"
+      rfp: "价格关联"
     attributes:
       user:
         username: "用户名"
@@ -222,6 +223,11 @@ zh:
         adult_sale_price: "成人售价"
         child_purchase_price: "儿童结算价"
         adult_purchase_price: "成人结算价"
+      rfp:
+        status: "状态"
+        agent: "旅行社"
+        spot: "景区"
+        agent_price: "旅行社价格"
   activemodel:
     errors:
       template:
