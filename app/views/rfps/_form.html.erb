@@ -1,5 +1,5 @@
 <%= simple_form_for @rfp do |f| %>
-  <%= f.association :agent %>
+  <%= f.association :agent , :disabled => !f.object.new_record?%>
   <%= f.association :agent_price %>
   <p><%= f.submit %></p>
 <% end %>

@@ -1,7 +1,20 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe RfpsController do
-  render_views
+
+  before(:each) do
+    Spot.delete_all
+    User.delete_all
+    City.delete_all
+    Season.delete_all
+    Ticket.delete_all
+    AgentPrice.delete_all
+    Agent.delete_all
+    Rfp.delete_all
+    @rfp = Factory(:rfp)
+    @spot_admin = Factory(:spot_admin, :spot => @rfp.spot)
+    test_login(@spot_admin)
+  end
 
   it "index action should render index template" do
     get :index
@@ -27,7 +40,7 @@ describe RfpsController do
   it "create action should redirect when model is valid" do
     Rfp.any_instance.stubs(:valid?).returns(true)
     post :create
-    response.should redirect_to(rfp_url(assigns[:rfp]))
+    response.should redirect_to(rfps_url)
   end
 
   it "edit action should render edit template" do
@@ -44,7 +57,7 @@ describe RfpsController do
   it "update action should redirect when model is valid" do
     Rfp.any_instance.stubs(:valid?).returns(true)
     put :update, :id => Rfp.first
-    response.should redirect_to(rfp_url(assigns[:rfp]))
+    response.should redirect_to(rfps_url)
   end
 
   it "destroy action should destroy model and redirect to index action" do

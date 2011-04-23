@@ -11,7 +11,7 @@ class RfpsController < ApplicationController
   end
 
   def create
-    @rfp = Rfp.new(params[:rfp])
+    @rfp = @spot.rfps.new(params[:rfp])
     @rfp.from_spot = true
     if @rfp.save
       redirect_to rfps_path, :notice => "创建已成功"
