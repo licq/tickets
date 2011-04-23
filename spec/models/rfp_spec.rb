@@ -34,9 +34,11 @@ describe Rfp do
     Factory.build(:rfp, :spot => rfp.spot, :agent => rfp.agent, :status => "a").should_not be_valid
   end
 
-  it "should accept same spot and agent when status is rejected" do
-    rfp = Factory(:rfp, :spot_id => 3, :agent_id => 3, :status => "r")
-    Factory.build(:rfp, :spot => rfp.spot, :agent => rfp.agent, :status => "a").should_not be_valid
+  it "should not validate uniqueness of spot and agent when status is rejected" do
+    spot = Factory(:spot)
+    agent = Factory(:agent)
+    rfp = Factory(:rfp, :spot => spot, :agent => agent, :status => "r")
+    Factory.build(:rfp, :spot => spot, :agent => agent, :status => "a").should be_valid
   end
 
    it "should return correct connected size when status is c" do

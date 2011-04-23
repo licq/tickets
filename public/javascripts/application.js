@@ -18,6 +18,15 @@ $(function() {
 
     });
 
+	$('#spot_accept_rfp_dialog').click(function() {
+        $('<div></div>')
+		.load($(this).action)
+		.dialog({
+			title: '选择旅行社价格'
+		});
+		return false;
+	});
+
 });
 
 function set_datepicker() {
@@ -52,3 +61,5 @@ function add_fields(link, association, content) {
     $(content.replace(regexp, new_id)).insertBefore($(link).parent());
     set_datepicker();
 }
+
+

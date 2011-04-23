@@ -28,6 +28,17 @@
           </div>
         </li>
     <% end %>
+
+    <% if current_user && current_user.type == "AgentOperator" %>
+        <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
+          <div class="list">
+            <a href="#">基础设置&nbsp;</a>
+            <br/>
+            <a href="<%= agent_rfps_path %>">价格关联</a><br/>
+          </div>
+        </li>
+    <% end %>
+
     <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
       <div class="list">
         <a href="#">订单管理</a>

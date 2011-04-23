@@ -21,7 +21,7 @@ class RfpsController < ApplicationController
   end
 
   def edit
-    @rfp = Rfp.find(params[:id])
+    @rfp = @spot.rfps.find(params[:id])
   end
 
   def update
@@ -38,4 +38,19 @@ class RfpsController < ApplicationController
     @rfp.destroy
     redirect_to rfps_url, :notice => "Successfully destroyed rfp."
   end
+
+  def accept
+    @rfp = Rfp.find(params[:id])
+    @rfp.status = 'c'
+    @rfp.save
+    redirect_to rfps_path, :notice => "接受已成功"
+  end
+
+  def reject
+    @rfp = Rfp.find(params[:id])
+    @rfp.status = 'r'
+    @rfp.save
+    redirect_to rfps_path, :notice => "拒绝已成功"
+  end
+
 end

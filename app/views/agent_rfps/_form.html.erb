@@ -1,0 +1,4 @@
+<%= simple_form_for @rfp, :url =>agent_rfps_path do |f| %>
+  <%= f.association :spot%>
+  <p><%= f.submit %></p>
+<% end %>

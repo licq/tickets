@@ -1,0 +1,46 @@
+<% title "价格关联" %>
+
+<h2>已关联</h2>
+<table>
+  <tr>
+    <th>景区</th>
+    <th colspan="2">操作</th>
+  </tr>
+  <% for rfp in @rfps.connected %>
+    <tr>
+      <td><%= rfp.spot.name %></td>
+      <td><%= link_to "删除", agent_rfp_path(rfp), :confirm => '你确认删除吗?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h2>已申请</h2>
+<table>
+  <tr>
+    <th>景区</th>
+    <th colspan="2">操作</th>
+  </tr>
+  <% for rfp in @rfps.applied_by_agent %>
+    <tr>
+      <td><%= rfp.spot.name %></td>
+      <td><%= link_to "撤销", agent_rfp_path(rfp), :confirm => '你确认撤销吗?', :method => :delete%></td>
+    </tr>
+  <% end %>
+</table>
+
+<h2>待确认</h2>
+<table>
+  <tr>
+    <th>景区</th>
+    <th colspan="2">操作</th>
+  </tr>
+  <% for rfp in @rfps.applied_by_spot %>
+    <tr>
+      <td><%= rfp.spot.name %></td>
+      <td><%= link_to "接受", accept_agent_rfp_path(rfp), :method => :put %></td>
+      <td><%= link_to "拒绝", reject_agent_rfp_path(rfp), :confirm => '你确认拒绝吗?' , :method => :put %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "新建价格关联", new_agent_rfp_path %></p>

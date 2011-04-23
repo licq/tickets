@@ -1,5 +1,18 @@
 Tickets::Application.routes.draw do
-  resources :rfps
+
+  resources :agent_rfps do
+    member do
+      put 'accept'
+      put 'reject'
+    end
+  end
+
+  resources :rfps do
+    member do
+      put 'accept'
+      put 'reject'
+    end
+  end
 
   resources :agent_prices
 
