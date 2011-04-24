@@ -43,7 +43,7 @@
   <% for rfp in @rfps.applied_by_agent %>
     <tr>
       <td><%= rfp.agent.name %></td>
-      <td><%= link_to "接受", edit_rfp_path(rfp), :id => "spot_accept_rfp_dialog"%></td>
+      <td><%= link_to "接受", edit_accept_rfp_path(rfp)%></td>
       <td><%= link_to "拒绝", reject_rfp_path(rfp), :confirm => '你确认拒绝吗?', :method => :put %></td>
     </tr>
   <% end %>

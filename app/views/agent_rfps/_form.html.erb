@@ -1,4 +1,4 @@
 <%= simple_form_for @rfp, :url =>agent_rfps_path do |f| %>
-  <%= f.association :spot%>
+  <%= f.association :spot, :collection => Spot.not_connected_with_agent(@rfp.agent)%>
   <p><%= f.submit %></p>
 <% end %>

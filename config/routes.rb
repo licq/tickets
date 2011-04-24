@@ -10,6 +10,7 @@ Tickets::Application.routes.draw do
   resources :rfps do
     member do
       put 'accept'
+      get 'edit_accept'
       put 'reject'
     end
   end

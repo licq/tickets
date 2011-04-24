@@ -3,7 +3,14 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Spot do
   before(:each) do
+    Ticket.delete_all
+    User.delete_all
+    City.delete_all
     Spot.delete_all
+    Season.delete_all
+    Agent.delete_all
+    AgentPrice.delete_all
+    Rfp.delete_all
   end
 
   describe "validation" do
@@ -45,6 +52,16 @@ describe Spot do
   describe "cities" do
     it "should require at least one city" do
       Factory.build(:spot,:cities => []).should have(1).error_on(:cities)
+    end
+  end
+
+  describe "rfps" do
+    it "should return correct not_connected_with_agent size " do
+      spot1 = Factory(:spot)
+      spot2 = Factory(:spot)
+      agent = Factory(:agent)
+      Factory(:rfp, :spot => spot1, :agent => agent)
+      Spot.not_connected_with_agent(agent).size.should == 1
     end
   end
 end

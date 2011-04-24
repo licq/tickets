@@ -23,8 +23,8 @@ class Spot < ActiveRecord::Base
   validates :cities, :presence => {:message => "至少选择一个城市"}
 
   has_many :users
-  has_one :admin,:class_name => 'SpotAdmin',:dependent => :delete
-  has_one :operators,:class_name => 'SpotOperator'
+  has_one :admin, :class_name => 'SpotAdmin', :dependent => :delete
+  has_one :operators, :class_name => 'SpotOperator'
   has_and_belongs_to_many :cities
   has_many :seasons
   has_many :timespans, :through => :seasons
@@ -38,4 +38,11 @@ class Spot < ActiveRecord::Base
   def city_tokens=(ids)
     self.city_ids = ids.split(",")
   end
+
+  def self.not_connected_with_agent(agent)
+    select('spots.*').
+        joins("left join rfps on spots.id = rfps.spot_id and rfps.agent_id = ?", agent.id).
+        where('rfps.spot_id is null')
+  end
+
 end
