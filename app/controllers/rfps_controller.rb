@@ -36,7 +36,7 @@ class RfpsController < ApplicationController
   def destroy
     @rfp = @spot.rfps.find(params[:id])
     @rfp.destroy
-    redirect_to rfps_url, :notice => "Successfully destroyed rfp."
+    redirect_to rfps_url, :notice => "删除已成功."
   end
 
   def edit_accept

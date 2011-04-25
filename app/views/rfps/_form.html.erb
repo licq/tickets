@@ -1,5 +1,9 @@
 <%= simple_form_for @rfp do |f| %>
-  <%= f.association :agent , :disabled => !f.object.new_record?%>
-  <%= f.association :agent_price %>
-  <p><%= f.submit %></p>
+    <% if f.object.new_record? %>
+        <%= f.association :agent, :collection => Agent.not_connected_with_spot(@rfp.spot) %>
+    <% else %>
+        <%= f.association :agent, :disabled => true %>
+    <% end %>
+    <%= f.association :agent_price %>
+    <p><%= f.submit %></p>
 <% end %>
