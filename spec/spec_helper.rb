@@ -28,4 +28,5 @@ RSpec.configure do |config|
   def test_login(user)
     controller.login(user)
   end
+
 end

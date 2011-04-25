@@ -8,11 +8,9 @@ class AgentRfpsController < ApplicationController
   end
 
   def new
-    @rfp = Rfp.new
+    @rfp = @agent.rfps.new
   end
 
-  def edit
-  end
 
   def create
     @rfp = @agent.rfps.new(params[:rfp])
@@ -23,24 +21,21 @@ class AgentRfpsController < ApplicationController
     end
   end
 
-  def update
-  end
-
   def destroy
-    @rfp = Rfp.find(params[:id])
+    @rfp = @agent.rfps.find(params[:id])
     @rfp.destroy
     redirect_to agent_rfps_path, :notice => "撤销已成功"
   end
 
   def accept
-    @rfp = Rfp.find(params[:id])
+    @rfp = @agent.rfps.find(params[:id])
     @rfp.status = 'c'
     @rfp.save
     redirect_to agent_rfps_path, :notice => "接受已成功"
   end
 
   def reject
-    @rfp = Rfp.find(params[:id])
+    @rfp = @agent.rfps.find(params[:id])
     @rfp.status = 'r'
     @rfp.save
     redirect_to agent_rfps_path, :notice => "拒绝已成功"

@@ -41,7 +41,7 @@ class Spot < ActiveRecord::Base
 
   def self.not_connected_with_agent(agent)
     select('spots.*').
-        joins("left join rfps on spots.id = rfps.spot_id and rfps.agent_id = ?", agent.id).
+        joins("left join rfps on spots.id = rfps.spot_id and rfps.agent_id = #{agent.id}").
         where('rfps.spot_id is null')
   end
 
