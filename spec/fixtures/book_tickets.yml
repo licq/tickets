@@ -1,0 +1,21 @@
+one:
+  agent_id: 1
+  spot_id: 1
+  city_id: 1
+  child_ticket_number: 1
+  adult_ticket_number: 1
+  date: 2011-05-03
+  is_team: false
+  linkman: MyString
+  linktel: MyString
+
+two:
+  agent_id: 1
+  spot_id: 1
+  city_id: 1
+  child_ticket_number: 1
+  adult_ticket_number: 1
+  date: 2011-05-03
+  is_team: false
+  linkman: MyString
+  linktel: MyString

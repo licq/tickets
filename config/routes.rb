@@ -1,5 +1,12 @@
 Tickets::Application.routes.draw do
 
+  resources :book_tickets do
+    member do
+      put 'individual'
+      put 'team'
+    end
+  end
+
   resources :agent_rfps do
     member do
       put 'accept'

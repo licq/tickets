@@ -1,0 +1,48 @@
+<% title "门票预订" %>
+
+<div id="search">
+  <%= simple_form_for @search, :url =>book_tickets_path do |f| %>
+      <fieldset class="inputs">
+        <%= f.input :spot_name_contains, :label => "景区名称", :required => false %>
+        <%= f.input :city_name_contains, :label => "城市名", :required => false %>
+        <%= f.input :date_equals, :label => "预订日期", :required => false %>
+      </fieldset>
+      <fieldset class="buttons">
+        <%= f.button :submit, :value => "查询" %>
+      </fieldset>
+  <% end %>
+</div>
+
+<%= paginate @book_tickets %>
+<table>
+  <tr>
+    <th>名称</th>
+    <th>所在城市</th>
+    <th>预订日期</th>
+    <th>订票张数</th>
+    <th>总价</th>
+    <th>联系人</th>
+    <th>联系方式</th>
+    <th colspan="2">操作</th>
+  </tr>
+  <% for book_ticket in @book_tickets %>
+      <tr id="book_ticket<%= book_ticket.id %>_row">
+        <td><%= book_ticket.spot.name %></td>
+        <td> <%= book_ticket.city.name %>  </td>
+        <td> <%= book_ticket.date %>  </td>
+        <td> 成人票：<%= book_ticket.adult_ticket_number %>
+          <% if book_ticket.child_ticket_number > 0 %>
+              <br/>
+              儿童票：<%= book_ticket.child_ticket_number %>
+          <% end %>
+        </td>
+        <td> <%= book_ticket.total_price %>  </td>
+        <td> <%= book_ticket.linkman %>  </td>
+        <td> <%= book_ticket.linktel %>  </td>
+        <td><%= link_to "修改", edit_book_ticket_path(book_ticket) %></td>
+        <td><%= link_to "取消", book_ticket, :confirm => '你确认删除吗?', :method => :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "散客票预订", individual_book_ticket_path(@agent), :method => :put %>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "团队票预订", team_book_ticket_path(@agent), :method => :put %></p>

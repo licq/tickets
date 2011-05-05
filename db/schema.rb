@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110417140347) do
+ActiveRecord::Schema.define(:version => 20110503135501) do
 
   create_table "agent_prices", :force => true do |t|
     t.integer  "spot_id"
@@ -28,6 +28,22 @@ ActiveRecord::Schema.define(:version => 20110417140347) do
   end
 
   add_index "agents", ["name"], :name => "index_agents_on_name", :unique => true
+
+  create_table "book_tickets", :force => true do |t|
+    t.integer  "agent_id"
+    t.integer  "spot_id"
+    t.integer  "city_id"
+    t.integer  "ticket_id"
+    t.integer  "child_ticket_number"
+    t.integer  "adult_ticket_number"
+    t.date     "date"
+    t.boolean  "is_team"
+    t.string   "linkman"
+    t.string   "linktel"
+    t.integer  "total_price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "cities", :force => true do |t|
     t.string   "code"

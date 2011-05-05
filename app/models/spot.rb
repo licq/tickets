@@ -45,4 +45,9 @@ class Spot < ActiveRecord::Base
         where('rfps.spot_id is null')
   end
 
+  def self.connected_by_agent(agent_id)
+    joins(:rfps).
+    where(:rfps => {:agent_id => agent_id, :status => "c"})
+  end
+
 end

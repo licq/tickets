@@ -87,3 +87,20 @@ Factory.define :rfp do |r|
   r.association :spot
 end
 
+
+Factory.define :book_ticket do |b|
+  b.association :agent
+  b.association :ticket
+  b.association :spot
+  b.association :city
+  b.child_ticket_number 1
+  b.adult_ticket_number 1
+  b.date  Date.today+1
+  b.linkman "lic"
+  b.linktel "1234243"
+end
+
+Factory.define :individual_rate do |i|
+
+end
+
