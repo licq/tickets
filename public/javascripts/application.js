@@ -37,6 +37,16 @@ $(function() {
 		return false;
 	});
 
+    $('#book_ticket_spot_id').change(function() {
+        var spot_id = $("OPTION:selected", this).val();
+        var cities =  $('#book_ticket_city_id')
+        jQuery.get('/book_tickets/get_spot/'+spot_id,function(data){
+//            $("#spotcityticket").html(data);
+//            cities.empty();
+//            cities.append($("<option value='1'>" + 2 + "</option>"));
+        })
+	});
+
 });
 
 function set_datepicker() {

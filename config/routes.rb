@@ -5,6 +5,9 @@ Tickets::Application.routes.draw do
       put 'individual'
       put 'team'
     end
+    collection do
+      post 'search'
+    end
   end
 
   resources :agent_rfps do

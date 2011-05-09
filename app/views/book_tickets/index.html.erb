@@ -1,11 +1,11 @@
 <% title "门票预订" %>
 
 <div id="search">
-  <%= simple_form_for @search, :url =>book_tickets_path do |f| %>
+  <%= simple_form_for @search, :url =>search_book_tickets_path do |f| %>
       <fieldset class="inputs">
         <%= f.input :spot_name_contains, :label => "景区名称", :required => false %>
-        <%= f.input :city_name_contains, :label => "城市名", :required => false %>
-        <%= f.input :date_equals, :label => "预订日期", :required => false %>
+        <%= f.input :spot_cities_name_contains, :label => "城市名", :required => false %>
+        订票日期 <%= f.input :date, :input_html => {:value => @date, :class=>"book_datepicker"} %>
       </fieldset>
       <fieldset class="buttons">
         <%= f.button :submit, :value => "查询" %>
@@ -13,35 +13,38 @@
   <% end %>
 </div>
 
-<%= paginate @book_tickets %>
+<%= paginate @agent_prices %>
+
 <table>
-  <tr>
-    <th>名称</th>
-    <th>所在城市</th>
-    <th>预订日期</th>
-    <th>订票张数</th>
-    <th>总价</th>
-    <th>联系人</th>
-    <th>联系方式</th>
-    <th colspan="2">操作</th>
-  </tr>
-  <% for book_ticket in @book_tickets %>
-      <tr id="book_ticket<%= book_ticket.id %>_row">
-        <td><%= book_ticket.spot.name %></td>
-        <td> <%= book_ticket.city.name %>  </td>
-        <td> <%= book_ticket.date %>  </td>
-        <td> 成人票：<%= book_ticket.adult_ticket_number %>
-          <% if book_ticket.child_ticket_number > 0 %>
-              <br/>
-              儿童票：<%= book_ticket.child_ticket_number %>
-          <% end %>
-        </td>
-        <td> <%= book_ticket.total_price %>  </td>
-        <td> <%= book_ticket.linkman %>  </td>
-        <td> <%= book_ticket.linktel %>  </td>
-        <td><%= link_to "修改", edit_book_ticket_path(book_ticket) %></td>
-        <td><%= link_to "取消", book_ticket, :confirm => '你确认删除吗?', :method => :delete %></td>
+  <% for agent_price in @agent_prices %>
+      <tr id="agent_price<%= agent_price.id %>_row">
+        <td>景区名称</td>
+        <td><%= agent_price.spot.name %></td>
+        <td>所在城市</td>
+        <td><%= agent_price.spot.cities.map(&:name).join(",") %></td>
       </tr>
+      <% for ticket in agent_price.spot.tickets %>
+          <% price = agent_price.price_for(@date) %>
+          <tr>
+            <td rowspan="2">门票名称</td>
+            <td rowspan="2"><%= ticket.name %></td>
+            <td>散客价</td>
+            <td>成人价</td>
+            <td><%= show_individual_adult_price(price, ticket.id) %></td>
+            <td>儿童价</td>
+            <td><%= show_individual_child_price(price, ticket.id) %></td>
+            <td><%= link_to "预订", %></td>
+          </tr>
+
+          <tr>
+            <td>团队价</td>
+            <td>成人价</td>
+            <td><%= show_team_adult_price(price, ticket.id) %></td>
+            <td>儿童价</td>
+            <td><%= show_team_child_price(price, ticket.id) %></td>
+            <td><%= link_to "预订", %></td>
+          </tr>
+      <% end %>
   <% end %>
 </table>
 

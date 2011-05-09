@@ -1,13 +1,17 @@
 <%= simple_form_for @book_ticket do |f| %>
 
     <%= f.association :spot, :collection => Spot.connected_by_agent(@book_ticket.agent_id) %>
+    <div id="city"></div>
     <%= f.association :city %>
     <%= f.association :ticket %>
+    <div id="spotcityticket">
+      <%= render :partial => 'spot' %>
+    </div>
     <%= f.input :child_ticket_number, :as => :integer %>
     <%= f.input :adult_ticket_number, :as => :integer %>
     <%= f.input :is_team, :as => :hidden %>
     <div class="fields right75">
-    订票日期 <%= f.text_field :date,{:class=>"book_datepicker"}%>
+      订票日期 <%= f.text_field :date, {:class=>"book_datepicker"} %>
     </div> <br/>
     <%= f.input :linkman %>
     <%= f.input :linktel %>

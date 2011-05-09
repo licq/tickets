@@ -22,4 +22,27 @@ module ApplicationHelper
     end
   end
 
+  def show_individual_adult_price(price_for_agent, ticket_id)
+    price_for_agent[ticket_id] && price_for_agent[ticket_id][:individual_rate] &&
+        "#{price_for_agent[ticket_id][:individual_rate].adult_sale_price}(" +
+            "#{price_for_agent[ticket_id][:individual_rate].adult_purchase_price})" || "--"
+  end
+
+  def show_individual_child_price(price_for_agent, ticket_id)
+    price_for_agent[ticket_id] && price_for_agent[ticket_id][:individual_rate] &&
+        "#{price_for_agent[ticket_id][:individual_rate].child_sale_price}(" +
+            "#{price_for_agent[ticket_id][:individual_rate].child_purchase_price})" || "--"
+  end
+
+  def show_team_adult_price(price_for_agent, ticket_id)
+    price_for_agent[ticket_id] && price_for_agent[ticket_id][:team_rate] &&
+        "#{price_for_agent[ticket_id][:team_rate].adult_price}" || "--"
+  end
+
+  def show_team_child_price(price_for_agent, ticket_id)
+    price_for_agent[ticket_id] && price_for_agent[ticket_id][:team_rate] &&
+        "#{price_for_agent[ticket_id][:team_rate].child_price}" || "--"
+  end
+
+
 end

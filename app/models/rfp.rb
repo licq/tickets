@@ -3,9 +3,9 @@ class Rfp < ActiveRecord::Base
   validates_presence_of :spot_id, :message => "必须选择一个景区"
   validates_presence_of :agent_id, :message => "必须选择一个旅行社"
   validates_presence_of :agent_price_id, :if => Proc.new { |rfp| rfp.from_spot? }, :message => "必须选择一个旅行社价格"
-  validates_inclusion_of :status, :in=> ['a','r','c']
+  validates_inclusion_of :status, :in=> ['a', 'r', 'c']
 
-  validate :agent_id_and_spot_id_must_be_unique_when_status_not_rejected , :on => :create
+  validate :agent_id_and_spot_id_must_be_unique_when_status_not_rejected, :on => :create
 
   def agent_id_and_spot_id_must_be_unique_when_status_not_rejected
     return if agent_id.blank?
@@ -24,5 +24,4 @@ class Rfp < ActiveRecord::Base
   scope :connected, where(:status => "c")
   scope :applied_by_spot, where(:status => "a", :from_spot => true)
   scope :applied_by_agent, where(:status => "a", :from_spot => false)
-
 end

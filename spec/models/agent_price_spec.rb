@@ -34,4 +34,15 @@ describe AgentPrice do
     agent_price.team_rate_for(season1, ticket1).adult_price.should == 100
   end
 
+  it "should return right individual_rate_for_date" do
+    agent_price = Factory(:agent_price)
+    ticket = Factory(:ticket)
+    season = Factory(:season)
+    date = Date.today + 1
+    individual_rate = Factory(:individual_rate, {:agent_price => agent_price, :ticket => ticket,
+                                                 :season => season, :child_sale_price => 50, :adult_sale_price=> 100})
+    agent_price.price_for(date)[ticket.id][:individual_rate].child_sale_price.should == 50
+
+  end
+
 end
