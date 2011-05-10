@@ -28,24 +28,14 @@ $(function() {
 
     });
 
-	$('#spot_accept_rfp_dialog').click(function() {
+    $('#spot_accept_rfp_dialog').click(function() {
         $('<div></div>')
-		.load($(this).action)
-		.dialog({
-			title: '选择旅行社价格'
-		});
-		return false;
-	});
-
-    $('#book_ticket_spot_id').change(function() {
-        var spot_id = $("OPTION:selected", this).val();
-        var cities =  $('#book_ticket_city_id')
-        jQuery.get('/book_tickets/get_spot/'+spot_id,function(data){
-//            $("#spotcityticket").html(data);
-//            cities.empty();
-//            cities.append($("<option value='1'>" + 2 + "</option>"));
-        })
-	});
+                .load($(this).action)
+                .dialog({
+                            title: '选择旅行社价格'
+                        });
+        return false;
+    });
 
 });
 
@@ -64,11 +54,14 @@ function set_datepicker() {
         minDate: new Date(),
         changeYear: true
     });
+    var day = new Date();
+    day.setDate(day.getDate() + 1);
 
     $(".book_datepicker").datepicker({
-        minDate: Date.today+1,
+        minDate: day,
         changeYear: true
-    });
+    }
+            );
 }
 
 function remove_field(link) {

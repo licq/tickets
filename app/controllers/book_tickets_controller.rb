@@ -4,15 +4,16 @@ class BookTicketsController < ApplicationController
   before_filter :set_agent
 
   def index
-    @search = []
+    params[:date] = Date.today + 1
   end
 
   def search
-    condition = params[:search] || {}
-    @date = condition.delete(:date)
-    @search = AgentPrice.connected_for_agent(@agent.id).search(condition)
+    @date = params[:date]
+    @search = AgentPrice.connected_for_agent(@agent.id).search(:spot_name_contains => params[:spot_name],
+                                                               :spot_cities_name_contains => params[:city_name])
     page = params[:page].to_i
     @agent_prices= @search.page(page)
+    render :action => 'index'
   end
 
 
