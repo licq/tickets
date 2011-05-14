@@ -1,12 +1,10 @@
 Tickets::Application.routes.draw do
 
   resources :book_tickets do
-    member do
-      put 'individual'
-      put 'team'
-    end
     collection do
       post 'search'
+      put 'individual'
+      put 'team'
     end
   end
 

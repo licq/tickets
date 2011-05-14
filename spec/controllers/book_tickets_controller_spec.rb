@@ -1,17 +1,24 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe BookTicketsController do
-  fixtures :all
-  render_views
+
+  before(:each) do
+    Spot.delete_all
+    User.delete_all
+    City.delete_all
+    Season.delete_all
+    Ticket.delete_all
+    AgentPrice.delete_all
+    Agent.delete_all
+    Rfp.delete_all
+    @book_ticket = Factory(:book_ticket)
+    @agent_operator = Factory(:agent_operator, :agent => @book_ticket.agent)
+    test_login(@agent_operator)
+  end
 
   it "index action should render index template" do
     get :index
     response.should render_template(:index)
-  end
-
-  it "show action should render show template" do
-    get :show, :id => BookTicket.first
-    response.should render_template(:show)
   end
 
   it "new action should render new template" do
@@ -19,39 +26,9 @@ describe BookTicketsController do
     response.should render_template(:new)
   end
 
-  it "create action should render new template when model is invalid" do
-    BookTicket.any_instance.stubs(:valid?).returns(false)
-    post :create
-    response.should render_template(:new)
-  end
+#  it "create action should redirect when model is valid" do
+#    post 'create', :book_ticket => @book_ticket
+#    response.should be_success
+#  end
 
-  it "create action should redirect when model is valid" do
-    BookTicket.any_instance.stubs(:valid?).returns(true)
-    post :create
-    response.should redirect_to(book_ticket_url(assigns[:book_ticket]))
-  end
-
-  it "edit action should render edit template" do
-    get :edit, :id => BookTicket.first
-    response.should render_template(:edit)
-  end
-
-  it "update action should render edit template when model is invalid" do
-    BookTicket.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => BookTicket.first
-    response.should render_template(:edit)
-  end
-
-  it "update action should redirect when model is valid" do
-    BookTicket.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => BookTicket.first
-    response.should redirect_to(book_ticket_url(assigns[:book_ticket]))
-  end
-
-  it "destroy action should destroy model and redirect to index action" do
-    book_ticket = BookTicket.first
-    delete :destroy, :id => book_ticket
-    response.should redirect_to(book_tickets_url)
-    BookTicket.exists?(book_ticket.id).should be_false
-  end
 end

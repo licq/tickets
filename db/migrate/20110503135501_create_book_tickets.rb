@@ -5,8 +5,14 @@ class CreateBookTickets < ActiveRecord::Migration
       t.references :spot
       t.references :city
       t.references :ticket
-      t.integer :child_ticket_number, :default => "1"
-      t.integer :adult_ticket_number, :default => "0"
+      t.integer :child_sale_price
+      t.integer :child_purchase_price
+      t.integer :adult_sale_price
+      t.integer :adult_purchase_price
+      t.integer :adult_price
+      t.integer :child_price
+      t.integer :child_ticket_number, :default => "0"
+      t.integer :adult_ticket_number, :default => "1"
       t.date :date
       t.boolean :is_team
       t.string :linkman

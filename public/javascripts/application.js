@@ -8,19 +8,9 @@ $(function() {
         searchingText: "查询中",
         noResultsText: "无结果"
     });
-    $("#book_ticket_spot_tokens").tokenInput("/spots.json", {
-        crossDomain: false,
-        prePopulate: $("#book_ticket_spot_tokens").data("pre"),
-        tokenLimit: 1,
-        theme: "facebook",
-        hintText: "输入景区名称",
-        preventDuplicates: true,
-        searchingText: "查询中",
-        noResultsText: "无结果"
-    });
     set_datepicker();
 
-    $("input.numeric").keydown(function(event) {
+    $("input.numeric").keydown(function(e) {
         var key = e.charCode || e.keyCode || 0;
         return ( key == 8 || key == 9 ||
                 key == 46 || (key >= 37 && key <= 40) ||

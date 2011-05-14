@@ -38,7 +38,7 @@
                 <td><%= show_individual_adult_price(price, ticket.id) %></td>
                 <td>儿童价</td>
                 <td><%= show_individual_child_price(price, ticket.id) %></td>
-                <td><%= link_to "预订",  %></td>
+                <td><%= link_to "预订",individual_book_tickets_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date] ), :method => :put%></td>
               </tr>
 
               <tr>
@@ -47,7 +47,7 @@
                 <td><%= show_team_adult_price(price, ticket.id) %></td>
                 <td>儿童价</td>
                 <td><%= show_team_child_price(price, ticket.id) %></td>
-                <td><%= link_to "预订", %></td>
+                <td><%= link_to "预订",team_book_tickets_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date]), :method => :put%></td>
               </tr>
           <% end %>
       <% end %>

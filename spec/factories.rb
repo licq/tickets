@@ -90,14 +90,17 @@ end
 
 Factory.define :book_ticket do |b|
   b.association :agent
-  b.association :ticket
   b.association :spot
   b.association :city
+  b.association :ticket
   b.child_ticket_number 1
   b.adult_ticket_number 1
   b.date  Date.today+1
   b.linkman "lic"
   b.linktel "1234243"
+  b.is_team false
+  b.child_sale_price 100
+  b.adult_sale_price 200
 end
 
 Factory.define :individual_rate do |i|

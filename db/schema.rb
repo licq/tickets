@@ -34,8 +34,14 @@ ActiveRecord::Schema.define(:version => 20110503135501) do
     t.integer  "spot_id"
     t.integer  "city_id"
     t.integer  "ticket_id"
-    t.integer  "child_ticket_number", :default => 1
-    t.integer  "adult_ticket_number", :default => 0
+    t.integer  "child_sale_price"
+    t.integer  "child_purchase_price"
+    t.integer  "adult_sale_price"
+    t.integer  "adult_purchase_price"
+    t.integer  "adult_price"
+    t.integer  "child_price"
+    t.integer  "child_ticket_number",  :default => 0
+    t.integer  "adult_ticket_number",  :default => 1
     t.date     "date"
     t.boolean  "is_team"
     t.string   "linkman"
