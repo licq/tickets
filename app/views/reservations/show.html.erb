@@ -1,0 +1,44 @@
+<% title "Book Ticket" %>
+
+<p>
+  <strong>Agent:</strong>
+  <%= @reservation.agent_id %>
+</p>
+<p>
+  <strong>Spot:</strong>
+  <%= @reservation.spot_id %>
+</p>
+<p>
+  <strong>City:</strong>
+  <%= @reservation.city_id %>
+</p>
+<p>
+  <strong>Child Ticket Number:</strong>
+  <%= @reservation.child_ticket_number %>
+</p>
+<p>
+  <strong>Adult Ticket Number:</strong>
+  <%= @reservation.adult_ticket_number %>
+</p>
+<p>
+  <strong>Date:</strong>
+  <%= @reservation.date %>
+</p>
+<p>
+  <strong>Is Team:</strong>
+  <%= @reservation.is_team %>
+</p>
+<p>
+  <strong>Linkman:</strong>
+  <%= @reservation.linkman %>
+</p>
+<p>
+  <strong>Linktel:</strong>
+  <%= @reservation.linktel %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_reservation_path(@reservation) %> |
+  <%= link_to "Destroy", @reservation, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", reservations_path %>
+</p>

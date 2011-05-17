@@ -1,7 +1,7 @@
-<%= simple_form_for @book_ticket do |f| %>
+<%= simple_form_for @reservation , :name => "reservation", :url => (@reservation.new_record? ? reservations_path : reservation_path(@reservation)) do |f| %>
 
     <%= f.input :spot_id, :as => :hidden  %>
-    <%= f.input :ticket_id, :as => :hidden %>
+    <%= f.input :ticket_name, :as => :hidden %>
     <%= f.input :child_sale_price, :as => :hidden %>
     <%= f.input :child_purchase_price, :as => :hidden %>
     <%= f.input :adult_sale_price, :as => :hidden %>
@@ -10,13 +10,12 @@
     <%= f.input :child_price, :as => :hidden %>
     <%= f.input :date, :as => :hidden %>
     <div class="right75">景区 <%= f.object.spot.name %></div>
-    <div class="right75">门票 <%= f.object.ticket.name %></div>
+    <div class="right75">门票 <%= f.object.ticket_name %></div>
     <div class="right75">日期 <%= f.object.date %></div>
-    <%= f.association :city, :collection => @agent_price.spot.cities %>
     <%= f.input :adult_ticket_number, :as => :integer %>
     <%= f.input :child_ticket_number, :as => :integer %>
-    <%= f.input :is_team, :as => :hidden %>
-    <%= f.input :linkman %>
-    <%= f.input :linktel %>
+    <%= f.input :type, :as => :hidden %>
+    <%= f.input :contact %>
+    <%= f.input :phone %>
     <%= f.submit %>
 <% end %>

@@ -29,28 +29,6 @@ ActiveRecord::Schema.define(:version => 20110503135501) do
 
   add_index "agents", ["name"], :name => "index_agents_on_name", :unique => true
 
-  create_table "book_tickets", :force => true do |t|
-    t.integer  "agent_id"
-    t.integer  "spot_id"
-    t.integer  "city_id"
-    t.integer  "ticket_id"
-    t.integer  "child_sale_price"
-    t.integer  "child_purchase_price"
-    t.integer  "adult_sale_price"
-    t.integer  "adult_purchase_price"
-    t.integer  "adult_price"
-    t.integer  "child_price"
-    t.integer  "child_ticket_number",  :default => 0
-    t.integer  "adult_ticket_number",  :default => 1
-    t.date     "date"
-    t.boolean  "is_team"
-    t.string   "linkman"
-    t.string   "linktel"
-    t.integer  "total_price"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "cities", :force => true do |t|
     t.string   "code"
     t.string   "name"
@@ -84,6 +62,28 @@ ActiveRecord::Schema.define(:version => 20110503135501) do
     t.integer  "adult_price"
     t.integer  "child_price"
     t.integer  "ticket_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reservations", :force => true do |t|
+    t.string   "no"
+    t.integer  "agent_id"
+    t.integer  "spot_id"
+    t.string   "ticket_name"
+    t.integer  "child_sale_price"
+    t.integer  "child_purchase_price"
+    t.integer  "adult_sale_price"
+    t.integer  "adult_purchase_price"
+    t.integer  "adult_price"
+    t.integer  "child_price"
+    t.integer  "child_ticket_number",  :default => 0
+    t.integer  "adult_ticket_number",  :default => 1
+    t.date     "date"
+    t.string   "type"
+    t.string   "contact"
+    t.string   "phone"
+    t.integer  "total_price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

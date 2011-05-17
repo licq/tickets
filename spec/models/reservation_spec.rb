@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe BookTicket do
+describe Reservation do
   before(:each) do
     Ticket.delete_all
     User.delete_all
@@ -14,6 +14,6 @@ describe BookTicket do
   end
 
   it "should be valid" do
-    Factory.build(:book_ticket).should be_valid
+    Factory.build(:reservation).should be_valid
   end
 end

@@ -8,7 +8,7 @@ class Agent < ActiveRecord::Base
   has_one :operator, :class_name => "AgentOperator"
   accepts_nested_attributes_for :operator
   has_many :rfps
-  has_many :book_tickets
+  has_many :reservations
 
   def self.not_connected_with_spot(spot)
     select('agents.*').

@@ -1,7 +1,7 @@
 <% title "门票预订" %>
 
 <div id="search">
-  <%= form_tag search_book_tickets_path do %>
+  <%= form_tag search_reservations_path do %>
       <fieldset class="inputs">
         <label for="spot_name">景区名称</label>
         <%= text_field_tag :spot_name, params[:spot_name] %>
@@ -38,7 +38,7 @@
                 <td><%= show_individual_adult_price(price, ticket.id) %></td>
                 <td>儿童价</td>
                 <td><%= show_individual_child_price(price, ticket.id) %></td>
-                <td><%= link_to "预订",individual_book_tickets_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date] ), :method => :put%></td>
+                <td><%= link_to "预订",individual_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date] ), :method => :put%></td>
               </tr>
 
               <tr>
@@ -47,7 +47,7 @@
                 <td><%= show_team_adult_price(price, ticket.id) %></td>
                 <td>儿童价</td>
                 <td><%= show_team_child_price(price, ticket.id) %></td>
-                <td><%= link_to "预订",team_book_tickets_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date]), :method => :put%></td>
+                <td><%= link_to "预订",team_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date]), :method => :put%></td>
               </tr>
           <% end %>
       <% end %>

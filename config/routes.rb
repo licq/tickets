@@ -1,6 +1,6 @@
 Tickets::Application.routes.draw do
 
-  resources :book_tickets do
+  resources :reservations do
     collection do
       post 'search'
       put 'individual'

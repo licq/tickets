@@ -183,7 +183,7 @@ zh:
       individual_rate: "散客价"
       agent_price: "旅行社价格"
       rfp: "价格关联"
-      book_ticket: "门票预订"
+      reservation: "门票预订"
     attributes:
       user:
         username: "用户名"
@@ -229,15 +229,22 @@ zh:
         agent: "旅行社"
         spot: "景区"
         agent_price: "旅行社价格"
-      book_ticket:
+      reservation:
+         no: "订单号"
          spot: "景区"
-         city: "城市"
+         agent: "旅行社"
          child_ticket_number: "儿童票数量"
          adult_ticket_number: "成人票数量"
-         date: "预订日期"
-         ticket: "门票"
-         linkman: "联系人"
-         linktel: "联系方式"
+         adult_price: "成人价格"
+         child_price: "儿童价格"
+         child_sale_price: "儿童售价"
+         adult_sale_price: "成人售价"
+         child_purchase_price: "儿童结算价"
+         adult_purchase_price: "成人结算价"
+         date: "日期"
+         ticket_name: "门票"
+         contact: "联系人"
+         phone: "联系方式"
          total_price: "总价"
   activemodel:
     errors:

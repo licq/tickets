@@ -1,10 +1,10 @@
-class CreateBookTickets < ActiveRecord::Migration
+class CreateReservations < ActiveRecord::Migration
   def self.up
-    create_table :book_tickets do |t|
+    create_table :reservations do |t|
+      t.string :no
       t.references :agent
       t.references :spot
-      t.references :city
-      t.references :ticket
+      t.string :ticket_name
       t.integer :child_sale_price
       t.integer :child_purchase_price
       t.integer :adult_sale_price
@@ -14,15 +14,18 @@ class CreateBookTickets < ActiveRecord::Migration
       t.integer :child_ticket_number, :default => "0"
       t.integer :adult_ticket_number, :default => "1"
       t.date :date
-      t.boolean :is_team
-      t.string :linkman
-      t.string :linktel
+      t.string :type
+      t.string :contact
+      t.string :phone
       t.integer :total_price
+      t.boolean :paid
+      t.integer :adult_true_ticket_number
+      t.integer :child_true_ticket_number
       t.timestamps
     end
   end
 
   def self.down
-    drop_table :book_tickets
+    drop_table :reservations
   end
 end

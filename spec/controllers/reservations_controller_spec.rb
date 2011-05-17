@@ -11,8 +11,8 @@ describe BookTicketsController do
     AgentPrice.delete_all
     Agent.delete_all
     Rfp.delete_all
-    @book_ticket = Factory(:book_ticket)
-    @agent_operator = Factory(:agent_operator, :agent => @book_ticket.agent)
+    @reservation = Factory(:reservation)
+    @agent_operator = Factory(:agent_operator, :agent => @reservation.agent)
     test_login(@agent_operator)
   end
 
@@ -27,7 +27,7 @@ describe BookTicketsController do
   end
 
 #  it "create action should redirect when model is valid" do
-#    post 'create', :book_ticket => @book_ticket
+#    post 'create', :reservation => @reservation
 #    response.should be_success
 #  end
 

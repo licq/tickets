@@ -88,7 +88,7 @@ Factory.define :rfp do |r|
 end
 
 
-Factory.define :book_ticket do |b|
+Factory.define :reservation do |b|
   b.association :agent
   b.association :spot
   b.association :city
