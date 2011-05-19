@@ -1,5 +1,56 @@
 <% title "门票预订" %>
 
-<%= render 'form' %>
+<div id="search">
+  <%= form_tag search_reservations_path do %>
+      <fieldset class="inputs">
+        <label for="spot_name">景区名称</label>
+        <%= text_field_tag :spot_name, params[:spot_name] %>
+        <label for="city_name">城市名</label>
+        <%= text_field_tag :city_name, params[:city_name] %>
+        <label for="date">日期</label>
+        <%= text_field_tag :date, params[:date], :class=>"book_datepicker" %>
+      </fieldset>
+      <fieldset class="buttons">
+        <%= submit_tag "查询" %>
+      </fieldset>
+  <% end %>
+</div>
 
-<p><%= link_to "返回列表", reservations_path %></p>
+<% if @agent_prices %>
+
+    <%= paginate @agent_prices %>
+
+    <table>
+      <% for agent_price in @agent_prices %>
+          <tr id="agent_price<%= agent_price.id %>_row">
+            <td>景区名称</td>
+            <td><%= agent_price.spot.name %></td>
+            <td>所在城市</td>
+            <td><%= agent_price.spot.cities.map(&:name).join(",") %></td>
+          </tr>
+          <% for ticket in agent_price.spot.tickets %>
+              <% price = agent_price.price_for(@date) %>
+              <tr>
+                <td rowspan="2">门票名称</td>
+                <td rowspan="2"><%= ticket.name %></td>
+                <td>散客价</td>
+                <td>成人价</td>
+                <td><%= show_individual_adult_price(price, ticket.id) %></td>
+                <td>儿童价</td>
+                <td><%= show_individual_child_price(price, ticket.id) %></td>
+                <td><%= link_to "预订",individual_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date] ), :method => :put%></td>
+              </tr>
+
+              <tr>
+                <td>团队价</td>
+                <td>成人价</td>
+                <td><%= show_team_adult_price(price, ticket.id) %></td>
+                <td>儿童价</td>
+                <td><%= show_team_child_price(price, ticket.id) %></td>
+                <td><%= link_to "预订",team_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date]), :method => :put%></td>
+              </tr>
+          <% end %>
+      <% end %>
+    </table>
+
+<% end %>

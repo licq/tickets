@@ -77,13 +77,17 @@ ActiveRecord::Schema.define(:version => 20110503135501) do
     t.integer  "adult_purchase_price"
     t.integer  "adult_price"
     t.integer  "child_price"
-    t.integer  "child_ticket_number",  :default => 0
-    t.integer  "adult_ticket_number",  :default => 1
+    t.integer  "child_ticket_number",      :default => 0
+    t.integer  "adult_ticket_number",      :default => 1
     t.date     "date"
     t.string   "type"
     t.string   "contact"
     t.string   "phone"
     t.integer  "total_price"
+    t.integer  "total_purchase_price"
+    t.boolean  "paid"
+    t.integer  "adult_true_ticket_number"
+    t.integer  "child_true_ticket_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

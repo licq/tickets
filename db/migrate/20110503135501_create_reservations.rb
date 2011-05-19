@@ -18,6 +18,7 @@ class CreateReservations < ActiveRecord::Migration
       t.string :contact
       t.string :phone
       t.integer :total_price
+      t.integer :total_purchase_price
       t.boolean :paid
       t.integer :adult_true_ticket_number
       t.integer :child_true_ticket_number

@@ -33,6 +33,14 @@ $(function() {
     $('#individual_reservation_child_ticket_number').blur(function() {
         calculate_individual_price();
     });
+    $('#team_reservation_adult_ticket_number').blur(function() {
+        calculate_team_price();
+    });
+    $('#team_reservation_child_ticket_number').blur(function() {
+        calculate_team_price();
+    });
+    calculate_individual_price();
+    calculate_team_price();
 });
 
 function set_datepicker() {
@@ -58,6 +66,10 @@ function set_datepicker() {
         changeYear: true
     }
             );
+     $(".reservation_datepicker").datepicker({
+        changeYear: true
+    }
+            );
 }
 
 function remove_field(link) {
@@ -77,13 +89,28 @@ function add_fields(link, association, content) {
 }
 
 function calculate_individual_price() {
-    var adult_ticket_number = $("#individual_reservation_adult_ticket_number").val();
-    var child_ticket_number = $("#individual_reservation_child_ticket_number").val();
-    var adult_sale_price = $("#individual_reservation_adult_sale_price").val();
-    var child_sale_price = $("#individual_reservation_child_sale_price").val();
-    var total_price = parseInt(adult_ticket_number) * parseInt(adult_sale_price) + parseInt(child_ticket_number) * parseInt(child_sale_price);
-    $("#individual_reservation_total_price").val(total_price);
-    $("#total_price_text")[0].innerHTML = total_price;
+    if ($("#individual_reservation_adult_ticket_number").length != 0) {
+        var adult_ticket_number = $("#individual_reservation_adult_ticket_number").val();
+        var child_ticket_number = $("#individual_reservation_child_ticket_number").val();
+        var adult_sale_price = $("#individual_reservation_adult_sale_price").val();
+        var child_sale_price = $("#individual_reservation_child_sale_price").val();
+        var total_price = parseInt(adult_ticket_number) * parseInt(adult_sale_price) + parseInt(child_ticket_number) * parseInt(child_sale_price);
+        $("#individual_reservation_total_price").val(total_price);
+        $("#total_price_text")[0].innerHTML = total_price;
+    }
+}
+
+
+function calculate_team_price() {
+    if ($("#team_reservation_adult_ticket_number").length != 0) {
+        var adult_ticket_number = $("#team_reservation_adult_ticket_number").val();
+        var child_ticket_number = $("#team_reservation_child_ticket_number").val();
+        var adult_price = $("#team_reservation_adult_price").val();
+        var child_price = $("#team_reservation_child_price").val();
+        var total_price = parseInt(adult_ticket_number) * parseInt(adult_price) + parseInt(child_ticket_number) * parseInt(child_price);
+        $("#team_reservation_total_price").val(total_price);
+        $("#total_price_text")[0].innerHTML = total_price;
+    }
 }
 
 

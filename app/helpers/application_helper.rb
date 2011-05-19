@@ -44,5 +44,39 @@ module ApplicationHelper
         "#{price_for_agent[ticket_id][:team_rate].child_price}" || "--"
   end
 
+  def show_reservation_type(reservation)
+    if (reservation.type == "IndividualReservation")
+      "散客票"
+    else
+      "团队票"
+    end
+  end
 
+  def show_reservation_adult_price(reservation)
+    if (reservation.type == "IndividualReservation")
+      "#{reservation.adult_sale_price}(#{reservation.adult_purchase_price})"
+    else
+      "#{reservation.adult_price}"
+    end
+  end
+
+  def show_reservation_child_price(reservation)
+    if (reservation.type == "IndividualReservation")
+      "#{reservation.child_sale_price}(#{reservation.child_purchase_price})"
+    else
+      "#{reservation.child_price}"
+    end
+  end
+
+  def show_reservation_total_price(reservation)
+    if (reservation.type == "IndividualReservation")
+      "#{reservation.total_price}(#{reservation.total_purchase_price})"
+    else
+      "#{reservation.total_price}"
+    end
+  end
+
+  def date_format(date)
+      date.strftime("%Y-%m-%d")
+  end
 end

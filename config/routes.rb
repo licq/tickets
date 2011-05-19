@@ -5,6 +5,8 @@ Tickets::Application.routes.draw do
       post 'search'
       put 'individual'
       put 'team'
+      post 'create_individual'
+      post 'create_team'
     end
   end
 

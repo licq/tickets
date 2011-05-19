@@ -1,5 +1,6 @@
 class Reservation < ActiveRecord::Base
 
+  default_scope order('id desc')
   belongs_to :spot
   belongs_to :agent
 
