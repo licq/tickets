@@ -1,0 +1,23 @@
+<%= f.input :spot_id, :as => :hidden %>
+<%= f.input :ticket_name, :as => :hidden %>
+<%= f.input :child_sale_price, :as => :hidden %>
+<%= f.input :child_purchase_price, :as => :hidden %>
+<%= f.input :adult_sale_price, :as => :hidden %>
+<%= f.input :adult_purchase_price, :as => :hidden %>
+<%= f.input :date, :as => :hidden %>
+<div class="right75">景区 <%= f.object.spot.name %></div>
+<div class="right75">门票 <%= f.object.ticket_name %></div>
+<div class="right75">日期 <%= f.object.date %></div>
+<div class="right75">成人价 <%= f.object.adult_sale_price %></div>
+<% unless f.object.child_sale_price.nil? %>
+    <div class="right75">儿童价 <%= f.object.child_sale_price %></div>
+<% end %>
+<%= f.input :adult_ticket_number, :as => :integer %>
+<% unless f.object.child_sale_price.nil? %>
+    <%= f.input :child_ticket_number, :as => :integer %>
+<% end %>
+总价
+<div id="total_price_text"><%= f.object.total_price %></div>
+<%= f.input :contact %>
+<%= f.input :phone %>
+<%= f.submit %>

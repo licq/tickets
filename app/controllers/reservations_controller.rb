@@ -26,42 +26,61 @@ class ReservationsController < ApplicationController
   end
 
 
-  def create
-    @reservation = @agent.reservations.new(params[:reservation])
-#    @reservation.type = params[:reservation][:type]
-#    @reservation.total_price = @reservation.calculate_price
-    if @reservation.save
-      redirect_to reservations_url, :notice => "已预订成功."
-    else
-      render :action => 'new'
-    end
+  def edit
+    @reservation = @agent.reservations.find(params[:id])
   end
 
   def create_individual
     @reservation = IndividualReservation.new(params[:individual_reservation])
     @reservation.agent = @agent
+    @reservation.status = :confirmed
     @reservation.total_price =@reservation.calculate_price
     @reservation.total_purchase_price =@reservation.calculate_purchase_price
     if @reservation.save
       redirect_to reservations_url, :notice => "已预订成功."
     else
-      render :action => 'new'
+      render :action => 'new_individual'
     end
   end
 
   def create_team
     @reservation = TeamReservation.new(params[:team_reservation])
     @reservation.agent = @agent
+    @reservation.status = :confirmed
     @reservation.total_price =@reservation.calculate_price
     if @reservation.save
       redirect_to reservations_url, :notice => "已预订成功."
     else
-      render :action => 'new'
+      render :action => 'create_team'
     end
   end
 
 
-  def individual
+  def update_individual
+    @reservation = @agent.reservations.find(params[:id])
+    if @reservation.update_attributes(params[:individual_reservation])
+      @reservation.total_price =@reservation.calculate_price
+      @reservation.total_purchase_price =@reservation.calculate_purchase_price
+      @reservation.save
+      redirect_to reservations_url, :notice => "已修改成功."
+    else
+      render :action => 'edit'
+    end
+  end
+
+  def update_team
+    @reservation = @agent.reservations.find(params[:id])
+    if @reservation.update_attributes(params[:team_reservation])
+      @reservation.total_price =@reservation.calculate_price
+      @reservation.save
+      redirect_to reservations_url, :notice => "已修改成功."
+    else
+      render :action => 'edit'
+    end
+  end
+
+
+  def new_individual
     @agent_price = AgentPrice.find(params[:agent_price])
     ticket = Ticket.find(params[:ticket])
     @reservation = IndividualReservation.new(:agent => @agent,
@@ -78,7 +97,7 @@ class ReservationsController < ApplicationController
     end
   end
 
-  def team
+  def new_team
     @agent_price = AgentPrice.find(params[:agent_price])
     ticket = Ticket.find(params[:ticket])
     @reservation = TeamReservation.new(:agent => @agent,
@@ -91,6 +110,13 @@ class ReservationsController < ApplicationController
       @reservation.child_price = team_rate.child_price
       @reservation.adult_price = team_rate.adult_price
     end
+  end
+
+  def destroy
+    @reservation = @agent.reservations.find(params[:id])
+    @reservation.status = :canceled
+    @reservation.save
+    redirect_to reservations_url, :notice => "取消已成功."
   end
 
 end

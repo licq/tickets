@@ -8,8 +8,11 @@
         <%= f.input :date_less_than_or_equal_to, :label => "入园结束日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %>
         <%= f.input :created_at_greater_than_or_equal_to, :label => "预定起始日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %>
         <%= f.input :created_at_less_than_or_equal_to, :label => "预定结束日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %>
-        <%= f.input :contact_contains, :label => "联系人", :required => false%>
-        <%= f.input :phone_contains, :label => "联系电话", :required => false%>
+        <%= f.input :contact_contains, :label => "联系人", :required => false %>
+        <%= f.input :phone_contains, :label => "联系电话", :required => false %>
+        <%= f.input :status_eq, :collection => [["","全部"],["confirmed", "已确认"], ["canceled", "已取消"]],
+                    :label_method => :last, :value_method => :first,
+                    :as => :select, :label => "状态", :required => false, :include_blank => false %>
       </fieldset>
       <fieldset class="buttons">
         <%= f.button :submit, :value => "查询" %>
@@ -32,6 +35,8 @@
     <th>联系人</th>
     <th>联系电话</th>
     <th>预定日期</th>
+    <th>状态</th>
+    <th colspan="2">操作</th>
   </tr>
   <% for reservation in @reservations %>
       <tr id="reservation<%= reservation.id %>_row">
@@ -47,6 +52,15 @@
         <td><%= reservation.contact %></td>
         <td><%= reservation.phone %></td>
         <td><%= date_format(reservation.created_at) %></td>
+        <td><%= reservation.status_name %></td>
+        <td>
+          <% if (reservation.can_edit) %><%= link_to "修改", edit_reservation_path(reservation) %>
+          <% end %>
+        </td>
+        <td>
+          <% if (reservation.can_cancel) %><%= link_to "取消", reservation_path(reservation), :confirm => '你确认取消吗?', :method => :delete %>
+          <% end %>
+        </td>
       </tr>
   <% end %>
 </table>

@@ -15,6 +15,7 @@ class CreateReservations < ActiveRecord::Migration
       t.integer :adult_ticket_number, :default => "1"
       t.date :date
       t.string :type
+      t.string :status
       t.string :contact
       t.string :phone
       t.integer :total_price

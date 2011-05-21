@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe BookTicketsController do
+describe ReservationsController do
 
   before(:each) do
     Spot.delete_all
@@ -11,6 +11,7 @@ describe BookTicketsController do
     AgentPrice.delete_all
     Agent.delete_all
     Rfp.delete_all
+    Reservation.delete_all
     @reservation = Factory(:reservation)
     @agent_operator = Factory(:agent_operator, :agent => @reservation.agent)
     test_login(@agent_operator)
@@ -26,9 +27,5 @@ describe BookTicketsController do
     response.should render_template(:new)
   end
 
-#  it "create action should redirect when model is valid" do
-#    post 'create', :reservation => @reservation
-#    response.should be_success
-#  end
 
 end

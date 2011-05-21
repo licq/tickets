@@ -1,0 +1,8 @@
+<% title "门票预订" %>
+
+<%= simple_form_for @reservation, :url =>create_team_reservations_path, :method =>:post do |f| %>
+
+    <%= render :partial => 'team_reservation_fields', :locals => { :f  => f}   %>
+<% end %>
+
+<p><%= link_to "返回列表", reservations_path %></p>

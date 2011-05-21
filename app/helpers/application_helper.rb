@@ -30,6 +30,7 @@ module ApplicationHelper
 
   def show_individual_child_price(price_for_agent, ticket_id)
     price_for_agent[ticket_id] && price_for_agent[ticket_id][:individual_rate] &&
+        price_for_agent[ticket_id][:individual_rate].child_sale_price &&
         "#{price_for_agent[ticket_id][:individual_rate].child_sale_price}(" +
             "#{price_for_agent[ticket_id][:individual_rate].child_purchase_price})" || "--"
   end
@@ -41,11 +42,12 @@ module ApplicationHelper
 
   def show_team_child_price(price_for_agent, ticket_id)
     price_for_agent[ticket_id] && price_for_agent[ticket_id][:team_rate] &&
+        price_for_agent[ticket_id][:team_rate].child_price &&
         "#{price_for_agent[ticket_id][:team_rate].child_price}" || "--"
   end
 
   def show_reservation_type(reservation)
-    if (reservation.type == "IndividualReservation")
+    if (reservation.is_individual?)
       "散客票"
     else
       "团队票"
@@ -53,7 +55,7 @@ module ApplicationHelper
   end
 
   def show_reservation_adult_price(reservation)
-    if (reservation.type == "IndividualReservation")
+    if (reservation.is_individual?)
       "#{reservation.adult_sale_price}(#{reservation.adult_purchase_price})"
     else
       "#{reservation.adult_price}"
@@ -61,15 +63,17 @@ module ApplicationHelper
   end
 
   def show_reservation_child_price(reservation)
-    if (reservation.type == "IndividualReservation")
-      "#{reservation.child_sale_price}(#{reservation.child_purchase_price})"
+    if (reservation.is_individual?)
+      reservation.child_sale_price &&
+          "#{reservation.child_sale_price}(#{reservation.child_purchase_price})"|| "--"
     else
-      "#{reservation.child_price}"
+      reservation.child_price &&
+          "#{reservation.child_price}"|| "--"
     end
   end
 
   def show_reservation_total_price(reservation)
-    if (reservation.type == "IndividualReservation")
+    if (reservation.is_individual?)
       "#{reservation.total_price}(#{reservation.total_purchase_price})"
     else
       "#{reservation.total_price}"
@@ -77,6 +81,7 @@ module ApplicationHelper
   end
 
   def date_format(date)
-      date.strftime("%Y-%m-%d")
+    date.strftime("%Y-%m-%d")
   end
+
 end

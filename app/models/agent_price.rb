@@ -1,6 +1,7 @@
 class AgentPrice < ActiveRecord::Base
 
-  validates :name, :presence => true, :uniqueness => true
+  validates :name, :presence => true
+  validates_uniqueness_of :name, :scope => [:spot]
   belongs_to :spot
   has_many :rfps
   has_many :individual_rates, :dependent => :delete_all

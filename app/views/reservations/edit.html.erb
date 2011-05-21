@@ -1,6 +1,14 @@
 <% title "修改门票预订" %>
 
-<%= render 'form' %>
+<% if @reservation.is_individual? %>
+    <%= simple_form_for @reservation, :url =>update_individual_reservation_path(@reservation), :method =>:post do |f| %>
+        <%= render :partial => 'individual_reservation_fields',  :locals => { :f  => f} %>
+    <% end %>
+<% else %>
+    <%= simple_form_for @reservation, :url =>update_team_reservation_path(@reservation), :method =>:post do |f| %>
+        <%= render :partial => 'team_reservation_fields', :locals => { :f  => f} %>
+    <% end %>
+<% end %>
 
 <p>
   <%= link_to "返回列表", reservations_path %>

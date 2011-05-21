@@ -91,14 +91,13 @@ end
 Factory.define :reservation do |b|
   b.association :agent
   b.association :spot
-  b.association :city
-  b.association :ticket
+  b.ticket_name "ticket"
   b.child_ticket_number 1
   b.adult_ticket_number 1
   b.date  Date.today+1
-  b.linkman "lic"
-  b.linktel "1234243"
-  b.is_team false
+  b.contact "lic"
+  b.phone "1234243"
+  b.type "IndividualReservation"
   b.child_sale_price 100
   b.adult_sale_price 200
 end

@@ -38,7 +38,10 @@
                 <td><%= show_individual_adult_price(price, ticket.id) %></td>
                 <td>儿童价</td>
                 <td><%= show_individual_child_price(price, ticket.id) %></td>
-                <td><%= link_to "预订",individual_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date] ), :method => :put%></td>
+                <td>
+                  <% if (show_individual_adult_price(price, ticket.id)!='--') %>
+                      <%= link_to "预订", new_individual_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date]), :method => :get %>
+                  <% end %></td>
               </tr>
 
               <tr>
@@ -47,7 +50,10 @@
                 <td><%= show_team_adult_price(price, ticket.id) %></td>
                 <td>儿童价</td>
                 <td><%= show_team_child_price(price, ticket.id) %></td>
-                <td><%= link_to "预订",team_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date]), :method => :put%></td>
+                <td>
+                  <% if (show_team_adult_price(price, ticket.id)!='--') %>
+                      <%= link_to "预订", new_team_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date]), :method => :get %>
+                  <% end %></td>
               </tr>
           <% end %>
       <% end %>

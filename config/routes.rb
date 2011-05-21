@@ -3,10 +3,14 @@ Tickets::Application.routes.draw do
   resources :reservations do
     collection do
       post 'search'
-      put 'individual'
-      put 'team'
+      get 'new_individual'
+      get 'new_team'
       post 'create_individual'
       post 'create_team'
+    end
+    member do
+      put 'update_individual'
+      put 'update_team'
     end
   end
 
