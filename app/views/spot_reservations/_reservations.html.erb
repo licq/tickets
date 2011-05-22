@@ -1,6 +1,7 @@
 <%= paginate @reservations %>
 <table>
   <tr>
+    <th>订单号</th>
     <th>旅行社</th>
     <th>门票</th>
     <th>日期</th>
@@ -17,6 +18,8 @@
   </tr>
   <% for reservation in @reservations %>
       <tr id="reservation<%= reservation.id %>_row">
+
+        <td><%= reservation.no %></td>
         <td><%= reservation.agent.name %></td>
         <td><%= reservation.ticket_name %></td>
         <td> <%= reservation.date %>  </td>

@@ -10,6 +10,13 @@ class Reservation < ActiveRecord::Base
   validates :spot_id, :presence => true
   validates_numericality_of :adult_ticket_number, :greater_than => 0, :message => "成人票数量不能为0"
 
+  after_create :set_no
+
+  def set_no
+    self.no = (100000 + self.id).to_s
+    self.save
+  end
+
   def status_name
     case self.status
       when 'confirmed'
