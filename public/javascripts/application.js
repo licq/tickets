@@ -10,6 +10,11 @@ $(function() {
     });
     set_datepicker();
 
+    $("#today_spot_reservations_search input").keyup(function() {
+        $.get($("#today_spot_reservations_search").attr("action"), $("#today_spot_reservations_search").serialize(), null, "script");
+        return false;
+    });
+
     $("input.numeric").keydown(function(e) {
         var key = e.charCode || e.keyCode || 0;
         return ( key == 8 || key == 9 ||
@@ -39,6 +44,20 @@ $(function() {
     $('#team_reservation_child_ticket_number').blur(function() {
         calculate_team_price();
     });
+
+    $('#individual_reservation_adult_true_ticket_number').keyup(function() {
+        calculate_individual_true_price();
+    });
+    $('#individual_reservation_child_true_ticket_number').keyup(function() {
+        calculate_individual_true_price();
+    });
+    $('#team_reservation_adult_true_ticket_number').keyup(function() {
+        calculate_team_true_price();
+    });
+    $('#team_reservation_child_true_ticket_number').keyup(function() {
+        calculate_team_true_price();
+    });
+
     calculate_individual_price();
     calculate_team_price();
 });
@@ -90,28 +109,50 @@ function add_fields(link, association, content) {
 
 function calculate_individual_price() {
     if ($("#individual_reservation_adult_ticket_number").length != 0) {
-        var adult_ticket_number = $("#individual_reservation_adult_ticket_number").val();
-        var child_ticket_number = $("#individual_reservation_child_ticket_number").val();
-        var adult_sale_price = $("#individual_reservation_adult_sale_price").val();
-        var child_sale_price = $("#individual_reservation_child_sale_price").val();
-        var total_price = parseInt(adult_ticket_number) * parseInt(adult_sale_price);
-        if (child_sale_price != null && child_sale_price != '')
-            total_price += parseInt(child_ticket_number) * parseInt(child_sale_price);
-        $("#total_price_text")[0].innerHTML = total_price;
+        calculate_price("individual_reservation_adult_ticket_number", "individual_reservation_adult_sale_price", "individual_reservation_child_ticket_number",
+                "individual_reservation_child_sale_price", "total_price_text");
     }
 }
 
 
 function calculate_team_price() {
     if ($("#team_reservation_adult_ticket_number").length != 0) {
-        var adult_ticket_number = $("#team_reservation_adult_ticket_number").val();
-        var child_ticket_number = $("#team_reservation_child_ticket_number").val();
-        var adult_price = $("#team_reservation_adult_price").val();
-        var child_price = $("#team_reservation_child_price").val();
-        var total_price = parseInt(adult_ticket_number) * parseInt(adult_price);
-        if (child_price != null && child_price != '')
-            total_price += parseInt(child_ticket_number) * parseInt(child_price);
-        $("#total_price_text")[0].innerHTML = total_price;
+        calculate_price("team_reservation_adult_ticket_number", "team_reservation_adult_price", "team_reservation_child_ticket_number",
+                "team_reservation_child_price", "total_price_text");
+    }
+}
+
+
+function calculate_individual_true_price() {
+    if ($("#individual_reservation_adult_true_ticket_number").length != 0) {
+        calculate_price("individual_reservation_adult_true_ticket_number", "individual_reservation_adult_sale_price", "individual_reservation_child_true_ticket_number",
+                "individual_reservation_child_sale_price", "total_price_text");
+    }
+}
+
+
+function calculate_team_true_price() {
+    if ($("#team_reservation_adult_true_ticket_number").length != 0) {
+        calculate_price("team_reservation_adult_true_ticket_number", "team_reservation_adult_price", "team_reservation_child_true_ticket_number",
+                "team_reservation_child_price", "total_price_text");
+    }
+}
+
+function calculate_price(adult_number_id, adult_price_id, child_number_id, child_price_id, total_price_id) {
+    var adult_ticket_number = $("#" + adult_number_id).val();
+    var child_ticket_number = $("#" + child_number_id).val();
+    var adult_price = $("#" + adult_price_id).val();
+    var child_price = $("#" + child_price_id).val();
+    var total_price = nan2zero(parseInt(adult_ticket_number)) * nan2zero(parseInt(adult_price));
+    total_price += nan2zero(parseInt(child_ticket_number)) * nan2zero(parseInt(child_price));
+    $("#" + total_price_id)[0].innerHTML = total_price;
+}
+
+function nan2zero(number) {
+    if (isNaN(number)) {
+        return 0;
+    } else {
+        return number;
     }
 }
 

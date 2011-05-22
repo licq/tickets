@@ -13,9 +13,15 @@ class Reservation < ActiveRecord::Base
   def status_name
     case self.status
       when 'confirmed'
-        '已确认'
+        if self.date >= Date.today
+          '已确认'
+        else
+          '已过期'
+        end
       when 'canceled'
         '已取消'
+      when 'checkedin'
+        '已入园'
     end
   end
 
@@ -27,6 +33,14 @@ class Reservation < ActiveRecord::Base
   def can_cancel
     return true if self.status == 'confirmed'
     false
+  end
+
+  def self.search_for_today(search)
+    reservations_for_today_and_confirmed = where({:date.eq => Date.today, :status.eq => :confirmed})
+    if search
+      reservations_for_today_and_confirmed.where((:phone.matches % "#{search}%" | :contact.matches % "%#{search}%" | :no.matches % "%#{search}%"))
+    end
+    reservations_for_today_and_confirmed
   end
 
 end

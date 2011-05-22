@@ -4,7 +4,7 @@ class ReservationsController < ApplicationController
   before_filter :set_agent
 
   def index
-    @search = Reservation.search(params[:search])
+    @search = @agent.reservations.search(params[:search])
     page = params[:page].to_i
     @reservations= @search.page(page)
     if (@reservations.all.empty?) && (page > 1)
@@ -59,9 +59,7 @@ class ReservationsController < ApplicationController
   def update_individual
     @reservation = @agent.reservations.find(params[:id])
     if @reservation.update_attributes(params[:individual_reservation])
-      @reservation.total_price =@reservation.calculate_price
-      @reservation.total_purchase_price =@reservation.calculate_purchase_price
-      @reservation.save
+      @reservation.save_total_price
       redirect_to reservations_url, :notice => "已修改成功."
     else
       render :action => 'edit'
@@ -71,8 +69,7 @@ class ReservationsController < ApplicationController
   def update_team
     @reservation = @agent.reservations.find(params[:id])
     if @reservation.update_attributes(params[:team_reservation])
-      @reservation.total_price =@reservation.calculate_price
-      @reservation.save
+      @reservation.save_total_price
       redirect_to reservations_url, :notice => "已修改成功."
     else
       render :action => 'edit'

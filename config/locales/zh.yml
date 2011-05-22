@@ -235,6 +235,8 @@ zh:
          agent: "旅行社"
          child_ticket_number: "儿童票数量"
          adult_ticket_number: "成人票数量"
+         adult_true_ticket_number: "实到成人数量"
+         child_true_ticket_number: "实到儿童数量"
          adult_price: "成人价格"
          child_price: "儿童价格"
          child_sale_price: "儿童售价"

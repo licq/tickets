@@ -1,0 +1,12 @@
+<% title "订单列表" %>
+
+<div id="search">
+  <%= form_tag today_spot_reservations_path, :method => 'get', :id => "today_spot_reservations_search" do %>
+      <p>
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag "查询", :name => nil %>
+      </p>
+  <% end %>
+  <div id="reservations"><%= render 'reservations' %></div>
+</div>
+

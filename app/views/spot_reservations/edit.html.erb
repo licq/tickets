@@ -1,0 +1,27 @@
+<% title "入园" %>
+
+<%= simple_form_for @reservation, :url =>spot_reservation_path, :id => "edit_reservation" do |f| %>
+    <%= f.input :child_sale_price, :as => :hidden %>
+    <%= f.input :child_purchase_price, :as => :hidden %>
+    <%= f.input :adult_sale_price, :as => :hidden %>
+    <%= f.input :adult_purchase_price, :as => :hidden %>
+    <%= f.input :child_price, :as => :hidden %>
+    <%= f.input :adult_price, :as => :hidden %>
+    <div class="right75">门票 <%= f.object.ticket_name %></div>
+    <div class="right75">日期 <%= f.object.date %></div>
+    <div class="right75">联系人 <%= f.object.contact %></div>
+    <div class="right75">联系方式 <%= f.object.phone %></div>
+    <div class="right75">成人价 <%= show_reservation_adult_price(@reservation) %></div>
+    <div class="right75">订票成人数量 <%= f.object.adult_ticket_number %></div>
+    <% if  f.object.can_book_child_ticket? %>
+        <div class="right75">儿童价 <%= show_reservation_child_price(@reservation) %></div>
+        <div class="right75">订票儿童数量 <%= f.object.child_ticket_number %></div>
+    <% end %>
+    <%= f.input :adult_true_ticket_number, :as => :integer %>
+    <% if  f.object.can_book_child_ticket? %>
+        <%= f.input :child_true_ticket_number, :as => :integer %>
+    <% end %>
+    总价
+    <div id="total_price_text"><%= f.object.total_price %></div>
+    <%= f.submit %>
+<% end %>
