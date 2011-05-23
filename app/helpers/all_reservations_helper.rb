@@ -1,0 +1,2 @@
+module AllReservationsHelper
+end

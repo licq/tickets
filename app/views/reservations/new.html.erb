@@ -18,6 +18,7 @@
 
 <% if @agent_prices %>
 
+    共找到<%= @agent_prices.total_count %>条记录
     <%= paginate @agent_prices %>
 
     <table>

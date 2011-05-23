@@ -4,7 +4,7 @@ class ReservationsController < ApplicationController
   before_filter :set_agent
 
   def index
-    @search = @agent.reservations.search(params[:search])
+    @search = @agent.reservations.includes(:spot).search(params[:search])
     page = params[:page].to_i
     @reservations= @search.page(page)
     if (@reservations.all.empty?) && (page > 1)
@@ -28,6 +28,10 @@ class ReservationsController < ApplicationController
 
   def edit
     @reservation = @agent.reservations.find(params[:id])
+  end
+
+  def show
+     @reservation = @agent.reservations.find(params[:id])
   end
 
   def create_individual

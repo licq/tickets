@@ -1,21 +1,30 @@
 <div id="navigation">
   <ul>
-    <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
-      <div class="list">
-        <a href="#">景区管理</a>
-        <br/>
-        <a href="<%= new_spot_path %>">新建景区</a><br/>
-        <a href="<%= spots_path %>">景区查询</a><br/>
-      </div>
-    </li>
-    <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
-      <div class="list">
-        <a href="#">旅行社管理</a>
-        <br/>
-        <a href="<%= new_agent_path %>">新建旅行社</a><br/>
-        <a href="<%= agents_path %>">旅行社查询</a><br/>
-      </div>
-    </li>
+    <% if current_user && current_user.type == "SystemAdmin" %>
+        <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
+          <div class="list">
+            <a href="#">景区管理</a>
+            <br/>
+            <a href="<%= new_spot_path %>">新建景区</a><br/>
+            <a href="<%= spots_path %>">景区查询</a><br/>
+          </div>
+        </li>
+        <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
+          <div class="list">
+            <a href="#">旅行社管理</a>
+            <br/>
+            <a href="<%= new_agent_path %>">新建旅行社</a><br/>
+            <a href="<%= agents_path %>">旅行社查询</a><br/>
+          </div>
+        </li>
+        <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
+          <div class="list">
+            <a href="#">订单管理</a>
+            <br/>
+            <a href="<%= all_reservations_path %>">订单列表</a><br/>
+          </div>
+        </li>
+    <% end %>
     <% if current_user && current_user.type == "SpotAdmin" %>
         <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
           <div class="list">
@@ -25,6 +34,14 @@
             <a href="<%= tickets_path %>">门票设置</a><br/>
             <a href="<%= agent_prices_path %>">旅行社价格</a><br/>
             <a href="<%= rfps_path %>">价格关联</a><br/>
+          </div>
+        </li>
+        <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
+          <div class="list">
+            <a href="#">订单管理</a>
+            <br/>
+            <a href="<%= spot_reservations_path %>">订单列表</a><br/>
+            <a href="<%= today_spot_reservations_path %>">当日订单</a><br/>
           </div>
         </li>
     <% end %>
@@ -41,14 +58,7 @@
         </li>
     <% end %>
 
-    <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
-      <div class="list">
-        <a href="#">订单管理</a>
-        <br/>
-        <a href="<%= spot_reservations_path %>">订单列表</a><br/>
-        <a href="<%= today_spot_reservations_path %>">当日订单</a><br/>
-      </div>
-    </li>
+
   </ul>
 </div>
 

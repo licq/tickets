@@ -4,6 +4,6 @@
     <% else %>
         <%= f.association :agent, :disabled => true %>
     <% end %>
-    <%= f.association :agent_price %>
+    <%= f.association :agent_price, :collection => @rfp.spot.agent_prices %>
     <p><%= f.submit %></p>
 <% end %>

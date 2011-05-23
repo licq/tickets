@@ -24,17 +24,6 @@
             <%= password_field_tag :password %>
           </div>
 
-
-        <!--<tr>-->
-        <!--<td></td>-->
-        <!--<td><%= submit_tag "登陆" %></td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td colspan="2" class="signup_td">-->
-        <!--<p>如果您是旅行社，还没有帐户?<%= link_to "注册!", signup_path %></p>-->
-        <!--</td>-->
-        <!--</tr>-->
-        <!--</table>-->
         <div class="hint">如果您是旅行社，还没有帐户?<%= link_to "注册!", signup_path %></div>
         <div class="buttons">
           <%= submit_tag "登陆" %>
@@ -42,7 +31,6 @@
         </fieldset>
     <% end %>
     </div>
-<%= debug(params) if Rails.env.development? %>
 </div>
 </body>
 </html>

@@ -9,7 +9,14 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:login], params[:password])
     if user
       login(user)
-      redirect_to_target_or_default root_url, :notice => "登陆已成功."
+      if(user.type == "AgentOperator")
+        url = new_reservation_path
+      elsif(user.type == "SpotAdmin")
+        url = today_spot_reservations_path
+      else
+        url = spots_path
+      end
+      redirect_to_target_or_default url, :notice => "登陆已成功."
     else
       flash.now[:alert] = "不正确的用户名或密码."
       render :action => 'new'

@@ -3,20 +3,24 @@ class SpotReservationsController < ApplicationController
   before_filter :set_spot
 
   def index
-    @search = @spot.reservations.search(params[:search])
+    @search = @spot.reservations.includes(:agent).search(params[:search])
     page = params[:page].to_i
     @reservations= @search.page(page)
   end
 
   def today
     page = params[:page].to_i
-    @reservations= @spot.reservations.search_for_today(params[:search]).page(page)
+    @reservations= @spot.reservations.includes(:agent).search_for_today(params[:search]).page(page)
   end
 
   def edit
     @reservation = @spot.reservations.find(params[:id])
     @reservation.child_true_ticket_number ||= @reservation.child_ticket_number
     @reservation.adult_true_ticket_number ||= @reservation.adult_ticket_number
+  end
+
+  def show
+    @reservation = @spot.reservations.find(params[:id])
   end
 
   def update

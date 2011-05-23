@@ -5,8 +5,8 @@
   <%= @reservation.no %>
 </p>
 <p>
-  <strong>景区名称:</strong>
-  <%= @reservation.spot.name %>
+  <strong>旅行社名称:</strong>
+  <%= @reservation.agent.name %>
 </p>
 <p>
   <strong>门票:</strong>
@@ -66,5 +66,5 @@
 </p>
 
 <p>
-  <%= link_to "返回列表", reservations_path %>
+  <%= link_to "返回列表", spot_reservations_path %>
 </p>
