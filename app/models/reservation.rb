@@ -12,6 +12,20 @@ class Reservation < ActiveRecord::Base
 
   after_create :set_no
 
+  def self.with_status(status)
+    case status
+      when "confirmed"
+        where(:status => status, :date.gte => Date.today)
+      when "outdated"
+        where(:status => "confirmed", :date.lt => Date.today)
+      else
+        where(:status => status)
+    end
+
+  end
+
+  search_methods :with_status
+
   def set_no
     self.no = (100000 + self.id).to_s
     self.save
@@ -45,7 +59,7 @@ class Reservation < ActiveRecord::Base
   def self.search_for_today(search)
     reservations_for_today_and_confirmed = where({:date.eq => Date.today, :status.eq => :confirmed})
     if search
-      reservations_for_today_and_confirmed.where((:phone.matches % "#{search}%" | :contact.matches % "%#{search}%" | :no.matches % "%#{search}%"))
+      reservations_for_today_and_confirmed = reservations_for_today_and_confirmed.where((:phone.matches % "#{search}%" | :contact.matches % "%#{search}%" | :no.matches % "%#{search}%"))
     end
     reservations_for_today_and_confirmed
   end

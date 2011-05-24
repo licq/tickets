@@ -4,7 +4,16 @@ class ReservationsController < ApplicationController
   before_filter :set_agent
 
   def index
-    @search = @agent.reservations.includes(:spot).search(params[:search])
+    condition = params[:search]
+    if condition
+      if condition[:status_eq] == "confirmed"
+        condition[:date_lte] = Date.today
+      elsif condition[:status_eq] == "outdated"
+        condition[:status_eq] = "confirmed"
+        condition[:date_gt] = Date.today
+      end
+    end
+    @search = @agent.reservations.includes(:spot).search(condition)
     page = params[:page].to_i
     @reservations= @search.page(page)
     if (@reservations.all.empty?) && (page > 1)

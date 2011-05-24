@@ -1,9 +1,9 @@
 <% title "当日入园订单" %>
 
-<div id="search">
+<div id="query">
   <%= form_tag today_spot_reservations_path, :method => 'get', :id => "today_spot_reservations_search" do %>
       <p>
-        <%= text_field_tag :search, params[:search] %>
+        输入订单号、联系人或联系方式<%= text_field_tag :search, params[:search] %>
         <%= submit_tag "查询", :name => nil %>
       </p>
   <% end %>

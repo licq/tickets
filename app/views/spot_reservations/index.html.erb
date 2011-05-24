@@ -11,7 +11,7 @@
         <%= f.input :created_at_less_than_or_equal_to, :label => "预定结束日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %>
         <%= f.input :contact_contains, :label => "联系人", :required => false %>
         <%= f.input :phone_contains, :label => "联系电话", :required => false %>
-        <%= f.input :status_eq, :collection => [["","全部"],["confirmed", "已确认"], ["canceled", "已取消"],["checkedin", "已入园"]],
+        <%= f.input :with_status, :collection => [["","全部"],["confirmed", "已确认"], ["canceled", "已取消"],["checkedin", "已入园"],["outdated", "已过期"]],
                     :label_method => :last, :value_method => :first,
                     :as => :select, :label => "状态", :required => false, :include_blank => false %>
       </fieldset>
