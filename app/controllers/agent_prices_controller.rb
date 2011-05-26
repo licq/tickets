@@ -4,9 +4,11 @@ class AgentPricesController < ApplicationController
   before_filter :set_spot
 
   def index
-    redirect_to seasons_path, :notice => "必须先设置淡旺季" if @spot.seasons.empty?
-    redirect_to tickets_path, :notice => "必须先设置门票" if @spot.tickets.empty?
-
+    if @spot.seasons.empty?
+      redirect_to seasons_path, :notice => "必须先设置淡旺季"
+    elsif @spot.tickets.empty?
+      redirect_to tickets_path, :notice => "必须先设置门票"
+    end
     @agent_prices = @spot.agent_prices
   end
 

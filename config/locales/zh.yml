@@ -194,6 +194,12 @@ zh:
       spot:
         name: "景区名称"
         code: "景区编码"
+        address: "地址"
+        traffic: "交通信息"
+        business_contact: "市场部联系人"
+        business_phone: "市场部联系方式"
+        finance_contact: "财务部联系人"
+        finance_phone: "财务部联系方式"
         description: "描述"
         admin: ""
         cities: ""
@@ -229,6 +235,8 @@ zh:
         agent: "旅行社"
         spot: "景区"
         agent_price: "旅行社价格"
+        team_payment_method: "团队票结算方式"
+        individual_payment_method: "散客票结算方式"
       reservation:
          no: "订单号"
          spot: "景区"

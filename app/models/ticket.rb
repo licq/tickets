@@ -1,5 +1,8 @@
 class Ticket < ActiveRecord::Base
-  validates :name, :presence => true, :uniqueness => true
+  validates :name, :presence => true
+  validates_uniqueness_of :name, :scope => [:spot]
+
+
   belongs_to :spot
   has_many :public_rates, :dependent => :delete_all
   accepts_nested_attributes_for :public_rates

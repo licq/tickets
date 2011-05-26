@@ -46,6 +46,8 @@ class RfpsController < ApplicationController
   def accept
     @rfp = @spot.rfps.find(params[:id])
     @rfp.agent_price_id = params[:rfp][:agent_price_id]
+    @rfp.team_payment_method = params[:rfp][:team_payment_method]
+    @rfp.individual_payment_method = params[:rfp][:individual_payment_method]
     @rfp.status = "c"
     @rfp.save
     redirect_to rfps_path, :notice => "接受已成功"

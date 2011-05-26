@@ -1,22 +1,28 @@
-<%= simple_form_for @spot,:html => {:novalidate => true} do |f| %>
+<%= simple_form_for @spot, :html => {:novalidate => true} do |f| %>
     <!--<%= f.error_messages %>-->
 
     <fieldset class="inputs">
-    <%= f.input :code %>
-    <%= f.input :name %>
-    <%= f.input :city_tokens, :label =>"所在城市", :required => true, :hint => "至少选择一个城市，可以多选",
-                :input_html => {"data-pre"=> @spot.cities.map(&:attributes).to_json} %>
-    <%= f.input :description %>
-    <%= f.simple_fields_for :admin do |af| %>
-        <%= af.input :username %>
-        <%= af.input :name %>
-        <%= af.input :email %>
-        <%= af.input :password %>
-        <%= af.input :password_confirmation, :required => true %>
-    <% end %>
-  </fieldset>
+      <%= f.input :code %>
+      <%= f.input :name %>
+      <%= f.input :city_tokens, :label =>"所在城市", :required => true, :hint => "至少选择一个城市，可以多选",
+                  :input_html => {"data-pre"=> @spot.cities.map(&:attributes).to_json} %>
+      <%= f.input :address %>
+      <%= f.input :traffic %>
+      <%= f.input :business_contact %>
+      <%= f.input :business_phone %>
+      <%= f.input :finance_contact %>
+      <%= f.input :finance_phone %>
+      <%= f.input :description %>
+      <%= f.simple_fields_for :admin do |af| %>
+          <%= af.input :username %>
+          <%= af.input :name %>
+          <%= af.input :email %>
+          <%= af.input :password %>
+          <%= af.input :password_confirmation, :required => true %>
+      <% end %>
+    </fieldset>
 
-  <fieldset class="buttons">
-    <%= f.button :submit %>
+    <fieldset class="buttons">
+      <%= f.button :submit %>
     </fieldset>
 <% end %>

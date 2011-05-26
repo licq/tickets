@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110503135501) do
+ActiveRecord::Schema.define(:version => 20110526141530) do
 
   create_table "agent_prices", :force => true do |t|
     t.integer  "spot_id"
@@ -97,10 +97,12 @@ ActiveRecord::Schema.define(:version => 20110503135501) do
     t.integer  "agent_id"
     t.integer  "spot_id"
     t.integer  "agent_price_id"
-    t.string   "status",         :limit => 1, :default => "a"
-    t.boolean  "from_spot",                   :default => false
+    t.string   "status",                    :limit => 1, :default => "a"
+    t.boolean  "from_spot",                              :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "team_payment_method"
+    t.string   "individual_payment_method"
   end
 
   create_table "seasons", :force => true do |t|
@@ -116,7 +118,15 @@ ActiveRecord::Schema.define(:version => 20110503135501) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "disabled",    :default => false, :null => false
+    t.boolean  "disabled",         :default => false, :null => false
+    t.string   "market_contact"
+    t.string   "market_phone"
+    t.string   "address"
+    t.text     "traffic"
+    t.string   "business_contact"
+    t.string   "business_phone"
+    t.string   "finance_contact"
+    t.string   "finance_phone"
   end
 
   add_index "spots", ["code"], :name => "index_spots_on_code", :unique => true

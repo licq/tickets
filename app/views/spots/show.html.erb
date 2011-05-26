@@ -13,16 +13,40 @@
   <%= @spot.cities.map(&:name).join(",") %>
 </p>
 <p>
+  <strong>地址:</strong>
+  <%= @spot.address %>
+</p>
+<p>
+  <strong>交通信息:</strong>
+  <%= @spot.traffic %>
+</p>
+<p>
+  <strong>市场部联系人:</strong>
+  <%= @spot.business_contact %>
+</p>
+<p>
+  <strong>市场部联系方式:</strong>
+  <%= @spot.business_phone %>
+</p>
+<p>
+  <strong>财务部联系人:</strong>
+  <%= @spot.finance_contact %>
+</p>
+<p>
+  <strong>财务部联系方式:</strong>
+  <%= @spot.finance_phone %>
+</p>
+<p>
   <strong>描述:</strong>
   <%= @spot.description %>
 </p>
 <p>
-  <strong>管理员姓名:</strong>
-  <%= @spot.admin.name %>
-</p>
-<p>
   <strong>管理员用户名:</strong>
   <%= @spot.admin.username %>
+</p>
+<p>
+  <strong>管理员姓名:</strong>
+  <%= @spot.admin.name %>
 </p>
 <p>
   <strong>管理员邮箱:</strong>
