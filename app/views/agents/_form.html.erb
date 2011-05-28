@@ -1,18 +1,23 @@
-<%= simple_form_for @agent,:html => {:novalidate => true} do |f| %>
+<%= simple_form_for @agent, :html => {:novalidate => true} do |f| %>
 
     <fieldset class="inputs">
-    <%= f.input :name %>
-    <%= f.input :description %>
-    <%= f.simple_fields_for :operator do |af| %>
-        <%= af.input :username %>
-        <%= af.input :name %>
-        <%= af.input :email %>
-        <%= af.input :password %>
-        <%= af.input :password_confirmation, :required => true %>
-    <% end %>
-  </fieldset>
+      <%= f.input :name %>
+      <%= f.input :address %>
+      <%= f.input :description %>
+      <%= f.input :business_contact %>
+      <%= f.input :business_phone %>
+      <%= f.input :finance_contact %>
+      <%= f.input :finance_phone %>
+      <%= f.simple_fields_for :operator do |af| %>
+          <%= af.input :username %>
+          <%= af.input :name %>
+          <%= af.input :email %>
+          <%= af.input :password %>
+          <%= af.input :password_confirmation, :required => true %>
+      <% end %>
+    </fieldset>
 
-  <fieldset class="buttons">
-    <%= f.button :submit %>
+    <fieldset class="buttons">
+      <%= f.button :submit %>
     </fieldset>
 <% end %>

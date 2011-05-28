@@ -206,6 +206,11 @@ zh:
         disabled: "状态"
       agent:
         name: "旅行社名称"
+        address: "地址"
+        business_contact: "市场部联系人"
+        business_phone: "市场部联系方式"
+        finance_contact: "财务部联系人"
+        finance_phone: "财务部联系方式"
         description: "描述"
         disabled: "状态"
         operator: ""

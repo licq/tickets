@@ -18,18 +18,22 @@
 <table>
   <tr>
     <th>名称</th>
+    <th>市场部联系人</th>
+    <th>市场部联系方式</th>
+    <th>财务部联系人</th>
+    <th>财务部联系人</th>
     <th>操作员姓名</th>
-    <th>操作员用户名</th>
-    <th>操作员邮箱</th>
     <th>状态</th>
     <th colspan="3">操作</th>
   </tr>
   <% for agent in @agents %>
     <tr>
       <td><%= agent.name %></td>
+      <td><%= agent.business_contact %></td>
+      <td><%= agent.business_phone %></td>
+      <td><%= agent.finance_contact %></td>
+      <td><%= agent.finance_phone %></td>
       <td><%= agent.operator.name %></td>
-      <td><%= agent.operator.username %></td>
-      <td><%= agent.operator.email %></td>
       <td><%=show_disabled agent.disabled %></td>
       <td><%= link_to "查看", agent %></td>
       <td><%= link_to "修改", edit_agent_path(agent) %></td>

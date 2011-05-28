@@ -4,6 +4,7 @@
 <%= f.input :child_purchase_price, :as => :hidden %>
 <%= f.input :adult_sale_price, :as => :hidden %>
 <%= f.input :adult_purchase_price, :as => :hidden %>
+<%= f.input :individual_payment_method, :as => :hidden %>
 <%= f.input :date, :as => :hidden %>
 <div class="right75">景区 <%= f.object.spot.name %></div>
 <div class="right75">门票 <%= f.object.ticket_name %></div>
@@ -20,4 +21,5 @@
 <div id="total_price_text"><%= f.object.total_price %></div>
 <%= f.input :contact %>
 <%= f.input :phone %>
-<%= f.submit %>
+<div class="right75">支付方式 <%= show_reservation_payment_method(@reservation) %></div>
+<%= f.submit (f.object.new_record? ? "预订" : "修改")%>

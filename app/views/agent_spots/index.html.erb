@@ -1,0 +1,39 @@
+<% title "景区列表" %>
+<div id="search">
+  <%= simple_form_for @search, :url =>agent_spots_path do |f| %>
+      <fieldset class="inputs">
+        <%= f.input :name_contains, :label => "景区名称", :required => false %>
+        <%= f.input :cities_name_contains, :label => "城市名", :required => false %>
+      </fieldset>
+      <fieldset class="buttons">
+        <%= f.button :submit, :value => "查询" %>
+      </fieldset>
+  <% end %>
+</div>
+共找到<%= @spots.total_count %>条记录
+<%= paginate @spots %>
+<table>
+  <tr>
+    <th>名称</th>
+    <th>编码</th>
+    <th>所在城市</th>
+    <th>市场联系人</th>
+    <th>市场联系方式</th>
+    <th>财务联系人</th>
+    <th>财务联系方式</th>
+    <th colspan="2">操作</th>
+  </tr>
+  <% for spot in @spots %>
+      <tr id="spot<%= spot.id %>_row">
+        <td><%= link_to spot.name, agent_spot_path(spot) %></td>
+        <td><%= spot.code %></td>
+        <td> <%= spot.city_names %>  </td>
+        <td><%= spot.business_contact %></td>
+        <td><%= spot.business_phone %></td>
+        <td><%= spot.finance_contact %></td>
+        <td><%= spot.finance_phone %></td>
+        <td><%= link_to "申请", agent_rfps_path(:spot_id => spot), :method => :post, :remote => true %></td>
+      </tr>
+  <% end %>
+</table>
+

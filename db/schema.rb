@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110526141530) do
+ActiveRecord::Schema.define(:version => 20110528083000) do
 
   create_table "agent_prices", :force => true do |t|
     t.integer  "spot_id"
@@ -22,9 +22,14 @@ ActiveRecord::Schema.define(:version => 20110526141530) do
   create_table "agents", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.boolean  "disabled",    :default => false, :null => false
+    t.boolean  "disabled",         :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "address"
+    t.string   "business_contact"
+    t.string   "business_phone"
+    t.string   "finance_contact"
+    t.string   "finance_phone"
   end
 
   add_index "agents", ["name"], :name => "index_agents_on_name", :unique => true
@@ -77,8 +82,8 @@ ActiveRecord::Schema.define(:version => 20110526141530) do
     t.integer  "adult_purchase_price"
     t.integer  "adult_price"
     t.integer  "child_price"
-    t.integer  "child_ticket_number",      :default => 0
-    t.integer  "adult_ticket_number",      :default => 1
+    t.integer  "child_ticket_number",       :default => 0
+    t.integer  "adult_ticket_number",       :default => 1
     t.date     "date"
     t.string   "type"
     t.string   "status"
@@ -91,6 +96,8 @@ ActiveRecord::Schema.define(:version => 20110526141530) do
     t.integer  "child_true_ticket_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "team_payment_method"
+    t.string   "individual_payment_method"
   end
 
   create_table "rfps", :force => true do |t|

@@ -21,7 +21,8 @@ class AgentPrice < ActiveRecord::Base
   end
 
   def self.connected_for_agent(agent_id)
-    AgentPrice.joins(:rfps).where(:rfps => {:agent_id => agent_id, :status => 'c'})
+    AgentPrice.select("agent_prices.*,rfps.team_payment_method,rfps.individual_payment_method").
+        includes(:spot).joins(:rfps, :spot).where(:rfps => {:agent_id => agent_id, :status => 'c'}, :spot => {:disabled => false})
   end
 
   def price_for(date)

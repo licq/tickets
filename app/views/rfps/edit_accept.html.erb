@@ -9,7 +9,7 @@
     <%= f.input :individual_payment_method, :collection => [["门口现付", "poa"], ["挂账", "prepay"]],
                 :label_method => :first, :value_method => :last,
                 :as => :select, :label => "散客票结算方式", :required => false, :include_blank => false %>
-    <p><%= f.submit %></p>
+    <p><%= f.submit("保存") %></p>
 <% end %>
 
 <p>

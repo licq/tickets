@@ -1,52 +1,86 @@
 <% title "价格关联" %>
-
-<h2>已关联</h2>
-<table>
-  <tr>
-    <th>旅行社</th>
-    <th>价格</th>
-    <th colspan="2">操作</th>
-  </tr>
-  <% for rfp in @rfps.connected %>
-    <tr>
-      <td><%= rfp.agent.name %></td>
-      <td><%= rfp.agent_price.name %></td>
-      <td><%= link_to "修改", edit_rfp_path(rfp) %></td>
-      <td><%= link_to "删除", rfp, :confirm => '你确认删除吗?', :method => :delete %></td>
-    </tr>
-  <% end %>
-</table>
-
-<h2>已申请</h2>
-<table>
-  <tr>
-    <th>旅行社</th>
-    <th>价格</th>
-    <th colspan="2">操作</th>
-  </tr>
-  <% for rfp in @rfps.applied_by_spot %>
-    <tr>
-      <td><%= rfp.agent.name %></td>
-      <td><%= rfp.agent_price.name %></td>
-      <td><%= link_to "修改", edit_rfp_path(rfp) %></td>
-      <td><%= link_to "删除", rfp, :confirm => '你确认删除吗?', :method => :delete %></td>
-    </tr>
-  <% end %>
-</table>
-
-<h2>待确认</h2>
-<table>
-  <tr>
-    <th>旅行社</th>
-    <th colspan="2">操作</th>
-  </tr>
-  <% for rfp in @rfps.applied_by_agent %>
-    <tr>
-      <td><%= rfp.agent.name %></td>
-      <td><%= link_to "接受", edit_accept_rfp_path(rfp)%></td>
-      <td><%= link_to "拒绝", reject_rfp_path(rfp), :confirm => '你确认拒绝吗?', :method => :put %></td>
-    </tr>
-  <% end %>
-</table>
-
+<% if @rfps.connected.count > 0 %>
+    <h2>已关联</h2>
+    <table>
+      <tr>
+        <th>旅行社</th>
+        <th>价格</th>
+        <th>市场部联系人</th>
+        <th>市场部联系方式</th>
+        <th>财务部联系人</th>
+        <th>财务部联系人</th>
+        <th>散客票支付方式</th>
+        <th>团队票支付方式</th>
+        <th colspan="2">操作</th>
+      </tr>
+      <% for rfp in @rfps.connected %>
+          <tr>
+            <td><%= link_to rfp.agent.name, spot_agent_path(rfp.agent) %></td>
+            <td><%= rfp.agent_price.name %></td>
+            <td><%= rfp.agent.business_contact %></td>
+            <td><%= rfp.agent.business_phone %></td>
+            <td><%= rfp.agent.finance_contact %></td>
+            <td><%= rfp.agent.finance_phone %></td>
+            <td><%= show_payment_method(rfp.individual_payment_method) %></td>
+            <td><%= show_payment_method(rfp.team_payment_method) %></td>
+            <td><%= link_to "修改", edit_rfp_path(rfp) %></td>
+            <td><%= link_to "删除", rfp, :confirm => '你确认删除吗?', :method => :delete %></td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>
+<% if @rfps.applied_by_spot.count > 0 %>
+    <h2>已申请</h2>
+    <table>
+      <tr>
+        <th>旅行社</th>
+        <th>价格</th>
+        <th>市场部联系人</th>
+        <th>市场部联系方式</th>
+        <th>财务部联系人</th>
+        <th>财务部联系人</th>
+        <th>散客票支付方式</th>
+        <th>团队票支付方式</th>
+        <th colspan="2">操作</th>
+      </tr>
+      <% for rfp in @rfps.applied_by_spot %>
+          <tr>
+            <td><%= link_to rfp.agent.name, spot_agent_path(rfp.agent) %></td>
+            <td><%= rfp.agent_price.name %></td>
+            <td><%= rfp.agent.business_contact %></td>
+            <td><%= rfp.agent.business_phone %></td>
+            <td><%= rfp.agent.finance_contact %></td>
+            <td><%= rfp.agent.finance_phone %></td>
+            <td><%= show_payment_method(rfp.individual_payment_method) %></td>
+            <td><%= show_payment_method(rfp.team_payment_method) %></td>
+            <td><%= link_to "修改", edit_rfp_path(rfp) %></td>
+            <td><%= link_to "删除", rfp, :confirm => '你确认删除吗?', :method => :delete %></td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>
+<% if @rfps.applied_by_agent.count > 0 %>
+    <h2>待确认</h2>
+    <table>
+      <tr>
+        <th>旅行社</th>
+        <th>市场部联系人</th>
+        <th>市场部联系方式</th>
+        <th>财务部联系人</th>
+        <th>财务部联系人</th>
+        <th colspan="2">操作</th>
+      </tr>
+      <% for rfp in @rfps.applied_by_agent %>
+          <tr>
+            <td><%= link_to rfp.agent.name, spot_agent_path(rfp.agent) %></td>
+            <td><%= rfp.agent.business_contact %></td>
+            <td><%= rfp.agent.business_phone %></td>
+            <td><%= rfp.agent.finance_contact %></td>
+            <td><%= rfp.agent.finance_phone %></td>
+            <td><%= link_to "接受", edit_accept_rfp_path(rfp) %></td>
+            <td><%= link_to "拒绝", reject_rfp_path(rfp), :confirm => '你确认拒绝吗?', :method => :put %></td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>
 <p><%= link_to "新建价格关联", new_rfp_path %></p>

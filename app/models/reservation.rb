@@ -47,13 +47,15 @@ class Reservation < ActiveRecord::Base
   end
 
   def can_edit
-    return true if self.status == 'confirmed'
-    false
+    is_confirmed?
   end
 
   def can_cancel
-    return true if self.status == 'confirmed'
-    false
+    is_confirmed?
+  end
+
+  def is_confirmed?
+    self.status == "confirmed" && self.date >= Date.today
   end
 
   def self.search_for_today(search)

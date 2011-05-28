@@ -33,18 +33,5 @@
   <%= @agent.finance_phone %>
 </p>
 <p>
-  <strong>操作员姓名:</strong>
-  <%= @agent.operator.name %>
-</p>
-<p>
-  <strong>操作员用户名:</strong>
-  <%= @agent.operator.username %>
-</p>
-<p>
-  <strong>操作员邮箱:</strong>
-  <%= @agent.operator.email %>
-</p>
-<p>
-  <%= link_to "修改", edit_agent_path(@agent) %> |
-  <%= link_to "旅行社列表", agents_path %>
+  <%= link_to "返回", "#", :onclick => "history.back(); return false;" %>
 </p>

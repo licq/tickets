@@ -33,7 +33,14 @@
             <a href="<%= seasons_path %>">淡旺季设置</a><br/>
             <a href="<%= tickets_path %>">门票设置</a><br/>
             <a href="<%= agent_prices_path %>">旅行社价格</a><br/>
-            <a href="<%= rfps_path %>">价格关联</a><br/>
+          </div>
+        </li>
+         <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
+          <div class="list">
+            <a href="#">旅行社列表&nbsp;</a>
+            <br/>
+            <a href="<%= rfps_path %>">已关联旅行社</a><br/>
+            <a href="<%= spot_agents_path %>">未关联旅行社</a><br/>
           </div>
         </li>
         <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
@@ -49,9 +56,16 @@
     <% if current_user && current_user.type == "AgentOperator" %>
         <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
           <div class="list">
-            <a href="#">基础设置&nbsp;</a>
+            <a href="#">景区列表&nbsp;</a>
             <br/>
-            <a href="<%= agent_rfps_path %>">价格关联</a><br/>
+            <a href="<%= agent_rfps_path %>">已关联景区</a><br/>
+            <a href="<%= agent_spots_path %>">未关联景区</a><br/>
+          </div>
+        </li>
+        <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
+          <div class="list">
+            <a href="#">订单管理</a>
+            <br/>
             <a href="<%= new_reservation_path %>">新建订单</a><br/>
             <a href="<%= reservations_path %>">订单列表</a><br/>
           </div>

@@ -84,4 +84,29 @@ module ApplicationHelper
     date.strftime("%Y-%m-%d")
   end
 
+  def show_payment_method(payment_method)
+    if (payment_method=="poa")
+      "门口现付"
+    else
+      "挂账"
+    end
+
+  end
+
+  def show_reservation_payment_method(reservation)
+    if (reservation.is_individual?)
+      if (reservation.individual_payment_method=="poa")
+        "门口现付"
+      else
+        "挂账"
+      end
+    else
+      if (reservation.team_payment_method=="poa")
+        "门口现付"
+      else
+        "挂账"
+      end
+    end
+  end
+
 end

@@ -24,5 +24,6 @@
     <% end %>
     总价
     <div id="total_price_text"><%= f.object.total_price %></div>
-    <%= f.submit %>
+    <div class="right75">支付方式 <%= show_reservation_payment_method(@reservation) %></div>
+    <%= f.submit "入园"%>
 <% end %>

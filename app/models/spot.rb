@@ -15,7 +15,6 @@
 
 
 class Spot < ActiveRecord::Base
-  paginates_per 10
   validates :name, :presence => true, :uniqueness => true
   validates :code, :presence => true, :uniqueness => true
   validates_associated :admin
@@ -43,7 +42,12 @@ class Spot < ActiveRecord::Base
   def self.not_connected_with_agent(agent)
     select('spots.*').
         joins("left join rfps on spots.id = rfps.spot_id and rfps.status!='r' and rfps.agent_id = #{agent.id}").
-        where('rfps.spot_id is null')
+        where("rfps.spot_id is null and spots.disabled = 'f'")
   end
+
+  def city_names
+    self.cities.map(&:name).join(",")
+  end
+
 
 end

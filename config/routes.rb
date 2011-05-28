@@ -1,68 +1,72 @@
 Tickets::Application.routes.draw do
 
-resources :all_reservations
+  resources :all_reservations
 
-resources :spot_reservations do
-  collection do
-    get 'today'
+  resources :agent_spots
+
+  resources :spot_agents
+
+  resources :spot_reservations do
+    collection do
+      get 'today'
+    end
   end
-end
 
-resources :reservations do
-  collection do
-    post 'search'
-    get 'new_individual'
-    get 'new_team'
-    post 'create_individual'
-    post 'create_team'
+  resources :reservations do
+    collection do
+      post 'search'
+      get 'new_individual'
+      get 'new_team'
+      post 'create_individual'
+      post 'create_team'
+    end
+    member do
+      put 'update_individual'
+      put 'update_team'
+    end
   end
-  member do
-    put 'update_individual'
-    put 'update_team'
+
+  resources :agent_rfps do
+    member do
+      put 'accept'
+      put 'reject'
+    end
   end
-end
 
-resources :agent_rfps do
-  member do
-    put 'accept'
-    put 'reject'
+  resources :rfps do
+    member do
+      put 'accept'
+      get 'edit_accept'
+      put 'reject'
+    end
   end
-end
 
-resources :rfps do
-  member do
-    put 'accept'
-    get 'edit_accept'
-    put 'reject'
+  resources :agent_prices
+
+  resources :tickets
+
+  resources :seasons
+
+  resources :agents do
+    member do
+      put 'disable'
+      put 'enable'
+    end
   end
-end
-
-resources :agent_prices
-
-resources :tickets
-
-resources :seasons
-
-resources :agents do
-  member do
-    put 'disable'
-    put 'enable'
+  resources :cities
+  resources :spots do
+    member do
+      put 'disable'
+      put 'enable'
+    end
   end
-end
-resources :cities
-resources :spots do
-  member do
-    put 'disable'
-    put 'enable'
-  end
-end
-resources :sessions
-resources :users
+  resources :sessions
+  resources :users
 
-match 'user/edit' => 'users#edit', :as => :edit_current_user
-match 'signup' => 'users#new', :as => :signup
-match 'logout' => 'sessions#destroy', :as => :logout
-match 'login' => 'sessions#new', :as => :login
+  match 'user/edit' => 'users#edit', :as => :edit_current_user
+  match 'signup' => 'users#new', :as => :signup
+  match 'logout' => 'sessions#destroy', :as => :logout
+  match 'login' => 'sessions#new', :as => :login
 
 # The priority is based upon order of creation:
 # first created -> highest priority.
@@ -113,7 +117,7 @@ match 'login' => 'sessions#new', :as => :login
 
 # You can have the root of your site routed with "root"
 # just remember to delete public/index.html.
-root :to => "sessions#new"
+  root :to => "sessions#new"
 
 # See how all your routes lay out with "rake routes"
 

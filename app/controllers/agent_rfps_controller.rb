@@ -13,11 +13,15 @@ class AgentRfpsController < ApplicationController
 
 
   def create
-    @rfp = @agent.rfps.new(params[:rfp])
-    if @rfp.save
-      redirect_to agent_rfps_path, :notice => "创建已成功"
-    else
-      render :action => 'new'
+    respond_to do |format|
+      format.js do
+        @rfp = @agent.rfps.new(:spot_id => params[:spot_id], :from_spot => false, :status => "a")
+        if @rfp.save
+          flash[:notice] = "申请已成功"
+        else
+          flash[:notice] = "申请失败"
+        end
+      end
     end
   end
 

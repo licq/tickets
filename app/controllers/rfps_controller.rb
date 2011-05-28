@@ -7,14 +7,14 @@ class RfpsController < ApplicationController
   end
 
   def new
-    @rfp = @spot.rfps.new
+    @rfp = @spot.rfps.new(:agent_id => params[:agent_id])
   end
 
   def create
     @rfp = @spot.rfps.new(params[:rfp])
     @rfp.from_spot = true
     if @rfp.save
-      redirect_to rfps_path, :notice => "创建已成功"
+      redirect_to spot_agents_path, :notice => "创建已成功"
     else
       render :action => 'new'
     end

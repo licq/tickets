@@ -35,6 +35,7 @@
     <th>成人票数量</th>
     <th>儿童票数量</th>
     <th>总价</th>
+    <th>支付方式</th>
     <th>联系人</th>
     <th>联系电话</th>
     <th>预定日期</th>
@@ -53,6 +54,7 @@
         <td><%= reservation.adult_ticket_number %></td>
         <td><%= reservation.child_ticket_number %></td>
         <td><%= show_reservation_total_price(reservation) %></td>
+        <td><%= show_reservation_payment_method(reservation) %></td>
         <td><%= reservation.contact %></td>
         <td><%= reservation.phone %></td>
         <td><%= date_format(reservation.created_at) %></td>

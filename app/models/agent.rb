@@ -1,5 +1,4 @@
 class Agent < ActiveRecord::Base
-  paginates_per 10
 
   validates :name, :presence => true, :uniqueness => true
   validates :operator, :presence => true
@@ -13,6 +12,6 @@ class Agent < ActiveRecord::Base
   def self.not_connected_with_spot(spot)
     select('agents.*').
         joins("left join rfps on agents.id = rfps.agent_id and rfps.status!='r' and rfps.spot_id = #{spot.id}").
-        where('rfps.agent_id is null')
+        where("rfps.agent_id is null and agents.disabled = 'f'")
   end
 end

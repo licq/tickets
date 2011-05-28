@@ -13,12 +13,12 @@
   <%= @spot.city_names %>
 </p>
 <p>
-  <strong>地址:</strong>
-  <%= @spot.address %>
-</p>
-<p>
   <strong>描述:</strong>
   <%= @spot.description %>
+</p>
+<p>
+  <strong>地址:</strong>
+  <%= @spot.address %>
 </p>
 <p>
   <strong>交通信息:</strong>
@@ -42,20 +42,5 @@
 </p>
 
 <p>
-  <strong>管理员用户名:</strong>
-  <%= @spot.admin.username %>
-</p>
-<p>
-  <strong>管理员姓名:</strong>
-  <%= @spot.admin.name %>
-</p>
-<p>
-  <strong>管理员邮箱:</strong>
-  <%= @spot.admin.email %>
-</p>
-
-
-<p>
-  <%= link_to "修改", edit_spot_path(@spot) %> |
-  <%= link_to "景区列表", spots_path %>
+  <%= link_to "返回", "#", :onclick => "history.back(); return false;" %>
 </p>
