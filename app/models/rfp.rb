@@ -1,5 +1,6 @@
 #coding: utf-8
 class Rfp < ActiveRecord::Base
+  default_scope order('id desc')
   validates_presence_of :spot_id, :message => "必须选择一个景区"
   validates_presence_of :agent_id, :message => "必须选择一个旅行社"
   validates_presence_of :agent_price_id, :if => Proc.new { |rfp| rfp.from_spot? }, :message => "必须选择一个旅行社价格"

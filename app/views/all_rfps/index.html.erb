@@ -1,0 +1,45 @@
+<% title "价格关联列表" %>
+<div id="search">
+  <%= simple_form_for @search, :url =>all_rfps_path do |f| %>
+      <fieldset class="inputs">
+        <%= f.input :agent_name_contains, :label => "旅行社名称", :required => false %>
+        <%= f.input :spot_name_contains, :label => "景区名称", :required => false %>
+        <%= f.input :status_eq, :collection => [["", "全部"], ["c", "已确认"], ["a", "已申请"], ["r", "已拒绝"]],
+                    :label_method => :last, :value_method => :first,
+                    :as => :select, :label => "状态", :required => false, :include_blank => false %>
+        <%= f.input :from_spot_eq, :collection => [["", "全部"],[false, "旅行社"], [true, "景区"]],
+                    :label_method => :last, :value_method => :first,
+                    :as => :select, :label => "申请发起方", :required => false, :include_blank => false %>
+      </fieldset>
+      <fieldset class="buttons">
+        <%= f.button :submit, :value => "查询" %>
+      </fieldset>
+  <% end %>
+</div>
+共找到<%= @rfps.total_count %>条记录
+<%= paginate @rfps %>
+
+<table>
+  <tr>
+    <th>景区名称</th>
+    <th>旅行社名称</th>
+    <th>旅行社价格</th>
+    <th>散客票结算方式</th>
+    <th>团队票结算方式</th>
+    <th>状态</th>
+    <th>申请发起方</th>
+    <th>创建时间</th>
+  </tr>
+  <% for rfp in @rfps %>
+      <tr>
+        <td><%= link_to rfp.spot.name,spot_path(rfp.spot) %></td>
+        <td><%= link_to rfp.agent.name, agent_path(rfp.agent) %></td>
+        <td><%= show_rfp_agent_price_name(rfp) %></td>
+        <td><%= show_payment_method(rfp.individual_payment_method) %></td>
+        <td><%= show_payment_method(rfp.team_payment_method) %></td>
+        <td><%= show_rfp_status(rfp.status) %></td>
+        <td><%= show_rfp_from_spot(rfp.from_spot) %></td>
+        <td><%= date_format(rfp.created_at) %></td>
+      </tr>
+  <% end %>
+</table>

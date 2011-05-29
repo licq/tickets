@@ -2,6 +2,8 @@ Tickets::Application.routes.draw do
 
   resources :all_reservations
 
+  resources :all_rfps
+
   resources :agent_spots
 
   resources :spot_agents

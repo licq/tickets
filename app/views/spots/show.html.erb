@@ -57,5 +57,6 @@
 
 <p>
   <%= link_to "修改", edit_spot_path(@spot) %> |
-  <%= link_to "景区列表", spots_path %>
+  <%= link_to "景区列表", spots_path %>|
+  <%= link_to "返回", "#", :onclick => "history.back(); return false;" %>
 </p>

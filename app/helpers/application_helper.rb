@@ -85,28 +85,50 @@ module ApplicationHelper
   end
 
   def show_payment_method(payment_method)
-    if (payment_method=="poa")
-      "门口现付"
-    else
-      "挂账"
+    case payment_method
+      when "poa" then
+        "门口现付"
+      when "prepay" then
+        "挂账"
+      else
+        "--"
     end
-
   end
 
   def show_reservation_payment_method(reservation)
     if (reservation.is_individual?)
-      if (reservation.individual_payment_method=="poa")
-        "门口现付"
-      else
-        "挂账"
-      end
+      payment_method = reservation.individual_payment_method
     else
-      if (reservation.team_payment_method=="poa")
+      payment_method = reservation.team_payment_method
+    end
+    case payment_method
+      when "poa" then
         "门口现付"
-      else
+      when "prepay" then
         "挂账"
-      end
+      else
+        "--"
     end
   end
+
+
+  def show_rfp_status(status)
+    case status
+      when 'a' then
+        '已申请'
+      when 'r' then
+        '已拒绝'
+      when 'c' then
+        '已确认'
+    end
+  end
+
+  def show_rfp_agent_price_name(rfp)
+    rfp.agent_price && "#{rfp.agent_price.name}" ||"--"
+  end
+
+   def show_rfp_from_spot(from_spot)
+    from_spot ? "景区" : "旅行社"
+   end
 
 end

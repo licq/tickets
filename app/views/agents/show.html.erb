@@ -46,5 +46,6 @@
 </p>
 <p>
   <%= link_to "修改", edit_agent_path(@agent) %> |
-  <%= link_to "旅行社列表", agents_path %>
+  <%= link_to "旅行社列表", agents_path %>|
+  <%= link_to "返回", "#", :onclick => "history.back(); return false;" %>
 </p>
