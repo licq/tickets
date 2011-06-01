@@ -22,7 +22,7 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    params[:date] = Date.today + 1
+    params[:date] = Date.today
   end
 
   def search

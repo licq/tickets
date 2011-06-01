@@ -216,3 +216,18 @@ div.right75 {
 div.add_timespan{
     margin-left:800px;
 }
+
+div.spot_left{
+    float: left;
+    margin: 2px;
+    border: 4px solid black;
+    padding: 2px;
+    width: 10%;
+}
+
+table.new_reservation_table{
+    width: 90%;
+}
+
+.ui-datepicker select.ui-datepicker-month,
+.ui-datepicker select.ui-datepicker-year { width: 30%;}

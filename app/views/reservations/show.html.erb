@@ -1,5 +1,5 @@
-<% title "订单明细" %>
-
+<% title "#{@reservation.agent.name}订单明细" %>
+<div class="print">
 <p>
   <strong>订单号:</strong>
   <%= @reservation.no %>
@@ -29,11 +29,11 @@
   <%= @reservation.status_name %>
 </p>
 <p>
-  <strong>成人价格:</strong>
+  <strong>成人价格(销售价/(结算价)):</strong>
   <%= show_reservation_adult_price(@reservation) %>
 </p>
 <p>
-  <strong>儿童价格:</strong>
+  <strong>儿童价格(销售价/(结算价)):</strong>
   <%= show_reservation_child_price(@reservation) %>
 </p>
 <p>
@@ -53,7 +53,7 @@
   <%= @reservation.child_true_ticket_number %>
 </p>
 <p>
-  <strong>总价:</strong>
+  <strong>总价(销售价/(结算价)):</strong>
   <%= show_reservation_total_price(@reservation) %>
 </p>
 <p>
@@ -68,7 +68,8 @@
   <strong>联系方式:</strong>
   <%= @reservation.phone %>
 </p>
-
+</div>
 <p>
   <%= link_to "返回列表", reservations_path %>
+  <a href="#" onclick="window.print();return false;">打印</a>
 </p>

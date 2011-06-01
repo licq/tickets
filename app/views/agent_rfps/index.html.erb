@@ -1,6 +1,6 @@
-<% title "价格关联" %>
+<% title "可预订景区" %>
 <% if @rfps.connected.count > 0 %>
-    <h2>已关联</h2>
+    <h2>可预订</h2>
     <table>
       <tr>
         <th>景区</th>
@@ -22,6 +22,7 @@
             <td><%= rfp.spot.finance_contact %></td>
             <td><%= rfp.spot.finance_phone %></td>
             <td><%= link_to "删除", agent_rfp_path(rfp), :confirm => '你确认删除吗?', :method => :delete %></td>
+            <td><%= link_to "预定", new_reservation_path(:spot_name => rfp.spot.name)%></td>
           </tr>
       <% end %>
     </table>
@@ -81,4 +82,4 @@
       <% end %>
     </table>
 <% end %>
-<p><%= link_to "新建价格关联", agent_spots_path %></p>
+<p><%= link_to "向景区提交开通申请", agent_spots_path %></p>

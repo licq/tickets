@@ -66,6 +66,7 @@ function set_datepicker() {
     $(".start_datepicker").datepicker({
         minDate: new Date(),
         changeYear: true,
+        changeMonth: true,
         onClose: function(dateText, inst) {
             $(this).siblings(".end_datepicker").datepicker("option", "minDate", dateText);
             $(this).siblings(".end_datepicker").datepicker("show");
@@ -75,18 +76,21 @@ function set_datepicker() {
 
     $(".end_datepicker").datepicker({
         minDate: new Date(),
-        changeYear: true
+        changeYear: true,
+        changeMonth: true
     });
     var day = new Date();
     day.setDate(day.getDate() + 1);
 
     $(".book_datepicker").datepicker({
-        minDate: day,
-        changeYear: true
+        minDate: new Date(),
+        changeYear: true ,
+        changeMonth: true
     }
             );
     $(".reservation_datepicker").datepicker({
-        changeYear: true
+        changeYear: true ,
+        changeMonth: true
     }
             );
 }

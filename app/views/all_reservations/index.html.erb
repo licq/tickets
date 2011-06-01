@@ -5,6 +5,7 @@
       <fieldset class="inputs">
         <%= f.input :no_contains, :label => "订单号", :required => false %>
         <%= f.input :spot_name_contains, :label => "景区名称", :required => false %>
+        <%= f.input :ticket_name_contains, :label => "门票种类", :required => false %>
         <%= f.input :agent_name_contains, :label => "旅行社名称", :required => false %>
         <%= f.input :date_greater_than_or_equal_to, :label => "入园起始日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %>
         <%= f.input :date_less_than_or_equal_to, :label => "入园结束日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %>
@@ -12,7 +13,7 @@
         <%= f.input :created_at_less_than_or_equal_to, :label => "预定结束日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %>
         <%= f.input :contact_contains, :label => "联系人", :required => false %>
         <%= f.input :phone_contains, :label => "联系电话", :required => false %>
-        <%= f.input :with_status, :collection => [["","全部"],["confirmed", "已确认"], ["canceled", "已取消"],["checkedin", "已入园"],["outdated", "已过期"]],
+        <%= f.input :with_status, :collection => [["", "全部"], ["confirmed", "已确认"], ["canceled", "已取消"], ["checkedin", "已入园"], ["outdated", "已过期"]],
                     :label_method => :last, :value_method => :first,
                     :as => :select, :label => "状态", :required => false, :include_blank => false %>
       </fieldset>
@@ -32,11 +33,11 @@
     <th>门票</th>
     <th>日期</th>
     <th>种类</th>
-    <th>成人价</th>
-    <th>儿童价</th>
+    <th>成人价(销售价/(结算价))</th>
+    <th>儿童价(销售价/(结算价))</th>
     <th>成人票数量</th>
     <th>儿童票数量</th>
-    <th>总价</th>
+    <th>总价(销售价/(结算价))</th>
     <th>支付方式</th>
     <th>联系人</th>
     <th>联系电话</th>

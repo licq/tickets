@@ -32,7 +32,7 @@
         <td><%= agent.finance_phone %></td>
         <td><%= agent.operator.name %></td>
         <td><%= show_disabled agent.disabled %></td>
-        <td><%= link_to "申请", new_rfp_path(:agent_id => agent) %></td>
+        <td><%= link_to "直接开通预订", new_rfp_path(:agent_id => agent) %></td>
       </tr>
   <% end %>
 </table>

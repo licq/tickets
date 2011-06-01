@@ -21,7 +21,12 @@ class AgentsController < ApplicationController
   def create
     @agent = Agent.new(params[:agent])
     if @agent.save
-      redirect_to @agent, :notice => "旅行社已创建."
+      if (current_user.nil?)
+        login(@agent.operator)
+        redirect_to new_reservation_path, :notice => "感谢您注册，现在您已登陆"
+      else
+        redirect_to @agent, :notice => "旅行社已创建."
+      end
     else
       render :action => 'new'
     end

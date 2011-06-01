@@ -24,14 +24,14 @@ module ApplicationHelper
 
   def show_individual_adult_price(price_for_agent, ticket_id)
     price_for_agent[ticket_id] && price_for_agent[ticket_id][:individual_rate] &&
-        "#{price_for_agent[ticket_id][:individual_rate].adult_sale_price}(" +
+        "#{price_for_agent[ticket_id][:individual_rate].adult_sale_price}/(" +
             "#{price_for_agent[ticket_id][:individual_rate].adult_purchase_price})" || "--"
   end
 
   def show_individual_child_price(price_for_agent, ticket_id)
     price_for_agent[ticket_id] && price_for_agent[ticket_id][:individual_rate] &&
         price_for_agent[ticket_id][:individual_rate].child_sale_price &&
-        "#{price_for_agent[ticket_id][:individual_rate].child_sale_price}(" +
+        "#{price_for_agent[ticket_id][:individual_rate].child_sale_price}/(" +
             "#{price_for_agent[ticket_id][:individual_rate].child_purchase_price})" || "--"
   end
 
@@ -56,7 +56,7 @@ module ApplicationHelper
 
   def show_reservation_adult_price(reservation)
     if (reservation.is_individual?)
-      "#{reservation.adult_sale_price}(#{reservation.adult_purchase_price})"
+      "#{reservation.adult_sale_price}/(#{reservation.adult_purchase_price})"
     else
       "#{reservation.adult_price}"
     end
@@ -65,7 +65,7 @@ module ApplicationHelper
   def show_reservation_child_price(reservation)
     if (reservation.is_individual?)
       reservation.child_sale_price &&
-          "#{reservation.child_sale_price}(#{reservation.child_purchase_price})"|| "--"
+          "#{reservation.child_sale_price}/(#{reservation.child_purchase_price})"|| "--"
     else
       reservation.child_price &&
           "#{reservation.child_price}"|| "--"
@@ -74,7 +74,7 @@ module ApplicationHelper
 
   def show_reservation_total_price(reservation)
     if (reservation.is_individual?)
-      "#{reservation.total_price}(#{reservation.total_purchase_price})"
+      "#{reservation.total_price}/(#{reservation.total_purchase_price})"
     else
       "#{reservation.total_price}"
     end
