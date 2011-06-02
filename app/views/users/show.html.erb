@@ -1,0 +1,19 @@
+<% title "用户" %>
+
+<p>
+  <strong>用户名:</strong>
+  <%= @user.username %>
+</p>
+<p>
+  <strong>姓名:</strong>
+  <%= @user.name %>
+</p>
+<p>
+  <strong>邮箱:</strong>
+   <%= @user.email %>
+</p>
+
+<p>
+  <%= link_to "修改", edit_user_path(@user) %> |
+  <%= link_to "用户列表", users_path %>|
+</p>

@@ -1,4 +1,5 @@
-#coding:utf-8
-<% title "修改个人信息" %>
 
-<%= render 'form' %>
+<% title "修改用户" %>
+<%= simple_form_for @user, :url =>user_path(@user), :method => :put do |f| %>
+    <%= render :partial =>'fields',  :locals => { :f  => f} %>
+<% end %>

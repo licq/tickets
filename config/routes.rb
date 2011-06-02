@@ -63,7 +63,12 @@ Tickets::Application.routes.draw do
     end
   end
   resources :sessions
-  resources :users
+  resources :users do
+    member do
+      get 'edit_myself'
+      put 'update_myself'
+    end
+  end
 
   match 'user/edit' => 'users#edit', :as => :edit_current_user
   match 'signup' => 'users#new', :as => :signup

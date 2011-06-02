@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
     BCrypt::Engine.hash_secret(pass, password_salt)
   end
 
+
   private
 
   def prepare_password

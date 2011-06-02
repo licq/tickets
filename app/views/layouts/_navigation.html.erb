@@ -1,6 +1,6 @@
 <div id="navigation">
   <ul>
-    <% if current_user && current_user.type == "SystemAdmin" %>
+    <% if current_user && (current_user.type == "SystemAdmin") %>
         <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
           <div class="list">
             <a href="#">景区管理</a>
@@ -19,9 +19,9 @@
         </li>
         <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
           <div class="list">
-            <a href="#">价格关联</a>
+            <a href="#">合作管理</a>
             <br/>
-            <a href="<%= all_rfps_path %>">价格关联列表</a><br/>
+            <a href="<%= all_rfps_path %>">合作列表</a><br/>
           </div>
         </li>
         <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
@@ -32,7 +32,7 @@
           </div>
         </li>
     <% end %>
-    <% if current_user && current_user.type == "SpotAdmin" %>
+    <% if current_user && (current_user.type == "SpotAdmin" || current_user.type == "SpotOperator" )  %>
         <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
           <div class="list">
             <a href="#">基础设置&nbsp;</a>
@@ -40,6 +40,14 @@
             <a href="<%= seasons_path %>">淡旺季设置</a><br/>
             <a href="<%= tickets_path %>">门票设置</a><br/>
             <a href="<%= agent_prices_path %>">旅行社价格</a><br/>
+          </div>
+        </li>
+        <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
+          <div class="list">
+            <a href="#">用户管理&nbsp;</a>
+            <br/>
+            <a href="<%= new_user_path %>">新建用户</a><br/>
+            <a href="<%= users_path %>">用户列表</a><br/>
           </div>
         </li>
          <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">

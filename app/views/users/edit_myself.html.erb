@@ -1,0 +1,5 @@
+<% title "修改个人信息" %>
+
+<%= simple_form_for @user, :as => :user, :url =>update_myself_user_path(@user), :html => {:method => :put } do |f| %>
+    <%= render :partial =>'fields', :locals => {:f => f} %>
+<% end %>

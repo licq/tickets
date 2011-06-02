@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       login(user)
       if(user.type == "AgentOperator")
         url = new_reservation_path
-      elsif(user.type == "SpotAdmin")
+      elsif(user.type == "SpotAdmin" || user.type == "SpotOperator")
         url = today_spot_reservations_path
       else
         url = spots_path

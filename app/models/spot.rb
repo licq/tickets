@@ -23,7 +23,7 @@ class Spot < ActiveRecord::Base
 
   has_many :users
   has_one :admin, :class_name => 'SpotAdmin', :dependent => :delete
-  has_one :operators, :class_name => 'SpotOperator'
+  has_many :operators, :class_name => 'SpotOperator'
   has_and_belongs_to_many :cities
   has_many :seasons
   has_many :timespans, :through => :seasons
