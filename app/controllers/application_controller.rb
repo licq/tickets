@@ -18,4 +18,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def check_system_admin
+    unless current_user && (current_user.type == "SystemAdmin")
+      redirect_to login_url
+    end
+  end
+
 end

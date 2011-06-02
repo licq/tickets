@@ -43,16 +43,16 @@
           <th><%= ticket.name %></th>
           <% for season in @spot.seasons %>
               <% individual_rate = agent_price.individual_rate_for(season, ticket) %>
-              <th> <%= individual_rate.adult_purchase_price %> </th>
-              <th> <%= individual_rate.adult_sale_price %></th>
-              <th> <%= individual_rate.child_purchase_price %> </th>
-              <th> <%= individual_rate.child_sale_price %></th>
+              <th> <%= show_adult_purchase_price_for_individual_rate(individual_rate) %> </th>
+              <th> <%= show_adult_sale_price_for_individual_rate(individual_rate) %></th>
+              <th> <%= show_child_purchase_price_for_individual_rate(individual_rate) %> </th>
+              <th> <%= show_child_sale_price_for_individual_rate(individual_rate) %></th>
               <% team_rate = agent_price.team_rate_for(season, ticket) %>
               <th>
-                <%= team_rate.adult_price %>
+                <%= show_adult_price_for_team_rate(team_rate) %>
               </th>
               <th>
-                <%= team_rate.child_price %>
+                <%= show_child_price_for_team_rate(team_rate) %>
               </th>
           <% end %>
            <% if (count == 1) %>

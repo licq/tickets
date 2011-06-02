@@ -115,7 +115,7 @@ module ApplicationHelper
   def show_rfp_status(status)
     case status
       when 'a' then
-        '已申请'
+        '已合作'
       when 'r' then
         '已拒绝'
       when 'c' then
@@ -127,8 +127,46 @@ module ApplicationHelper
     rfp.agent_price && "#{rfp.agent_price.name}" ||"--"
   end
 
-   def show_rfp_from_spot(from_spot)
+  def show_rfp_from_spot(from_spot)
     from_spot ? "景区" : "旅行社"
-   end
+  end
+
+  def show_adult_purchase_price_for_individual_rate(individual_rate)
+    individual_rate&&
+        "#{individual_rate.adult_purchase_price}" || "--"
+  end
+
+  def show_adult_sale_price_for_individual_rate(individual_rate)
+    individual_rate&&
+        "#{individual_rate.adult_sale_price}" || "--"
+  end
+
+  def show_child_purchase_price_for_individual_rate(individual_rate)
+    individual_rate&&
+        "#{individual_rate.child_purchase_price}" || "--"
+  end
+
+  def show_child_sale_price_for_individual_rate(individual_rate)
+    individual_rate&&
+        "#{individual_rate.child_sale_price}" || "--"
+  end
+
+  def show_adult_price_for_team_rate(team_rate)
+    team_rate&&
+        "#{team_rate.adult_price}" || "--"
+  end
+
+  def show_child_price_for_team_rate(team_rate)
+    team_rate&&
+        "#{team_rate.child_price}" || "--"
+  end
+
+  def show_agent_or_spot_name()
+    if current_user && current_user.type == "SpotAdmin"
+      "--#{current_user.spot.name}"
+    elsif current_user && current_user.type == "AgentOperator"
+      "--#{current_user.agent.name}"
+    end
+  end
 
 end

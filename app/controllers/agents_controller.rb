@@ -1,5 +1,8 @@
 #coding: utf-8
 class AgentsController < ApplicationController
+
+  before_filter :check_system_admin
+
   def index
     @search = Agent.search(params[:search] || {:disabled_eq => false})
     page = params[:page].to_i

@@ -1,6 +1,9 @@
 <header>
-  <% logo = image_tag "logo.png", :alt => "景区网络营销系统", :class => "round" %>
-  <%= link_to logo, root_path %>
+  <!--<% logo = image_tag "logo.png", :alt => "景区网络营销系统", :class => "round" %>-->
+  <!--<%= link_to logo, root_path %>-->
+  <div style="float:left;">
+     景区网络营销系统<%= show_agent_or_spot_name %>
+  </div>
   <nav class="round">
     <ul>
       <% if logged_in? %>

@@ -16,7 +16,8 @@ class SessionsController < ApplicationController
       else
         url = spots_path
       end
-      redirect_to_target_or_default url, :notice => "登陆已成功."
+      redirect_to_target_or_default url
+#      , :notice => "登陆已成功."
     else
       flash.now[:alert] = "不正确的用户名或密码."
       render :action => 'new'

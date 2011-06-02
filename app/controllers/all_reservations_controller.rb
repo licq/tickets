@@ -1,4 +1,7 @@
 class AllReservationsController < ApplicationController
+
+  before_filter :check_system_admin
+
   def index
     @search = Reservation.includes(:spot,:agent).search(params[:search])
     page = params[:page].to_i
