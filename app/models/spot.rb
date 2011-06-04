@@ -49,5 +49,9 @@ class Spot < ActiveRecord::Base
     self.cities.map(&:name).join(",")
   end
 
+  def self.applied_for_agent(agent)
+    joins(:rfps).where({:disabled => false},:rfps => {:agent_id => agent.id, :status => 'a', :from_spot => false})
+  end
+
 
 end

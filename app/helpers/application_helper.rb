@@ -115,11 +115,11 @@ module ApplicationHelper
   def show_rfp_status(status)
     case status
       when 'a' then
-        '已合作'
+        '已申请'
       when 'r' then
         '已拒绝'
       when 'c' then
-        '已确认'
+        '已合作'
     end
   end
 

@@ -4,9 +4,18 @@ Tickets::Application.routes.draw do
 
   resources :all_rfps
 
-  resources :agent_spots
+  resources :agent_spots do
+    collection do
+      get "applied"
+    end
+  end
 
-  resources :spot_agents
+  resources :spot_agents do
+    collection do
+      get "applied"
+    end
+  end
+
 
   resources :spot_reservations do
     collection do

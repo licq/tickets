@@ -1,0 +1,37 @@
+<% title "已申请待开通旅行社" %>
+<div id="search">
+  <%= simple_form_for @search, :url =>applied_spot_agents_path do |f| %>
+      <fieldset class="inputs">
+        <%= f.input :name_contains, :label => "旅行社名称", :required => false %>
+      </fieldset>
+      <fieldset class="buttons">
+        <%= f.button :submit, :value => "查询" %>
+      </fieldset>
+  <% end %>
+</div>
+共找到<%= @agents.total_count %>条记录
+<%= paginate @agents %>
+
+
+<table>
+  <tr>
+    <th>旅行社</th>
+    <th>市场部联系人</th>
+    <th>市场部联系方式</th>
+    <th>财务部联系人</th>
+    <th>财务部联系人</th>
+    <th colspan="2">操作</th>
+  </tr>
+  <% for agent in @agents %>
+      <tr>
+        <td><%= link_to agent.name, spot_agent_path(agent) %></td>
+        <td><%= agent.business_contact %></td>
+        <td><%= agent.business_phone %></td>
+        <td><%= agent.finance_contact %></td>
+        <td><%= agent.finance_phone %></td>
+        <td><%= link_to "接受", edit_accept_rfp_path(agent) %></td>
+        <td><%= link_to "拒绝", reject_rfp_path(agent), :confirm => '你确认拒绝吗?', :method => :put %></td>
+      </tr>
+  <% end %>
+</table>
+

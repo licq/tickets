@@ -1,6 +1,6 @@
-<% title "不可预订景区" %>
+<% title "已申请预订景区" %>
 <div id="search">
-  <%= simple_form_for @search, :url =>agent_spots_path do |f| %>
+  <%= simple_form_for @search, :url =>applied_agent_spots_path do |f| %>
       <fieldset class="inputs">
         <%= f.input :name_contains, :label => "景区名称", :required => false %>
         <%= f.input :cities_name_contains, :label => "城市名", :required => false %>
@@ -32,7 +32,7 @@
         <td><%= spot.business_phone %></td>
         <td><%= spot.finance_contact %></td>
         <td><%= spot.finance_phone %></td>
-        <td><%= link_to "申请", agent_rfps_path(:spot_id => spot), :method => :post, :remote => true %></td>
+        <td><%= link_to "撤销", agent_rfp_path(spot), :confirm => '你确认撤销吗?', :method => :delete %></td>
       </tr>
   <% end %>
 </table>

@@ -15,4 +15,13 @@ class SpotAgentsController < ApplicationController
     @agent = Agent.find(params[:id])
   end
 
+  def applied
+    @search = Agent.applied_for_spot(@spot).search(params[:search])
+    page = params[:page].to_i
+    @agents= @search.page(page)
+    if (@agents.all.empty?) && (page > 1)
+      @agents = @search.page(page -1)
+    end
+  end
+
 end

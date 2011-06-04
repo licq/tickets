@@ -1,85 +1,47 @@
 <% title "可预订景区" %>
-<% if @rfps.connected.count > 0 %>
-    <h2>可预订</h2>
-    <table>
+
+<div id="search">
+  <%= simple_form_for @search do |f| %>
+      <fieldset class="inputs">
+        <%= f.input :spot_name_contains, :label => "景区名称", :required => false %>
+        <%= f.input :spot_cities_name_contains, :label => "城市名", :required => false %>
+      </fieldset>
+      <fieldset class="buttons">
+        <%= f.button :submit, :value => "查询" %>
+      </fieldset>
+  <% end %>
+</div>
+共找到<%= @rfps.total_count %>条记录
+<%= paginate @rfps %>
+
+<table>
+  <tr>
+    <th>景区</th>
+    <th>编码</th>
+    <th>所在城市</th>
+    <th>市场联系人</th>
+    <th>市场联系方式</th>
+    <th>财务联系人</th>
+    <th>财务联系方式</th>
+    <th>散客票支付方式</th>
+    <th>团队票支付方式</th>
+    <th colspan="2">操作</th>
+  </tr>
+  <% for rfp in @rfps %>
       <tr>
-        <th>景区</th>
-        <th>编码</th>
-        <th>所在城市</th>
-        <th>市场联系人</th>
-        <th>市场联系方式</th>
-        <th>财务联系人</th>
-        <th>财务联系方式</th>
-        <th colspan="2">操作</th>
+        <td><%= link_to rfp.spot.name, agent_spot_path(rfp.spot) %></td>
+        <td><%= rfp.spot.code %></td>
+        <td> <%= rfp.spot.city_names %>  </td>
+        <td><%= rfp.spot.business_contact %></td>
+        <td><%= rfp.spot.business_phone %></td>
+        <td><%= rfp.spot.finance_contact %></td>
+        <td><%= rfp.spot.finance_phone %></td>
+        <td><%= show_payment_method(rfp.individual_payment_method) %></td>
+        <td><%= show_payment_method(rfp.team_payment_method) %></td>
+        <td><%= link_to "预定", new_reservation_path(:spot_name => rfp.spot.name) %></td>
       </tr>
-      <% for rfp in @rfps.connected %>
-          <tr>
-            <td><%= link_to rfp.spot.name, agent_spot_path(rfp.spot) %></td>
-            <td><%= rfp.spot.code %></td>
-            <td> <%= rfp.spot.city_names %>  </td>
-            <td><%= rfp.spot.business_contact %></td>
-            <td><%= rfp.spot.business_phone %></td>
-            <td><%= rfp.spot.finance_contact %></td>
-            <td><%= rfp.spot.finance_phone %></td>
-            <td><%= link_to "删除", agent_rfp_path(rfp), :confirm => '你确认删除吗?', :method => :delete %></td>
-            <td><%= link_to "预定", new_reservation_path(:spot_name => rfp.spot.name)%></td>
-          </tr>
-      <% end %>
-    </table>
-<% end %>
-<% if @rfps.applied_by_agent.count > 0 %>
-    <h2>已申请</h2>
-    <table>
-      <tr>
-        <th>景区</th>
-        <th>编码</th>
-        <th>所在城市</th>
-        <th>市场联系人</th>
-        <th>市场联系方式</th>
-        <th>财务联系人</th>
-        <th>财务联系方式</th>
-        <th colspan="2">操作</th>
-      </tr>
-      <% for rfp in @rfps.applied_by_agent %>
-          <tr>
-            <td><%= link_to rfp.spot.name, agent_spot_path(rfp.spot) %></td>
-            <td><%= rfp.spot.code %></td>
-            <td> <%= rfp.spot.city_names %>  </td>
-            <td><%= rfp.spot.business_contact %></td>
-            <td><%= rfp.spot.business_phone %></td>
-            <td><%= rfp.spot.finance_contact %></td>
-            <td><%= rfp.spot.finance_phone %></td>
-            <td><%= link_to "撤销", agent_rfp_path(rfp), :confirm => '你确认撤销吗?', :method => :delete %></td>
-          </tr>
-      <% end %>
-    </table>
-<% end %>
-<% if @rfps.applied_by_spot.count > 0 %>
-    <h2>景区申请</h2>
-    <table>
-      <tr>
-        <th>景区</th>
-        <th>编码</th>
-        <th>所在城市</th>
-        <th>市场联系人</th>
-        <th>市场联系方式</th>
-        <th>财务联系人</th>
-        <th>财务联系方式</th>
-        <th colspan="3">操作</th>
-      </tr>
-      <% for rfp in @rfps.applied_by_spot %>
-          <tr>
-            <td><%= link_to rfp.spot.name, agent_spot_path(rfp.spot) %></td>
-            <td><%= rfp.spot.code %></td>
-            <td> <%= rfp.spot.city_names %>  </td>
-            <td><%= rfp.spot.business_contact %></td>
-            <td><%= rfp.spot.business_phone %></td>
-            <td><%= rfp.spot.finance_contact %></td>
-            <td><%= rfp.spot.finance_phone %></td>
-            <td><%= link_to "接受", accept_agent_rfp_path(rfp), :method => :put %></td>
-            <td><%= link_to "拒绝", reject_agent_rfp_path(rfp), :confirm => '你确认拒绝吗?', :method => :put %></td>
-          </tr>
-      <% end %>
-    </table>
-<% end %>
+  <% end %>
+</table>
+
+
 <p><%= link_to "向景区提交开通申请", agent_spots_path %></p>
