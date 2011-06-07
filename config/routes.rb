@@ -34,6 +34,7 @@ Tickets::Application.routes.draw do
     member do
       put 'update_individual'
       put 'update_team'
+      get 'print'
     end
   end
 
@@ -79,6 +80,7 @@ Tickets::Application.routes.draw do
     end
   end
 
+  get 'reports/output_for_date_span'
   match 'user/edit' => 'users#edit', :as => :edit_current_user
   match 'signup' => 'users#new', :as => :signup
   match 'logout' => 'sessions#destroy', :as => :logout

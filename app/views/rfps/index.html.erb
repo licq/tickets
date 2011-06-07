@@ -1,4 +1,4 @@
-<% title "已开通预定旅行社" %>
+<% title "已开通预订旅行社列表" %>
 <div id="search">
   <%= simple_form_for @search do |f| %>
       <fieldset class="inputs">
@@ -39,4 +39,6 @@
       </tr>
   <% end %>
 </table>
+
+<p><%= link_to "查询未开通预订旅行社", spot_agents_path %></p>
 

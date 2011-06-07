@@ -17,7 +17,7 @@
   <%= show_reservation_type(@reservation) %>
 </p>
 <p>
-  <strong>日期:</strong>
+  <strong>入园日期:</strong>
   <%= @reservation.date %>
 </p>
 <p>
@@ -71,5 +71,6 @@
 </div>
 <p>
   <%= link_to "返回列表", reservations_path %>
-  <a href="#" onclick="window.print();return false;">打印</a>
+  <!--<a href="#" onclick="window.print();return false;">打印</a>-->
+  <%= link_to "打印", print_reservation_path(@reservation),{"data-popup" => true} %>
 </p>

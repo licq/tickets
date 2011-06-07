@@ -60,6 +60,11 @@ $(function() {
 
     calculate_individual_price();
     calculate_team_price();
+
+    $('a[data-popup]').live('click', function(e) {
+        window.open($(this)[0].href);
+        e.preventDefault();
+    });
 });
 
 function set_datepicker() {

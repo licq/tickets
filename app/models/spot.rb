@@ -28,6 +28,7 @@ class Spot < ActiveRecord::Base
   has_many :seasons
   has_many :timespans, :through => :seasons
   has_many :tickets
+  has_many :public_rates,:through => :tickets
   has_many :agent_prices
   has_many :rfps
   has_many :reservations
@@ -51,6 +52,10 @@ class Spot < ActiveRecord::Base
 
   def self.applied_for_agent(agent)
     joins(:rfps).where({:disabled => false},:rfps => {:agent_id => agent.id, :status => 'a', :from_spot => false})
+  end
+
+  def public_rates_complete?
+    public_rates.size == seasons.size * tickets.size
   end
 
 

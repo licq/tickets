@@ -30,7 +30,17 @@ class AgentPricesController < ApplicationController
   end
 
   def edit
-    @agent_price = @spot.agent_prices.find(params[:id])
+    if @spot.public_rates_complete?
+      @agent_price = @spot.agent_prices.find(params[:id])
+      @spot.tickets.product(@spot.seasons) do |t, s|
+        unless @agent_price.exists(s, t)
+          @agent_price.team_rates << @agent_price.team_rates.build(:season => s, :ticket => t)
+          @agent_price.individual_rates << @agent_price.individual_rates.build(:season => s, :ticket => t)
+        end
+      end
+    else
+      redirect_to tickets_path, :notice => "请先设置门市价"
+    end
   end
 
   def update

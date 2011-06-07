@@ -4,8 +4,8 @@ class AgentPrice < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => [:spot]
   belongs_to :spot
   has_many :rfps
-  has_many :individual_rates, :dependent => :delete_all
-  has_many :team_rates, :dependent => :delete_all
+  has_many :individual_rates, :dependent => :delete_all, :order => "ticket_id"
+  has_many :team_rates, :dependent => :delete_all, :order => "ticket_id"
   accepts_nested_attributes_for :team_rates, :individual_rates
 
   def team_rate_for(season, ticket)
@@ -42,4 +42,9 @@ class AgentPrice < ActiveRecord::Base
     end
     result
   end
+
+  def exists(season,ticket)
+    team_rate_for(season,ticket) || individual_rate_for(season,ticket)
+  end
+
 end

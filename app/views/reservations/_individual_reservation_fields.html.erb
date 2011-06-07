@@ -4,11 +4,11 @@
 <%= f.input :child_purchase_price, :as => :hidden %>
 <%= f.input :adult_sale_price, :as => :hidden %>
 <%= f.input :adult_purchase_price, :as => :hidden %>
-<%= f.input :individual_payment_method, :as => :hidden %>
+<%= f.input :payment_method, :as => :hidden %>
 <%= f.input :date, :as => :hidden %>
 <div class="right75">景区 <%= f.object.spot.name %></div>
 <div class="right75">门票 <%= f.object.ticket_name %></div>
-<div class="right75">日期 <%= f.object.date %></div>
+<div class="right75">入园日期 <%= f.object.date %></div>
 <div class="right75">成人价 <%= f.object.adult_sale_price %></div>
 <% unless f.object.child_sale_price.nil? %>
     <div class="right75">儿童价 <%= f.object.child_sale_price %></div>

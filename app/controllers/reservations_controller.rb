@@ -95,7 +95,7 @@ class ReservationsController < ApplicationController
     ticket = Ticket.find(params[:ticket])
     @reservation = IndividualReservation.new(:agent => @agent,
                                              :spot => @agent_price.spot, :ticket_name => ticket.name, :date => params[:date],
-                                             :individual_payment_method => params[:individual_payment_method])
+                                             :payment_method => params[:payment_method])
     price = @agent_price.price_for(params[:date])
     if (price[ticket.id].nil? || price[ticket.id][:individual_rate].nil?)
       redirect_to reservations_url, :method => :post, :notice => "未设置价格，不能预订."
@@ -113,7 +113,7 @@ class ReservationsController < ApplicationController
     ticket = Ticket.find(params[:ticket])
     @reservation = TeamReservation.new(:agent => @agent,
                                        :spot => @agent_price.spot, :ticket_name => ticket.name, :date => params[:date],
-                                       :team_payment_method => params[:team_payment_method])
+                                       :payment_method => params[:payment_method])
     price = @agent_price.price_for(params[:date])
     if (price[ticket.id].nil? || price[ticket.id][:team_rate].nil?)
       redirect_to reservations_url, :method => :post, :notice => "未设置价格，不能预订."
@@ -129,6 +129,10 @@ class ReservationsController < ApplicationController
     @reservation.status = :canceled
     @reservation.save
     redirect_to reservations_url, :notice => "取消已成功."
+  end
+
+   def print
+    @reservation = @agent.reservations.find(params[:id])
   end
 
 end

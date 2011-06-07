@@ -24,6 +24,8 @@ module ApplicationHelper
 
   def show_individual_adult_price(price_for_agent, ticket_id)
     price_for_agent[ticket_id] && price_for_agent[ticket_id][:individual_rate] &&
+        price_for_agent[ticket_id][:individual_rate].adult_sale_price &&
+        price_for_agent[ticket_id][:individual_rate].adult_purchase_price &&
         "#{price_for_agent[ticket_id][:individual_rate].adult_sale_price}/(" +
             "#{price_for_agent[ticket_id][:individual_rate].adult_purchase_price})" || "--"
   end
@@ -37,6 +39,7 @@ module ApplicationHelper
 
   def show_team_adult_price(price_for_agent, ticket_id)
     price_for_agent[ticket_id] && price_for_agent[ticket_id][:team_rate] &&
+        price_for_agent[ticket_id][:team_rate].adult_price &&
         "#{price_for_agent[ticket_id][:team_rate].adult_price}" || "--"
   end
 
@@ -96,12 +99,7 @@ module ApplicationHelper
   end
 
   def show_reservation_payment_method(reservation)
-    if (reservation.is_individual?)
-      payment_method = reservation.individual_payment_method
-    else
-      payment_method = reservation.team_payment_method
-    end
-    case payment_method
+    case reservation.payment_method
       when "poa" then
         "门口现付"
       when "prepay" then

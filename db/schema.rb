@@ -82,8 +82,8 @@ ActiveRecord::Schema.define(:version => 20110528083000) do
     t.integer  "adult_purchase_price"
     t.integer  "adult_price"
     t.integer  "child_price"
-    t.integer  "child_ticket_number",       :default => 0
-    t.integer  "adult_ticket_number",       :default => 1
+    t.integer  "child_ticket_number",      :default => 0
+    t.integer  "adult_ticket_number",      :default => 1
     t.date     "date"
     t.string   "type"
     t.string   "status"
@@ -96,8 +96,7 @@ ActiveRecord::Schema.define(:version => 20110528083000) do
     t.integer  "child_true_ticket_number"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "team_payment_method"
-    t.string   "individual_payment_method"
+    t.string   "payment_method"
   end
 
   create_table "rfps", :force => true do |t|

@@ -1,6 +1,8 @@
 #coding: utf-8
 class Reservation < ActiveRecord::Base
 
+  acts_as_reportable :only => [:date, :child_ticket_number, :adult_ticket_number, :adult_true_ticket_number, :child_true_ticket_number, :total_price, :total_purchase_price, :created_at]
+
   default_scope order('id desc')
   belongs_to :spot
   belongs_to :agent
@@ -64,6 +66,10 @@ class Reservation < ActiveRecord::Base
       reservations_for_today_and_confirmed = reservations_for_today_and_confirmed.where((:phone.matches % "#{search}%" | :contact.matches % "%#{search}%" | :no.matches % "%#{search}%"))
     end
     reservations_for_today_and_confirmed
+  end
+
+  def self.day_between(start_date, end_date)
+    report_table(:all, :methods => :calculate_price, :conditions => ["date >= ? and date <= ?", start_date, end_date])
   end
 
 end

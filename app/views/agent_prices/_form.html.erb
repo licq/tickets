@@ -1,14 +1,13 @@
 <%= simple_form_for @agent_price do |f| %>
-    <% season_size = @spot.seasons.size %>
-
     <%= f.input :name %><br/>
     <th>散客价</th> <br/>
     <%= f.simple_fields_for :individual_rates do |ir| %>
-        <th><%= ir.object.season.name %><th>
         <th><%= ir.object.ticket.name %>(门市价:
           成人价 <%= ir.object.ticket.public_rate_for(ir.object.season.name).adult_price %>
           儿童价 <%= ir.object.ticket.public_rate_for(ir.object.season.name).child_price %>)
         <th>
+        <th><%= ir.object.season.name %><th>
+
         <th><%= ir.input :adult_purchase_price, :as => :integer, :input_html => {:size =>"10"} %> </th>
         <th><%= ir.input :adult_sale_price, :as => :integer %> </th>
         <th><%= ir.input :child_purchase_price, :as => :integer %>  </th>
@@ -18,11 +17,12 @@
     <% end %>
     <th>团队价</th> <br/>
     <%= f.simple_fields_for :team_rates do |rf| %>
-        <th><%= rf.object.season.name %><th>
         <th><%= rf.object.ticket.name %>(门市价:
           成人价 <%= rf.object.ticket.public_rate_for(rf.object.season.name).adult_price %>
           儿童价 <%= rf.object.ticket.public_rate_for(rf.object.season.name).child_price %>)
         <th>
+        <th><%= rf.object.season.name %><th>
+
         <th><%= rf.input :adult_price, :as => :integer %> </th>
         <th><%= rf.input :child_price, :as => :integer %> </th>
         <th><%= rf.input :season_id, :as => :hidden %>  </th>
