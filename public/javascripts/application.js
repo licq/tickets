@@ -65,6 +65,19 @@ $(function() {
         window.open($(this)[0].href);
         e.preventDefault();
     });
+
+    $('#output_report_type').change(function() {
+        change_output_report_condition_fields($(this).val());
+    });
+
+    $('#year').change(function() {
+        change_year($(this).val());
+    });
+
+    $('#month').change(function() {
+        change_month($(this).val());
+    });
+
 });
 
 function set_datepicker() {
@@ -165,5 +178,84 @@ function nan2zero(number) {
     }
 }
 
+function change_output_report_condition_fields(val) {
+    switch (val) {
+        case "day":
+            show_month();
+            show_day();
+            hide_week();
+            break;
+        case "month":
+            show_month();
+            hide_day();
+            hide_week();
+            break;
+        case "week":
+            show_week();
+            hide_month();
+            hide_day();
+            break;
+    }
+}
+
+function show_month() {
+    $("#month").parent().show();
+}
+function show_day() {
+
+    $("#day").parent().show();
+}
+function show_week() {
+    $("#week").parent().show();
+}
+
+function hide_month() {
+    $("#month").parent().hide();
+}
+function hide_day() {
+    $("#day").parent().hide();
+}
+function hide_week() {
+    $("#week").parent().hide();
+}
+
+function change_year(year) {
+    if (year == new Time().year()) {
+        setMonthOptions(new Time().month());
+        setWeekOptions(new Time().week());
+    } else {
+        setMonthOptions(12);
+        setWeekOptions(new Time(year).endOfYear().week());
+    }
+}
+
+function change_month(month) {
+
+    var year_int = parseInt($("#year").val());
+    var month_int = parseInt(month);
+    var today = new Time();
+    if (year_int == today.year() && (month_int == today.month())) {
+        setDayOptions(today.day());
+    } else
+        setDayOptions(new Time(year_int, month_int).daysInMonth());
+}
+
+function setMonthOptions(max) {
+    setIntOptions("month", max);
+    change_month($("#month").val());
+}
+function setWeekOptions(max) {
+    setIntOptions("week", max);
+}
+function setDayOptions(max) {
+    setIntOptions("day", max);
+}
+
+
+function setIntOptions(element, max) {
+    $("#" + element + " option").remove();
+    for (var i = 0; i < max; i ++)
+        $("#" + element).append('<option value="' + (i + 1) + '">' + (i + 1) + '</option>');
+}
 
 

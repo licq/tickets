@@ -3,6 +3,7 @@ class ReportsController < ApplicationController
   before_filter :set_spot
 
   def output_for_date_span
+
     table = @spot.reservations.day_between('2011-05-16','2011-06-06')
     table.add_column("create_date") { |r| r.created_at.to_date }
 
