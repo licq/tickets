@@ -80,7 +80,8 @@ Tickets::Application.routes.draw do
     end
   end
 
-  get 'reports/output_for_date_span'
+  get 'reports/output'
+  post 'reports/output'
   match 'user/edit' => 'users#edit', :as => :edit_current_user
   match 'signup' => 'users#new', :as => :signup
   match 'logout' => 'sessions#destroy', :as => :logout

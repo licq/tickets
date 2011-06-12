@@ -11,8 +11,9 @@ gem 'meta_where'
 gem 'meta_search'
 gem 'simple_form'
 gem 'flutie'
-gem 'acts_as_reportable'
-gem 'ruport-util'
+gem 'prawn_rails'
+gem 'prawn-format'
+gem 'prawn-layout'
 
 group :development do
   gem 'jquery-rails'

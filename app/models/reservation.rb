@@ -1,9 +1,8 @@
 #coding: utf-8
 class Reservation < ActiveRecord::Base
 
-  acts_as_reportable :only => [:date, :child_ticket_number, :adult_ticket_number, :adult_true_ticket_number, :child_true_ticket_number, :total_price, :total_purchase_price, :created_at]
-
   default_scope order('id desc')
+  scope :exclude_canceled, where(:status.ne => "canceled")
   belongs_to :spot
   belongs_to :agent
 
@@ -69,7 +68,17 @@ class Reservation < ActiveRecord::Base
   end
 
   def self.day_between(start_date, end_date)
-    report_table(:all, :methods => :calculate_price, :conditions => ["date >= ? and date <= ?", start_date, end_date])
+    where(:created_at => start_date..end_date)
+  end
+
+  def self.sum_between(start_time, end_time)
+    individual_sum = select('count(1) as count_sum, sum(adult_ticket_number) as adult_ticket_sum, sum(child_ticket_number) as child_ticket_sum,
+                sum(adult_ticket_number * adult_sale_price + child_ticket_number * child_sale_price) as price_sum').where(:created_at => start_time..end_time,:type => "IndividualReservation")
+    team_sum = select('count(1) as count_sum, sum(adult_ticket_number) as adult_ticket_sum, sum(child_ticket_number) as child_ticket_sum,
+                sum(adult_ticket_number * adult_price + child_ticket_number * child_price) as price_sum').where(:created_at => start_time..end_time,:type => "TeamReservation")
+
+    return individual_sum[0].count_sum+team_sum[0].count_sum, individual_sum[0].adult_ticket_sum+team_sum[0].adult_ticket_sum,
+           individual_sum[0].child_ticket_sum+individual_sum[0].child_ticket_sum, individual_sum[0].price_sum+team_sum[0].price_sum
   end
 
 end

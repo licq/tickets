@@ -78,6 +78,15 @@ $(function() {
         change_month($(this).val());
     });
 
+    $("#output_report_form input[type=submit]").click(function() {
+        $.post($("#output_report_form").attr("action"), $("#output_report_form").serialize(), function(data) {
+            $("#report").html(data);
+        }, "script");
+        return false;
+    });
+
+    init_output_report_condition();
+
 });
 
 function set_datepicker() {
@@ -178,6 +187,19 @@ function nan2zero(number) {
     }
 }
 
+function init_output_report_condition() {
+    $("#output_report_type").val("day");
+    change_output_report_condition_fields("day");
+    setYearOptions();
+    var today = new Time();
+    $("#year").val(today.year());
+    change_year(today.year());
+    $("#month").val(today.month());
+    change_month(today.month());
+    $("#day").val(today.day());
+
+}
+
 function change_output_report_condition_fields(val) {
     switch (val) {
         case "day":
@@ -238,6 +260,17 @@ function change_month(month) {
         setDayOptions(today.day());
     } else
         setDayOptions(new Time(year_int, month_int).daysInMonth());
+}
+
+function change_day(day) {
+    $("#day").selected = day;
+}
+
+function setYearOptions() {
+    var this_year = new Time().year();
+    $("#year" + " option").remove();
+    for (var i = this_year - 5; i < this_year; i ++)
+        $("#year").append('<option value="' + (i + 1) + '">' + (i + 1) + '</option>');
 }
 
 function setMonthOptions(max) {
