@@ -1,0 +1,18 @@
+<table>
+    <tr>
+        <td>订单总数</td>
+        <td>成人总数</td>
+        <td>儿童总数</td>
+        <td>总价</td>
+    </tr>
+    <tr>
+        <td><%= @table[0] %></td>
+        <td><%= @table[1] %></td>
+        <td><%= @table[2] %></td>
+        <td><%= @table[3] %></td>
+    </tr>
+</table>
+
+<p id="pdf_link"><%= link_to "PDF下载", reports_spot_checkin_path(:format => "pdf",:type => params[:type],
+:year => params[:year],:month => params[:month],:day => params[:day],:week => params[:week]),{"data-popup" => true}  %></p>
+

@@ -28,6 +28,11 @@ class SpotReservationsController < ApplicationController
     if @reservation.update_attributes(params[:team_reservation] || params[:individual_reservation])
       @reservation.set_true_total_price
       @reservation.status = :checkedin
+      if (@reservation.type == 'TeamReservation' && @reservation.payment_method == 'poa')
+        @reservation.paid = true
+      else
+        @reservation.paid = false
+      end
       @reservation.save
       redirect_to today_spot_reservations_url, :notice => "已入园成功."
     else

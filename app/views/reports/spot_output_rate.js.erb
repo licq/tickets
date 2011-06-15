@@ -1,0 +1,22 @@
+<table>
+    <tr>
+        <td>当月订单总数</td>
+        <td>当月总价</td>
+        <td>上月订单总数(环比)</td>
+        <td>上月总价(环比)</td>
+        <td>去年当月订单总数(同比)</td>
+        <td>去年当月总价(同比)</td>
+    </tr>
+    <tr>
+        <td><%= @table[0] %></td>
+        <td><%= @table[3] %></td>
+        <td><%= @prev_month_table[0]%>(<%= @prev_month_count_rate %>)</td>
+        <td><%= @prev_month_table[3]%>(<%= @prev_month_price_rate %>)</td>
+        <td><%= @prev_year_table[0] %>(<%= @prev_year_count_rate %>)</td>
+        <td><%= @prev_year_table[3] %>(<%= @prev_year_price_rate %>)</td>
+    </tr>
+</table>
+
+<p id = "pdf_link" > <%= link_to "PDF下载", reports_spot_output_rate_path(:format => "pdf",:type => params[:type],
+:year => params[:year],:month => params[:month],:day => params[:day],:week => params[:week]),{"data-popup" => true}  %></p>
+

@@ -1,0 +1,22 @@
+<% title "结算列表" %>
+
+<table>
+  <tr>
+    <th>旅行社名称</th>
+    <th>门票种类</th>
+    <th>支付方式</th>
+    <th>总订单数</th>
+    <th>应收应付</th>
+    <th>金额</th>
+  </tr>
+  <% for item in @table %>
+      <tr>
+        <td><%= item.agent_name %>
+        <td><%= show_reservation_type_with(item.type) %></td>
+        <td><%= show_payment_method(item.payment_method) %>  </td>
+        <td><%= item.count_sum %></td>
+        <td><%= show_in_or_out(item) %> </td>
+        <td><%= item.price_sum %></td>
+      </tr>
+  <% end %>
+</table>

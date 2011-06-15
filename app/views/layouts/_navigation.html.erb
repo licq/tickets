@@ -72,9 +72,21 @@
           <div class="list">
             <a href="#">报表</a>
             <br/>
-            <a href="<%= reports_output_path %>">产量报表</a><br/>
+            <a href="<%= reports_spot_output_path %>">产量统计报表</a><br/>
+            <a href="<%= reports_spot_output_rate_path %>">产量同比环比报表</a><br/>
+            <a href="<%= reports_spot_checkin_path %>">入园统计报表</a><br/>
+            <a href="<%= reports_spot_agent_output_path %>">分销商销售业绩报表</a><br/>
           </div>
         </li>
+
+        <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
+          <div class="list">
+            <a href="#">结算管理</a>
+            <br/>
+            <a href="<%= spot_purchases_path %>">结算列表</a><br/>
+          </div>
+        </li>
+
     <% end %>
 
     <% if current_user && current_user.type == "AgentOperator" %>

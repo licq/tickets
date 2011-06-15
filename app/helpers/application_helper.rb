@@ -57,6 +57,14 @@ module ApplicationHelper
     end
   end
 
+  def show_reservation_type_with(type)
+    if (type == 'IndividualReservation')
+      "散客票"
+    else
+      "团队票"
+    end
+  end
+
   def show_reservation_adult_price(reservation)
     if (reservation.is_individual?)
       "#{reservation.adult_sale_price}/(#{reservation.adult_purchase_price})"
@@ -164,6 +172,14 @@ module ApplicationHelper
       "--#{current_user.spot.name}"
     elsif current_user && current_user.type == "AgentOperator"
       "--#{current_user.agent.name}"
+    end
+  end
+
+  def show_in_or_out(item)
+    if(item.payment_method == 'poa' && item.type == "IndividualReservation")
+      '应付'
+    else
+      '应收'
     end
   end
 

@@ -2,6 +2,8 @@ Tickets::Application.routes.draw do
 
   resources :all_reservations
 
+  resources :spot_purchases
+
   resources :all_rfps
 
   resources :agent_spots do
@@ -80,8 +82,15 @@ Tickets::Application.routes.draw do
     end
   end
 
-  get 'reports/output'
-  post 'reports/output'
+  get 'reports/spot_output'
+  post 'reports/spot_output'
+  get 'reports/spot_output_rate'
+  post 'reports/spot_output_rate'
+  get 'reports/spot_checkin'
+  post 'reports/spot_checkin'
+  get 'reports/spot_agent_output'
+  post 'reports/spot_agent_output'
+
   match 'user/edit' => 'users#edit', :as => :edit_current_user
   match 'signup' => 'users#new', :as => :signup
   match 'logout' => 'sessions#destroy', :as => :logout

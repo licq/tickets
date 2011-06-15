@@ -1,0 +1,12 @@
+<fieldset class="inputs">
+  <div>报表类型<%= select_tag :type, options_for_select([["日", "day"], ["周", "week"], ["月", "month"]], params[:type]), :id =>"output_report_type" %></div>
+  <div>
+    <span>年 <%= select_tag :year, options_for_select([[2011, 2011], [2010, 2010]], params[:year]) %></span>
+    <span>月 <%= select_tag :month, options_for_select([[2011, 2011]], params[:month]) %></span>
+    <span>日 <%= select_tag :day, options_for_select([[2011, 2011]], params[:day]) %></span>
+    <span>周 <%= select_tag :week, options_for_select([[2011, 2011]], params[:week]) %></span>
+  </div>
+</fieldset>
+<fieldset class="buttons">
+  <%= submit_tag "查询" %>
+</fieldset>

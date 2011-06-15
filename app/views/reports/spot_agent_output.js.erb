@@ -1,0 +1,22 @@
+<table>
+    <tr>
+        <td>旅行社名称</td>
+        <td>订单总数</td>
+        <td>成人总数</td>
+        <td>儿童总数</td>
+        <td>总价</td>
+    </tr>
+<% @table.each do |r| %>
+    <tr>
+        <td><%= r[0] %></td>
+        <td><%= r[1] %></td>
+        <td><%= r[2] %></td>
+        <td><%= r[3] %></td>
+        <td><%= r[4] %></td>
+    </tr>
+<% end %>
+</table>
+
+<p id = "pdf_link" > <%= link_to "PDF下载", reports_spot_agent_output_path(:format => "pdf",:type => params[:type],
+:year => params[:year],:month => params[:month],:day => params[:day],:week => params[:week]),{"data-popup" => true}  %></p>
+
