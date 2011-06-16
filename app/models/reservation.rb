@@ -140,4 +140,5 @@ class Reservation < ActiveRecord::Base
                 sum(total_price-total_purchase_price)  as price_sum').joins(:agent).group(:agent_name, :type, :payment_method).where(:paid => false, :payment_method => 'poa', :type => "IndividualReservation", :status => "checkedin").reorder(:agent_id)
     (prepay_purchase_sum + poa_purchase_sum).sort_by(&:agent_name)
   end
+
 end

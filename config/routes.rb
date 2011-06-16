@@ -2,7 +2,12 @@ Tickets::Application.routes.draw do
 
   resources :all_reservations
 
-  resources :spot_purchases
+  resources :spot_purchases do
+    collection do
+      get "reservations"
+      put "update_paid"
+    end
+  end
 
   resources :all_rfps
 

@@ -66,6 +66,10 @@ $(function() {
         e.preventDefault();
     });
 
+    $('#reservation_select_all').click(function() {
+        selectAllReservations($(this).attr("checked"));
+    });
+
     $('#output_report_type').change(function() {
         change_output_report_condition_fields($(this).val());
     });
@@ -111,6 +115,12 @@ function set_datepicker() {
 
     $(".book_datepicker").datepicker({
         minDate: new Date(),
+        changeYear: true ,
+        changeMonth: true
+    }
+            );
+    $(".maxdate_datepicker").datepicker({
+        maxDate: new Date(),
         changeYear: true ,
         changeMonth: true
     }
@@ -289,6 +299,10 @@ function setIntOptions(element, max) {
     $("#" + element + " option").remove();
     for (var i = 0; i < max; i ++)
         $("#" + element).append('<option value="' + (i + 1) + '">' + (i + 1) + '</option>');
+}
+
+function selectAllReservations(flag) {
+    $("#purchase_table input[type=checkbox]").attr('checked', flag);
 }
 
 

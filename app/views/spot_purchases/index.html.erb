@@ -1,5 +1,19 @@
 <% title "结算列表" %>
 
+<div id="search">
+  <%= form_tag spot_purchases_path, :method => :get do %>
+      <fieldset class="inputs">
+        <label for="agent_name">旅行社名称</label>
+        <%= text_field_tag :agent_name, params[:agent_name] %>
+        <label for="date">入园截止日期</label>
+        <%= text_field_tag :date, params[:date], :class=>"maxdate_datepicker" %>
+      </fieldset>
+      <fieldset class="buttons">
+        <%= submit_tag "查询" %>
+      </fieldset>
+  <% end %>
+</div>
+
 <table>
   <tr>
     <th>旅行社名称</th>
@@ -11,7 +25,7 @@
   </tr>
   <% for item in @table %>
       <tr>
-        <td><%= item.agent_name %>
+        <td><%= link_to item.agent_name, reservations_spot_purchases_path(:agent_id => item.agent_id, :type => item.type, :payment_method => item.payment_method, :date => @date) %></td>
         <td><%= show_reservation_type_with(item.type) %></td>
         <td><%= show_payment_method(item.payment_method) %>  </td>
         <td><%= item.count_sum %></td>
