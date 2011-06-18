@@ -13,6 +13,6 @@
     </tr>
 </table>
 
-<p id="pdf_link"><%= link_to "PDF下载", reports_spot_checkin_path(:format => "pdf",:type => params[:type],
+<p id = "pdf_link" > <%= link_to "PDF下载", reports_agent_checkin_path(:format => "pdf",:type => params[:type],
 :year => params[:year],:month => params[:month],:day => params[:day],:week => params[:week]),{"data-popup" => true}  %></p>
 

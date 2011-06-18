@@ -47,8 +47,11 @@ class ReservationsController < ApplicationController
     @reservation = IndividualReservation.new(params[:individual_reservation])
     @reservation.agent = @agent
     @reservation.status = :confirmed
-    @reservation.total_price =@reservation.calculate_price
-    @reservation.total_purchase_price =@reservation.calculate_purchase_price
+    @reservation.book_price =@reservation.calculate_price
+    @reservation.book_purchase_price =@reservation.calculate_purchase_price
+    @reservation.total_price =@reservation.book_price
+    @reservation.total_purchase_price =@reservation.book_purchase_price
+
     if @reservation.save
       redirect_to reservations_url, :notice => "已预订成功."
     else
@@ -60,7 +63,8 @@ class ReservationsController < ApplicationController
     @reservation = TeamReservation.new(params[:team_reservation])
     @reservation.agent = @agent
     @reservation.status = :confirmed
-    @reservation.total_price =@reservation.calculate_price
+    @reservation.book_price =@reservation.calculate_price
+    @reservation.total_price =@reservation.book_price
     if @reservation.save
       redirect_to reservations_url, :notice => "已预订成功."
     else

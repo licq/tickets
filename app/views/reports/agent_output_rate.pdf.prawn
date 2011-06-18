@@ -1,7 +1,7 @@
 #encoding: utf-8
 prawn_document(:page_layout => :landscape) do |pdf|
   pdf.font "#{Prawn::BASEDIR}/data/fonts/gkai00mp.ttf"
-  pdf.text "#{@spot.name}产量同比环比报表(#{@start_time.year}年#{@start_time.month}月)", :size => 30
+  pdf.text "#{@agent.name}产量同比环比报表(#{@start_time.year}年#{@start_time.month}月)", :size => 30
 
   pdf.move_down 30
   items = [@table.count_sum, @table.price_sum, "#{@prev_month_table.count_sum}(#{@prev_month_count_rate})", "#{@prev_month_table.price_sum}(#{@prev_month_price_rate})",

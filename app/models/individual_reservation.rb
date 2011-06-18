@@ -32,8 +32,10 @@ class IndividualReservation < Reservation
   end
 
   def save_total_price
-    self.total_price = calculate_price
-    self.total_purchase_price = calculate_purchase_price
+    self.book_price = calculate_price
+    self.book_purchase_price = calculate_purchase_price
+    self.total_price = self.book_price
+    self.total_purchase_price = self.book_purchase_price
     self.save
   end
 

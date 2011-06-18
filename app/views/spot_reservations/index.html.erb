@@ -12,9 +12,12 @@
         <%= f.input :created_at_less_than_or_equal_to, :label => "预定结束日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %>
         <%= f.input :contact_contains, :label => "联系人", :required => false %>
         <%= f.input :phone_contains, :label => "联系电话", :required => false %>
-        <%= f.input :with_status, :collection => [["","全部"],["confirmed", "已确认"], ["canceled", "已取消"],["checkedin", "已入园"],["outdated", "已过期"]],
+        <%= f.input :with_status, :collection => [["", "全部"], ["confirmed", "已确认"], ["canceled", "已取消"], ["checkedin", "已入园"], ["outdated", "已过期"]],
                     :label_method => :last, :value_method => :first,
                     :as => :select, :label => "状态", :required => false, :include_blank => false %>
+        <%= f.input :paid_eq, :collection => [["", "全部"], [true, "已结算"], [false, "未结算"]],
+                    :label_method => :last, :value_method => :first,
+                    :as => :select, :label => "结算状态", :required => false, :include_blank => false %>
       </fieldset>
       <fieldset class="buttons">
         <%= f.button :submit, :value => "查询" %>
@@ -33,14 +36,17 @@
     <th>种类</th>
     <th>成人价(销售价/(结算价))</th>
     <th>儿童价(销售价/(结算价))</th>
-    <th>成人票数量</th>
-    <th>儿童票数量</th>
+    <th>预订成人票</th>
+    <th>预订儿童票</th>
+    <th>实际成人票</th>
+    <th>实际儿童票</th>
     <th>总价(销售价/(结算价))</th>
     <th>支付方式</th>
     <th>联系人</th>
     <th>联系电话</th>
     <th>预定日期</th>
     <th>状态</th>
+    <th>结算状态</th>
   </tr>
   <% for reservation in @reservations %>
       <tr id="reservation<%= reservation.id %>_row">
@@ -53,12 +59,15 @@
         <td> <%= show_reservation_child_price(reservation) %></td>
         <td><%= reservation.adult_ticket_number %></td>
         <td><%= reservation.child_ticket_number %></td>
+        <td><%= reservation.adult_true_ticket_number %></td>
+        <td><%= reservation.child_true_ticket_number %></td>
         <td><%= show_reservation_total_price(reservation) %></td>
         <td><%= show_reservation_payment_method(reservation) %></td>
         <td><%= reservation.contact %></td>
         <td><%= reservation.phone %></td>
         <td><%= date_format(reservation.created_at) %></td>
         <td><%= reservation.status_name %></td>
+        <td><%= reservation.paid_name %></td>
       </tr>
   <% end %>
 </table>

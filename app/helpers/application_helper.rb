@@ -175,11 +175,19 @@ module ApplicationHelper
     end
   end
 
-  def show_in_or_out(item)
+  def show_in_or_out_for_spot(item)
     if(item.payment_method == 'poa' && item.type == "IndividualReservation")
       '应付'
     else
       '应收'
+    end
+  end
+
+  def show_in_or_out_for_agent(item)
+    if(item.payment_method == 'poa' && item.type == "IndividualReservation")
+      '应收'
+    else
+      '应付'
     end
   end
 

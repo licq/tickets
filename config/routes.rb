@@ -9,6 +9,13 @@ Tickets::Application.routes.draw do
     end
   end
 
+  resources :agent_purchases do
+    collection do
+      get "reservations"
+      put "update_paid"
+    end
+  end
+
   resources :all_rfps
 
   resources :agent_spots do
@@ -95,6 +102,16 @@ Tickets::Application.routes.draw do
   post 'reports/spot_checkin'
   get 'reports/spot_agent_output'
   post 'reports/spot_agent_output'
+
+
+  get 'reports/agent_output'
+  post 'reports/agent_output'
+  get 'reports/agent_output_rate'
+  post 'reports/agent_output_rate'
+  get 'reports/agent_checkin'
+  post 'reports/agent_checkin'
+  get 'reports/agent_spot_output'
+  post 'reports/agent_spot_output'
 
   match 'user/edit' => 'users#edit', :as => :edit_current_user
   match 'signup' => 'users#new', :as => :signup

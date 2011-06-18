@@ -20,7 +20,8 @@ class TeamReservation < Reservation
   end
 
   def save_total_price
-    self.total_price = calculate_price
+    self.book_price = calculate_price
+    self.total_price = self.book_price
     self.save
   end
 

@@ -24,4 +24,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def to_percentage(value)
+     "%.2f" % (value * 100) + "%"
+  end
+
 end
