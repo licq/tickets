@@ -2,6 +2,12 @@ Tickets::Application.routes.draw do
 
   resources :all_reservations
 
+  resources :roles do
+    collection do
+      get "menu_groups"
+    end
+  end
+
   resources :spot_purchases do
     collection do
       get "reservations"

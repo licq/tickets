@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110618061957) do
+ActiveRecord::Schema.define(:version => 20110618120305) do
 
   create_table "agent_prices", :force => true do |t|
     t.integer  "spot_id"
@@ -62,6 +62,24 @@ ActiveRecord::Schema.define(:version => 20110618061957) do
     t.datetime "updated_at"
   end
 
+  create_table "menu_groups", :force => true do |t|
+    t.string  "name"
+    t.string  "category"
+    t.integer "seq"
+  end
+
+  create_table "menus", :force => true do |t|
+    t.string  "name"
+    t.string  "url"
+    t.integer "menu_group_id"
+    t.integer "seq"
+  end
+
+  create_table "menus_roles", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "menu_id"
+  end
+
   create_table "public_rates", :force => true do |t|
     t.integer  "season_id"
     t.integer  "adult_price"
@@ -111,6 +129,12 @@ ActiveRecord::Schema.define(:version => 20110618061957) do
     t.datetime "updated_at"
     t.string   "team_payment_method"
     t.string   "individual_payment_method"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string  "name"
+    t.integer "roleable_id"
+    t.string  "roleable_type"
   end
 
   create_table "seasons", :force => true do |t|
@@ -176,6 +200,7 @@ ActiveRecord::Schema.define(:version => 20110618061957) do
     t.string   "type"
     t.integer  "spot_id"
     t.integer  "agent_id"
+    t.integer  "role_id"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true

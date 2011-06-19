@@ -17,4 +17,9 @@
 
 class SpotAdmin < User
   belongs_to :spot
+
+  def menu_groups
+    MenuGroup.includes(:menus).where(:category => 'spot')
+  end
+
 end

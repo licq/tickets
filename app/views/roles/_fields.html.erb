@@ -1,0 +1,11 @@
+<fieldset class="inputs">
+  <%= f.input :name %>
+  <div style="display:none">
+  <%= f.association :menus, :input_html => {:id => "menu_ids"} %>
+  </div>
+  <div id="menu_tree"></div>
+</fieldset>
+<fieldset class="buttons">
+  <%= f.button :submit %>
+</fieldset>
+

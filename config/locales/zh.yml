@@ -184,6 +184,7 @@ zh:
       agent_price: "旅行社价格"
       rfp: "价格关联"
       reservation: "门票预订"
+      role: "角色"
     attributes:
       user:
         username: "用户名"
@@ -261,6 +262,8 @@ zh:
          contact: "联系人"
          phone: "联系方式"
          total_price: "总价"
+      role:
+         name: "名称"
   activemodel:
     errors:
       template:

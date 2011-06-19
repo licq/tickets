@@ -1,0 +1,17 @@
+<% title "角色列表" %>
+
+<table>
+  <tr>
+    <th>名称</th>
+    <th colspan="2">操作</th>
+  </tr>
+  <% for role in @roles %>
+      <tr id="role<%= role.id %>_row">
+        <td><%= role.name %></td>
+        <td><%= link_to "修改", edit_role_path(role) %></td>
+        <td><%= link_to "删除", role_path(role), :confirm => '你确认删除吗?', :method => :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "新建角色", new_role_path %></p>

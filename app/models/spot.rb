@@ -32,6 +32,7 @@ class Spot < ActiveRecord::Base
   has_many :agent_prices
   has_many :rfps
   has_many :reservations
+  has_many :roles, :as => :roleable
   attr_reader :city_tokens
 
   accepts_nested_attributes_for :admin

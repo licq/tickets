@@ -15,6 +15,40 @@ $(function() {
         return false;
     });
 
+
+    $("#menu_tree").jstree({
+        "json_data" : {
+            "ajax" : {
+                "url" : "/roles/menu_groups.js"
+            }
+        },
+
+        "plugins" : [ "themes", "json_data", "ui", "checkbox" ],
+        "core" : {
+            "strings": { "loading" : "加载中"}
+        }
+    });
+
+    jQuery("#menu_tree").bind("loaded.jstree", function (event, data) {
+        var selected_menu_ids = $("#menu_ids").val() || [];
+        for (var i = 0; i < selected_menu_ids.length; i++) {
+            $("#menu_tree").jstree("check_node", $("#" + selected_menu_ids[i]));
+        }
+    });
+
+    $("#role_form").submit(function() {
+        var checked_ids = [];
+        $("#menu_tree").jstree("get_checked", null, true).each(function() {
+            if (this.id != '')
+                checked_ids.push(this.id);
+        });
+
+        $("#menu_ids").val(checked_ids);
+        $(this).submit();
+
+        return false;
+    });
+
     $("input.numeric").keydown(function(e) {
         var key = e.charCode || e.keyCode || 0;
         return ( key == 8 || key == 9 ||
@@ -91,7 +125,8 @@ $(function() {
 
     init_output_report_condition();
 
-});
+})
+        ;
 
 function set_datepicker() {
     $(".start_datepicker").datepicker({

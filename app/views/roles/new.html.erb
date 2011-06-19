@@ -1,0 +1,5 @@
+#coding: utf-8
+<% title "新建角色" %>
+<%= simple_form_for @role, :html => {:id => "role_form"} do |f| %>
+    <%= render :partial =>'fields', :locals => {:f => f} %>
+<% end %>

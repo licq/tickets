@@ -16,5 +16,9 @@
 #
 
 class SystemAdmin < User
+
+  def menu_groups
+    MenuGroup.includes(:menus).where(:category => 'system')
+  end
   
 end
