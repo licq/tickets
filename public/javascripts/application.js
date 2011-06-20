@@ -15,11 +15,10 @@ $(function() {
         return false;
     });
 
-
     $("#menu_tree").jstree({
         "json_data" : {
             "ajax" : {
-                "url" : "/roles/menu_groups.js"
+                "url" : $("#menus_url").html()
             }
         },
 

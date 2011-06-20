@@ -1,0 +1,5 @@
+
+<% title "修改用户" %>
+<%= simple_form_for @user, :url =>agent_user_path(@user), :method => :put do |f| %>
+    <%= render :partial =>'fields',  :locals => { :f  => f} %>
+<% end %>

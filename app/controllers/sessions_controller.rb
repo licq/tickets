@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:login], params[:password])
     if user
       login(user)
-      if(user.type == "AgentOperator")
+      if(user.type == "AgentOperator" || user.type == "AgentAdmin")
         url = new_reservation_path
       elsif(user.type == "SpotAdmin" || user.type == "SpotOperator")
         url = today_spot_reservations_path

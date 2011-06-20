@@ -25,12 +25,12 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username, :allow_blank => true
   validates_format_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "只能包含数字，字母或下划线"
   validates_presence_of :name
+  validates_presence_of :role
   validates_format_of :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i, :allow_blank => true
   validates_presence_of :password, :on => :create
   validates_confirmation_of :password
   validates_length_of :password, :minimum => 4, :allow_blank => true
   belongs_to :role
-
 
   def self.authenticate(login, pass)
     user = find_by_username(login)
@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
 
   def encrypt_password(pass)
     BCrypt::Engine.hash_secret(pass, password_salt)
+  end
+
+  def menu_groups
+    role.menu_groups
   end
 
 

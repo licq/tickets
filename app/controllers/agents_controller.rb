@@ -18,7 +18,7 @@ class AgentsController < ApplicationController
 
   def new
     @agent = Agent.new
-    @agent.operator = AgentOperator.new
+    @agent.operator = AgentAdmin.new
   end
 
   def create

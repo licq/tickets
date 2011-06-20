@@ -65,6 +65,12 @@ Menu.create!(:name => "合作列表", :url => "all_rfps_path", :menu_group => sy
 
 Menu.create!(:name => "订单列表", :url => "all_reservations_path", :menu_group => system_menu_group4, :seq => 1)
 
+Menu.create!(:name => "新建用户", :url => "new_agent_user_path", :menu_group => agent_menu_group1, :seq => 1)
+Menu.create!(:name => "用户列表", :url => "agent_users_path", :menu_group => agent_menu_group1, :seq => 2)
+
+Menu.create!(:name => "新建角色", :url => "new_agent_role_path", :menu_group => agent_menu_group2, :seq => 1)
+Menu.create!(:name => "角色列表", :url => "agent_roles_path", :menu_group => agent_menu_group2, :seq => 2)
+
 Menu.create!(:name => "可预订景区", :url => "agent_rfps_path", :menu_group => agent_menu_group3, :seq => 1)
 Menu.create!(:name => "已申请预订景区", :url => "applied_agent_spots_path", :menu_group => agent_menu_group3, :seq => 2)
 Menu.create!(:name => "未开通预订景区", :url => "agent_spots_path", :menu_group => agent_menu_group3, :seq => 3)

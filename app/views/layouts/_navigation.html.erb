@@ -4,7 +4,7 @@
         <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
           <div class="list">
             <a href="#"><%= menu_group.name %>&nbsp;</a> </br>
-            <% for menu in menu_group.menus %>
+            <% for menu in menu_group.my_menus %>
                 <a href="<%= send(menu.url) %>"><%= menu.name %></a><br/>
             <% end %>
           </div>

@@ -1,6 +1,8 @@
 #encoding: utf-8
 class RolesController < ApplicationController
   before_filter :set_spot
+  before_filter :set_menus_url
+
 
   def index
     @roles = @spot.roles
@@ -21,6 +23,7 @@ class RolesController < ApplicationController
   end
 
   def edit
+    @menus_url = '/roles/menu_groups.js'
     @role =@spot.roles.find(params[:id])
   end
 
@@ -51,4 +54,10 @@ class RolesController < ApplicationController
     end
 
   end
+
+  private
+  def set_menus_url
+    @menus_url = '/roles/menu_groups.js'
+  end
+
 end

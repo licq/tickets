@@ -1,0 +1,33 @@
+<% title "用户列表" %>
+<div id="search">
+  <%= simple_form_for @search, :url =>agent_users_path do |f| %>
+      <fieldset class="inputs">
+        <%= f.input :username_contains, :label => "用户名", :required => false %>
+        <%= f.input :name_contains, :label => "姓名", :required => false %>
+      </fieldset>
+      <fieldset class="buttons">
+        <%= f.button :submit, :value => "查询" %>
+      </fieldset>
+  <% end %>
+</div>
+共找到<%= @users.total_count %>条记录
+<%= paginate @users %>
+<table>
+  <tr>
+    <th>用户名</th>
+    <th>姓名</th>
+    <th>邮箱</th>
+    <th colspan="2">操作</th>
+  </tr>
+  <% for user in @users %>
+      <tr id="user<%= user.username %>_row">
+        <td><%= user.username %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to "查看", agent_user_path(user) %></td>
+        <td><%= link_to "修改", edit_agent_user_path(user) %></td>
+      </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "新建用户", new_agent_user_path %></p>

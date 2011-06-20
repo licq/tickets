@@ -10,4 +10,14 @@ class Role < ActiveRecord::Base
   def can_edit?
     users.empty?
   end
+
+  def menu_groups
+    groups = MenuGroup.find(menus.map(&:menu_group_id).uniq)
+    groups.each do |g|
+      menus.select{|m| m.menu_group_id == g.id}.sort_by(&:seq).each do |m|
+        g.add_menu(m)
+      end
+    end
+    groups
+  end
 end

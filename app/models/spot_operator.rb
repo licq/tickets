@@ -17,16 +17,5 @@
 
 class SpotOperator < User
   belongs_to :spot
-  belongs_to :role
-  has_many :menus, :through => :role
-  has_many :menu_groups, :through => :menus
-
-#  def menu_groups
-#    result = Hash.new{|h,k| h[k] = []}
-#    self.menus.each do |menu|
-#       result[menu.menu_group.name] << menu
-#    end
-#    result
-#  end
 
 end

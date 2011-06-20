@@ -192,6 +192,7 @@ zh:
         password_confirmation: "重复密码"        
         email: "邮箱"
         name: "姓名"
+        role: "用户角色"
       spot:
         name: "景区名称"
         code: "景区编码"

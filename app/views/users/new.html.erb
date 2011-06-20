@@ -1,5 +1,5 @@
 #coding: utf-8
 <% title "新建用户" %>
 <%= simple_form_for @user, :url =>users_path do |f| %>
-    <%= render :partial =>'fields', :locals => {:f => f} %>
+    <%= render :partial =>'fields', :locals => {:f => f, :edit_role => true} %>
 <% end %>

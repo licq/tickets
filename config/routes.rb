@@ -100,6 +100,14 @@ Tickets::Application.routes.draw do
     end
   end
 
+  resources :agent_users
+
+  resources :agent_roles do
+    collection do
+      get "menu_groups"
+    end
+  end
+
   get 'reports/spot_output'
   post 'reports/spot_output'
   get 'reports/spot_output_rate'

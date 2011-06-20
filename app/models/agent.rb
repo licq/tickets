@@ -1,13 +1,15 @@
 class Agent < ActiveRecord::Base
 
   validates :name, :presence => true, :uniqueness => true
-  validates :operator, :presence => true
-  validates_associated :operator
+  validates :admin, :presence => true
+  validates_associated :admin
 
-  has_one :operator, :class_name => "AgentOperator"
-  accepts_nested_attributes_for :operator
+  has_one :admin, :class_name => "AgentAdmin"
+  has_many :operators, :class_name => "AgentOperator"
+  accepts_nested_attributes_for :admin
   has_many :rfps
   has_many :reservations
+  has_many :roles, :as => :roleable
 
   def self.not_connected_with_spot(spot)
     select('agents.*').
@@ -16,7 +18,7 @@ class Agent < ActiveRecord::Base
   end
 
   def self.applied_for_spot(spot)
-    joins(:rfps).where({:disabled => false},:rfps => {:spot_id => spot.id, :status => 'a', :from_spot => false})
+    joins(:rfps).where({:disabled => false}, :rfps => {:spot_id => spot.id, :status => 'a', :from_spot => false})
   end
 
 end
