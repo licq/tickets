@@ -1,7 +1,7 @@
 #coding: utf-8
 class AgentsController < ApplicationController
 
-  before_filter :check_system_admin
+  before_filter :check_system_admin, :except => [:new, :create]
 
   def index
     @search = Agent.search(params[:search] || {:disabled_eq => false})
@@ -18,14 +18,14 @@ class AgentsController < ApplicationController
 
   def new
     @agent = Agent.new
-    @agent.operator = AgentAdmin.new
+    @agent.admin = AgentAdmin.new
   end
 
   def create
     @agent = Agent.new(params[:agent])
     if @agent.save
       if (current_user.nil?)
-        login(@agent.operator)
+        login(@agent.admin)
         redirect_to new_reservation_path, :notice => "感谢您注册，现在您已登陆"
       else
         redirect_to @agent, :notice => "旅行社已创建."

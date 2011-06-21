@@ -17,5 +17,6 @@
 
 class SpotOperator < User
   belongs_to :spot
+  validates_presence_of :role
 
 end

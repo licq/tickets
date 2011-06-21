@@ -1,14 +1,16 @@
 <div id="navigation">
   <ul>
-    <% for menu_group in user_menu_groups %>
-        <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
-          <div class="list">
-            <a href="#"><%= menu_group.name %>&nbsp;</a> </br>
-            <% for menu in menu_group.my_menus %>
-                <a href="<%= send(menu.url) %>"><%= menu.name %></a><br/>
-            <% end %>
-          </div>
-        </li>
+    <% if  current_user %>
+        <% for menu_group in user_menu_groups %>
+            <li class="menu2" onMouseOver="this.className='menu1'" onMouseOut="this.className='menu2'">
+              <div class="list">
+                <a href="#"><%= menu_group.name %>&nbsp;</a> </br>
+                <% for menu in menu_group.my_menus %>
+                    <a href="<%= send(menu.url) %>"><%= menu.name %></a><br/>
+                <% end %>
+              </div>
+            </li>
+        <% end %>
     <% end %>
   </ul>
 </div>

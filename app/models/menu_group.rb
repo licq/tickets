@@ -1,5 +1,5 @@
 class MenuGroup < ActiveRecord::Base
-  default_scope order('id')
+  default_scope order('seq')
   scope :for_spot, where(:category => 'spot')
   scope :for_agent, where(:category => 'agent')
   has_many :menus
