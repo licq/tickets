@@ -30,6 +30,7 @@
 <table>
   <tr>
     <th>订单号</th>
+    <th>团号</th>
     <th>景区</th>
     <th>门票</th>
     <th>入园日期</th>
@@ -52,6 +53,7 @@
   <% for reservation in @reservations %>
       <tr id="reservation<%= reservation.id %>_row">
         <td><%= link_to reservation.no, reservation_path(reservation) %></td>
+        <td><%= reservation.group_no %></td>
         <td><%= reservation.spot.name %></td>
         <td><%= reservation.ticket_name %></td>
         <td> <%= reservation.date %>  </td>

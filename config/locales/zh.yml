@@ -263,6 +263,7 @@ zh:
          contact: "联系人"
          phone: "联系方式"
          total_price: "总价"
+         group_no: "团号"
       role:
          name: "名称"
   activemodel:

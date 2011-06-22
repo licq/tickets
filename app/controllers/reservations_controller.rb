@@ -46,6 +46,7 @@ class ReservationsController < ApplicationController
   def create_individual
     @reservation = IndividualReservation.new(params[:individual_reservation])
     @reservation.agent = @agent
+    @reservation.paid = false
     @reservation.status = :confirmed
     @reservation.book_price =@reservation.calculate_price
     @reservation.book_purchase_price =@reservation.calculate_purchase_price
@@ -62,6 +63,7 @@ class ReservationsController < ApplicationController
   def create_team
     @reservation = TeamReservation.new(params[:team_reservation])
     @reservation.agent = @agent
+    @reservation.paid = false
     @reservation.status = :confirmed
     @reservation.book_price =@reservation.calculate_price
     @reservation.total_price =@reservation.book_price

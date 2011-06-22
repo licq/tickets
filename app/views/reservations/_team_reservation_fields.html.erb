@@ -17,6 +17,7 @@
 <% end %>
 总价
 <div id="total_price_text"><%= f.object.total_price %></div>
+<%= f.input :group_no %>
 <%= f.input :contact %>
 <%= f.input :phone %>
 <div class="right75">支付方式 <%= show_reservation_payment_method(@reservation) %></div>

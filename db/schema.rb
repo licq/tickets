@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110618120305) do
+ActiveRecord::Schema.define(:version => 20110622132025) do
 
   create_table "agent_prices", :force => true do |t|
     t.integer  "spot_id"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20110618120305) do
     t.string   "payment_method"
     t.integer  "book_price"
     t.integer  "book_purchase_price"
+    t.string   "group_no"
   end
 
   create_table "rfps", :force => true do |t|
