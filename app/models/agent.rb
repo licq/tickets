@@ -10,6 +10,7 @@ class Agent < ActiveRecord::Base
   has_many :rfps
   has_many :reservations
   has_many :roles, :as => :roleable
+  has_many :purchase_histories
 
   def self.not_connected_with_spot(spot)
     select('agents.*').

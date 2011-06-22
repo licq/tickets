@@ -54,6 +54,7 @@ Menu.create!(:name => "入园统计报表", :url => "reports_spot_checkin_path",
 Menu.create!(:name => "分销商销售业绩报表", :url => "reports_spot_agent_output_path", :menu_group => spot_menu_group6, :seq => 4)
 
 Menu.create!(:name => "结算列表", :url => "spot_purchases_path", :menu_group => spot_menu_group7, :seq => 1)
+Menu.create!(:name => "结算历史", :url => "purchase_histories_path", :menu_group => spot_menu_group7, :seq => 2)
 
 Menu.create!(:name => "新建景区", :url => "new_spot_path", :menu_group => system_menu_group1, :seq => 1)
 Menu.create!(:name => "景区查询", :url => "spots_path", :menu_group => system_menu_group1, :seq => 2)

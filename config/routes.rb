@@ -1,5 +1,7 @@
 Tickets::Application.routes.draw do
 
+  resources :purchase_histories
+
   resources :all_reservations
 
   resources :roles do

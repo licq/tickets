@@ -1,0 +1,24 @@
+<table>
+  <tr>
+    <th>旅行社</th>
+    <th>门票种类</th>
+    <th>结算方式</th>
+    <th>应收应付</th>
+    <th>总价</th>
+    <th>结算日期</th>
+    <th>结算用户</th>
+  </tr>
+  <tr>
+    <td><%= @purchase_history.agent.name %>  </td>
+    <td><%= @purchase_history.ticket_type %></td>
+    <td><%= show_payment_method(@purchase_history.payment_method) %></td>
+    <td><%= @purchase_history.in_out %></td>
+    <td><%= @purchase_history.price %></td>
+    <td><%= @purchase_history.purchase_date %></td>
+    <td><%= @purchase_history.user %></td>
+  </tr>
+</table>
+
+<%= render :partial => '/spot_reservations/reservations_table',:locals => {:reservations => @purchase_history.reservations} %>
+
+<%= link_to "返回" , purchase_histories_path %>

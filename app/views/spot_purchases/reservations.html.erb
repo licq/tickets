@@ -1,11 +1,14 @@
 <% title "#{@agent.name}未结算订单#{params[:date].present? ? "--" + params[:date] : ""}" %>
-<% form_tag update_paid_spot_purchases_path, :method => :put do %>
+<% form_tag update_paid_spot_purchases_path, {:method => :put, :id => "purchase_reservations_form"} do %>
     <%= render :partial => 'prepay_individual_reservations' if params[:payment_method] == "prepay" && params[:type] == "IndividualReservation" %>
     <%= render :partial => 'poa_individual_reservations' if params[:payment_method] == "poa" && params[:type] == "IndividualReservation" %>
     <%= render :partial => 'prepay_team_reservations' if params[:payment_method] == "prepay" && params[:type] == "TeamReservation" %>
     <%= hidden_field_tag 'date', @date %>
     <%= hidden_field_tag 'agent_name', @agent_name %>
 <% end %>
+<div>
+  总价<span id="total_price">0</span>
+</div>
 
 
 <%= link_to "返回", "#", :onclick => "history.back(); return false;" %>

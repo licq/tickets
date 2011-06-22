@@ -1,4 +1,5 @@
 class TeamReservation < Reservation
+  before_save :set_total_purchase_price
   def calculate_price
     result = self.adult_ticket_number * self.adult_price
     if can_book_child_ticket?
@@ -32,6 +33,12 @@ class TeamReservation < Reservation
   def can_book_child_ticket?
     return false if self.child_price.nil?
     true
+  end
+
+  private
+  def set_total_purchase_price
+    self.book_purchase_price = self.book_price
+    self.total_purchase_price = self.total_price
   end
 
 end

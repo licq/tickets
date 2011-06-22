@@ -5,6 +5,7 @@ class Reservation < ActiveRecord::Base
   scope :exclude_canceled, where(:status.ne => "canceled")
   belongs_to :spot
   belongs_to :agent
+  belongs_to :purchase_history
 
   validates :contact, :presence => true
   validates :phone, :presence => true

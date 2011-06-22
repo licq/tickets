@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110622132025) do
+ActiveRecord::Schema.define(:version => 20110622140640) do
 
   create_table "agent_prices", :force => true do |t|
     t.integer  "spot_id"
@@ -89,6 +89,18 @@ ActiveRecord::Schema.define(:version => 20110622132025) do
     t.datetime "updated_at"
   end
 
+  create_table "purchase_histories", :force => true do |t|
+    t.date     "purchase_date"
+    t.string   "user"
+    t.integer  "agent_id"
+    t.integer  "spot_id"
+    t.integer  "price"
+    t.boolean  "is_individual"
+    t.string   "payment_method"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "reservations", :force => true do |t|
     t.string   "no"
     t.integer  "agent_id"
@@ -118,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20110622132025) do
     t.integer  "book_price"
     t.integer  "book_purchase_price"
     t.string   "group_no"
+    t.integer  "purchase_history_id"
   end
 
   create_table "rfps", :force => true do |t|
