@@ -135,8 +135,7 @@ class ReportsController < ApplicationController
   def get_start_parameters_by_rate
     year = params[:year].to_i
     month = params[:month].to_i
-    start_date = DateTime.new(year, month, 1).beginning_of_month
-    return start_date
+    DateTime.new(year, month, 1).beginning_of_month
   end
 
   def generate_spot_output

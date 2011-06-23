@@ -13,6 +13,7 @@ Tickets::Application.routes.draw do
   resources :spot_purchases do
     collection do
       get "reservations"
+      get "report"
       put "update_paid"
     end
   end

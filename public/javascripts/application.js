@@ -125,6 +125,9 @@ $(function() {
 
     $("#purchase_reservations_form :checkbox").click(calculate_total_price_for_purchase);
 
+    $("#generate_purchase_report_button").click(generate_purchase_report);
+
+
     init_output_report_condition();
 
 })
@@ -345,12 +348,27 @@ function selectAllReservations(flag) {
 function calculate_total_price_for_purchase() {
     var total_price = 0;
     $.each($("#purchase_reservations_form tr"), function() {
-        if ($(this).find("input:checked").length > 0){
+        if ($(this).find("input:checked").length > 0) {
             total_price += parseInt($(this).children("td:nth-child(10)").html());
         }
     });
 
     $("#total_price").text(total_price);
+}
+
+
+function generate_purchase_report() {
+    var checked_ids = "";
+    $.each($("#purchase_reservations_form tr"), function() {
+        if ($(this).find("input:checked").length > 0) {
+            checked_ids += ($(this).attr("id").substring(11, 12)) + ",";
+        }
+    });
+
+    if (checked_ids.length == 0) {
+        alert("至少选择一张订单") ;
+    } else
+        window.open("/spot_purchases/report.pdf?reservation_ids=" + checked_ids + "&date=" + $("#date").val());
 }
 
 
