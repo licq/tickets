@@ -134,4 +134,6 @@ class Reservation < ActiveRecord::Base
     (prepay_purchase_sum + poa_purchase_sum).sort_by(&:spot_name)
   end
 
+
+
 end

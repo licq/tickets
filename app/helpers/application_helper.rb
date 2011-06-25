@@ -91,6 +91,14 @@ module ApplicationHelper
     end
   end
 
+  def show_reservation_book_total_price(reservation)
+    if (reservation.is_individual?)
+      "#{reservation.book_price}/(#{reservation.book_purchase_price})"
+    else
+      "#{reservation.book_price}"
+    end
+  end
+
   def date_format(date)
     date.strftime("%Y-%m-%d")
   end

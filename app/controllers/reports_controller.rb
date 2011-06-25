@@ -1,7 +1,7 @@
 #encoding: utf-8
 class ReportsController < ApplicationController
 
-  before_filter :set_spot,  :only => [:spot_output, :spot_output_rate, :spot_checkin, :spot_agent_output]
+  before_filter :set_spot,  :only => [:spot_output, :spot_output_rate, :spot_checkin, :spot_agent_output, :spot_month_reservations]
   before_filter :set_agent, :only => [:agent_output, :agent_output_rate, :agent_checkin, :agent_spot_output]
 
 
@@ -14,6 +14,32 @@ class ReportsController < ApplicationController
 
       format.pdf {
         generate_spot_output()
+      }
+    end
+  end
+
+  def spot_month_reservations
+    respond_to do |format|
+      format.html
+      format.js {
+        generate_spot_month_reservations()
+      }
+
+      format.pdf {
+        generate_spot_month_reservations()
+      }
+    end
+  end
+
+  def spot_month_output
+    respond_to do |format|
+      format.html
+      format.js {
+        generate_spot_month_output()
+      }
+
+      format.pdf {
+        generate_spot_month_output()
       }
     end
   end
@@ -138,10 +164,28 @@ class ReportsController < ApplicationController
     DateTime.new(year, month, 1).beginning_of_month
   end
 
+  def generate_spot_month_reservations
+    @start_time = get_start_parameters_by_rate
+    @search = params[:year]+"年"+params[:month]+"月"
+    @table = @spot.reservations.exclude_canceled.where(:created_at => @start_time..@start_time.end_of_month).reorder(:agent_id).all
+    @total_adult_ticket_number = @table.sum(&:adult_ticket_number)
+    @total_child_ticket_number = @table.sum(&:child_ticket_number)
+    @total_book_price = @table.sum(&:book_price)
+    @total_book_purchase_price = @table.sum(&:book_purchase_price)
+  end
+
+
+   def generate_spot_month_output
+    @start_time = get_start_parameters_by_rate
+    @search = params[:year]+"年"+params[:month]+"月"
+    @table = @spot.reservations.exclude_canceled.sum_month_output_with_agents(@start_time,@start_time.end_of_month)
+  end
+
   def generate_spot_output
     @start_time, @end_time = get_start_and_end_parameters
     @table = @spot.reservations.exclude_canceled.sum_output_between(@start_time, @end_time)
   end
+
 
   def generate_agent_output
     @start_time, @end_time = get_start_and_end_parameters

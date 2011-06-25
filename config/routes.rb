@@ -131,6 +131,11 @@ Tickets::Application.routes.draw do
   get 'reports/spot_agent_output'
   post 'reports/spot_agent_output'
 
+  get 'reports/spot_month_reservations'
+  post 'reports/spot_month_reservations'
+  post 'reports/spot_month_output'
+  post 'reports/spot_month_output'
+
 
   get 'reports/agent_output'
   post 'reports/agent_output'
