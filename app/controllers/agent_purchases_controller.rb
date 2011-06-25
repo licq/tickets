@@ -31,10 +31,10 @@ class AgentPurchasesController < ApplicationController
       PurchaseHistory.transaction do
         reservations = @agent.reservations.where(:payment_method => "poa").find(ids)
         spot_id = reservations[0].spot_id
-        price = reservations.sum(&:total_sale_price)-reservations.sum(&:total_purchase_price)
+        price = reservations.sum(&:total_price)-reservations.sum(&:total_purchase_price)
         purchase_history = @agent.purchase_histories.create(:purchase_date => Date.today, :user => current_user.name, :spot_id => spot_id, :is_individual => true, :payment_method => "poa", :price => price)
         purchase_history.save
-        @agent.reservations.where(:payment_method => "poa").update_all(["paid=?", true], :id => params[:reservation_ids])
+        @agent.reservations.where(:payment_method => "poa").update_all({:paid => true, :purchase_history_id => purchase_history}, :id => params[:reservation_ids])
       end
     end
     redirect_to agent_purchases_path({:date =>params[:date], :spot_name =>params[:spot_name]})

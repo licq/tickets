@@ -1,0 +1,31 @@
+<% title "结算历史" %>
+
+共找到<%= @purchase_histories.total_count %>条记录
+<%= paginate @purchase_histories %>
+<table>
+  <tr>
+    <th>景区</th>
+    <th>旅行社</th>
+    <th>门票种类</th>
+    <th>结算方式</th>
+    <th>应收应付</th>
+    <th>总价</th>
+    <th>结算日期</th>
+    <th>结算用户</th>
+    <th>操作</th>
+  </tr>
+  <% for history in @purchase_histories %>
+      <tr id="history<%= history.id %>_row">
+        <td><%= history.spot.name %>  </td>
+        <td><%= history.agent.name %>  </td>
+        <td><%= history.ticket_type %></td>
+        <td><%= show_payment_method(history.payment_method) %></td>
+        <td><%= history.in_out %></td>
+        <td><%= history.price %></td>
+        <td><%= history.purchase_date %></td>
+        <td><%= history.user %></td>
+        <td><%= link_to "查看", all_purchase_history_path(history) %></td>
+      </tr>
+  <% end %>
+</table>
+
