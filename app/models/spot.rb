@@ -19,7 +19,7 @@ class Spot < ActiveRecord::Base
   validates :code, :presence => true, :uniqueness => true
   validates_associated :admin
   validates_presence_of :admin, :on => :create, :message => "必须设置管理员"
-  validates :cities, :presence => {:message => "至少选择一个城市"}
+  validates :cities, :presence => {:message => "至少选择一个城市"}, :on => :save
 
   has_many :users
   has_one :admin, :class_name => 'SpotAdmin', :dependent => :delete

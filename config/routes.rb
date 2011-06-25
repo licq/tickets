@@ -1,6 +1,7 @@
 Tickets::Application.routes.draw do
 
   resources :purchase_histories
+  resources :agent_purchase_histories
 
   resources :all_reservations
 
@@ -21,6 +22,7 @@ Tickets::Application.routes.draw do
   resources :agent_purchases do
     collection do
       get "reservations"
+      get "report"
       put "update_paid"
     end
   end

@@ -11,8 +11,8 @@ prawn_document(:page_layout => :landscape) do |pdf|
 
 
   items = [["时间", @date, nil, nil, nil, nil, nil, nil, nil],
-           ["景区名称", @spot.name, "财务联系人", @spot.finance_contact, "财务联系电话", @spot.finance_phone, "", "", ""],
            ["旅行社名称", @agent.name, "财务联系人", @agent.finance_contact, "财务联系电话", @agent.finance_phone, "", "", ""],
+           ["景区名称", @spot.name, "财务联系人", @spot.finance_contact, "财务联系电话", @spot.finance_phone, "", "", ""],
            [""],
            ["订单号", "团号", "入园时间", "联系人", type, "预订人数", "总价", "实际入园人数", "实际总价"]]
   items += @reservations.map do |reservation|

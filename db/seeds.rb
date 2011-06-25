@@ -2,11 +2,11 @@
 #User.delete_all
 #SystemAdmin.create!(:name => "Admin", :username => "admin", :password => "foobar",
 #                    :password_confirmation => "foobar", :email => "aa@aa.com")
-City.delete_all
-City.create!(:name => "北京", :code => "001", :pinyin => "beijing")
-City.create!(:name => "上海", :code => "002", :pinyin => "shanghai")
-City.create!(:name => "泰山", :code => "003", :pinyin => "taishan")
-City.create!(:name => "南京", :code => "004", :pinyin => "nanjing")
+#City.delete_all
+#City.create!(:name => "北京", :code => "001", :pinyin => "beijing")
+#City.create!(:name => "上海", :code => "002", :pinyin => "shanghai")
+#City.create!(:name => "泰山", :code => "003", :pinyin => "taishan")
+#City.create!(:name => "南京", :code => "004", :pinyin => "nanjing")
 
 MenuGroup.delete_all
 spot_menu_group1 = MenuGroup.create!(:name => "基础设置", :category => "spot", :seq => 1)
@@ -21,6 +21,7 @@ system_menu_group1 = MenuGroup.create!(:name => "景区管理", :category => "sy
 system_menu_group2 = MenuGroup.create!(:name => "旅行社管理", :category => "system", :seq => 2)
 system_menu_group3 = MenuGroup.create!(:name => "合作管理", :category => "system", :seq => 3)
 system_menu_group4 = MenuGroup.create!(:name => "订单管理", :category => "system", :seq => 4)
+system_menu_group5 = MenuGroup.create!(:name => "结算管理", :category => "system", :seq => 5)
 
 agent_menu_group1 = MenuGroup.create!(:name => "用户管理", :category => "agent", :seq => 1)
 agent_menu_group2 = MenuGroup.create!(:name => "角色管理", :category => "agent", :seq => 2)
@@ -66,6 +67,9 @@ Menu.create!(:name => "合作列表", :url => "all_rfps_path", :menu_group => sy
 
 Menu.create!(:name => "订单列表", :url => "all_reservations_path", :menu_group => system_menu_group4, :seq => 1)
 
+Menu.create!(:name => "结算列表", :url => "all_purchases_path", :menu_group => system_menu_group5, :seq => 1)
+Menu.create!(:name => "结算历史", :url => "all_purchase_histories_path", :menu_group => system_menu_group5, :seq => 2)
+
 Menu.create!(:name => "新建用户", :url => "new_agent_user_path", :menu_group => agent_menu_group1, :seq => 1)
 Menu.create!(:name => "用户列表", :url => "agent_users_path", :menu_group => agent_menu_group1, :seq => 2)
 
@@ -80,6 +84,7 @@ Menu.create!(:name => "新建订单", :url => "new_reservation_path", :menu_grou
 Menu.create!(:name => "订单列表", :url => "reservations_path", :menu_group => agent_menu_group4, :seq => 2)
 
 Menu.create!(:name => "结算列表", :url => "agent_purchases_path", :menu_group => agent_menu_group5, :seq => 1)
+Menu.create!(:name => "结算历史", :url => "agent_purchase_histories_path", :menu_group => agent_menu_group5, :seq => 2)
 
 Menu.create!(:name => "产量统计报表", :url => "reports_agent_output_path", :menu_group => agent_menu_group6, :seq => 1)
 Menu.create!(:name => "产量同比环比报表", :url => "reports_agent_output_rate_path", :menu_group => agent_menu_group6, :seq => 2)

@@ -48,7 +48,7 @@ class SpotsController < ApplicationController
       format.js do
         @spot = Spot.find(params[:id])
         @spot.disabled = true
-        @spot.save
+        @spot.save!
         flash[:notice] = "禁用#{@spot.name}已成功"
       end
     end
@@ -59,7 +59,7 @@ class SpotsController < ApplicationController
       format.js do
         @spot = Spot.find(params[:id])
         @spot.disabled = false
-        @spot.save
+        @spot.save!
         flash[:notice] = "启用#{@spot.name}已成功"
       end
     end

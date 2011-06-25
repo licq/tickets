@@ -34,6 +34,5 @@
           </tr>
       <% end %>
     </table>
-    <%= hidden_field( :reservation_ids, :value => [], :id => "checked_reservation_ids" )%>
     <%= submit_tag "结 算", :confirm => "确认要将选择的订单进行结算吗？" %>
     <input type="button" id="generate_purchase_report_button" value="生成对帐单"/>

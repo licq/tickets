@@ -1,5 +1,5 @@
 <% title "#{@spot.name}未结算订单#{params[:date].present? ? "--" + params[:date] : ""}" %>
-<% form_tag update_paid_agent_purchases_path, :method => :put do %>
+<% form_tag update_paid_agent_purchases_path, {:method => :put, :id => "purchase_reservations_form"}  do %>
     <%= render :partial => 'prepay_individual_reservations' if params[:payment_method] == "prepay" && params[:type] == "IndividualReservation" %>
     <%= render :partial => 'poa_individual_reservations' if params[:payment_method] == "poa" && params[:type] == "IndividualReservation" %>
     <%= render :partial => 'prepay_team_reservations' if params[:payment_method] == "prepay" && params[:type] == "TeamReservation" %>

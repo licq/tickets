@@ -26,12 +26,13 @@ class SpotPurchasesController < ApplicationController
   end
 
   def update_paid
-    if params[:reservation_ids].present?
+    ids = id_list(params[:reservation_ids])
+    if ids.present?
       PurchaseHistory.transaction do
-        reservations = @spot.reservations.where(:payment_method => "prepay", :id => params[:reservation_ids])
+        reservations = @spot.reservations.where(:payment_method => "prepay").find(ids)
         agent_id = reservations[0].agent_id
         is_individual = reservations[0].type == "IndividualReservation"
-        price = reservations.sum(:total_purchase_price)
+        price = reservations.sum(&:total_purchase_price)
         purchase_history = @spot.purchase_histories.create(:purchase_date => Date.today, :user => current_user.name, :agent_id => agent_id, :is_individual => is_individual, :payment_method => "prepay", :price => price)
         purchase_history.save
         @spot.reservations.where(:payment_method => "prepay").update_all({:paid => true, :purchase_history_id => purchase_history}, :id => params[:reservation_ids])
@@ -43,19 +44,35 @@ class SpotPurchasesController < ApplicationController
   def report
     respond_to do |format|
       format.pdf do
-        if params[:reservation_ids].present?
-          @reservations = @spot.reservations.where(:payment_method => "prepay", :id => params[:reservation_ids]).all
+        ids = id_list(params[:reservation_ids])
+        if ids.present?
+#          @reservations = @spot.reservations.where(:payment_method => "prepay").find(ids)
+          @reservations = @spot.reservations.find(ids)
           @agent = Agent.find(@reservations[0].agent_id)
-          @date = params[:date]
-          @price = @reservations.sum(&:total_purchase_price)
-          @book_price = @reservations.sum(&:book_purchase_price)
+          @date = params[:date].empty? ? Date.today : params[:date]
+          @purchase_price = @reservations.sum(&:total_purchase_price)
+          @is_individual = @reservations[0].type == "IndividualReservation"
+          @is_poa = @reservations[0].payment_method == "poa"
+          @book_purchase_price = @reservations.sum(&:book_purchase_price)
           @adult_total_ticket_number = @reservations.sum(&:adult_ticket_number)
           @child_total_ticket_number = @reservations.sum(&:child_ticket_number)
           @adult_total_true_ticket_number = @reservations.sum(&:adult_true_ticket_number)
           @child_total_true_ticket_number = @reservations.sum(&:child_true_ticket_number)
+          if @is_poa
+            @price = @reservations.sum(&:total_price)
+            @book_price = @reservations.sum(&:book_price)
+            render "poa_report"
+          else
+            render "report"
+          end
         end
       end
     end
+  end
+
+  private
+  def id_list(id_string)
+    id_string.split(",")
   end
 
 end

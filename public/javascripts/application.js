@@ -359,16 +359,19 @@ function calculate_total_price_for_purchase() {
 
 function generate_purchase_report() {
     var checked_ids = "";
-    $.each($("#purchase_reservations_form tr"), function() {
-        if ($(this).find("input:checked").length > 0) {
-            checked_ids += ($(this).attr("id").substring(11, 12)) + ",";
-        }
+    $.each($("#purchase_reservations_form tr input:checked"), function() {
+        checked_ids += $(this).val() + ",";
     });
 
     if (checked_ids.length == 0) {
-        alert("至少选择一张订单") ;
-    } else
-        window.open("/spot_purchases/report.pdf?reservation_ids=" + checked_ids + "&date=" + $("#date").val());
+        alert("至少选择一张订单");
+    } else {
+        checked_ids = checked_ids.substring(0, checked_ids.length - 1);
+        if ($("#flag").val() == 'spot')
+            window.open("/spot_purchases/report.pdf?reservation_ids=" + checked_ids + "&date=" + $("#date").val());
+        else
+            window.open("/agent_purchases/report.pdf?reservation_ids=" + checked_ids + "&date=" + $("#date").val());
+    }
 }
 
 

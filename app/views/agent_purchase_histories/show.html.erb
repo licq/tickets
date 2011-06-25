@@ -1,0 +1,68 @@
+<table>
+  <tr>
+    <th>景区</th>
+    <th>门票种类</th>
+    <th>结算方式</th>
+    <th>应收应付</th>
+    <th>总价</th>
+    <th>结算日期</th>
+    <th>结算用户</th>
+  </tr>
+  <tr>
+    <td><%= @purchase_history.spot.name %>  </td>
+    <td><%= @purchase_history.ticket_type %></td>
+    <td><%= show_payment_method(@purchase_history.payment_method) %></td>
+    <td><%= @purchase_history.in_out %></td>
+    <td><%= @purchase_history.price %></td>
+    <td><%= @purchase_history.purchase_date %></td>
+    <td><%= @purchase_history.user %></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>订单号</th>
+    <th>团号</th>
+    <th>景区</th>
+    <th>门票</th>
+    <th>入园日期</th>
+    <th>种类</th>
+    <th>成人价(销售价/(结算价))</th>
+    <th>儿童价(销售价/(结算价))</th>
+    <th>预订成人票</th>
+    <th>预订儿童票</th>
+    <th>实际成人票</th>
+    <th>实际儿童票</th>
+    <th>总价(销售价/(结算价))</th>
+    <th>支付方式</th>
+    <th>联系人</th>
+    <th>联系电话</th>
+    <th>预定日期</th>
+    <th>状态</th>
+    <th>结算状态</th>
+  </tr>
+  <% for reservation in @purchase_history.reservations %>
+      <tr id="reservation<%= reservation.id %>_row">
+        <td><%= link_to reservation.no, reservation_path(reservation) %></td>
+        <td><%= reservation.group_no %></td>
+        <td><%= reservation.spot.name %></td>
+        <td><%= reservation.ticket_name %></td>
+        <td> <%= reservation.date %>  </td>
+        <td> <%= show_reservation_type(reservation) %></td>
+        <td> <%= show_reservation_adult_price(reservation) %> </td>
+        <td> <%= show_reservation_child_price(reservation) %></td>
+        <td><%= reservation.adult_ticket_number %></td>
+        <td><%= reservation.child_ticket_number %></td>
+        <td><%= reservation.adult_true_ticket_number %></td>
+        <td><%= reservation.child_true_ticket_number %></td>
+        <td><%= show_reservation_total_price(reservation) %></td>
+        <td><%= show_reservation_payment_method(reservation) %></td>
+        <td><%= reservation.contact %></td>
+        <td><%= reservation.phone %></td>
+        <td><%= date_format(reservation.created_at) %></td>
+        <td><%= reservation.status_name %></td>
+        <td><%= reservation.paid_name %></td>
+      </tr>
+  <% end %>
+</table>
+<%= link_to "返回" , purchase_histories_path %>

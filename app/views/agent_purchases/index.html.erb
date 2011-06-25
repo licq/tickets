@@ -22,15 +22,17 @@
     <th>总订单数</th>
     <th>应收应付</th>
     <th>金额</th>
+    <th>操作</th>
   </tr>
   <% for item in @table %>
       <tr>
-        <td><%= link_to item.spot_name, reservations_agent_purchases_path(:spot_id => item.spot_id, :type => item.type, :payment_method => item.payment_method, :date => @date, :spot_name => @spot_name) %></td>
+        <td><%= item.spot_name%></td>
         <td><%= show_reservation_type_with(item.type) %></td>
         <td><%= show_payment_method(item.payment_method) %>  </td>
         <td><%= item.count_sum %></td>
         <td><%= show_in_or_out_for_agent(item) %> </td>
         <td><%= item.price_sum %></td>
+        <td><%= link_to "查看", reservations_agent_purchases_path(:spot_id => item.spot_id, :type => item.type, :payment_method => item.payment_method, :date => @date, :spot_name => @spot_name) %></td>
       </tr>
   <% end %>
 </table>

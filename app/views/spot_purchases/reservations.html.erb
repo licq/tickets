@@ -5,6 +5,7 @@
     <%= render :partial => 'prepay_team_reservations' if params[:payment_method] == "prepay" && params[:type] == "TeamReservation" %>
     <%= hidden_field_tag 'date', @date %>
     <%= hidden_field_tag 'agent_name', @agent_name %>
+    <%= hidden_field_tag 'flag', "spot" %>
 <% end %>
 <div>
   总价<span id="total_price">0</span>
