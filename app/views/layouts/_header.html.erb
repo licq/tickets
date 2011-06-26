@@ -1,17 +1,19 @@
 <header>
-  <!--<% logo = image_tag "logo.png", :alt => "景区网络营销系统", :class => "round" %>-->
-  <!--<%= link_to logo, root_path %>-->
-  <div style="float:left;">
-     景区网络营销系统<%= show_agent_or_spot_name %>
-  </div>
-  <nav class="round">
-    <ul>
-      <% if logged_in? %>
-          欢迎 <%= current_user.name %>.
-          <%= link_to "修改个人信息", edit_myself_user_path(current_user) %>
-          <%= link_to "登出", logout_path %>
-      <% end %>
-    </ul>
-  </nav>
-  <%= render 'layouts/navigation' %>
+  <div class="headout">
+    <% logo = image_tag "headlogo.jpg", :alt => "景区网络营销系统", :class => "headlogoimg" %>
+    <div class="headlogo"><%= logo %></div>
+
+    <div class="headright">
+      <div class="headrighttop">
+        <% if logged_in? %>
+            <span style="font-size: 14px;font-weight: bold;"><%= show_agent_or_spot_name %></span>
+            欢迎您：<span style="font-weight: bold;"><%= current_user.name %></span>
+            <%= link_to "修改个人信息", edit_myself_user_path(current_user) %>
+            <%= link_to "登出", logout_path %>
+        <% end %>
+      </div>
+      <div class="headrightbottom">
+        <%= render 'layouts/navigation' %>
+      </div>
+    </div>
 </header>

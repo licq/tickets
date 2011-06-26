@@ -19,4 +19,16 @@ class SpotOperator < User
   belongs_to :spot
   validates_presence_of :role
 
+  def is_spot_user
+    true
+  end
+
+  def is_agent_user
+    false
+  end
+
+  def is_system_user
+    false
+  end
+
 end

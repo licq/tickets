@@ -12,8 +12,8 @@ b, i,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section, summary,
+article, aside, canvas, figcaption, figure,
+footer, header, hgroup, menu, nav, section,
 time, mark, audio, video {
     margin: 0;
     padding: 0;
@@ -286,9 +286,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 2.2em;
-    line-height: 1;
-    margin-bottom: 0.25em;
+    font-size: 14px;
+	height:30px;
+    line-height:30px;
+    margin-bottom: 0px;
+	background:url(../../images/titlebg.jpg) ; color:#fff;
+	font-weight:bold;
+	color:#013358;
 }
 
 h2 {
@@ -464,9 +468,6 @@ form abbr {
     border-bottom: 0;
 }
 
-label {
-    display: block;
-}
 
 .required label {
     font-weight: bold;
@@ -489,10 +490,11 @@ a.cancel {
 
 /* Fieldsets */
 fieldset {
-    background: #f1f1f1;
-    border: 1px solid #e3e3e3;
-    margin: 0 0 1.5em 0;
-    padding: 1.5em 1.5em 1em 1.5em;
+    background: #e0edf5;
+    border: none;
+    margin:5px auto;
+    padding: 0;
+	width:1020px;
 }
 
 fieldset fieldset,
@@ -541,8 +543,8 @@ input[type="time"],
 input[type="url"],
 input[type="week"] {
     font-size: inherit;
-    padding: 3px 2px;
-    width: 300px;
+    padding: 0;
+    width: 200px;
 }
 
 .ie6 input {
@@ -594,7 +596,7 @@ textarea {
 
 /* Select fields */
 fieldset .select select {
-    width: 200px;
+    width: 100px;
     font-size: 0.9em;
 }
 
@@ -626,8 +628,10 @@ form ol li.time label {
 
 /* Tables */
 table {
-    margin-bottom: 2em;
-    width: 100%;
+   
+    width: 98%;
+	margin:5px auto;
+	border:1px solid #cdd1d0;
 }
 
 th {
@@ -641,7 +645,7 @@ td {
 }
 
 caption, th, td {
-    padding: 4px 10px 4px 0;
+    padding: 4px 10px 4px 5px;
 }
 
 caption {
@@ -654,6 +658,9 @@ tr, td, th {
     border: 1px solid #999999;
     vertical-align: middle;
     text-align: center;
+	background:#e0edf5;
+	font-size:12px; 
+	color:#333;
 }
 
 /* Use this if you use span-x classes on th/td. */
@@ -668,7 +675,7 @@ ul, ol {
 }
 
 ul {
-    list-style-type: disc;
+    list-style-type: none;
 }
 
 ol {
@@ -686,7 +693,7 @@ dl dt {
 }
 
 dl dd {
-    margin-bottom: 0em;
+    margin-bottom: 0;
 }
 
 dd {

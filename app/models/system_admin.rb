@@ -20,5 +20,17 @@ class SystemAdmin < User
   def menu_groups
     MenuGroup.includes(:menus).where(:category => 'system')
   end
-  
+
+  def is_spot_user
+    false
+  end
+
+  def is_agent_user
+    false
+  end
+
+  def is_system_user
+    true
+  end
+
 end

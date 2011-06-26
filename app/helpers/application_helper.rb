@@ -176,10 +176,10 @@ module ApplicationHelper
   end
 
   def show_agent_or_spot_name()
-    if current_user && current_user.type == "SpotAdmin"
-      "--#{current_user.spot.name}"
-    elsif current_user && current_user.type == "AgentOperator"
-      "--#{current_user.agent.name}"
+    if current_user && current_user.is_spot_user
+      "#{current_user.spot.name}"
+    elsif current_user && current_user.is_agent_user
+      "#{current_user.agent.name}"
     end
   end
 
