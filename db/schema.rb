@@ -165,8 +165,6 @@ ActiveRecord::Schema.define(:version => 20110622140640) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "disabled",         :default => false, :null => false
-    t.string   "market_contact"
-    t.string   "market_phone"
     t.string   "address"
     t.text     "traffic"
     t.string   "business_contact"
