@@ -1,12 +1,15 @@
 <%= simple_form_for @ticket do |f| %>
-    <div class="inputs">
+    <fieldset class="inputs">
       <%= f.input :name %>
       <%= f.simple_fields_for :public_rates do |rf| %>
-          <div class="right75"> <%= rf.object.season.name %></div>
-          <%= rf.input :adult_price, :as => :integer %>
-          <%= rf.input :child_price, :as => :integer %>
+          <div class="right75" style="font-size:16px; font-weight:bold;"> <%= rf.object.season.name %></div>
+          <%= rf.input :adult_price, :as => :integer ,:required => true %>
+          <%= rf.input :child_price, :as => :integer ,:required => true%>
           <%= rf.input :season_id, :as => :hidden %>
       <% end %>
-    </div>
-    <p><%= f.submit %></p>
+    </fieldset>
+
+    <fieldset class="buttons">
+      <%= f.button :submit %>
+    </fieldset>
 <% end %>

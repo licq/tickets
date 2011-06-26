@@ -140,8 +140,9 @@ function set_datepicker() {
         changeYear: true,
         changeMonth: true,
         onClose: function(dateText, inst) {
-            $(this).siblings(".end_datepicker").datepicker("option", "minDate", dateText);
-            $(this).siblings(".end_datepicker").datepicker("show");
+            var end_date_picker = $(this).parent().next().children(".end_datepicker");
+            end_date_picker.datepicker("option", "minDate", dateText);
+            end_date_picker.datepicker("show");
         }
     });
 
@@ -158,19 +159,16 @@ function set_datepicker() {
         minDate: new Date(),
         changeYear: true ,
         changeMonth: true
-    }
-            );
+    });
     $(".maxdate_datepicker").datepicker({
         maxDate: new Date(),
         changeYear: true ,
         changeMonth: true
-    }
-            );
+    });
     $(".reservation_datepicker").datepicker({
         changeYear: true ,
         changeMonth: true
-    }
-            );
+    });
 }
 
 function remove_field(link) {

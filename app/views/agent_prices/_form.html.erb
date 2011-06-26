@@ -1,32 +1,33 @@
 <%= simple_form_for @agent_price do |f| %>
-    <%= f.input :name %><br/>
-    <th>散客价</th> <br/>
-    <%= f.simple_fields_for :individual_rates do |ir| %>
-        <th><%= ir.object.ticket.name %>(门市价:
-          成人价 <%= ir.object.ticket.public_rate_for(ir.object.season.name).adult_price %>
-          儿童价 <%= ir.object.ticket.public_rate_for(ir.object.season.name).child_price %>)
-        <th>
-        <th><%= ir.object.season.name %><th>
+    <fieldset class="inputs">
+      <%= f.input :name %>
+      <div class="string required right75" style="font-weight:bold;font-size:16px;">散客价</div>
+      <%= f.simple_fields_for :individual_rates do |ir| %>
+          <div class="string required right75" style="font-weight:bold;"><%= ir.object.ticket.name %>--<%= ir.object.season.name %>
+            (门市价: 成人价 <%= ir.object.ticket.public_rate_for(ir.object.season.name).adult_price %>
+            儿童价 <%= ir.object.ticket.public_rate_for(ir.object.season.name).child_price %>)
+          </div>
 
-        <th><%= ir.input :adult_purchase_price, :as => :integer, :input_html => {:size =>"10"} %> </th>
-        <th><%= ir.input :adult_sale_price, :as => :integer %> </th>
-        <th><%= ir.input :child_purchase_price, :as => :integer %>  </th>
-        <th><%= ir.input :child_sale_price, :as => :integer %>  </th>
-        <th><%= ir.input :season_id, :as => :hidden %>  </th>
-        <th><%= ir.input :ticket_id, :as => :hidden %>  </th>
-    <% end %>
-    <th>团队价</th> <br/>
-    <%= f.simple_fields_for :team_rates do |rf| %>
-        <th><%= rf.object.ticket.name %>(门市价:
-          成人价 <%= rf.object.ticket.public_rate_for(rf.object.season.name).adult_price %>
-          儿童价 <%= rf.object.ticket.public_rate_for(rf.object.season.name).child_price %>)
-        <th>
-        <th><%= rf.object.season.name %><th>
-
-        <th><%= rf.input :adult_price, :as => :integer %> </th>
-        <th><%= rf.input :child_price, :as => :integer %> </th>
-        <th><%= rf.input :season_id, :as => :hidden %>  </th>
-        <th><%= rf.input :ticket_id, :as => :hidden %>  </th>
-    <% end %>
-    <p><%= f.submit %></p>
+          <%= ir.input :adult_sale_price, :as => :integer %>
+          <%= ir.input :adult_purchase_price, :as => :integer, :input_html => {:size =>"10"} %>
+          <%= ir.input :child_sale_price, :as => :integer %>
+          <%= ir.input :child_purchase_price, :as => :integer %>
+          <%= ir.input :season_id, :as => :hidden %>
+          <%= ir.input :ticket_id, :as => :hidden %>
+      <% end %>
+      <div class="string required right75" style="font-weight:bold;font-size:16px;">团队价</div>
+      <%= f.simple_fields_for :team_rates do |rf| %>
+          <div class="string required right75" style="font-weight:bold;"><%= rf.object.ticket.name %>--<%= rf.object.season.name %>
+            (门市价: 成人价 <%= rf.object.ticket.public_rate_for(rf.object.season.name).adult_price %>
+            儿童价 <%= rf.object.ticket.public_rate_for(rf.object.season.name).child_price %>)
+          </div>
+          <%= rf.input :adult_price, :as => :integer %>
+          <%= rf.input :child_price, :as => :integer %>
+          <%= rf.input :season_id, :as => :hidden %>
+          <%= rf.input :ticket_id, :as => :hidden %>
+      <% end %>
+    </fieldset>
+    <fieldset class="buttons">
+      <%= f.button :submit %>
+    </fieldset>
 <% end %>

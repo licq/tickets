@@ -1,25 +1,31 @@
 <% title "门票及门市价" %>
 
+<table class="formtable01">
+  <tr class="formtable01">
+    <td class="formtable01" style="text-align:right; ">
+      <%= button_to "新建门票及门市价", new_ticket_path, {:class=> "btn", :style=>"float:none;", :method => :get} %></td>
+  </tr>
+</table>
+
 <table>
   <tr>
     <th>名称</th>
     <% for season in @spot.seasons %>
         <th><%= season.name %></th>
     <% end %>
-    <th colspan="2">操作</th>
+    <th>操作</th>
   </tr>
   <% for ticket in @tickets %>
-      <tr>
+      <tr class=<%= cycle("trwrite", "trgray") %>>
         <td><%= ticket.name %></td>
         <% for season in @spot.seasons %>
             <td>
               <%= raw(show_public_rate(ticket.public_rate_for(season.name))) %>
             </td>
         <% end %>
-        <td><%= link_to "修改", edit_ticket_path(ticket) %></td>
-        <td><%= link_to "删除", ticket, :confirm => '你确认删除吗?', :method => :delete %></td>
+        <td><%= link_to "修改", edit_ticket_path(ticket) %>
+          <%= link_to "删除", ticket, :confirm => '你确认删除吗?', :method => :delete %></td>
       </tr>
   <% end %>
 </table>
 
-<p><%= link_to "新建门票及门市价", new_ticket_path %></p>

@@ -1,37 +1,43 @@
 <% title "旅行社" %>
 
-<p>
-  <strong>名称:</strong>
-  <%= @agent.name %>
-</p>
-<p>
-  <strong>地址:</strong>
-  <%= @agent.address %>
-</p>
-<p>
-  <strong>描述:</strong>
-  <%= @agent.description %>
-</p>
-<p>
-  <strong>状态:</strong>
-  <%= show_disabled(@agent.disabled?) %>
-</p>
-<p>
-  <strong>市场部联系人:</strong>
-  <%= @agent.business_contact %>
-</p>
-<p>
-  <strong>市场部联系方式:</strong>
-  <%= @agent.business_phone %>
-</p>
-<p>
-  <strong>财务部联系人:</strong>
-  <%= @agent.finance_contact %>
-</p>
-<p>
-  <strong>财务部联系方式:</strong>
-  <%= @agent.finance_phone %>
-</p>
-<p>
-  <%= link_to "返回", "#", :onclick => "history.back(); return false;" %>
-</p>
+<table class="newtable">
+  <tr>
+    <td class="textright">景区名称</td>
+    <td class="textleft"><%= @agent.name %> </td>
+    <td class="textright">状态</td>
+    <td class="textleft"><%= show_disabled @agent.disabled? %></td>
+  </tr>
+
+  <tr>
+    <td class="textright">市场部联系人</td>
+    <td class="textleft"><%= @agent.business_contact %></td>
+    <td class="textright">市场部联系方式</td>
+    <td class="textleft"><%= @agent.business_phone %></td>
+  </tr>
+
+  <tr>
+    <td class="textright">财务部联系人</td>
+    <td class="textleft"><%= @agent.finance_contact %></td>
+    <td class="textright">财务部联系方式</td>
+    <td class="textleft"><%= @agent.finance_phone %></td>
+  </tr>
+
+  <tr>
+    <td class="textright">地址</td>
+    <td class="textleft" colspan="3"><%= @agent.address %></td>
+  </tr>
+
+  <tr>
+    <td class="textright">描述</td>
+    <td class="textleft" colspan="3"> <%= @agent.description %></td>
+  </tr>
+
+</table>
+
+<table class="formtable01">
+  <tr class="formtable01">
+    <td class="formtable01" style="text-align:center; ">
+      <%= button_to "返回", "#", :onclick => "history.back(); return false;" %>
+    </td>
+  </tr>
+</table>

@@ -14,7 +14,7 @@ class AgentPricesController < ApplicationController
 
   def new
     @agent_price = @spot.agent_prices.build
-    @spot.seasons.product(@spot.tickets) do |s, t|
+    @spot.tickets.product(@spot.seasons) do |t, s|
       @agent_price.team_rates << @agent_price.team_rates.build(:season => s, :ticket => t)
       @agent_price.individual_rates << @agent_price.individual_rates.build(:season => s, :ticket => t)
     end

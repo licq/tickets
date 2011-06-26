@@ -1,13 +1,20 @@
 <% title "淡旺季" %>
 
+<table class="formtable01">
+  <tr class="formtable01">
+    <td class="formtable01" style="text-align:right; ">
+      <%= button_to "新建淡旺季", new_season_path, {:class=> "btn", :style=>"float:none;", :method => :get} %></td>
+  </tr>
+</table>
+
 <table>
   <tr>
     <th width="20%">名称</th>
     <th width="50%">时间段</th>
-    <th width="30%" colspan="3">操作</th>
+    <th width="30%">操作</th>
   </tr>
   <% for season in @seasons %>
-      <tr>
+      <tr class=<%= cycle("trwrite", "trgray") %>>
         <td><%= season.name %></td>
         <td>
           <% season.timespans.each do |timespan| %>
@@ -15,11 +22,12 @@
               <br/>
           <% end %>
         </td>
-        <td><%= link_to "修改", edit_season_path(season) %></td>
-        <td><%= link_to "删除", season, :confirm => '你确认删除吗?', :method => :delete %></td>
+        <td><%= link_to "修改", edit_season_path(season) %>
+          <%= link_to "删除", season, :confirm => '你确认删除吗?', :method => :delete %>
+        </td>
       </tr>
   <% end %>
 </table>
 
-<%= link_to "新建淡旺季", new_season_path %>
+
 

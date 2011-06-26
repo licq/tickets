@@ -2,14 +2,27 @@
 <div id="search">
   <%= simple_form_for @search, :url =>spot_agents_path do |f| %>
       <fieldset class="inputs">
-        <%= f.input :name_contains, :label => "旅行社名称", :required => false %>
-      </fieldset>
-      <fieldset class="buttons">
-        <%= f.button :submit, :value => "查询" %>
+        <table style="border:none;">
+          <tr style="border:none;">
+            <td> <%= f.input :name_contains, :label => "旅行社名称", :required => false %></td>
+            <td></td>
+            <td>
+              <fieldset class="buttons">
+                <%= f.button :submit, :value => "查询" %>
+              </fieldset>
+            </td>
+          </tr>
+        </table>
       </fieldset>
   <% end %>
 </div>
-共找到<%= @agents.total_count %>条记录
+
+<table class="formtable">
+  <tr class="formtable">
+    <td class="formtable">共找到<%= @agents.total_count %>条记录</td>
+  </tr>
+</table>
+
 <%= paginate @agents %>
 
 <table>
@@ -21,10 +34,10 @@
     <th>财务部联系人</th>
     <th>操作员姓名</th>
     <th>状态</th>
-    <th colspan="2">操作</th>
+    <th>操作</th>
   </tr>
   <% for agent in @agents %>
-      <tr>
+      <tr class=<%= cycle("trwrite", "trgray") %>>
         <td><%= link_to agent.name, spot_agent_path(agent) %></td>
         <td><%= agent.business_contact %></td>
         <td><%= agent.business_phone %></td>

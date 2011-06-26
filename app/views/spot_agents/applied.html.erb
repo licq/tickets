@@ -2,16 +2,29 @@
 <div id="search">
   <%= simple_form_for @search, :url =>applied_spot_agents_path do |f| %>
       <fieldset class="inputs">
-        <%= f.input :name_contains, :label => "旅行社名称", :required => false %>
-      </fieldset>
-      <fieldset class="buttons">
-        <%= f.button :submit, :value => "查询" %>
+        <table style="border:none;">
+          <tr style="border:none;">
+            <td>
+              <%= f.input :name_contains, :label => "旅行社名称", :required => false %>
+            </td>
+            <td></td>
+            <td>
+              <fieldset class="buttons">
+                <%= f.button :submit, :value => "查询" %>
+              </fieldset>
+            </td>
+          </tr>
+        </table>
       </fieldset>
   <% end %>
 </div>
-共找到<%= @agents.total_count %>条记录
-<%= paginate @agents %>
 
+<table class="formtable">
+  <tr class="formtable">
+    <td class="formtable">共找到<%= @agents.total_count %>条记录</td>
+  </tr>
+</table>
+<%= paginate @agents %>
 
 <table>
   <tr>
@@ -20,17 +33,19 @@
     <th>市场部联系方式</th>
     <th>财务部联系人</th>
     <th>财务部联系人</th>
-    <th colspan="2">操作</th>
+    <th>操作</th>
   </tr>
   <% for agent in @agents %>
-      <tr>
+      <tr class=<%= cycle("trwrite", "trgray") %>>
         <td><%= link_to agent.name, spot_agent_path(agent) %></td>
         <td><%= agent.business_contact %></td>
         <td><%= agent.business_phone %></td>
         <td><%= agent.finance_contact %></td>
         <td><%= agent.finance_phone %></td>
-        <td><%= link_to "接受", edit_accept_rfp_path(agent) %></td>
-        <td><%= link_to "拒绝", reject_rfp_path(agent), :confirm => '你确认拒绝吗?', :method => :put %></td>
+        <td>
+          <%= link_to "接受", edit_accept_rfp_path(agent) %>
+          <%= link_to "拒绝", reject_rfp_path(agent), :confirm => '你确认拒绝吗?', :method => :put %>
+        </td>
       </tr>
   <% end %>
 </table>
