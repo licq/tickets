@@ -15,7 +15,7 @@
     <th>预定日期</th>
   </tr>
   <% for reservation in @reservations %>
-      <tr id="reservation<%= reservation.id %>_row">
+      <tr id="reservation<%= reservation.id %>_row" class=<%= cycle("trwrite","trgray")%>>
         <td><%= reservation.no %></td>
         <td><%= reservation.ticket_name %></td>
         <td> <%= reservation.date %>  </td>

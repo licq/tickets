@@ -2,17 +2,33 @@
 <div id="search">
   <%= simple_form_for @search do |f| %>
       <fieldset class="inputs">
-        <%= f.input :name_contains, :label => "旅行社名称", :required => false %>
-        <%= f.input :disabled_eq, :collection => [[false, "正常"], [true, "已禁用"]],
-                    :label_method => :last, :value_method => :first,
-                    :as => :select, :label => "状态", :required => false, :include_blank => false %>
+        <table style="border:none;">
+          <tr style="border:none;">
+            <td class="searchtabletr"><%= f.input :name_contains, :label => "旅行社名称", :required => false %> </td>
+            <td class="searchtabletr"><%= f.input :disabled_eq, :collection => [[false, "正常"], [true, "已禁用"]],
+                                                  :label_method => :last, :value_method => :first,
+                                                  :as => :select, :label => "状态", :required => false, :include_blank => false %></td>
+            <td style="border:none; text-align:left;"><%= f.button :submit, :value => "查询", :class=> "btn01" %></td>
+          </tr>
+        </table>
       </fieldset>
-      <fieldset class="buttons">
-        <%= f.button :submit, :value => "查询" %>
-      </fieldset>
+
   <% end %>
 </div>
-共找到<%= @agents.total_count %>条记录
+
+<table class="formtable01">
+  <tr class="formtable01">
+    <td class="formtable01" style="text-align:right; ">
+      <%= button_to "新建旅行社", new_agent_path, {:class=> "btn", :style=>"float:none;", :method => :get} %></td>
+  </tr>
+</table>
+
+<table class="formtable">
+  <tr class="formtable">
+    <td class="formtable">共找到<%= @agents.total_count %>条记录</td>
+  </tr>
+</table>
+
 <%= paginate @agents %>
 
 <table>
@@ -27,23 +43,23 @@
     <th colspan="3">操作</th>
   </tr>
   <% for agent in @agents %>
-    <tr>
-      <td><%= agent.name %></td>
-      <td><%= agent.business_contact %></td>
-      <td><%= agent.business_phone %></td>
-      <td><%= agent.finance_contact %></td>
-      <td><%= agent.finance_phone %></td>
-      <td><%= agent.admin.name %></td>
-      <td><%=show_disabled agent.disabled %></td>
-      <td><%= link_to "查看", agent %></td>
-      <td><%= link_to "修改", edit_agent_path(agent) %></td>
-       <% if agent.disabled? %>
-            <td><%= link_to "启用", enable_agent_path(agent), :method => :put, :remote=> true %></td>
-        <% else %>
-            <td><%= link_to "禁用", disable_agent_path(agent), :method => :put, :remote => true %></td>
-        <% end %>
-    </tr>
+      <tr class=<%= cycle("trwrite", "trgray") %>>
+        <td><%= agent.name %></td>
+        <td><%= agent.business_contact %></td>
+        <td><%= agent.business_phone %></td>
+        <td><%= agent.finance_contact %></td>
+        <td><%= agent.finance_phone %></td>
+        <td><%= agent.admin.name %></td>
+        <td><%= show_disabled agent.disabled %></td>
+        <td colspan="3"><%= link_to "查看", agent %>
+          <%= link_to "修改", edit_agent_path(agent) %>
+          <% if agent.disabled? %>
+              <%= link_to "启用", enable_agent_path(agent), :method => :put, :remote=> true %>
+          <% else %>
+              <%= link_to "禁用", disable_agent_path(agent), :method => :put, :remote => true %>
+          <% end %>
+        </td>
+      </tr>
   <% end %>
 </table>
 
-<p><%= link_to "新建旅行社", new_agent_path %></p>

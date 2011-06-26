@@ -353,6 +353,25 @@ table.new_reservation_table {
     color: #333;
 }
 
+.formtable01 input[type="submit"] {
+    width: 108px;
+    height: 29px;
+    line-height: 29px;
+    margin-left: 10px;
+    background: url(../images/btnbg.jpg) no-repeat;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    float: none;
+}
+
+fieldset.inputs td {
+    border: none;
+    width: 400px;
+}
+
 .searchtabletr {
     border: none;
     width: 300px;
@@ -528,6 +547,21 @@ div.empty_home {
     font-weight: bold;
     border: none;
     cursor: pointer;
+}
+
+fieldset.inputs .buttons input[type="submit"] {
+    width: 40px;
+    line-height: 22px;
+    height: 22px;
+    border: none;
+    background: #0eb3e3;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+fieldset.inputs fieldset.buttons{
+    width: 400px;
 }
 
 

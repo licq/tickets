@@ -3,16 +3,26 @@
 <div id="search">
   <%= form_tag agent_purchases_path, :method => :get do %>
       <fieldset class="inputs">
-        <label for="agent_name">景区名称</label>
-        <%= text_field_tag :spot_name, params[:spot_name] %>
-        <label for="agent_name">旅行社名称</label>
-        <%= text_field_tag :agent_name, params[:agent_name] %>
-        <label for="date">入园截止日期</label>
-        <%= text_field_tag :date, params[:date], :class=>"maxdate_datepicker" %>
+        <table style="border:none;">
+          <tr style="border:none;">
+            <td><label for="agent_name">景区名称</label>
+              <%= text_field_tag :spot_name, params[:spot_name] %></td>
+            <td><label for="agent_name">旅行社名称</label>
+              <%= text_field_tag :agent_name, params[:agent_name] %></td>
+            <td rowspan="2">
+              <fieldset class="buttons">
+                <%= submit_tag "查询" %>
+              </fieldset>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="date">入园截止日期</label>
+              <%= text_field_tag :date, params[:date], :class=>"maxdate_datepicker" %></td>
+            <td></td>
+          </tr>
+        </table>
       </fieldset>
-      <fieldset class="buttons">
-        <%= submit_tag "查询" %>
-      </fieldset>
+
   <% end %>
 </div>
 
@@ -28,15 +38,15 @@
     <th>操作</th>
   </tr>
   <% for item in @table %>
-      <tr>
-        <td><%= item.spot_name%></td>
-        <td><%= item.agent_name%></td>
+      <tr class=<%= cycle("trwrite","trgray")%>>
+        <td><%= item.spot_name %></td>
+        <td><%= item.agent_name %></td>
         <td><%= show_reservation_type_with(item.type) %></td>
         <td><%= show_payment_method(item.payment_method) %>  </td>
         <td><%= item.count_sum %></td>
         <td><%= show_in_or_out_for_agent(item) %> </td>
         <td><%= item.price_sum %></td>
-        <td><%= link_to "查看", reservations_all_purchases_path(:spot_id => item.spot_id,:agent_id => item.agent_id, :type => item.type, :payment_method => item.payment_method, :date => @date, :spot_name => @spot_name, :agent_name=> @agent_name) %></td>
+        <td><%= link_to "查看", reservations_all_purchases_path(:spot_id => item.spot_id, :agent_id => item.agent_id, :type => item.type, :payment_method => item.payment_method, :date => @date, :spot_name => @spot_name, :agent_name=> @agent_name) %></td>
       </tr>
   <% end %>
 </table>

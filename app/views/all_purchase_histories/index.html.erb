@@ -15,7 +15,7 @@
     <th>操作</th>
   </tr>
   <% for history in @purchase_histories %>
-      <tr id="history<%= history.id %>_row">
+      <tr id="history<%= history.id %>_row" class=<%= cycle("trwrite","trgray")%>>
         <td><%= history.spot.name %>  </td>
         <td><%= history.agent.name %>  </td>
         <td><%= history.ticket_type %></td>
