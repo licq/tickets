@@ -12,10 +12,6 @@ class AgentRfpsController < ApplicationController
     end
   end
 
-  def new
-    @rfp = @agent.rfps.new
-  end
-
 
   def create
     respond_to do |format|

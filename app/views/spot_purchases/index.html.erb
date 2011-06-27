@@ -3,13 +3,21 @@
 <div id="search">
   <%= form_tag spot_purchases_path, :method => :get do %>
       <fieldset class="inputs">
-        <label for="agent_name">旅行社名称</label>
-        <%= text_field_tag :agent_name, params[:agent_name] %>
-        <label for="date">入园截止日期</label>
-        <%= text_field_tag :date, params[:date], :class=>"maxdate_datepicker" %>
-      </fieldset>
-      <fieldset class="buttons">
-        <%= submit_tag "查询" %>
+        <table style="border:none;">
+          <tr style="border:none;">
+            <td>旅行社名称
+              <%= text_field_tag :agent_name, params[:agent_name] %>
+            </td>
+            <td>入园截止日期
+              <%= text_field_tag :date, params[:date], :class=>"maxdate_datepicker" %>
+            </td>
+            <td>
+              <fieldset class="buttons">
+                <%= submit_tag "查询" %>
+              </fieldset>
+            </td>
+          </tr>
+        </table>
       </fieldset>
   <% end %>
 </div>
@@ -25,8 +33,8 @@
     <th>操作</th>
   </tr>
   <% for item in @table %>
-      <tr>
-        <td><%= item.agent_name%></td>
+      <tr class=<%= cycle("trwrite","trgray") %>>
+        <td><%= item.agent_name %></td>
         <td><%= show_reservation_type_with(item.type) %></td>
         <td><%= show_payment_method(item.payment_method) %>  </td>
         <td><%= item.count_sum %></td>

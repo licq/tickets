@@ -561,8 +561,8 @@ fieldset.inputs .buttons input[type="submit"] {
     cursor: pointer;
 }
 
-fieldset.inputs fieldset.buttons{
-    width: 400px;
+fieldset.buttons{
+    width: 100px;
 }
 
 

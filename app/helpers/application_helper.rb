@@ -184,7 +184,7 @@ module ApplicationHelper
   end
 
   def show_in_or_out_for_spot(item)
-    if(item.payment_method == 'poa' && item.type == "IndividualReservation")
+    if (item.payment_method == 'poa' && item.type == "IndividualReservation")
       '应付'
     else
       '应收'
@@ -192,7 +192,7 @@ module ApplicationHelper
   end
 
   def show_in_or_out_for_agent(item)
-    if(item.payment_method == 'poa' && item.type == "IndividualReservation")
+    if (item.payment_method == 'poa' && item.type == "IndividualReservation")
       '应收'
     else
       '应付'
@@ -200,7 +200,11 @@ module ApplicationHelper
   end
 
   def button_to_link(value, action, options)
-    content_tag(:input,nil,{:type => :button, :value => value,:onclick=>"window.location=\"#{action}\""}.merge(options)  )
+    content_tag(:input, nil, {:type => :button, :value => value, :onclick=>"window.location=\"#{action}\""}.merge(options))
+  end
+
+  def button_to_new_window(value, action, options)
+    content_tag(:input, nil, {:type => :button, :value => value, :onclick=>"window.open(\"#{action}\")"}.merge(options))
   end
 
 end

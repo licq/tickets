@@ -1,23 +1,27 @@
 <% title "用户" %>
 
-<p>
-  <strong>用户名:</strong>
-  <%= @user.username %>
-</p>
-<p>
-  <strong>姓名:</strong>
-  <%= @user.name %>
-</p>
-<p>
-  <strong>用户角色:</strong>
-  <%= @user.role.name %>
-</p>
-<p>
-  <strong>邮箱:</strong>
-   <%= @user.email %>
-</p>
+<% title "用户" %>
 
-<p>
-  <%= link_to "修改", edit_agent_user_path(@user) %> |
-  <%= link_to "用户列表", agent_users_path %>|
-</p>
+<table class="newtable">
+  <tr>
+    <td class="textright">用户名</td>
+    <td class="textleft"><%= @user.username %> </td>
+    <td class="textright">姓名</td>
+    <td class="textleft"><%= @user.name %></td>
+  </tr>
+  <tr>
+    <td class="textright">用户角色</td>
+    <td class="textleft"><%= @user.role.name %> </td>
+    <td class="textright">邮箱</td>
+    <td class="textleft"><%= @user.email %></td>
+  </tr>
+</table>
+
+<table class="formtable01">
+  <tr class="formtable01">
+    <td class="formtable01" style="text-align:center; ">
+      <%= button_to "修改", edit_agent_user_path(@user), {:class=> "btn", :style=> "float:none;", :method => :get} %>
+      <%= button_to "用户列表", agent_users_path , {:class=> "btn", :style=> "float:none;", :method => :get}%>
+    </td>
+  </tr>
+</table>

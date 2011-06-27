@@ -1,24 +1,29 @@
-<%= f.input :spot_id, :as => :hidden %>
-<%= f.input :ticket_name, :as => :hidden %>
-<%= f.input :child_price, :as => :hidden %>
-<%= f.input :adult_price, :as => :hidden %>
-<%= f.input :payment_method, :as => :hidden %>
-<%= f.input :date, :as => :hidden %>
-<div class="right75">景区 <%= f.object.spot.name %></div>
-<div class="right75">门票 <%= f.object.ticket_name %></div>
-<div class="right75">入园日期 <%= f.object.date %></div>
-<div class="right75">成人价 <%= f.object.adult_price %></div>
-<% unless f.object.child_price.nil? %>
-    <div class="right75">儿童价 <%= f.object.child_price %></div>
-<% end %>
-<%= f.input :adult_ticket_number, :as => :integer %>
-<% unless f.object.child_price.nil? %>
-    <%= f.input :child_ticket_number, :as => :integer %>
-<% end %>
-总价
-<div id="total_price_text"><%= f.object.total_price %></div>
-<%= f.input :group_no %>
-<%= f.input :contact %>
-<%= f.input :phone %>
-<div class="right75">支付方式 <%= show_reservation_payment_method(@reservation) %></div>
-<%= f.submit (f.object.new_record? ? "预订" : "修改")%>
+<fieldset class="inputs">
+  <%= f.input :spot_id, :as => :hidden %>
+  <%= f.input :ticket_name, :as => :hidden %>
+  <%= f.input :child_price, :as => :hidden %>
+  <%= f.input :adult_price, :as => :hidden %>
+  <%= f.input :payment_method, :as => :hidden %>
+  <%= f.input :date, :as => :hidden %>
+  <div class="input string required"><label>景区</label><%= f.object.spot.name %></div>
+  <div class="input string required"><label>门票</label> <%= f.object.ticket_name %></div>
+  <div class="input string required"><label>入园日期</label><%= f.object.date %></div>
+  <div class="input string required"><label>成人价</label><%= f.object.adult_price %></div>
+  <% unless f.object.child_price.nil? %>
+      <div class="input string required"><label>儿童价</label> <%= f.object.child_price %></div>
+  <% end %>
+  <%= f.input :adult_ticket_number, :as => :integer, :required => true %>
+  <% unless f.object.child_price.nil? %>
+      <%= f.input :child_ticket_number, :as => :integer, :required => true %>
+  <% end %>
+  <div class="input string required"><label>总价</label>
+    <span id="total_price_text"><%= f.object.total_price %></span>
+  </div>
+  <%= f.input :group_no %>
+  <%= f.input :contact %>
+  <%= f.input :phone %>
+  <div class="input string required"><label>支付方式</label> <%= show_reservation_payment_method(@reservation) %></div>
+</fieldset>
+<fieldset class="buttons">
+  <%= f.button :submit, (f.object.new_record? ? "预订" : "修改") %>
+</fieldset>

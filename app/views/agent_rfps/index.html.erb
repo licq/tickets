@@ -3,15 +3,34 @@
 <div id="search">
   <%= simple_form_for @search do |f| %>
       <fieldset class="inputs">
-        <%= f.input :spot_name_contains, :label => "景区名称", :required => false %>
-        <%= f.input :spot_cities_name_contains, :label => "城市名", :required => false %>
-      </fieldset>
-      <fieldset class="buttons">
-        <%= f.button :submit, :value => "查询" %>
+        <table style="border:none;">
+          <tr style="border:none;">
+            <td><%= f.input :spot_name_contains, :label => "景区名称", :required => false %></td>
+            <td><%= f.input :spot_cities_name_contains, :label => "城市名", :required => false %></td>
+            <td>
+              <fieldset class="buttons">
+                <%= f.button :submit, :value => "查询" %>
+              </fieldset>
+            </td>
+          </tr>
+        </table>
       </fieldset>
   <% end %>
 </div>
-共找到<%= @rfps.total_count %>条记录
+
+<table class="formtable01">
+  <tr class="formtable01">
+    <td class="formtable01" style="text-align:right; ">
+      <%= button_to "查询未开通预订景区", agent_spots_path, {:class=> "btn", :style=>"float:none;", :method => :get} %></td>
+  </tr>
+</table>
+
+<table class="formtable">
+  <tr class="formtable">
+    <td class="formtable">共找到<%= @rfps.total_count %>条记录</td>
+  </tr>
+</table>
+
 <%= paginate @rfps %>
 
 <table>
@@ -25,10 +44,10 @@
     <th>财务联系方式</th>
     <th>散客票支付方式</th>
     <th>团队票支付方式</th>
-    <th colspan="2">操作</th>
+    <th>操作</th>
   </tr>
   <% for rfp in @rfps %>
-      <tr>
+      <tr class=<%= cycle("trwrite", "trgray") %>>
         <td><%= link_to rfp.spot.name, agent_spot_path(rfp.spot) %></td>
         <td><%= rfp.spot.code %></td>
         <td> <%= rfp.spot.city_names %>  </td>
@@ -43,5 +62,3 @@
   <% end %>
 </table>
 
-
-<p><%= link_to "查询未开通预订景区", agent_spots_path %></p>

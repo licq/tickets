@@ -7,16 +7,21 @@
         <td>去年当月订单总数(同比)</td>
         <td>去年当月总价(同比)</td>
     </tr>
-    <tr>
+    <tr class="<%= cycle("trwrite","trgray") %>">
         <td><%= @table.count_sum %></td>
-        <td><%= @table.price_sum %></td>
+        <td><%= @table.price_sum.to_i %></td>
         <td><%= @prev_month_table.count_sum%>(<%= @prev_month_count_rate %>)</td>
-        <td><%= @prev_month_table.price_sum%>(<%= @prev_month_price_rate %>)</td>
+        <td><%= @prev_month_table.price_sum.to_i%>(<%= @prev_month_price_rate %>)</td>
         <td><%= @prev_year_table.count_sum %>(<%= @prev_year_count_rate %>)</td>
-        <td><%= @prev_year_table.price_sum %>(<%= @prev_year_price_rate %>)</td>
+        <td><%= @prev_year_table.price_sum.to_i %>(<%= @prev_year_price_rate %>)</td>
     </tr>
 </table>
-
-<p id = "pdf_link" > <%= link_to "PDF下载", reports_spot_output_rate_path(:format => "pdf",:type => params[:type],
-:year => params[:year],:month => params[:month],:day => params[:day],:week => params[:week]),{"data-popup" => true}  %></p>
+<table class="formtable01" >
+        <tr class="formtable01">
+            <td class="formtable01" style="text-align:center; ">
+            <%= button_to_new_window "PDF下载", reports_spot_output_rate_path(:format => "pdf",:type => params[:type],
+              :year => params[:year],:month => params[:month],:day => params[:day],:week => params[:week]),{:class => "btn", :style=> "float:none;"}  %>
+            </td>
+        </tr>
+</table>
 

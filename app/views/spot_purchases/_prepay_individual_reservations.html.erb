@@ -16,7 +16,7 @@
     <th>预定日期</th>
   </tr>
   <% for reservation in @reservations %>
-      <tr id="reservation<%= reservation.id %>_row">
+      <tr id="reservation<%= reservation.id %>_row" class=<%= cycle("trwrite", "trgray") %>>
         <td><%= check_box_tag 'reservation_ids[]', reservation.id %></td>
         <td><%= reservation.no %></td>
         <td><%= reservation.ticket_name %></td>
@@ -34,5 +34,17 @@
       </tr>
   <% end %>
 </table>
-<%= submit_tag "设置为已结算", :confirm => "确认要将选择的订单设置为已结算吗？" %>
-<input type="button" id="generate_purchase_report_button" value="生成对帐单"/>
+
+<div style="margin-top:5px;margin-left:10px;">
+  <label>总价</label><span id="total_price" style="margin-left:5px;">0</span>
+</div>
+
+<table class="formtable01">
+  <tr class="formtable01">
+    <td class="formtable01" style="text-align:center; ">
+      <%= submit_tag "设置为已结算", :confirm => "确认要将选择的订单设置为已结算吗？" %>
+      <input type="button" id="generate_purchase_report_button" value="生成对帐单" class="btn" style="float:none;"/>
+      <input type="button" value="返回" onclick = "history.back(); return false;" class="btn" style="float:none;">
+    </td>
+  </tr>
+</table>

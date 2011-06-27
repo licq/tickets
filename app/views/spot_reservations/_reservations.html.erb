@@ -1,4 +1,8 @@
-共找到<%= @reservations.total_count %>条记录
+<table class="formtable">
+  <tr class="formtable">
+    <td class="formtable">共找到<%= @reservations.total_count %>条记录</td>
+  </tr>
+</table>
 <%= paginate @reservations %>
 <table>
   <tr>
@@ -19,7 +23,7 @@
     <th>操作</th>
   </tr>
   <% for reservation in @reservations %>
-      <tr id="reservation<%= reservation.id %>_row">
+      <tr id="reservation<%= reservation.id %>_row" class=<%= cycle("trwrite", "trgray") %>>
 
         <td><%= reservation.no %></td>
         <td><%= reservation.agent.name %></td>
@@ -38,4 +42,4 @@
         <td><%= link_to "入园", edit_spot_reservation_path(reservation) %></td>
       </tr>
   <% end %>
-  </table>
+</table>

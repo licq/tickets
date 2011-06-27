@@ -2,15 +2,28 @@
 <div id="search">
   <%= simple_form_for @search, :url =>agent_spots_path do |f| %>
       <fieldset class="inputs">
-        <%= f.input :name_contains, :label => "景区名称", :required => false %>
-        <%= f.input :cities_name_contains, :label => "城市名", :required => false %>
-      </fieldset>
-      <fieldset class="buttons">
-        <%= f.button :submit, :value => "查询" %>
+        <table style="border:none;">
+          <tr style="border:none;">
+            <td><%= f.input :name_contains, :label => "景区名称", :required => false %></td>
+            <td><%= f.input :cities_name_contains, :label => "城市名", :required => false %></td>
+            <td>
+              <fieldset class="buttons">
+                <%= f.button :submit, :value => "查询" %>
+              </fieldset>
+            </td>
+          </tr>
+        </table>
       </fieldset>
   <% end %>
 </div>
-共找到<%= @spots.total_count %>条记录
+
+<table class="formtable">
+  <tr class="formtable">
+    <td class="formtable">共找到<%= @spots.total_count %>条记录</td>
+  </tr>
+</table>
+
+
 <%= paginate @spots %>
 <table>
   <tr>
@@ -21,10 +34,10 @@
     <th>市场联系方式</th>
     <th>财务联系人</th>
     <th>财务联系方式</th>
-    <th colspan="2">操作</th>
+    <th>操作</th>
   </tr>
   <% for spot in @spots %>
-      <tr id="spot<%= spot.id %>_row">
+      <tr id="spot<%= spot.id %>_row" class=<%= cycle("trwrite", "trgray") %>>
         <td><%= link_to spot.name, agent_spot_path(spot) %></td>
         <td><%= spot.code %></td>
         <td> <%= spot.city_names %>  </td>

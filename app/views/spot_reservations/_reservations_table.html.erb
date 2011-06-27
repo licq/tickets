@@ -20,7 +20,7 @@
     <th>结算状态</th>
   </tr>
   <% for reservation in reservations %>
-      <tr id="reservation<%= reservation.id %>_row">
+      <tr id="reservation<%= reservation.id %>_row" class=<%= cycle("trwrite","trgray") %>>
         <td><%= link_to reservation.no, spot_reservation_path(reservation) %></td>
         <td><%= reservation.agent.name %></td>
         <td><%= reservation.ticket_name %></td>

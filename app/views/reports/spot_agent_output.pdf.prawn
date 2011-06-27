@@ -5,7 +5,7 @@ prawn_document(:page_layout => :landscape) do |pdf|
 
   pdf.move_down 30
   items = @table.map do |line|
-    [line.agent_name, line.count_sum, line.adult_ticket_sum, line.child_ticket_sum, line.price_sum]
+    [line.agent_name, line.count_sum, line.adult_ticket_sum.to_i, line.child_ticket_sum.to_i, line.price_sum.to_i]
   end
   pdf.table items, :border_style => :grid,:width => 600,
             :headers => ["旅行社名称","订单总数", "成人总数", "儿童总数", "总价"],

@@ -1,97 +1,79 @@
 <% title "#{@reservation.agent.name}订单明细" %>
 
-<div class="print">
-  <p>
-    <strong>订单号:</strong>
-    <%= @reservation.no %>
-  </p>
+<table class="newtable">
+  <tr>
+    <td class="textright">订单号</td>
+    <td class="textleft"><%= @reservation.no %> </td>
+    <td class="textright">团号</td>
+    <td class="textleft"><%= @reservation.group_no %></td>
+  </tr>
 
-  <p>
-    <strong>团号:</strong>
-    <%= @reservation.group_no %>
-  </p>
+  <tr>
+    <td class="textright">旅行社名称</td>
+    <td class="textleft"><%= @reservation.agent.name %></td>
+    <td class="textright">门票</td>
+    <td class="textleft"><%= @reservation.ticket_name %></td>
+  </tr>
 
-  <p>
-    <strong>旅行社名称:</strong>
-    <%= @reservation.agent.name %>
-  </p>
+  <tr>
+    <td class="textright">种类</td>
+    <td class="textleft"> <%= show_reservation_type(@reservation) %></td>
+    <td class="textright">日期</td>
+    <td class="textleft"><%= @reservation.date %></td>
+  </tr>
 
-  <p>
-    <strong>门票:</strong>
-    <%= @reservation.ticket_name %>
-  </p>
+  <tr>
+    <td class="textright">预定日期</td>
+    <td class="textleft"><%= date_format(@reservation.created_at) %></td>
+    <td class="textright">状态</td>
+    <td class="textleft"> <%= @reservation.status_name %></td>
+  </tr>
 
-  <p>
-    <strong>种类:</strong>
-    <%= show_reservation_type(@reservation) %>
-  </p>
+  <tr>
+    <td class="textright">成人价格(销售价/(结算价))</td>
+    <td class="textleft"> <%= show_reservation_adult_price(@reservation) %></td>
+    <td class="textright">儿童价格(销售价/(结算价))</td>
+    <td class="textleft"> <%= show_reservation_child_price(@reservation) %></td>
+  </tr>
 
-  <p>
-    <strong>日期:</strong>
-    <%= @reservation.date %>
-  </p>
 
-  <p>
-    <strong>预定日期:</strong>
-    <%= date_format(@reservation.created_at) %>
-  </p>
+  <tr>
+    <td class="textright">成人票数量</td>
+    <td class="textleft"><%= @reservation.adult_ticket_number %> </td>
+    <td class="textright">儿童票数量</td>
+    <td class="textleft"><%= @reservation.child_ticket_number %></td>
+  </tr>
 
-  <p>
-    <strong>状态:</strong>
-    <%= @reservation.status_name %>
-  </p>
+  <tr>
+    <td class="textright">成人票实际数量</td>
+    <td class="textleft"><%= @reservation.adult_true_ticket_number %></td>
+    <td class="textright">儿童票实际数量</td>
+    <td class="textleft"> <%= @reservation.child_true_ticket_number %></td>
+  </tr>
 
-  <p>
-    <strong>成人价格(销售价/(结算价)):</strong>
-    <%= show_reservation_adult_price(@reservation) %>
-  </p>
+  <tr>
+    <td class="textright">总价(销售价/(结算价))</td>
+    <td class="textleft"><%= show_reservation_total_price(@reservation) %></td>
+    <td class="textright">支付方式</td>
+    <td class="textleft"><%= show_reservation_payment_method(@reservation) %></td>
+  </tr>
 
-  <p>
-    <strong>儿童价格(销售价/(结算价)):</strong>
-    <%= show_reservation_child_price(@reservation) %>
-  </p>
+  <tr>
+    <td class="textright">联系人</td>
+    <td class="textleft"> <%= @reservation.contact %></td>
+    <td class="textright">联系方式</td>
+    <td class="textleft"><%= @reservation.phone %></td>
+  </tr>
 
-  <p>
-    <strong>成人票数量:</strong>
-    <%= @reservation.adult_ticket_number %>
-  </p>
+</table>
 
-  <p>
-    <strong>儿童票数量:</strong>
-    <%= @reservation.child_ticket_number %>
-  </p>
+<table class="formtable01">
+  <tr class="formtable01">
+    <td class="formtable01" style="text-align:center; ">
+      <%= button_to "返回列表", spot_reservations_path, {:class=> "btn", :style=> "float:none;", :method => :get} %>
+      <%= button_to "打印", "#", :class=> "btn", :style=> "float:none;", :onclick => "window.print();return false;" %>
+    </td>
+  </tr>
+</table>
 
-  <p>
-    <strong>成人票实际数量:</strong>
-    <%= @reservation.adult_true_ticket_number %>
-  </p>
 
-  <p>
-    <strong>儿童票实际数量:</strong>
-    <%= @reservation.child_true_ticket_number %>
-  </p>
-
-  <p>
-    <strong>总价(销售价/(结算价)):</strong>
-    <%= show_reservation_total_price(@reservation) %>
-  </p>
-
-  <p>
-    <strong>支付方式:</strong>
-    <%= show_reservation_payment_method(@reservation) %>
-  </p>
-
-  <p>
-    <strong>联系人:</strong>
-    <%= @reservation.contact %>
-  </p>
-
-  <p>
-    <strong>联系方式:</strong>
-    <%= @reservation.phone %>
-  </p>
-</div>
-<p>
-  <%= link_to "返回列表", spot_reservations_path %>
-  <a href="#" onclick="window.print();return false;">打印</a>
-</p>

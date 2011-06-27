@@ -3,42 +3,55 @@
 <div id="search">
   <%= form_tag search_reservations_path do %>
       <fieldset class="inputs">
-        <label for="spot_name">景区名称</label>
-        <%= text_field_tag :spot_name, params[:spot_name] %>
-        <label for="city_name">城市名</label>
-        <%= text_field_tag :city_name, params[:city_name] %>
-        <label for="date">入园日期</label>
-        <%= text_field_tag :date, params[:date], :class=>"book_datepicker" %>
-      </fieldset>
-      <fieldset class="buttons">
-        <%= submit_tag "查询" %>
+        <table style="border:none;">
+          <tr style="border:none;">
+            <td>景区名称
+              <%= text_field_tag :spot_name, params[:spot_name] %>
+            </td>
+            <td>城市名
+              <%= text_field_tag :city_name, params[:city_name] %>
+            </td>
+            <td colspan="2">
+              <fieldset class="buttons">
+                <%= submit_tag "查询" %>
+              </fieldset>
+            </td>
+          </tr>
+          <tr style="border:none;">
+            <td>入园日期
+              <%= text_field_tag :date, params[:date], :class=>"book_datepicker" %>
+            </td>
+            <td></td>
+          </tr>
+        </table>
       </fieldset>
   <% end %>
 </div>
 
 <% if @agent_prices %>
 
-    共找到<%= @agent_prices.total_count %>条记录
+    <table class="formtable">
+      <tr class="formtable">
+        <td class="formtable">共找到<%= @agent_prices.total_count %>条记录</td>
+      </tr>
+    </table>
 
     <%= paginate @agent_prices %>
     <table>
       <tr>
-        <td>景区名称</td>
-        <td>门票名称</td>
-        <td>价格名称(结算方式)</td>
-        <td colspan="4">销售价/(结算价)</td>
-        <td>操作</td>
+        <th>景区名称</th>
+        <th>门票名称</th>
+        <th>价格名称(结算方式)</th>
+        <th colspan="4">销售价/(结算价)</th>
+        <th>操作</th>
       </tr>
       <% for agent_price in @agent_prices %>
-
           <tr>
             <td rowspan=<%= 2*agent_price.spot.tickets.size %>><%= agent_price.spot.name %>
               <br/>
               所在城市:<%= agent_price.spot.city_names %></td>
             <% for ticket in agent_price.spot.tickets %>
                 <% price = agent_price.price_for(@date) %>
-
-
                 <td rowspan="2"><%= ticket.name %></td>
                 <td>散客价(<%= show_payment_method(agent_price.individual_payment_method) %>)</td>
                 <td>成人价</td>
@@ -52,7 +65,6 @@
                                                                          :method => :get) %>
                   <% end %></td>
                 </tr>
-
                 <tr>
                   <td>团队价(<%= show_payment_method(agent_price.team_payment_method) %>)</td>
                   <td>成人价</td>

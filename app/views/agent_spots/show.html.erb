@@ -1,46 +1,53 @@
 <% title "景区" %>
 
-<p>
-  <strong>景区名称:</strong>
-  <%= @spot.name %>
-</p>
-<p>
-  <strong>景区编码:</strong>
-  <%= @spot.code %>
-</p>
-<p>
-  <strong>所在城市:</strong>
-  <%= @spot.city_names %>
-</p>
-<p>
-  <strong>描述:</strong>
-  <%= @spot.description %>
-</p>
-<p>
-  <strong>地址:</strong>
-  <%= @spot.address %>
-</p>
-<p>
-  <strong>交通信息:</strong>
-  <%= @spot.traffic %>
-</p>
-<p>
-  <strong>市场部联系人:</strong>
-  <%= @spot.business_contact %>
-</p>
-<p>
-  <strong>市场部联系方式:</strong>
-  <%= @spot.business_phone %>
-</p>
-<p>
-  <strong>财务部联系人:</strong>
-  <%= @spot.finance_contact %>
-</p>
-<p>
-  <strong>财务部联系方式:</strong>
-  <%= @spot.finance_phone %>
-</p>
+<table class="newtable">
+  <tr>
+    <td class="textright">景区名称</td>
+    <td class="textleft"><%= @spot.name %> </td>
+    <td class="textright">景区编码</td>
+    <td class="textleft"><%= @spot.code %></td>
+  </tr>
 
-<p>
-  <%= link_to "返回", "#", :onclick => "history.back(); return false;" %>
-</p>
+  <tr>
+    <td class="textright">市场部联系人</td>
+    <td class="textleft"><%= @spot.business_contact %></td>
+    <td class="textright">市场部联系方式</td>
+    <td class="textleft"><%= @spot.business_phone %></td>
+  </tr>
+
+  <tr>
+    <td class="textright">财务部联系人</td>
+    <td class="textleft"><%= @spot.finance_contact %></td>
+    <td class="textright">财务部联系方式</td>
+    <td class="textleft"><%= @spot.finance_phone %></td>
+  </tr>
+
+  <tr>
+    <td class="textright">地址</td>
+    <td class="textleft"><%= @spot.address %></td>
+    <td class="textright">所在城市</td>
+    <td class="textleft"><%= @spot.city_names %></td>
+  </tr>
+
+  <tr>
+    <td class="textright">交通信息</td>
+    <td class="textleft" colspan="3"><%= @spot.traffic %></td>
+
+  </tr>
+
+  <tr>
+
+    <td class="textright">描述</td>
+    <td class="textleft" colspan="3"> <%= @spot.description %></td>
+  </tr>
+
+  </table>
+
+<table class="formtable01">
+  <tr class="formtable01">
+    <td class="formtable01" style="text-align:center; ">
+      <input type="button" value="返回" onclick="history.back(); return false;" class="btn" style="float:none;">
+    </td>
+  </tr>
+</table>
+

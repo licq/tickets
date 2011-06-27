@@ -36,6 +36,7 @@
   <tr>
     <th>用户名</th>
     <th>姓名</th>
+    <th>角色</th>
     <th>邮箱</th>
     <th>操作</th>
   </tr>
@@ -43,6 +44,7 @@
       <tr id="user<%= user.username %>_row" class=<%= cycle("trwrite", "trgray") %>>
         <td><%= user.username %></td>
         <td><%= user.name %></td>
+        <td><%= user.role.name %></td>
         <td><%= user.email %></td>
         <td>
           <%= link_to "查看", user_path(user) %>

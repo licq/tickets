@@ -7,16 +7,23 @@
         <td>总价</td>
     </tr>
 <% @table.each do |r| %>
-    <tr>
+    <tr class="<%= cycle("trwrite","trgray") %>">
         <td><%= r.agent_name %></td>
         <td><%= r.count_sum %></td>
-        <td><%= r.adult_ticket_sum %></td>
-        <td><%= r.child_ticket_sum %></td>
-        <td><%= r.price_sum %></td>
+        <td><%= r.adult_ticket_sum.to_i %></td>
+        <td><%= r.child_ticket_sum.to_i %></td>
+        <td><%= r.price_sum.to_i %></td>
     </tr>
 <% end %>
 </table>
 
-<p id = "pdf_link" > <%= link_to "PDF下载", reports_spot_agent_output_path(:format => "pdf",:type => params[:type],
-:year => params[:year],:month => params[:month],:day => params[:day],:week => params[:week]),{"data-popup" => true}  %></p>
+<table class="formtable01">
+        <tr class="formtable01">
+            <td class="formtable01" style="text-align:center; ">
+            <%= button_to_new_window "PDF下载", reports_spot_agent_output_path(:format => "pdf",:type => params[:type],
+               :year => params[:year],:month => params[:month],:day => params[:day],:week => params[:week]),{:class => "btn", :style=> "float:none;"}  %>
+            </td>
+        </tr>
+</table>
+
 
