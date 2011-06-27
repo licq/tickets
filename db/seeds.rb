@@ -54,7 +54,6 @@ Menu.create!(:name => "产量同比环比报表", :url => "reports_spot_output_r
 Menu.create!(:name => "入园统计报表", :url => "reports_spot_checkin_path", :menu_group => spot_menu_group6, :seq => 3)
 Menu.create!(:name => "分销商销售业绩报表", :url => "reports_spot_agent_output_path", :menu_group => spot_menu_group6, :seq => 4)
 Menu.create!(:name => "每月销售统计报表", :url => "reports_spot_month_reservations_path", :menu_group => spot_menu_group6, :seq => 5)
-Menu.create!(:name => "每月销售统计报表汇总", :url => "reports_spot_month_output_path", :menu_group => spot_menu_group6, :seq => 6)
 
 
 Menu.create!(:name => "结算列表", :url => "spot_purchases_path", :menu_group => spot_menu_group7, :seq => 1)

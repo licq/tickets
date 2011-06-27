@@ -199,4 +199,8 @@ module ApplicationHelper
     end
   end
 
+  def button_to_link(value, action, options)
+    content_tag(:input,nil,{:type => :button, :value => value,:onclick=>"window.location=\"#{action}\""}.merge(options)  )
+  end
+
 end

@@ -347,7 +347,7 @@ function selectAllReservations(flag) {
 function calculate_total_price_for_purchase() {
     var total_price = 0;
     $.each($("#purchase_reservations_form tr"), function() {
-        if ($(this).find("input:checked").length > 0) {
+        if ($(this).find("td input:checked").length > 0) {
             total_price += parseInt($(this).children("td:nth-child(10)").html());
         }
     });

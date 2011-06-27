@@ -29,11 +29,12 @@
                 <td width=60 align="right">密码</td>
                 <td width=200 align="left"><%= password_field_tag :password %></td>
                 <%= hidden_field_tag :from,"agent" %>
-                <td width=200 align="center"> <%= submit_tag "登陆", :class => "btn" %></td>
+                <td width=100 align="center"> <%= submit_tag "登陆", :class => "btn" %></td>
+                <td width=100 align="center"> <%= button_to_link "注册", new_agent_path,  :class => "btn" %></td>
               </tr>
               <tr>
                 <td colspan="5" align="center">
-                  如需帮助，请发送邮件到 <a href="#">abcdedffer@derbysoft.com</a>
+                  如需帮助，请发送邮件到 <a href="#">as.support@derbysoft.com</a>
                 </td>
               </tr>
             </table>
