@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_filter :set_spot, :except => [:edit_myself, :update_myself]
 
   def index
-    @search = @spot.operators.search(params[:search])
+    @search = @spot.operators.where(:deleted => false).search(params[:search])
     page = params[:page].to_i
     @users= @search.page(page)
   end
@@ -50,5 +50,12 @@ class UsersController < ApplicationController
     else
       render :action => 'edit_myself'
     end
+  end
+
+  def destroy
+    @user = @spot.operators.find(params[:id])
+    @user.deleted = true
+    @user.save
+    redirect_to users_path, :notice => "删除已成功."
   end
 end

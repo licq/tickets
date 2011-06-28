@@ -18,7 +18,7 @@
   <% end %>
 </div>
 
-<%= button_to_link "新建用户", new_agent_user_path, :class=> "new_button"%>
+<%= button_to_link "新建用户", new_agent_user_path, :class=> "new_button" %>
 
 <div class="result_count">共找到<%= @users.total_count %>条记录</div>
 
@@ -32,13 +32,15 @@
     <th>操作</th>
   </tr>
   <% for user in @users %>
-      <tr id="user<%= user.username %>_row"  class=<%= cycle("even", "odd") %>>
+      <tr id="user<%= user.username %>_row" class=<%= cycle("even", "odd") %>>
         <td><%= user.username %></td>
         <td><%= user.name %></td>
         <td><%= user.role.name %></td>
         <td><%= user.email %></td>
-        <td><%= link_to "查看", agent_user_path(user) %>
-            <%= link_to "修改", edit_agent_user_path(user) %>
+        <td>
+          <%= link_to "查看", agent_user_path(user) %>
+          <%= link_to "修改", edit_agent_user_path(user) %>
+          <%= link_to "删除", agent_user_path(user), :method => :delete, :confirm => "您确认要删除吗？" %>
         </td>
       </tr>
   <% end %>

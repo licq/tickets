@@ -3,7 +3,7 @@ class AgentUsersController < ApplicationController
   before_filter :set_agent
 
   def index
-    @search = @agent.operators.search(params[:search])
+    @search = @agent.operators.where(:deleted => false).search(params[:search])
     page = params[:page].to_i
     @users= @search.page(page)
   end
@@ -36,6 +36,13 @@ class AgentUsersController < ApplicationController
     else
       render :action => 'edit'
     end
+  end
+
+  def destroy
+    @user = @agent.operators.find(params[:id])
+    @user.deleted = true
+    @user.save
+    redirect_to agent_users_path, :notice => "删除已成功."
   end
 
 end

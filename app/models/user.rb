@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   belongs_to :role
 
   def self.authenticate(login, pass)
-    user = find_by_username(login)
+    user = find_by_username_and_deleted(login,false)
     return user if user && user.password_hash == user.encrypt_password(pass)
   end
 
@@ -42,7 +42,6 @@ class User < ActiveRecord::Base
   def menu_groups
     role.menu_groups
   end
-
 
   private
 
