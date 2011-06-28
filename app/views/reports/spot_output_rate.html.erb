@@ -2,8 +2,8 @@
 <div id="search">
   <%= form_tag reports_spot_output_rate_path, :id => "output_report_form" do %>
       <fieldset class="inputs">
-        <table style="border:none;">
-          <tr style="border:none;">
+        <table class="search_table">
+          <tr>
             <td>
               <span>年 <%= select_tag :year, options_for_select([[2011, 2011], [2010, 2010]], params[:year]) %></span>
               <span>月 <%= select_tag :month, options_for_select([[2011, 2011]], params[:month]) %></span>

@@ -1,11 +1,6 @@
 <% title "角色列表" %>
 
-<table class="formtable01">
-  <tr class="formtable01">
-    <td class="formtable01" style="text-align:right; ">
-      <%= button_to "新建角色", new_role_path, {:class=> "btn", :style=>"float:none;", :method => :get} %></td>
-  </tr>
-</table>
+<%= button_to_link "新建角色", new_role_path, :class=> "new_button"%>
 
 <table>
   <tr>
@@ -13,7 +8,7 @@
     <th>操作</th>
   </tr>
   <% for role in @roles %>
-      <tr id="role<%= role.id %>_row" class=<%= cycle("trwrite", "trgray") %>>
+      <tr id="role<%= role.id %>_row" class=<%= cycle("even", "odd") %>>
         <td><%= role.name %></td>
         <td>
           <%= link_to "修改", edit_role_path(role) %>

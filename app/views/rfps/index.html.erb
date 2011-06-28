@@ -2,8 +2,8 @@
 <div id="search">
   <%= simple_form_for @search do |f| %>
       <fieldset class="inputs">
-        <table style="border:none;">
-          <tr style="border:none;">
+        <table class="search_table">
+          <tr>
             <td><%= f.input :agent_name_contains, :label => "旅行社名称", :required => false %></td>
             <td></td>
             <td>
@@ -17,18 +17,9 @@
   <% end %>
 </div>
 
-<table class="formtable01">
-  <tr class="formtable01">
-    <td class="formtable01" style="text-align:right; ">
-      <%= button_to "查询未开通预订旅行社", spot_agents_path, {:class=> "btn", :style=>"float:none;", :method => :get} %></td>
-  </tr>
-</table>
+<%= button_to_link "查询未开通预订旅行社", spot_agents_path, :class=> "new_button"%>
 
-<table class="formtable">
-  <tr class="formtable">
-    <td class="formtable">共找到<%= @rfps.total_count %>条记录</td>
-  </tr>
-</table>
+<div class="result_count">共找到<%= @rfps.total_count %>条记录</div>
 
 <%= paginate @rfps %>
 
@@ -45,7 +36,7 @@
     <th>操作</th>
   </tr>
   <% for rfp in @rfps %>
-      <tr class=<%= cycle("trwrite", "trgray") %>>
+      <tr class=<%= cycle("even", "odd") %>>
         <td><%= link_to rfp.agent.name, spot_agent_path(rfp.agent) %></td>
         <td><%= rfp.agent_price.name %></td>
         <td><%= rfp.agent.business_contact %></td>

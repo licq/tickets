@@ -1,6 +1,6 @@
 <% title "旅行社" %>
 
-<table class="newtable">
+<table class="show_table">
   <tr>
     <td class="textright">景区名称</td>
     <td class="textleft"><%= @agent.name %> </td>
@@ -34,10 +34,6 @@
 
 </table>
 
-<table class="formtable01">
-  <tr class="formtable01">
-    <td class="formtable01" style="text-align:center; ">
-      <%= button_to "返回", "#", :onclick => "history.back(); return false;" %>
-    </td>
-  </tr>
-</table>
+<div class="bottom_links">
+  <%= back_button %>
+</div>

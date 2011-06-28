@@ -1,11 +1,6 @@
 <% title "门票及门市价" %>
 
-<table class="formtable01">
-  <tr class="formtable01">
-    <td class="formtable01" style="text-align:right; ">
-      <%= button_to "新建门票及门市价", new_ticket_path, {:class=> "btn", :style=>"float:none;", :method => :get} %></td>
-  </tr>
-</table>
+<%= button_to_link "新建门票及门市价", new_ticket_path, :class=> "new_button"%>
 
 <table>
   <tr>
@@ -16,7 +11,7 @@
     <th>操作</th>
   </tr>
   <% for ticket in @tickets %>
-      <tr class=<%= cycle("trwrite", "trgray") %>>
+      <tr class=<%= cycle("even", "odd") %>>
         <td><%= ticket.name %></td>
         <% for season in @spot.seasons %>
             <td>

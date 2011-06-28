@@ -199,12 +199,20 @@ module ApplicationHelper
     end
   end
 
-  def button_to_link(value, action, options)
+  def button_to_link(value, action, options = {})
     content_tag(:input, nil, {:type => :button, :value => value, :onclick=>"window.location=\"#{action}\""}.merge(options))
   end
 
-  def button_to_new_window(value, action, options)
+  def button_to_new_window(value, action, options = {})
     content_tag(:input, nil, {:type => :button, :value => value, :onclick=>"window.open(\"#{action}\")"}.merge(options))
+  end
+
+  def back_button
+    '<input type="button" value="返回" onclick="history.back(); return false;">'.html_safe
+  end
+
+  def print_button
+    '<input type="button" value="打印" onclick="window.print(); return false;">'.html_safe
   end
 
 end

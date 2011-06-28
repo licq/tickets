@@ -2,32 +2,32 @@
 <div id="search">
   <%= simple_form_for @search do |f| %>
       <fieldset class="inputs">
-        <table style="border:none;">
-          <tr style="border:none;">
-            <td class="searchtabletr"><%= f.input :name_contains, :label => "景区名称: ", :required => false %> </td>
-            <td class="searchtabletr"><%= f.input :cities_name_contains, :label => "城市名: ", :required => false %></td>
-            <td class="searchtabletr"><%= f.input :disabled_eq, :collection => [[false, "正常"], [true, "已禁用"]],
-                                                  :label_method => :last, :value_method => :first,
-                                                  :as => :select, :label => "状态: ", :required => false, :include_blank => false %></td>
-            <td style="border:none; text-align:left;"><%= f.button :submit, :value => "查询", :class=> "btn01" %></td>
+        <table class="search_table">
+          <tr>
+            <td><%= f.input :name_contains, :label => "景区名称: ", :required => false %> </td>
+            <td><%= f.input :cities_name_contains, :label => "城市名: ", :required => false %></td>
+            <td rowspan="2">
+              <fieldset class="buttons">
+                <%= f.button :submit, :value => "查询" %>
+              </fieldset>
+            </td>
+          </tr>
+          <tr>
+
+            <td><%= f.input :disabled_eq, :collection => [[false, "正常"], [true, "已禁用"]],
+                            :label_method => :last, :value_method => :first,
+                            :as => :select, :label => "状态: ", :required => false, :include_blank => false %></td>
+            <td></td>
           </tr>
         </table>
       </fieldset>
   <% end %>
 </div>
 
-<table class="formtable01">
-  <tr class="formtable01">
-    <td class="formtable01" style="text-align:right; ">
-      <%= button_to "新建景区", new_spot_path, {:class=> "btn", :style=>"float:none;", :method => :get} %></td>
-  </tr>
-</table>
+<%= button_to_link "新建景区", new_spot_path, :class=> "new_button" %>
 
-<table class="formtable">
-  <tr class="formtable">
-    <td class="formtable">共找到<%= @spots.total_count %>条记录</td>
-  </tr>
-</table>
+<div class="result_count">共找到<%= @spots.total_count %>条记录</div>
+
 <%= paginate @spots %>
 <table>
   <tr>
@@ -43,7 +43,7 @@
     <th colspan="3">操作</th>
   </tr>
   <% for spot in @spots %>
-      <tr id="spot<%= spot.id %>_row" class=<%= cycle("trwrite","trgray") %>>
+      <tr id="spot<%= spot.id %>_row" class=<%= cycle("even", "odd") %>>
         <td><%= spot.name %></td>
         <td><%= spot.code %></td>
         <td> <%= spot.city_names %>  </td>

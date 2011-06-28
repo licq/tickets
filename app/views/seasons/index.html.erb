@@ -1,11 +1,6 @@
 <% title "淡旺季" %>
 
-<table class="formtable01">
-  <tr class="formtable01">
-    <td class="formtable01" style="text-align:right; ">
-      <%= button_to "新建淡旺季", new_season_path, {:class=> "btn", :style=>"float:none;", :method => :get} %></td>
-  </tr>
-</table>
+<%= button_to_link "新建淡旺季", new_season_path, :class=> "new_button"%>
 
 <table>
   <tr>
@@ -14,7 +9,7 @@
     <th width="30%">操作</th>
   </tr>
   <% for season in @seasons %>
-      <tr class=<%= cycle("trwrite", "trgray") %>>
+      <tr class=<%= cycle("even", "odd") %>>
         <td><%= season.name %></td>
         <td>
           <% season.timespans.each do |timespan| %>

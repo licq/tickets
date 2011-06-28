@@ -3,8 +3,8 @@
 <div id="search">
   <%= form_tag spot_purchases_path, :method => :get do %>
       <fieldset class="inputs">
-        <table style="border:none;">
-          <tr style="border:none;">
+        <table class="search_table">
+          <tr>
             <td>旅行社名称
               <%= text_field_tag :agent_name, params[:agent_name] %>
             </td>
@@ -33,13 +33,13 @@
     <th>操作</th>
   </tr>
   <% for item in @table %>
-      <tr class=<%= cycle("trwrite","trgray") %>>
+      <tr class=<%= cycle("even","odd") %>>
         <td><%= item.agent_name %></td>
         <td><%= show_reservation_type_with(item.type) %></td>
         <td><%= show_payment_method(item.payment_method) %>  </td>
         <td><%= item.count_sum %></td>
         <td><%= show_in_or_out_for_spot(item) %> </td>
-        <td><%= item.price_sum %></td>
+        <td><%= item.price_sum.to_i %></td>
         <td><%= link_to "查看", reservations_spot_purchases_path(:agent_id => item.agent_id, :type => item.type, :payment_method => item.payment_method, :date => @date, :agent_name => @agent_name) %></td>
       </tr>
   <% end %>

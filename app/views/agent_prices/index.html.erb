@@ -1,11 +1,7 @@
 <% title "旅行社价格" %>
 
-<table class="formtable01">
-  <tr class="formtable01">
-    <td class="formtable01" style="text-align:right; ">
-      <%= button_to "新建旅行社价格", new_agent_price_path, {:class=> "btn", :style=>"float:none;", :method => :get} %></td>
-  </tr>
-</table>
+<%= button_to_link "新建旅行社价格", new_agent_price_path,:class=> "new_button" %>
+
 
 <% season_size = @spot.seasons.size %>
 <% ticket_size = @spot.tickets.size %>
@@ -41,7 +37,7 @@
 
   <% for agent_price in @agent_prices %>
       <% count = 1 %>
-      <tr class=<%= cycle("trwrite", "trgray") %>>
+      <tr class=<%= cycle("even", "odd") %>>
         <th rowspan="<%= ticket_size %>"><%= agent_price.name %></th>
         <% for ticket in @spot.tickets %>
             <% if (count > 1) %>

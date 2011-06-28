@@ -1,6 +1,6 @@
 <% title "景区" %>
 
-<table class="newtable">
+<table class="show_table">
   <tr>
     <td class="textright">景区名称</td>
     <td class="textleft"><%= @spot.name %> </td>
@@ -59,14 +59,10 @@
 
 </table>
 
-<table class="formtable01">
-  <tr class="formtable01">
-    <td class="formtable01" style="text-align:center; ">
-      <%= button_to "修改", edit_spot_path(@spot), {:class=> "btn", :style=> "float:none;", :method => :get} %>
-      <%= button_to "景区列表", spots_path , {:class=> "btn", :style=> "float:none;", :method => :get}%>
-      <%= button_to "返回", "#", :class=> "btn", :style=> "float:none;", :onclick => "history.back(); return false;" %>
-    </td>
-  </tr>
-</table>
+<div class="bottom_links">
+  <%= button_to_link "修改", edit_spot_path(@spot) %>
+  <%= button_to_link "景区列表", spots_path %>
+  <%= back_button %>
+</div>
 
 

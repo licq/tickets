@@ -2,8 +2,8 @@
 <div id="search">
   <%= simple_form_for @search, :url =>applied_agent_spots_path do |f| %>
       <fieldset class="inputs">
-        <table style="border:none;">
-          <tr style="border:none;">
+        <table class="search_table">
+          <tr>
             <td><%= f.input :name_contains, :label => "景区名称", :required => false %></td>
             <td><%= f.input :cities_name_contains, :label => "城市名", :required => false %></td>
             <td>
@@ -17,11 +17,7 @@
   <% end %>
 </div>
 
-<table class="formtable">
-  <tr class="formtable">
-    <td class="formtable">共找到<%= @spots.total_count %>条记录</td>
-  </tr>
-</table>
+<div class="result_count">共找到<%= @spots.total_count %>条记录</div>
 
 <%= paginate @spots %>
 <table>
@@ -36,7 +32,7 @@
     <th>操作</th>
   </tr>
   <% for spot in @spots %>
-      <tr id="spot<%= spot.id %>_row" class=<%= cycle("trwrite", "trgray") %>>
+      <tr id="spot<%= spot.id %>_row" class=<%= cycle("even", "odd") %>>
         <td><%= link_to spot.name, agent_spot_path(spot) %></td>
         <td><%= spot.code %></td>
         <td> <%= spot.city_names %>  </td>

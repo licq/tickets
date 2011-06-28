@@ -1,6 +1,7 @@
 <% title "结算历史" %>
 
-共找到<%= @purchase_histories.total_count %>条记录
+<div class="result_count">共找到<%= @purchase_histories.total_count %>条记录</div>
+
 <%= paginate @purchase_histories %>
 <table>
   <tr>
@@ -15,7 +16,7 @@
     <th>操作</th>
   </tr>
   <% for history in @purchase_histories %>
-      <tr id="history<%= history.id %>_row" class=<%= cycle("trwrite","trgray")%>>
+      <tr id="history<%= history.id %>_row" class=<%= cycle("even","odd")%>>
         <td><%= history.spot.name %>  </td>
         <td><%= history.agent.name %>  </td>
         <td><%= history.ticket_type %></td>

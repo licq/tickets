@@ -2,13 +2,17 @@
 <div id="search">
   <%= simple_form_for @search do |f| %>
       <fieldset class="inputs">
-        <table style="border:none;">
-          <tr style="border:none;">
-            <td class="searchtabletr"><%= f.input :name_contains, :label => "旅行社名称", :required => false %> </td>
-            <td class="searchtabletr"><%= f.input :disabled_eq, :collection => [[false, "正常"], [true, "已禁用"]],
-                                                  :label_method => :last, :value_method => :first,
-                                                  :as => :select, :label => "状态", :required => false, :include_blank => false %></td>
-            <td style="border:none; text-align:left;"><%= f.button :submit, :value => "查询", :class=> "btn01" %></td>
+        <table class="search_table">
+          <tr>
+            <td><%= f.input :name_contains, :label => "旅行社名称", :required => false %> </td>
+            <td><%= f.input :disabled_eq, :collection => [[false, "正常"], [true, "已禁用"]],
+                            :label_method => :last, :value_method => :first,
+                            :as => :select, :label => "状态", :required => false, :include_blank => false %></td>
+            <td>
+              <fieldset class="buttons">
+                <%= f.button :submit, :value => "查询" %>
+              </fieldset>
+            </td>
           </tr>
         </table>
       </fieldset>
@@ -16,18 +20,9 @@
   <% end %>
 </div>
 
-<table class="formtable01">
-  <tr class="formtable01">
-    <td class="formtable01" style="text-align:right; ">
-      <%= button_to "新建旅行社", new_agent_path, {:class=> "btn", :style=>"float:none;", :method => :get} %></td>
-  </tr>
-</table>
+<%= button_to_link "新建旅行社", new_agent_path, :class=> "new_button" %>
 
-<table class="formtable">
-  <tr class="formtable">
-    <td class="formtable">共找到<%= @agents.total_count %>条记录</td>
-  </tr>
-</table>
+<div class="result_count">共找到<%= @agents.total_count %>条记录</div>
 
 <%= paginate @agents %>
 
@@ -43,7 +38,7 @@
     <th colspan="3">操作</th>
   </tr>
   <% for agent in @agents %>
-      <tr class=<%= cycle("trwrite", "trgray") %>>
+      <tr class=<%= cycle("even", "odd") %>>
         <td><%= agent.name %></td>
         <td><%= agent.business_contact %></td>
         <td><%= agent.business_phone %></td>

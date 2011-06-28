@@ -1,6 +1,6 @@
 <% title "#{@reservation.agent.name}订单明细" %>
 <div class="print">
-<table class="newtable">
+<table class="show_table">
   <tr>
     <td class="textright">订单号</td>
     <td class="textleft"><%= @reservation.no %> </td>
@@ -67,11 +67,8 @@
 
 </table>
 </div>
-<table class="formtable01">
-  <tr class="formtable01">
-    <td class="formtable01" style="text-align:center; ">
-      <%= button_to "返回列表", reservations_path, {:class=> "btn", :style=> "float:none;", :method => :get} %>
-      <%= button_to "打印", "#", :class=> "btn", :style=> "float:none;", :onclick => "window.print();return false;" %>
-    </td>
-  </tr>
-</table>
+
+<div class="bottom_links">
+  <%= button_to_link "返回列表", reservations_path %>
+  <%= print_button %>
+</div>

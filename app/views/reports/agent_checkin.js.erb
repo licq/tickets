@@ -5,14 +5,15 @@
         <td>儿童总数</td>
         <td>总价</td>
     </tr>
-    <tr>
+    <tr class="even">
         <td><%= @table.count_sum %></td>
-        <td><%= @table.adult_ticket_sum %></td>
-        <td><%= @table.child_ticket_sum %></td>
-        <td><%= @table.price_sum %></td>
+        <td><%= @table.adult_ticket_sum.to_i %></td>
+        <td><%= @table.child_ticket_sum.to_i %></td>
+        <td><%= @table.price_sum.to_i %></td>
     </tr>
 </table>
 
-<p id = "pdf_link" > <%= link_to "PDF下载", reports_agent_checkin_path(:format => "pdf",:type => params[:type],
-:year => params[:year],:month => params[:month],:day => params[:day],:week => params[:week]),{"data-popup" => true}  %></p>
-
+<div class="bottom_links">
+<%= button_to_new_window "PDF下载", reports_agent_checkin_path(:format => "pdf",:type => params[:type],
+:year => params[:year],:month => params[:month],:day => params[:day],:week => params[:week])%>
+</div>

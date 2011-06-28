@@ -3,8 +3,8 @@
 <div id="search">
   <%= form_tag search_reservations_path do %>
       <fieldset class="inputs">
-        <table style="border:none;">
-          <tr style="border:none;">
+        <table class="search_table">
+          <tr>
             <td>景区名称
               <%= text_field_tag :spot_name, params[:spot_name] %>
             </td>
@@ -17,7 +17,7 @@
               </fieldset>
             </td>
           </tr>
-          <tr style="border:none;">
+          <tr>
             <td>入园日期
               <%= text_field_tag :date, params[:date], :class=>"book_datepicker" %>
             </td>
@@ -30,11 +30,7 @@
 
 <% if @agent_prices %>
 
-    <table class="formtable">
-      <tr class="formtable">
-        <td class="formtable">共找到<%= @agent_prices.total_count %>条记录</td>
-      </tr>
-    </table>
+    <div class="result_count">共找到<%= @agent_prices.total_count %>条记录</div>
 
     <%= paginate @agent_prices %>
     <table>

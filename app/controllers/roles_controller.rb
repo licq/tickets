@@ -50,7 +50,8 @@ class RolesController < ApplicationController
       @role.destroy
       redirect_to roles_path, :notice => "角色已删除成功"
     else
-      redirect_to roles_path, :error => "角色还有用户关联，不能删除"
+      flash[:error] = "角色还有用户关联，不能删除"
+      redirect_to roles_path
     end
 
   end

@@ -8,7 +8,7 @@
     <th>结算日期</th>
     <th>结算用户</th>
   </tr>
-  <tr class=<%= cycle("trwrite","trgray") %>>
+  <tr class=<%= cycle("even","odd") %>>
     <td><%= @purchase_history.agent.name %>  </td>
     <td><%= @purchase_history.ticket_type %></td>
     <td><%= show_payment_method(@purchase_history.payment_method) %></td>
@@ -21,10 +21,6 @@
 
 <%= render :partial => '/spot_reservations/reservations_table',:locals => {:reservations => @purchase_history.reservations} %>
 
-<table class="formtable01">
-  <tr class="formtable01">
-    <td class="formtable01" style="text-align:center; ">
-      <input type="button" value="返回" onclick = "history.back(); return false;" class="btn" style="float:none;">
-    </td>
-  </tr>
-</table>
+<div class="bottom_links">
+  <%= back_button %>
+</div>

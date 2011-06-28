@@ -41,7 +41,7 @@
     <th>预定日期</th>
   </tr>
   <% for reservation in @purchase_history.reservations %>
-      <tr id="reservation<%= reservation.id %>_row" class=<%= cycle("trwrite","trgray")%>>
+      <tr id="reservation<%= reservation.id %>_row" class=<%= cycle("even","odd")%>>
         <td><%= link_to reservation.no, all_reservation_path(reservation) %></td>
         <td><%= reservation.group_no %></td>
         <td><%= reservation.ticket_name %></td>

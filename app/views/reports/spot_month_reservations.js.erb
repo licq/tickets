@@ -9,7 +9,7 @@
         <td>总价</td>
     </tr>
 <% @table.each do |r| %>
-    <tr class="<%= cycle("trwrite","trgray") %>">
+    <tr class="<%= cycle("even","odd") %>">
         <td><%= r.agent.name %></td>
         <td><%= r.no %></td>
         <td><%= r.group_no %></td>
@@ -30,13 +30,9 @@
     </tr>
 </table>
 
- <table class="formtable01">
-        <tr class="formtable01">
-            <td class="formtable01" style="text-align:center; ">
-            <%= button_to_new_window "PDF下载", reports_spot_month_reservations_path(:format => "pdf",:type => params[:type],
-               :year => params[:year],:month => params[:month],:day => params[:day],:week => params[:week]),{:class => "btn", :style=> "float:none;"}  %>
-            </td>
-        </tr>
-</table>
+< div class = "bottom_links" >
+        <%= button_to_new_window "PDF下载", reports_spot_month_reservations_path(:format => "pdf",:type => params[:type],
+:year => params[:year],:month => params[:month],:day => params[:day],:week => params[:week]) %>
+        </div>
 
 

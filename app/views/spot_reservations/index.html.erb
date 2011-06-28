@@ -3,8 +3,8 @@
 <div id="search">
   <%= simple_form_for @search, :url => spot_reservations_path do |f| %>
       <fieldset class="inputs">
-        <table style="border:none;">
-          <tr style="border:none;">
+        <table class="search_table">
+          <tr>
             <td><%= f.input :no_contains, :label => "订单号", :required => false %></td>
             <td><%= f.input :ticket_name_contains, :label => "门票种类", :required => false %></td>
             <td rowspan="6">
@@ -15,38 +15,34 @@
           </tr>
           <tr>
             <td><%= f.input :agent_name_contains, :label => "旅行社名称", :required => false %></td>
+            <td></td>
+          </tr>
+          <tr>
             <td><%= f.input :date_greater_than_or_equal_to, :label => "入园起始日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %></td>
-          </tr>
-          <tr>
             <td><%= f.input :date_less_than_or_equal_to, :label => "入园结束日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %></td>
+          </tr>
+          <tr>
             <td><%= f.input :created_at_greater_than_or_equal_to, :label => "预定起始日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %></td>
-          </tr>
-          <tr>
             <td><%= f.input :created_at_less_than_or_equal_to, :label => "预定结束日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %></td>
-            <td><%= f.input :contact_contains, :label => "联系人", :required => false %></td>
           </tr>
           <tr>
+            <td><%= f.input :contact_contains, :label => "联系人", :required => false %></td>
             <td><%= f.input :phone_contains, :label => "联系电话", :required => false %></td>
+          </tr>
+          <tr>
             <td><%= f.input :with_status, :collection => [["", "全部"], ["confirmed", "已确认"], ["canceled", "已取消"], ["checkedin", "已入园"], ["outdated", "已过期"]],
                             :label_method => :last, :value_method => :first,
                             :as => :select, :label => "状态", :required => false, :include_blank => false %></td>
-          </tr>
-          <tr>
             <td><%= f.input :paid_eq, :collection => [["", "全部"], [true, "已结算"], [false, "未结算"]],
                             :label_method => :last, :value_method => :first,
                             :as => :select, :label => "结算状态", :required => false, :include_blank => false %></td>
-            <td></td>
           </tr>
         </table>
       </fieldset>
   <% end %>
 </div>
 
-<table class="formtable">
-  <tr class="formtable">
-    <td class="formtable">共找到<%= @reservations.total_count %>条记录</td>
-  </tr>
-</table>
+<div class="result_count">共找到<%= @reservations.total_count %>条记录</div>
 
 <%= paginate @reservations %>
 <%= render :partial => 'reservations_table', :locals => {:reservations => @reservations} %>
