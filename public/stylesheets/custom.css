@@ -480,5 +480,9 @@ table.search_table, table.search_table tr {
     border: none;
 }
 
+.report_date_select select{
+    width: 60px;
+}
+
 
 

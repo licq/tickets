@@ -118,7 +118,7 @@ $(function() {
     $("#output_report_form input[type=submit]").click(function() {
         $.post($("#output_report_form").attr("action"), $("#output_report_form").serialize(), function(data) {
             $("#report").html(data);
-        }, "script");
+        });
         return false;
     });
 

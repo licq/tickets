@@ -137,12 +137,24 @@ Tickets::Application.routes.draw do
   post 'reports/spot_checkin'
   get 'reports/spot_agent_output'
   post 'reports/spot_agent_output'
-
   get 'reports/spot_month_reservations'
   post 'reports/spot_month_reservations'
   post 'reports/spot_month_output'
   post 'reports/spot_month_output'
 
+  get 'reports/generate_spot_output'
+  post 'reports/generate_spot_output'
+  get 'reports/generate_spot_output_rate'
+  post 'reports/generate_spot_output_rate'
+  get 'reports/generate_spot_checkin'
+  post 'reports/generate_spot_checkin'
+  get 'reports/generate_spot_agent_output'
+  post 'reports/generate_spot_agent_output'
+  get 'reports/generate_spot_month_reservations'
+  post 'reports/generate_spot_month_reservations'
+  post 'reports/generate_spot_month_output'
+  post 'reports/generate_spot_month_output'
+  
 
   get 'reports/agent_output'
   post 'reports/agent_output'
@@ -151,7 +163,16 @@ Tickets::Application.routes.draw do
   get 'reports/agent_checkin'
   post 'reports/agent_checkin'
   get 'reports/agent_spot_output'
-  post 'reports/agent_spot_output'
+  post 'reports/agent_spot_output' 
+  
+  get 'reports/generate_agent_output'
+  post 'reports/generate_agent_output'
+  get 'reports/generate_agent_output_rate'
+  post 'reports/generate_agent_output_rate'
+  get 'reports/generate_agent_checkin'
+  post 'reports/generate_agent_checkin'
+  get 'reports/generate_agent_spot_output'
+  post 'reports/generate_agent_spot_output'
 
   match 'user/edit' => 'users#edit', :as => :edit_current_user
   match 'signup' => 'users#new', :as => :signup

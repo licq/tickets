@@ -1,0 +1,20 @@
+<table>
+  <tr>
+    <td>订单总数</td>
+    <td>成人总数</td>
+    <td>儿童总数</td>
+    <td>总价</td>
+  </tr>
+  <tr class="<%= cycle("even", "odd") %>">
+    <td><%= @table.count_sum.to_i %></td>
+    <td><%= @table.adult_ticket_sum.to_i %></td>
+    <td><%= @table.child_ticket_sum.to_i %></td>
+    <td><%= @table.price_sum.to_i %></td>
+  </tr>
+</table>
+
+<div class="bottom_links">
+  <%= button_to_new_window "PDF下载", reports_generate_spot_output_path(:format => "pdf", :type => params[:type],
+                                                                      :year => params[:year], :month => params[:month], :day => params[:day], :week => params[:week]) %>
+</div>
+
