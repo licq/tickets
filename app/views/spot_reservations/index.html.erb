@@ -22,8 +22,8 @@
             <td><%= f.input :date_less_than_or_equal_to, :label => "入园结束日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %></td>
           </tr>
           <tr>
-            <td><%= f.input :created_at_greater_than_or_equal_to, :label => "预定起始日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %></td>
-            <td><%= f.input :created_at_less_than_or_equal_to, :label => "预定结束日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %></td>
+            <td><%= f.input :start_book_date, :label => "预定起始日期", :required => false,:input_html => {:class =>'reservation_datepicker'} %></td>
+            <td><%= f.input :end_book_date, :label => "预定结束日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %></td>
           </tr>
           <tr>
             <td><%= f.input :contact_contains, :label => "联系人", :required => false %></td>

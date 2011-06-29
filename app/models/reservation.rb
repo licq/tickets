@@ -23,10 +23,17 @@ class Reservation < ActiveRecord::Base
       else
         where(:status => status)
     end
-
   end
 
-  search_methods :with_status
+  def self.start_book_date(start_date)
+    where(:created_at.gte => DateTime.parse(start_date).beginning_of_day)
+  end
+
+  def self.end_book_date(end_date)
+    where(:created_at.lte => DateTime.parse(end_date).end_of_day)
+  end
+
+  search_methods :with_status, :start_book_date, :end_book_date
 
   def set_no
     self.no = (100000 + self.id).to_s
