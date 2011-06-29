@@ -2,7 +2,7 @@ class AgentPurchaseHistoriesController < ApplicationController
   before_filter :set_agent
 
   def index
-    @search = @agent.purchase_histories
+    @search = @agent.purchase_histories.search(params[:search])
     page = params[:page].to_i
     @purchase_histories= @search.page(page)
   end

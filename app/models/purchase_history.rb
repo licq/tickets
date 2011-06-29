@@ -20,4 +20,14 @@ class PurchaseHistory < ActiveRecord::Base
   def ticket_type
     self.is_individual? ? "散客票" : "团队票"
   end
+
+  def self.from_spot(flag)
+    if flag
+      where(:payment_method => "poa")
+    else
+      where(:payment_method => "prepay")
+    end
+  end
+
+  search_methods :from_spot
 end

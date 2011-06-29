@@ -13,6 +13,12 @@
               </fieldset>
             </td>
           </tr>
+          <tr>
+            <td><%= f.input :role_id_eq, :collection => @agent.roles,
+                            :label_method => :name, :value_method => :id,
+                            :as => :select, :label => "角色", :required => false %></td>
+            <td></td>
+          </tr>
         </table>
       </fieldset>
   <% end %>

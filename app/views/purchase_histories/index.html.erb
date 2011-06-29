@@ -1,5 +1,34 @@
 <% title "结算历史" %>
 
+<div id="search">
+  <%= simple_form_for @search, :url =>purchase_histories_path do |f| %>
+      <fieldset class="inputs">
+        <table class="search_table">
+          <tr>
+            <td><%= f.input :agent_name_contains, :label => "旅行社", :required => false %></td>
+            <td><%= f.input :payment_method_eq, :label => "支付方式", :required => false,
+                            :collection => [["poa", "门口现付"], ["prepay", "挂帐"]], :label_method => :last,
+                            :value_method => :first, :required => false %></td>
+            <td>
+              <fieldset class="buttons">
+                <%= f.button :submit, :value => "查询" %>
+              </fieldset>
+            </td>
+          </tr>
+          <tr>
+            <td><%= f.input :from_spot, :collection => [[true, "应付"], [false, "应收"]],
+                            :label_method => :last, :value_method => :first,
+                            :as => :select, :label => "应收应付", :required => false %>
+            </td>
+            <td>
+              <%= f.input :user_contains, :label=> "结算人员", :required => false %>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+  <% end %>
+</div>
+
 <div class="result_count">共找到<%= @purchase_histories.total_count %>条记录</div>
 
 <%= paginate @purchase_histories %>
@@ -15,7 +44,7 @@
     <th>操作</th>
   </tr>
   <% for history in @purchase_histories %>
-      <tr id="history<%= history.id %>_row" class=<%= cycle("even","odd") %>>
+      <tr id="history<%= history.id %>_row" class=<%= cycle("even", "odd") %>>
         <td><%= history.agent.name %>  </td>
         <td><%= history.ticket_type %></td>
         <td><%= show_payment_method(history.payment_method) %></td>
