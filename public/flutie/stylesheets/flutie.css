@@ -91,6 +91,7 @@ hr {
 
 input, select {
     vertical-align: middle;
+    width: 200px;
 }
 
 body {
@@ -287,12 +288,13 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
     font-size: 14px;
-	height:30px;
-    line-height:30px;
+    height: 30px;
+    line-height: 30px;
     margin-bottom: 0px;
-	background:url(../../images/titlebg.jpg) ; color:#fff;
-	font-weight:bold;
-	color:#013358;
+    background: url(../../images/titlebg.jpg);
+    color: #fff;
+    font-weight: bold;
+    color: #013358;
 }
 
 h2 {
@@ -468,7 +470,6 @@ form abbr {
     border-bottom: 0;
 }
 
-
 .required label {
     font-weight: bold;
 }
@@ -492,9 +493,9 @@ a.cancel {
 fieldset {
     background: #e0edf5;
     border: none;
-    margin:5px auto;
+    margin: 5px auto;
     padding: 0;
-	width:1020px;
+    width: 1020px;
 }
 
 fieldset fieldset,
@@ -596,7 +597,7 @@ textarea {
 
 /* Select fields */
 fieldset .select select {
-    width: 100px;
+    width: 200px;
     font-size: 0.9em;
 }
 
@@ -628,10 +629,10 @@ form ol li.time label {
 
 /* Tables */
 table {
-   
+
     width: 98%;
-	margin:5px auto;
-	border:1px solid #cdd1d0;
+    margin: 5px auto;
+    border: 1px solid #cdd1d0;
 }
 
 th {
@@ -658,9 +659,9 @@ tr, td, th {
     border: 1px solid #999999;
     vertical-align: middle;
     text-align: center;
-	background:#e0edf5;
-	font-size:12px; 
-	color:#333;
+    background: #e0edf5;
+    font-size: 12px;
+    color: #333;
 }
 
 /* Use this if you use span-x classes on th/td. */

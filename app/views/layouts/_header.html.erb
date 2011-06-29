@@ -1,6 +1,13 @@
 <header>
   <div class="headout">
     <% logo = image_tag "headlogo.jpg", :alt => "景区网络营销系统", :class => "headlogoimg" %>
+    <% if current_user %>
+        <% if current_user.is_spot_user %>
+            <% logo = image_tag "jingdian.jpg", :alt => "景点业务合作平台", :class => "headlogoimg" %>
+        <% elsif current_user.is_agent_user %>
+            <% logo = image_tag "lvxingshe.jpg", :alt => "旅行社业务合作平台", :class => "headlogoimg" %>
+        <% end %>
+    <% end %>
     <div class="headlogo"><%= logo %></div>
 
     <div class="headright">
@@ -8,7 +15,7 @@
         <% if logged_in? %>
             <span style="font-size: 14px;font-weight: bold;"><%= show_agent_or_spot_name %></span>
             欢迎您：<span style="font-weight: bold;"><%= current_user.name %></span>
-            <%= link_to "修改个人信息", edit_myself_user_path(current_user) %>
+            <%= link_to "<span style='color:#fff;'>修改个人信息</span>".html_safe, edit_myself_user_path(current_user) %>
             <%= link_to "登出", logout_path %>
         <% end %>
       </div>
@@ -16,5 +23,5 @@
         <%= render 'layouts/navigation' %>
       </div>
     </div>
-	</div>
+  </div>
 </header>

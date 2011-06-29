@@ -14,9 +14,7 @@
 <div id="apDiv2">旅行社 登陆</div>
 <div id="apDiv3">
 
-  <% flash.each do |name, msg| %>
-      <div class="flash <%= name %>"><%= msg %></div>
-  <% end %>
+  
   <%= form_tag sessions_path, :class => "simple_form" do %>
       <table width="100%" border="0" cellspacing="0">
         <tr>
@@ -37,6 +35,15 @@
                   如需帮助，请发送邮件到 <a href="#">as.support@derbysoft.com</a>
                 </td>
               </tr>
+			  
+			  <tr>
+                <td colspan="5" align="center">
+                  <% flash.each do |name, msg| %>
+					  <div class="flash <%= name %>"><%= msg %></div>
+				  <% end %>
+                </td>
+              </tr>
+			  
             </table>
           </td>
         </tr>

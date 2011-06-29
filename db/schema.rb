@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110628161353) do
+ActiveRecord::Schema.define(:version => 20110628162909) do
 
   create_table "agent_prices", :force => true do |t|
     t.integer  "spot_id"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20110628161353) do
 
   add_index "cities", ["code"], :name => "index_cities_on_code", :unique => true
   add_index "cities", ["name"], :name => "index_cities_on_name", :unique => true
+  add_index "cities", ["pinyin"], :name => "index_cities_on_pinyin"
 
   create_table "cities_spots", :id => false, :force => true do |t|
     t.integer "city_id"
@@ -74,6 +75,8 @@ ActiveRecord::Schema.define(:version => 20110628161353) do
     t.integer "menu_group_id"
     t.integer "seq"
   end
+
+  add_index "menus", ["menu_group_id"], :name => "index_menus_on_menu_group_id"
 
   create_table "menus_roles", :id => false, :force => true do |t|
     t.integer "role_id"
@@ -133,6 +136,14 @@ ActiveRecord::Schema.define(:version => 20110628161353) do
     t.integer  "purchase_history_id"
   end
 
+  add_index "reservations", ["agent_id"], :name => "index_reservations_on_agent_id"
+  add_index "reservations", ["contact"], :name => "index_reservations_on_contact"
+  add_index "reservations", ["created_at"], :name => "index_reservations_on_created_at"
+  add_index "reservations", ["date"], :name => "index_reservations_on_date"
+  add_index "reservations", ["no"], :name => "index_reservations_on_no", :unique => true
+  add_index "reservations", ["phone"], :name => "index_reservations_on_phone"
+  add_index "reservations", ["spot_id"], :name => "index_reservations_on_spot_id"
+
   create_table "rfps", :force => true do |t|
     t.integer  "agent_id"
     t.integer  "spot_id"
@@ -144,6 +155,10 @@ ActiveRecord::Schema.define(:version => 20110628161353) do
     t.string   "team_payment_method"
     t.string   "individual_payment_method"
   end
+
+  add_index "rfps", ["agent_id"], :name => "index_rfps_on_agent_id"
+  add_index "rfps", ["agent_price_id"], :name => "index_rfps_on_agent_price_id"
+  add_index "rfps", ["spot_id"], :name => "index_rfps_on_spot_id"
 
   create_table "roles", :force => true do |t|
     t.string  "name"
@@ -157,6 +172,8 @@ ActiveRecord::Schema.define(:version => 20110628161353) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "seasons", ["name"], :name => "index_seasons_on_name"
 
   create_table "spots", :force => true do |t|
     t.string   "name"
@@ -193,6 +210,8 @@ ActiveRecord::Schema.define(:version => 20110628161353) do
     t.datetime "updated_at"
   end
 
+  add_index "tickets", ["name"], :name => "index_tickets_on_name"
+
   create_table "timespans", :force => true do |t|
     t.date     "from_date"
     t.date     "to_date"
@@ -216,6 +235,7 @@ ActiveRecord::Schema.define(:version => 20110628161353) do
     t.boolean  "deleted",       :default => false
   end
 
+  add_index "users", ["deleted"], :name => "index_users_on_deleted"
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end
