@@ -246,7 +246,7 @@ div.add_timespan {
     text-align: right;
 }
 
-.headrighttop a:visited {
+.headrighttop a, .headrighttop a:visited {
     color: #fff;
     text-decoration: none;
 }
@@ -436,7 +436,7 @@ div.add_timespan {
 }
 
 #nav li ul a:visited {
-    color: #fff;
+    color: #134f91;
     text-decoration: none;
 }
 
