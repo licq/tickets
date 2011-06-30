@@ -422,17 +422,17 @@ div.add_timespan {
 
 #nav li ul a {
     display: block;
-    width: 95px;
+    width: 100px;
     _width: 100px;
     *width: 100px;
-    text-align: left;
+    text-align: center;
     overflow: hidden;
 }
 
 #nav li ul a:link {
     color: #134f91;
     text-decoration: none;
-    padding-left: 5px;
+    text-align: center;
 }
 
 #nav li ul a:visited {
@@ -482,6 +482,10 @@ table.search_table, table.search_table tr {
 
 .report_date_select select{
     width: 60px;
+}
+
+#main h1{
+    padding-left: 10px;
 }
 
 
