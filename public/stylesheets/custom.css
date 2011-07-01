@@ -233,6 +233,7 @@ div.add_timespan {
 }
 
 .headright {
+    background: url("../images/headbg.jpg") repeat-x scroll 0 0 transparent;
     width: 770px;
     height: 80px;
     float: right;
@@ -280,7 +281,6 @@ div.add_timespan {
     width: 100px;
     height: 40px;
     float: left;
-    background: url(../images/headbg.jpg) no-repeat;
     color: #fff;
     text-decoration: none;
     display: block;
@@ -425,13 +425,15 @@ div.add_timespan {
     width: 95px;
     _width: 100px;
     *width: 100px;
-    text-align: left;
+    text-align: center;
     overflow: hidden;
 }
 
 #nav li ul a:link {
     color: #134f91;
     text-decoration: none;
+    text-align: left;
+    font-size: 12px;
     padding-left: 5px;
 }
 
@@ -482,6 +484,10 @@ table.search_table, table.search_table tr {
 
 .report_date_select select{
     width: 60px;
+}
+
+#main h1{
+    padding-left: 10px;
 }
 
 
