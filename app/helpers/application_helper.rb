@@ -183,6 +183,14 @@ module ApplicationHelper
     end
   end
 
+  def agent_or_spot_unread_message_count
+    if current_user && current_user.is_spot_user
+      current_user.spot.unread_messages.count
+    elsif current_user && current_user.is_agent_user
+      current_user.agent.unread_messages.count
+    end
+  end
+
   def show_in_or_out_for_spot(item)
     if (item.payment_method == 'poa' && item.type == "IndividualReservation")
       '应付'

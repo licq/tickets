@@ -33,6 +33,9 @@ class Spot < ActiveRecord::Base
   has_many :rfps
   has_many :reservations
   has_many :roles, :as => :roleable
+  has_many :received_messages, :as => :message_to,:class_name => "Message"
+  has_many :sent_messages, :as => :message_from,:class_name => "Message"
+
   has_many :purchase_histories
   attr_reader :city_tokens
 
@@ -40,6 +43,10 @@ class Spot < ActiveRecord::Base
 
   def city_tokens=(ids)
     self.city_ids = ids.split(",")
+  end
+
+  def unread_messages
+    received_messages.unread
   end
 
   def self.not_connected_with_agent(agent)

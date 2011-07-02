@@ -1,0 +1,11 @@
+one:
+  message_from: 1
+  message_to: 1
+  content: MyString
+  read: false
+
+two:
+  message_from: 1
+  message_to: 1
+  content: MyString
+  read: false

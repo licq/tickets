@@ -1,5 +1,7 @@
 Tickets::Application.routes.draw do
 
+  resources :messages
+
   get "home/index"
 
   resources :purchase_histories

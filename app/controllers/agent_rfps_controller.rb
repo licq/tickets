@@ -19,6 +19,8 @@ class AgentRfpsController < ApplicationController
         Rfp.delete_by_spot_id_and_agent_id(params[:spot_id], @agent.id)
         @rfp = @agent.rfps.new(:spot_id => params[:spot_id], :from_spot => false, :status => "a")
         if @rfp.save
+          @agent.sent_messages.create!(:message_to => @rfp.spot,
+                                      :content => "#{@agent.name}申请可以预订", :read => false)
           flash[:notice] = "申请已成功"
         else
           flash[:notice] = "申请失败"

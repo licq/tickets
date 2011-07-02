@@ -1,0 +1,20 @@
+<%= form_for @message do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :message_from %><br />
+    <%= f.text_field :message_from %>
+  </p>
+  <p>
+    <%= f.label :message_to %><br />
+    <%= f.text_field :message_to %>
+  </p>
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_field :content %>
+  </p>
+  <p>
+    <%= f.label :read %><br />
+    <%= f.check_box :read %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110628162909) do
+ActiveRecord::Schema.define(:version => 20110702123210) do
 
   create_table "agent_prices", :force => true do |t|
     t.integer  "spot_id"
@@ -81,6 +81,17 @@ ActiveRecord::Schema.define(:version => 20110628162909) do
   create_table "menus_roles", :id => false, :force => true do |t|
     t.integer "role_id"
     t.integer "menu_id"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.integer  "message_from_id"
+    t.string   "message_from_type"
+    t.integer  "message_to_id"
+    t.string   "message_to_type"
+    t.string   "content"
+    t.boolean  "read",              :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "public_rates", :force => true do |t|

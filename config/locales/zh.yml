@@ -185,6 +185,7 @@ zh:
       rfp: "价格关联"
       reservation: "门票预订"
       role: "角色"
+      message: "消息"
     attributes:
       user:
         username: "用户名"
@@ -266,6 +267,10 @@ zh:
          group_no: "团号"
       role:
          name: "名称"
+      message:
+         message_from: "发件人"
+         content: "内容"
+         read: "已读"
   activemodel:
     errors:
       template:

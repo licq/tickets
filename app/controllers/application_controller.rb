@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     if current_user && (current_user.type = "SpotAdmin" || current_user.type = "SpotOperator")
       @spot ||= current_user.spot
     else
-      redirect_to new_spot_url
+      redirect_to '/'
     end
   end
 
@@ -14,13 +14,13 @@ class ApplicationController < ActionController::Base
     if current_user && (current_user.type = "AgentOperator")
       @agent ||= current_user.agent
     else
-      redirect_to new_agent_url
+      redirect_to '/'
     end
   end
 
   def check_system_admin
     unless current_user && (current_user.type == "SystemAdmin")
-      redirect_to new_spot_url
+      redirect_to '/'
     end
   end
 

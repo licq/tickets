@@ -1,0 +1,24 @@
+<% title "Message" %>
+
+<p>
+  <strong>Message From:</strong>
+  <%= @message.message_from %>
+</p>
+<p>
+  <strong>Message To:</strong>
+  <%= @message.message_to %>
+</p>
+<p>
+  <strong>Content:</strong>
+  <%= @message.content %>
+</p>
+<p>
+  <strong>Read:</strong>
+  <%= @message.read %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_message_path(@message) %> |
+  <%= link_to "Destroy", @message, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", messages_path %>
+</p>

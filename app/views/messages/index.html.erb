@@ -1,0 +1,20 @@
+<% title "消息" %>
+
+<div class="result_count">共找到<%= @messages.total_count %>条记录</div>
+
+<%= paginate @messages %>
+<table>
+  <tr>
+    <th width="150px">发件人</th>
+    <th width="750px">内容</th>
+    <th>操作</th>
+  </tr>
+  <% for message in @messages %>
+    <tr class=<%= cycle("even", "odd") %>>
+      <td><%= message.message_from.name %></td>
+      <td><%= message.content %></td>
+      <td><%= link_to "删除", message, :confirm => '您确认删除吗?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
