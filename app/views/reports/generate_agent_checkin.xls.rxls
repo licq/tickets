@@ -1,0 +1,28 @@
+excel_document(:filename => "agent_checkin.xls") do |workbook|
+  sheet = workbook.create_worksheet
+
+#  sheet.row(0).concat %w{Name Country Acknowlegement}
+#  sheet[1,0] = 'Japan'
+#  row = sheet.row(1)
+#  row.push 'Creator of Ruby'
+#  row.unshift 'Yukihiro Matsumoto'
+#  sheet.row(2).replace [ 'Daniel J. Berger', 'U.S.A.',
+#                         'Author of original code for Spreadsheet::Excel' ]
+#  sheet.row(3).push 'Charles Lowe', 'Author of the ruby-ole Library'
+#  sheet.row(3).insert 1, 'Unknown'
+#  sheet.update_row 4, 'Hannes Wyss', 'Switzerland', 'Author'
+#
+#  sheet.row(0).height = 18
+#
+  format = Spreadsheet::Format.new :color => :blue,
+                                   :weight => :bold,
+                                   :size => 18
+  bold = Spreadsheet::Format.new :weight => :bold
+
+  sheet.row(0).push "#{@agent.name}入园报表(#{@start_time.to_date}~#{@end_time.to_date})"
+  sheet.row(1).concat ["订单总数", "成人总数", "儿童总数", "总价"]
+  sheet.row(2).concat [@table.count_sum, @table.adult_ticket_sum.to_i, @table.child_ticket_sum.to_i, @table.price_sum.to_i]
+
+  sheet.row(0).default_format = format
+  2.times do |x| sheet.row(x + 1).set_format(0, bold) end
+end

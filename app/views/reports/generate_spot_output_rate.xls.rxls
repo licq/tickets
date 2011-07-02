@@ -1,0 +1,18 @@
+#encoding: utf-8
+excel_document(:filename => "spot_output_rate.xls") do |workbook|
+  sheet = workbook.create_worksheet
+  format = Spreadsheet::Format.new :color => :blue,
+                                   :weight => :bold,
+                                   :size => 18
+  bold = Spreadsheet::Format.new :weight => :bold
+
+  sheet.row(0).push "#{@spot.name}产量同比环比报表(#{@start_time.year}年#{@start_time.month}月)"
+  sheet.row(1).concat ["当月订单总数", "当月总价", "上月订单总数(环比)", "上月总价(环比)", "去年当月订单总数(同比)"]
+  sheet.row(2).concat [@table.count_sum, @table.price_sum.to_i, "#{@prev_month_table.count_sum}(#{@prev_month_count_rate})", "#{@prev_month_table.price_sum.to_i}(#{@prev_month_price_rate})",
+           "#{@prev_year_table.count_sum}(#{@prev_year_count_rate})", "#{@prev_year_table.price_sum.to_i}(#{@prev_year_price_rate})"]
+
+  sheet.row(0).default_format = format
+  2.times do |x|
+    sheet.row(x + 1).set_format(0, bold)
+  end
+end

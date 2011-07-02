@@ -16,6 +16,8 @@ gem 'flutie'
 gem 'prawn_rails'
 gem 'prawn-format'
 gem 'prawn-layout'
+gem 'spreadsheet'
+gem 'excel_rails'
 
 group :development do
   gem 'jquery-rails'

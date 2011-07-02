@@ -1,0 +1,15 @@
+excel_document(:filename => "spot_checkin.xls") do |workbook|
+  sheet = workbook.create_worksheet
+
+  format = Spreadsheet::Format.new :color => :blue,
+                                   :weight => :bold,
+                                   :size => 18
+  bold = Spreadsheet::Format.new :weight => :bold
+
+  sheet.row(0).push "#{@spot.name}入园报表(#{@start_time.to_date}~#{@end_time.to_date})"
+  sheet.row(1).concat ["订单总数", "成人总数", "儿童总数", "总价"]
+  sheet.row(2).concat [@table.count_sum, @table.adult_ticket_sum.to_i, @table.child_ticket_sum.to_i, @table.price_sum.to_i]
+
+  sheet.row(0).default_format = format
+  2.times do |x| sheet.row(x + 1).set_format(0, bold) end
+end
