@@ -31,7 +31,7 @@ class AgentUsersController < ApplicationController
 
   def update
     @user =@agent.operators.find(params[:id])
-    if @agent.update_attributes(params[:agent_operator])
+    if @user.update_attributes(params[:agent_operator])
       redirect_to agent_users_path, :notice => "修改已成功"
     else
       render :action => 'edit'

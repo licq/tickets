@@ -42,18 +42,18 @@ Menu.create!(:name => "用户列表", :url => "users_path", :menu_group => spot_
 Menu.create!(:name => "新建角色", :url => "new_role_path", :menu_group => spot_menu_group3, :seq => 1)
 Menu.create!(:name => "角色列表", :url => "roles_path", :menu_group => spot_menu_group3, :seq => 2)
 
-Menu.create!(:name => "已开通预订旅行社", :url => "rfps_path", :menu_group => spot_menu_group4, :seq => 1)
-Menu.create!(:name => "已申请待开通旅行社", :url => "applied_spot_agents_path", :menu_group => spot_menu_group4, :seq => 2)
-Menu.create!(:name => "未开通预订旅行社", :url => "spot_agents_path", :menu_group => spot_menu_group4, :seq => 3)
+Menu.create!(:name => "已开通预订", :url => "rfps_path", :menu_group => spot_menu_group4, :seq => 1)
+Menu.create!(:name => "已申请待开通", :url => "applied_spot_agents_path", :menu_group => spot_menu_group4, :seq => 2)
+Menu.create!(:name => "未开通预订", :url => "spot_agents_path", :menu_group => spot_menu_group4, :seq => 3)
 
 Menu.create!(:name => "订单列表", :url => "spot_reservations_path", :menu_group => spot_menu_group5, :seq => 1)
 Menu.create!(:name => "当日订单", :url => "today_spot_reservations_path", :menu_group => spot_menu_group5, :seq => 2)
 
-Menu.create!(:name => "产量统计报表", :url => "reports_spot_output_path", :menu_group => spot_menu_group6, :seq => 1)
-Menu.create!(:name => "产量同比环比报表", :url => "reports_spot_output_rate_path", :menu_group => spot_menu_group6, :seq => 2)
-Menu.create!(:name => "入园统计报表", :url => "reports_spot_checkin_path", :menu_group => spot_menu_group6, :seq => 3)
-Menu.create!(:name => "分销商销售业绩报表", :url => "reports_spot_agent_output_path", :menu_group => spot_menu_group6, :seq => 4)
-Menu.create!(:name => "每月销售统计报表", :url => "reports_spot_month_reservations_path", :menu_group => spot_menu_group6, :seq => 5)
+Menu.create!(:name => "产量统计", :url => "reports_spot_output_path", :menu_group => spot_menu_group6, :seq => 1)
+Menu.create!(:name => "产量同比环比", :url => "reports_spot_output_rate_path", :menu_group => spot_menu_group6, :seq => 2)
+Menu.create!(:name => "入园统计", :url => "reports_spot_checkin_path", :menu_group => spot_menu_group6, :seq => 3)
+Menu.create!(:name => "分销商销售业绩", :url => "reports_spot_agent_output_path", :menu_group => spot_menu_group6, :seq => 4)
+Menu.create!(:name => "每月销售统计", :url => "reports_spot_month_reservations_path", :menu_group => spot_menu_group6, :seq => 5)
 
 
 Menu.create!(:name => "结算列表", :url => "spot_purchases_path", :menu_group => spot_menu_group7, :seq => 1)
@@ -78,9 +78,9 @@ Menu.create!(:name => "用户列表", :url => "agent_users_path", :menu_group =>
 Menu.create!(:name => "新建角色", :url => "new_agent_role_path", :menu_group => agent_menu_group2, :seq => 1)
 Menu.create!(:name => "角色列表", :url => "agent_roles_path", :menu_group => agent_menu_group2, :seq => 2)
 
-Menu.create!(:name => "可预订景区", :url => "agent_rfps_path", :menu_group => agent_menu_group3, :seq => 1)
-Menu.create!(:name => "已申请预订景区", :url => "applied_agent_spots_path", :menu_group => agent_menu_group3, :seq => 2)
-Menu.create!(:name => "未开通预订景区", :url => "agent_spots_path", :menu_group => agent_menu_group3, :seq => 3)
+Menu.create!(:name => "可预订", :url => "agent_rfps_path", :menu_group => agent_menu_group3, :seq => 1)
+Menu.create!(:name => "已申请预订", :url => "applied_agent_spots_path", :menu_group => agent_menu_group3, :seq => 2)
+Menu.create!(:name => "未开通预订", :url => "agent_spots_path", :menu_group => agent_menu_group3, :seq => 3)
 
 Menu.create!(:name => "新建订单", :url => "new_reservation_path", :menu_group => agent_menu_group4, :seq => 1)
 Menu.create!(:name => "订单列表", :url => "reservations_path", :menu_group => agent_menu_group4, :seq => 2)
@@ -88,7 +88,7 @@ Menu.create!(:name => "订单列表", :url => "reservations_path", :menu_group =
 Menu.create!(:name => "结算列表", :url => "agent_purchases_path", :menu_group => agent_menu_group5, :seq => 1)
 Menu.create!(:name => "结算历史", :url => "agent_purchase_histories_path", :menu_group => agent_menu_group5, :seq => 2)
 
-Menu.create!(:name => "产量统计报表", :url => "reports_agent_output_path", :menu_group => agent_menu_group6, :seq => 1)
-Menu.create!(:name => "产量同比环比报表", :url => "reports_agent_output_rate_path", :menu_group => agent_menu_group6, :seq => 2)
-Menu.create!(:name => "入园统计报表", :url => "reports_agent_checkin_path", :menu_group => agent_menu_group6, :seq => 3)
-Menu.create!(:name => "景区销售业绩报表", :url => "reports_agent_spot_output_path", :menu_group => agent_menu_group6, :seq => 4)
+Menu.create!(:name => "产量统计", :url => "reports_agent_output_path", :menu_group => agent_menu_group6, :seq => 1)
+Menu.create!(:name => "产量同比环比", :url => "reports_agent_output_rate_path", :menu_group => agent_menu_group6, :seq => 2)
+Menu.create!(:name => "入园统计", :url => "reports_agent_checkin_path", :menu_group => agent_menu_group6, :seq => 3)
+Menu.create!(:name => "景区销售业绩", :url => "reports_agent_spot_output_path", :menu_group => agent_menu_group6, :seq => 4)
