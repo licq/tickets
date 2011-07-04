@@ -10,6 +10,23 @@ $(function() {
     });
     set_datepicker();
 
+    $("#city_id").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "/cities.json",
+                data: "q=" + request.term,
+                success: function(data) {
+                    response($.map(data, function(item) {
+                        return {
+                            value: item.name
+                        }
+                    }))
+                }
+            });
+        },
+        minLength: 1
+    });
+
     $("#today_spot_reservations_search input").keyup(function() {
         $.get($("#today_spot_reservations_search").attr("action"), $("#today_spot_reservations_search").serialize(), null, "script");
         return false;

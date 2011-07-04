@@ -5,7 +5,7 @@
         <table class="search_table">
           <tr>
             <td><%= f.input :name_contains, :label => "景区名称: ", :required => false %> </td>
-            <td><%= f.input :cities_name_contains, :label => "城市名: ", :required => false %></td>
+            <td><%= f.input :cities_name_contains, :label => "城市名: ", :required => false, :input_html => {:id => "city_id"} %></td>
             <td rowspan="2">
               <fieldset class="buttons">
                 <%= f.button :submit, :value => "查询" %>

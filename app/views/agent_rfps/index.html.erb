@@ -1,12 +1,12 @@
 <% title "可预订景区列表" %>
 
 <div id="search">
-  <%= simple_form_for @search do |f| %>
+  <%= simple_form_for @search, :url => agent_rfps_path do |f| %>
       <fieldset class="inputs">
         <table class="search_table">
           <tr>
             <td><%= f.input :spot_name_contains, :label => "景区名称", :required => false %></td>
-            <td><%= f.input :spot_cities_name_contains, :label => "城市名", :required => false %></td>
+            <td><%= f.input :spot_cities_name_contains, :label => "城市名", :required => false, :input_html => {:id => "city_id"} %></td>
             <td>
               <fieldset class="buttons">
                 <%= f.button :submit, :value => "查询" %>
