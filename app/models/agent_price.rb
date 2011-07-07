@@ -3,7 +3,7 @@ class AgentPrice < ActiveRecord::Base
   validates :name, :presence => true
   validates_uniqueness_of :name, :scope => [:spot]
   belongs_to :spot
-  has_many :rfps
+  has_many :rfps, :dependent => :delete_all
   has_many :individual_rates, :dependent => :delete_all, :order => "ticket_id"
   has_many :team_rates, :dependent => :delete_all, :order => "ticket_id"
   accepts_nested_attributes_for :team_rates, :individual_rates

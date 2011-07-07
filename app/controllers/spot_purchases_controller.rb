@@ -31,10 +31,10 @@ class SpotPurchasesController < ApplicationController
       PurchaseHistory.transaction do
         reservations = @spot.reservations.where(:payment_method => "prepay").find(ids)
         agent_id = reservations[0].agent_id
-        is_individual = reservations[0].type == "IndividualReservation"
+        is_individual = reservations[0].is_individual?
         price = reservations.sum(&:total_purchase_price)
         purchase_history = @spot.purchase_histories.create(:purchase_date => Date.today, :user => current_user.name, :agent_id => agent_id, :is_individual => is_individual, :payment_method => "prepay", :price => price)
-        purchase_history.save
+        purchase_history.save!
         @spot.reservations.where(:payment_method => "prepay").update_all({:paid => true, :purchase_history_id => purchase_history}, :id => params[:reservation_ids])
       end
     end

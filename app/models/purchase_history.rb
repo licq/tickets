@@ -6,7 +6,6 @@ class PurchaseHistory < ActiveRecord::Base
   validates_presence_of :agent_id
   validates_presence_of :spot_id
   validates_presence_of :price
-  validates_presence_of :is_individual
   validates_presence_of :payment_method
 
   has_many :reservations

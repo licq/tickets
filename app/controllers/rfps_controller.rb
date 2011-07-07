@@ -61,11 +61,13 @@ class RfpsController < ApplicationController
     @rfp.team_payment_method = params[:rfp][:team_payment_method]
     @rfp.individual_payment_method = params[:rfp][:individual_payment_method]
     @rfp.status = "c"
-    @rfp.save
-
-    @spot.sent_messages.create!(:message_to => Agent.find(@rfp.agent_id),
-                                :content => "#{@spot.name}已经通过了您的预订申请", :read => false)
-    redirect_to applied_spot_agents_path, :notice => "接受已成功"
+    if @rfp.save
+      @spot.sent_messages.create!(:message_to => Agent.find(@rfp.agent_id),
+                                  :content => "#{@spot.name}已经通过了您的预订申请", :read => false)
+      redirect_to applied_spot_agents_path, :notice => "接受已成功"
+    else
+      render :edit_accept
+    end
   end
 
   def reject

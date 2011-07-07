@@ -5,7 +5,7 @@ class Rfp < ActiveRecord::Base
   validates_presence_of :agent_id, :message => "必须选择一个旅行社"
   validates_presence_of :agent_id, :scope =>[:spot_id], :message => "已经存在与旅行社的关联"
   validates_presence_of :spot_id, :scope =>[:agent_id], :message => "已经存在与景区的关联"
-  validates_presence_of :agent_price_id, :if => Proc.new { |rfp| rfp.from_spot? }, :message => "必须选择一个旅行社价格"
+  validates_presence_of :agent_price_id, :if => Proc.new { |rfp| rfp.status == 'c' }, :message => "必须选择一个旅行社价格"
   validates_presence_of :team_payment_method, :if => Proc.new { |rfp| rfp.from_spot? }, :message => "必须选择团队票支付方式"
   validates_presence_of :individual_payment_method, :if => Proc.new { |rfp| rfp.from_spot? }, :message => "必须选择散客票支付方式"
   validates_inclusion_of :status, :in=> ['a', 'r', 'c']
