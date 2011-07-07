@@ -44,7 +44,7 @@ class AgentRolesController < ApplicationController
 
   def destroy
     @role = @agent.roles.find(params[:id])
-    if (@role.users.empty?)
+    if (@role.users.where(:deleted => false).empty?)
       @role.destroy
       redirect_to agent_roles_path, :notice => "角色已删除成功"
     else
