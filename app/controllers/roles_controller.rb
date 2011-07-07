@@ -46,7 +46,7 @@ class RolesController < ApplicationController
 
   def destroy
     @role = @spot.roles.find(params[:id])
-    if (@role.users.empty?)
+    if (@role.users.where(:deleted => false).empty?)
       @role.destroy
       redirect_to roles_path, :notice => "角色已删除成功"
     else

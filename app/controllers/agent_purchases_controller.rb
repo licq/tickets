@@ -71,7 +71,7 @@ class AgentPurchasesController < ApplicationController
 
   private
   def id_list(id_string)
-    id_string.split(",")
+    id_string.present? ? id_string.split(",") : nil
   end
 
 

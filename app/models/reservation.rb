@@ -10,7 +10,8 @@ class Reservation < ActiveRecord::Base
   validates :contact, :presence => true
   validates :phone, :presence => true
   validates :spot_id, :presence => true
-  validates_numericality_of :adult_ticket_number, :greater_than => 0, :message => "成人票数量不能为0"
+  validates_numericality_of :adult_ticket_number, :greater_than => 0, :message => "成人票数量不能为0和负数"
+  validates_numericality_of :child_ticket_number, :greater_than => -1, :message => "儿童票数量不能为负数", :allow_blank => true
 
   after_create :set_no
 

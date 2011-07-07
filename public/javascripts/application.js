@@ -108,11 +108,11 @@ $(function() {
         calculate_team_true_price();
     });
 
-    $('#individual_reservation_date').change(function(){
+    $('#individual_reservation_date').change(function() {
         window.location = window.location.pathname + "?date=" + $(this).val();
     });
 
-    $('#team_reservation_date').change(function(){
+    $('#team_reservation_date').change(function() {
         window.location = window.location.pathname + "?date=" + $(this).val();
     });
 
@@ -204,9 +204,9 @@ function set_datepicker() {
         changeYear: true ,
         changeMonth: true,
         numberOfMonths: 2,
-        beforeShow: function(input,inst){
+        beforeShow: function(input, inst) {
             var start_picker = $(this).closest("td").prev().find(".reservation_start_datepicker");
-            $(this).datepicker('option','minDate',$(start_picker).datepicker('getDate'));
+            $(this).datepicker('option', 'minDate', $(start_picker).datepicker('getDate'));
         }
     });
 }

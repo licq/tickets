@@ -494,5 +494,9 @@ table.search_table, table.search_table tr {
     padding-left: 10px;
 }
 
+#purchase_table input[type="checkbox"]{
+    width: 10px;
+}
+
 
 
