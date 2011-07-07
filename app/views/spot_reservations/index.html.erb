@@ -15,7 +15,7 @@
           </tr>
           <tr>
             <td><%= f.input :agent_name_contains, :label => "旅行社名称", :required => false %></td>
-            <td></td>
+            <td><%= f.input :group_no_contains, :label => "团号", :required => false %></td>
           </tr>
           <tr>
             <td><%= f.input :date_greater_than_or_equal_to, :label => "入园起始日期", :required => false, :input_html => {:class =>'reservation_datepicker'} %></td>

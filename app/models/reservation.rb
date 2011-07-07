@@ -79,7 +79,8 @@ class Reservation < ActiveRecord::Base
   def self.search_for_today(search)
     reservations_for_today_and_confirmed = where({:date.eq => Date.today, :status.eq => :confirmed})
     if search
-      reservations_for_today_and_confirmed = reservations_for_today_and_confirmed.where((:phone.matches % "#{search}%" | :contact.matches % "%#{search}%" | :no.matches % "%#{search}%"))
+      reservations_for_today_and_confirmed =
+          reservations_for_today_and_confirmed.where((:phone.matches % "#{search}%" | :contact.matches % "%#{search}%" | :no.matches % "%#{search}%" | :group_no.matches % "%#{search}%"))
     end
     reservations_for_today_and_confirmed
   end
