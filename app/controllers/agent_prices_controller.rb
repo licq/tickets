@@ -8,6 +8,8 @@ class AgentPricesController < ApplicationController
       redirect_to seasons_path, :notice => "必须先设置淡旺季"
     elsif @spot.tickets.empty?
       redirect_to tickets_path, :notice => "必须先设置门票"
+    elsif !@spot.public_rates_complete?
+      redirect_to tickets_path, :notice => "请先设置门市价"
     end
     @agent_prices = @spot.agent_prices
   end

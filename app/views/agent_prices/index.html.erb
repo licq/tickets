@@ -1,6 +1,6 @@
 <% title "旅行社价格" %>
 
-<%= button_to_link "新建旅行社价格", new_agent_price_path,:class=> "new_button" %>
+<%= button_to_link "新建旅行社价格", new_agent_price_path, :class=> "new_button" %>
 
 
 <% season_size = @spot.seasons.size %>
@@ -23,10 +23,10 @@
   </tr>
   <tr>
     <% season_size.times do %>
-        <th>成人结算价</th>
         <th>成人售价</th>
-        <th>儿童结算价</th>
+        <th>成人结算价</th>
         <th>儿童售价</th>
+        <th>儿童结算价</th>
     <% end %>
     <% season_size.times do %>
         <th>成人售价</th>
@@ -46,10 +46,12 @@
           <th><%= ticket.name %></th>
           <% for season in @spot.seasons %>
               <% individual_rate = agent_price.individual_rate_for(season, ticket) %>
-              <th> <%= show_adult_purchase_price_for_individual_rate(individual_rate) %> </th>
               <th> <%= show_adult_sale_price_for_individual_rate(individual_rate) %></th>
-              <th> <%= show_child_purchase_price_for_individual_rate(individual_rate) %> </th>
+              <th> <%= show_adult_purchase_price_for_individual_rate(individual_rate) %> </th>
               <th> <%= show_child_sale_price_for_individual_rate(individual_rate) %></th>
+              <th> <%= show_child_purchase_price_for_individual_rate(individual_rate) %> </th>
+          <% end %>
+          <% for season in @spot.seasons %>
               <% team_rate = agent_price.team_rate_for(season, ticket) %>
               <th>
                 <%= show_adult_price_for_team_rate(team_rate) %>
@@ -58,15 +60,13 @@
                 <%= show_child_price_for_team_rate(team_rate) %>
               </th>
           <% end %>
-           <% if (count == 1) %>
-          <th rowspan="<%= ticket_size %>"><%= link_to "修改", edit_agent_price_path(agent_price) %></th>
-          <th rowspan="<%= ticket_size %>"><%= link_to "删除", agent_price, :confirm => '你确认删除吗?', :method => :delete %></th>
-           <%end%>
+          <% if (count == 1) %>
+              <th rowspan="<%= ticket_size %>"><%= link_to "修改", edit_agent_price_path(agent_price) %></th>
+              <th rowspan="<%= ticket_size %>"><%= link_to "删除", agent_price, :confirm => '你确认删除吗?', :method => :delete %></th>
+          <% end %>
           <% count += 1 %>
       <% end %>
-
       </tr>
-
   <% end %>
 </table>
 
