@@ -37,6 +37,48 @@ class ReservationsController < ApplicationController
 
   def edit
     @reservation = @agent.reservations.find(params[:id])
+    no_price = false
+    if params[:date]
+      if @reservation.is_individual?
+        individual_rate = AgentPrice.individual_price(@reservation.spot_id, @reservation.agent_id, params[:date])
+        if individual_rate
+          if @reservation.child_ticket_number > 0 && (individual_rate.child_purchase_price.nil? || individual_rate.child_sale_price.nil?)
+            no_price = true
+          else
+            @reservation.date = params[:date]
+            @reservation.child_sale_price = individual_rate.child_sale_price
+            @reservation.child_purchase_price = individual_rate.child_purchase_price
+            @reservation.adult_sale_price = individual_rate.adult_sale_price
+            @reservation.adult_purchase_price = individual_rate.adult_purchase_price
+            @reservation.book_price =@reservation.calculate_price
+            @reservation.book_purchase_price =@reservation.calculate_purchase_price
+            @reservation.total_price =@reservation.book_price
+            @reservation.total_purchase_price =@reservation.book_purchase_price
+          end
+        else
+          no_price = true
+        end
+      else
+        team_rate = AgentPrice.team_price(@reservation.spot_id, @reservation.agent_id, params[:date])
+        if team_rate
+          if @reservation.child_ticket_number > 0 && (team_rate.child_price.nil?)
+            no_price = true
+          else
+            @reservation.date = params[:date]
+            @reservation.child_price = team_rate.child_price
+            @reservation.adult_price = team_rate.adult_price
+            @reservation.book_price =@reservation.calculate_price
+            @reservation.total_price =@reservation.book_price
+          end
+        else
+          no_price = true
+        end
+      end
+    end
+
+    if no_price
+      flash.now[:notice] = "该日" + params[:date] + "没有价格"
+    end
   end
 
   def show
@@ -137,7 +179,7 @@ class ReservationsController < ApplicationController
     redirect_to reservations_url, :notice => "取消已成功."
   end
 
-   def print
+  def print
     @reservation = @agent.reservations.find(params[:id])
   end
 

@@ -108,6 +108,14 @@ $(function() {
         calculate_team_true_price();
     });
 
+    $('#individual_reservation_date').change(function(){
+        window.location = window.location.pathname + "?date=" + $(this).val();
+    });
+
+    $('#team_reservation_date').change(function(){
+        window.location = window.location.pathname + "?date=" + $(this).val();
+    });
+
     calculate_individual_price();
     calculate_team_price();
 
