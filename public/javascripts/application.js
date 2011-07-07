@@ -68,17 +68,17 @@ $(function() {
     $("input.numeric").keydown(function(e) {
         var key = e.charCode || e.keyCode || 0;
         return ( key == 8 || key == 9 ||
-                key == 46 || (key >= 37 && key <= 40) ||
-                (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+            key == 46 || (key >= 37 && key <= 40) ||
+            (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
 
     });
 
     $('#spot_accept_rfp_dialog').click(function() {
         $('<div></div>')
-                .load($(this).action)
-                .dialog({
-                            title: '选择旅行社价格'
-                        });
+            .load($(this).action)
+            .dialog({
+                title: '选择旅行社价格'
+            });
         return false;
     });
 
@@ -156,6 +156,7 @@ function set_datepicker() {
         minDate: new Date(),
         changeYear: true,
         changeMonth: true,
+        numberOfMonths: 2,
         onClose: function(dateText, inst) {
             var end_date_picker = $(this).parent().next().children(".end_datepicker");
             end_date_picker.datepicker("option", "minDate", dateText);
@@ -167,7 +168,8 @@ function set_datepicker() {
     $(".end_datepicker").datepicker({
         minDate: new Date(),
         changeYear: true,
-        changeMonth: true
+        changeMonth: true,
+        numberOfMonths: 2
     });
     var day = new Date();
     day.setDate(day.getDate() + 1);
@@ -175,16 +177,29 @@ function set_datepicker() {
     $(".book_datepicker").datepicker({
         minDate: new Date(),
         changeYear: true ,
-        changeMonth: true
+        changeMonth: true,
+        numberOfMonths: 2
     });
     $(".maxdate_datepicker").datepicker({
         maxDate: new Date(),
         changeYear: true ,
-        changeMonth: true
+        changeMonth: true ,
+        numberOfMonths: 2
     });
-    $(".reservation_datepicker").datepicker({
+    $(".reservation_start_datepicker").datepicker({
         changeYear: true ,
-        changeMonth: true
+        changeMonth: true,
+        numberOfMonths: 2
+    });
+
+    $(".reservation_end_datepicker").datepicker({
+        changeYear: true ,
+        changeMonth: true,
+        numberOfMonths: 2,
+        beforeShow: function(input,inst){
+            var start_picker = $(this).closest("td").prev().find(".reservation_start_datepicker");
+            $(this).datepicker('option','minDate',$(start_picker).datepicker('getDate'));
+        }
     });
 }
 
@@ -207,7 +222,7 @@ function add_fields(link, association, content) {
 function calculate_individual_price() {
     if ($("#individual_reservation_adult_ticket_number").length != 0) {
         calculate_price("individual_reservation_adult_ticket_number", "individual_reservation_adult_sale_price", "individual_reservation_child_ticket_number",
-                "individual_reservation_child_sale_price", "total_price_text");
+            "individual_reservation_child_sale_price", "total_price_text");
     }
 }
 
@@ -215,7 +230,7 @@ function calculate_individual_price() {
 function calculate_team_price() {
     if ($("#team_reservation_adult_ticket_number").length != 0) {
         calculate_price("team_reservation_adult_ticket_number", "team_reservation_adult_price", "team_reservation_child_ticket_number",
-                "team_reservation_child_price", "total_price_text");
+            "team_reservation_child_price", "total_price_text");
     }
 }
 
@@ -223,7 +238,7 @@ function calculate_team_price() {
 function calculate_individual_true_price() {
     if ($("#individual_reservation_adult_true_ticket_number").length != 0) {
         calculate_price("individual_reservation_adult_true_ticket_number", "individual_reservation_adult_sale_price", "individual_reservation_child_true_ticket_number",
-                "individual_reservation_child_sale_price", "total_price_text");
+            "individual_reservation_child_sale_price", "total_price_text");
     }
 }
 
@@ -231,7 +246,7 @@ function calculate_individual_true_price() {
 function calculate_team_true_price() {
     if ($("#team_reservation_adult_true_ticket_number").length != 0) {
         calculate_price("team_reservation_adult_true_ticket_number", "team_reservation_adult_price", "team_reservation_child_true_ticket_number",
-                "team_reservation_child_price", "total_price_text");
+            "team_reservation_child_price", "total_price_text");
     }
 }
 

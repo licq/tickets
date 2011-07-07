@@ -65,7 +65,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def can_edit
-    is_confirmed?
+    self.status == "confirmed"
   end
 
   def can_cancel
@@ -77,12 +77,12 @@ class Reservation < ActiveRecord::Base
   end
 
   def self.search_for_today(search)
-    reservations_for_today_and_confirmed = where({:date.eq => Date.today, :status.eq => :confirmed})
+    today_and_confirmed = where({:date.in => (Date.today - 1)..(Date.today + 1), :status.eq => :confirmed})
     if search
-      reservations_for_today_and_confirmed =
-          reservations_for_today_and_confirmed.where((:phone.matches % "#{search}%" | :contact.matches % "%#{search}%" | :no.matches % "%#{search}%" | :group_no.matches % "%#{search}%"))
+      today_and_confirmed =
+          today_and_confirmed.where((:phone.matches % "#{search}%" | :contact.matches % "%#{search}%" | :no.matches % "%#{search}%" | :group_no.matches % "%#{search}%"))
     end
-    reservations_for_today_and_confirmed
+    today_and_confirmed
   end
 
   def self.day_between(start_date, end_date)

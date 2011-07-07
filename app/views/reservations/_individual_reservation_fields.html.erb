@@ -6,9 +6,9 @@
   <%= f.input :adult_sale_price, :as => :hidden %>
   <%= f.input :adult_purchase_price, :as => :hidden %>
   <%= f.input :payment_method, :as => :hidden %>
-  <%= f.input :date, :as => :hidden %>
   <div class="input string required"><label>景区</label><%= f.object.spot.name %></div>
   <div class="input string required"><label>门票</label> <%= f.object.ticket_name %></div>
+  <%= f.input :date, :required => true, :as => :string, :input_html => {:class => "book_datepicker"} %>
   <div class="input string required"><label>入园日期</label><%= f.object.date %></div>
   <div class="input string required"><label>成人价</label><%= f.object.adult_sale_price %></div>
   <% unless f.object.child_sale_price.nil? %>
