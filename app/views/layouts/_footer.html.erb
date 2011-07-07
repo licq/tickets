@@ -1,8 +1,15 @@
 <footer>
   <nav class="round" style="margin-top:5px;">
     <ul>
-      <li>如需帮助，请发送邮件到 <a href="mailto:as.support@derbysoft.com"><span style='color:#fff;'>as.support@derbysoft.com</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="#"><span style='color:#fff;'>下载操作手册</span></a>
+      <li>如需帮助，请发送邮件到
+        <a href="mailto:as.support@derbysoft.com"><span style='color:#fff;'>as.support@derbysoft.com</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <% if current_user %>
+            <% if current_user.is_spot_user %>
+                <%= link_to "下载操作手册", manuals_spot_path %>
+            <% elsif current_user.is_agent_user %>
+                <%= link_to "下载操作手册", manuals_agent_path %>
+            <% end %>
+        <% end %>
       </li>
     </ul>
   </nav>

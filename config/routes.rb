@@ -1,5 +1,9 @@
 Tickets::Application.routes.draw do
 
+  get "manuals/spot"
+
+  get "manuals/agent"
+
   resources :messages
 
   get "home/index"

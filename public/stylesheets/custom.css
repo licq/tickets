@@ -85,6 +85,10 @@ footer nav {
     padding: 0;
 }
 
+footer nav.round a, footer nav.round a:visited, footer nav.round a.hover{
+    color: #fff;
+}
+
 div.field div.actions {
     margin-bottom: 10px;
 }
