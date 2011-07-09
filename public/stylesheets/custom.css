@@ -328,6 +328,8 @@ div.add_timespan {
 .search_table td {
     border: none;
     width: 400px;
+	padding-top: 0;
+	padding-bottom: 0;
 }
 
 .even td {
@@ -471,7 +473,7 @@ div.empty_home {
     border: none;
 }
 
-fieldset.inputs .buttons input[type="submit"] , .search_button {
+fieldset.inputs fieldset.buttons input[type="submit"] , .search_button {
     width: 40px;
     line-height: 22px;
     height: 22px;
@@ -480,10 +482,22 @@ fieldset.inputs .buttons input[type="submit"] , .search_button {
     color: #fff;
     font-size: 12px;
     cursor: pointer;
+	margin: 0;
 }
 
-fieldset.buttons {
+fieldset.inputs fieldset.buttons {
     width: 100px;
+	background: #E0EDF5;
+}
+
+fieldset.buttons{
+	text-align: center;
+	width: 1050px;
+	background: #fff;
+}
+
+fieldset.buttons input[type='submit']{
+	margin: 20px auto;
 }
 
 table.search_table, table.search_table tr {
