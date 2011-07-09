@@ -29,13 +29,6 @@ section {
     width: 1050px;
 }
 
-nav {
-    float: right;
-    background-color: white;
-    padding: 0 0.7em;
-    white-space: nowrap;
-}
-
 nav ul {
     margin: 0;
     padding: 0;
@@ -76,6 +69,7 @@ footer {
 }
 
 footer nav {
+    white-space: nowrap;
     float: none;
     background: url(../images/bottombg.jpg) repeat-x;
     height: 40px;
@@ -85,7 +79,7 @@ footer nav {
     padding: 0;
 }
 
-footer nav.round a, footer nav.round a:visited, footer nav.round a.hover{
+footer nav.round a, footer nav.round a:visited, footer nav.round a.hover {
     color: #fff;
 }
 
@@ -263,15 +257,13 @@ div.add_timespan {
 
 .headrightbottom {
     height: 40px;
-	width: 770px;
+    width: 770px;
     float: right;
     clear: right;
 }
 
 .headrightbottom ul {
-    height: 40px;
     line-height: 40px;
-    float: left;
 }
 
 .headrightbottom li {
@@ -283,19 +275,16 @@ div.add_timespan {
 }
 
 .headrightbottom li a:visited {
-    width: 100px;
-    height: 40px;
-    float: left;
     color: #fff;
     text-decoration: none;
     display: block;
 }
 
-.bottom_links{
-    margin-left:auto;
-    margin-right:auto;
-    margin-bottom:5px;
-    text-align:center;
+.bottom_links {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    text-align: center;
 }
 
 .new_button, .buttons .button, .bottom_links input {
@@ -328,8 +317,8 @@ div.add_timespan {
 .search_table td {
     border: none;
     width: 400px;
-	padding-top: 0;
-	padding-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .even td {
@@ -340,7 +329,7 @@ div.add_timespan {
     background: #f1f1f1;
 }
 
-.button_to, .button_to div  {
+.button_to, .button_to div {
     display: inline;
 }
 
@@ -363,9 +352,59 @@ div.add_timespan {
     margin-left: 5px;
 }
 
+div.empty_home {
+    height: 500px;
+    background-color: #eef3f9;
+    border: none;
+}
+
+fieldset.inputs fieldset.buttons input[type="submit"], .search_button {
+    width: 40px;
+    line-height: 22px;
+    height: 22px;
+    border: none;
+    background: #0eb3e3;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 0;
+}
+
+fieldset.inputs fieldset.buttons {
+    width: 100px;
+    background: #E0EDF5;
+}
+
+fieldset.buttons {
+    text-align: center;
+    width: 1050px;
+    background: #fff;
+}
+
+fieldset.buttons input[type='submit'] {
+    margin: 20px auto;
+}
+
+table.search_table, table.search_table tr {
+    border: none;
+}
+
+.report_date_select select {
+    width: 60px;
+}
+
+#main h1 {
+    padding-left: 10px;
+}
+
+#purchase_table input[type="checkbox"] {
+    width: 10px;
+}
+
 #nav {
     line-height: 24px;
-    list-style-type: none; /*background: #666;*/
+    list-style-type: none;
+    background: #666;
 }
 
 #nav a {
@@ -399,7 +438,7 @@ div.add_timespan {
     float: left;
     width: 100px;
     background: url(../images/menublue.jpg) no-repeat;
-    margin: 0 1px;
+    margin: 0 5px;
 }
 
 #nav li a:hover {
@@ -432,28 +471,23 @@ div.add_timespan {
     width: 95px;
     _width: 100px;
     *width: 100px;
-    text-align: center;
+    text-align: left;
     overflow: hidden;
 }
 
 #nav li ul a:link {
     color: #134f91;
     text-decoration: none;
-    text-align: left;
-    font-size: 12px;
     padding-left: 5px;
 }
 
 #nav li ul a:visited {
-    color: #134F91;
+    color: #134f91;
     text-decoration: none;
-    font-size: 12px;
-    text-align: left;
-    padding-left: 5px;
 }
 
 #nav li ul a:hover {
-    color: #fff;
+    color: #134f91;
     text-decoration: none;
     font-weight: normal;
     background: #2f74c1;
@@ -467,54 +501,7 @@ div.add_timespan {
     left: auto;
 }
 
-div.empty_home {
-    height: 500px;
-    background-color: #eef3f9;
-    border: none;
+#content {
+    clear: left;
 }
-
-fieldset.inputs fieldset.buttons input[type="submit"] , .search_button {
-    width: 40px;
-    line-height: 22px;
-    height: 22px;
-    border: none;
-    background: #0eb3e3;
-    color: #fff;
-    font-size: 12px;
-    cursor: pointer;
-	margin: 0;
-}
-
-fieldset.inputs fieldset.buttons {
-    width: 100px;
-	background: #E0EDF5;
-}
-
-fieldset.buttons{
-	text-align: center;
-	width: 1050px;
-	background: #fff;
-}
-
-fieldset.buttons input[type='submit']{
-	margin: 20px auto;
-}
-
-table.search_table, table.search_table tr {
-    border: none;
-}
-
-.report_date_select select{
-    width: 60px;
-}
-
-#main h1{
-    padding-left: 10px;
-}
-
-#purchase_table input[type="checkbox"]{
-    width: 10px;
-}
-
-
 
