@@ -265,6 +265,7 @@ zh:
          phone: "联系方式"
          total_price: "总价"
          group_no: "团号"
+         note: "备注"
       role:
          name: "名称"
       message:

@@ -26,6 +26,9 @@
       <div class="input string required"><label>总价</label>
         <span id="total_price_text"><%= f.object.total_price %></span>
       </div>
+      <div class="input string required"><label>备注</label>
+        <span><%= f.object.note %></span>
+      </div>
       <div class="input string required"><label>支付方式</label> <%= show_reservation_payment_method(@reservation) %></div>
     </fieldset>
     <fieldset class="buttons">

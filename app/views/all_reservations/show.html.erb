@@ -94,6 +94,11 @@
     <strong>联系方式:</strong>
     <%= @reservation.phone %>
   </p>
+
+  <p>
+  	<strong>备注</strong>
+	<%= @reservation.note %>
+  </p>
 </div>
 <p>
   <%= link_to "返回列表", all_reservations_path %>

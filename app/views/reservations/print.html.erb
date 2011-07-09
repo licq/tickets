@@ -32,55 +32,59 @@
       <td colspan="4"> </td>
     </tr>
     <% adult_price = @reservation.is_individual? ? @reservation.adult_sale_price : @reservation.adult_price;
-            child_price = @reservation.is_individual? ? @reservation.child_sale_price : @reservation.child_price %>
-    <tr>
-      <td>成人销售价格:</td>
-      <td><%= adult_price %></td>
-      <td>数量:</td>
-      <td><%= @reservation.adult_ticket_number %></td>
-    </tr>
+    child_price = @reservation.is_individual? ? @reservation.child_sale_price : @reservation.child_price %>
+  <tr>
+    <td>成人销售价格:</td>
+    <td><%= adult_price %></td>
+    <td>数量:</td>
+    <td><%= @reservation.adult_ticket_number %></td>
+  </tr>
 
-    <tr>
-      <td>儿童销售价格:</td>
-      <td><%= child_price %></td>
-      <td>数量:</td>
-      <td><%= @reservation.child_ticket_number %></td>
-    </tr>
+  <tr>
+    <td>儿童销售价格:</td>
+    <td><%= child_price %></td>
+    <td>数量:</td>
+    <td><%= @reservation.child_ticket_number %></td>
+  </tr>
 
-    <tr>
-      <td>总价:</td>
-      <td colspan="3"> <%=@reservation.total_price %></td>
-    </tr>
+  <tr>
+    <td>总价:</td>
+    <td colspan="3"> <%=@reservation.total_price %></td>
+  </tr>
 
-    <tr>
-       <td colspan="4"> </td>
-    </tr>
+  <tr>
+    <td colspan="4"> </td>
+  </tr>
 
-    <tr>
-      <td>联系人:</td>
-      <td><%= @reservation.contact %></td>
-      <td>联系方式:</td>
-      <td> <%= @reservation.phone %></td>
-    </tr>
+  <tr>
+    <td>联系人:</td>
+    <td><%= @reservation.contact %></td>
+    <td>联系方式:</td>
+    <td> <%= @reservation.phone %></td>
+  </tr>
+  <tr>
+    <td>备注:</td>
+    <td colspan="3"><%= @reservation.note %></td>
+  </tr>
 
-    <tr>
-       <td colspan="4"> </td>
-    </tr>
+  <tr>
+    <td colspan="4"> </td>
+  </tr>
 
-     <tr>
-      <td>订单咨询电话:</td>
-      <td colspan="3"><%= @reservation.spot.business_phone %> </td>
-    </tr>
+  <tr>
+    <td>订单咨询电话:</td>
+    <td colspan="3"><%= @reservation.spot.business_phone %> </td>
+  </tr>
 
-    <tr>
-       <td colspan="4"> </td>
-    </tr>
+  <tr>
+    <td colspan="4"> </td>
+  </tr>
 
-    <tr>
-       <td colspan="4">祝您旅途愉快！ </td>
-    </tr>
+  <tr>
+    <td colspan="4">祝您旅途愉快！ </td>
+  </tr>
 
-  </table>
+</table>
 
 </div>
 <p>
