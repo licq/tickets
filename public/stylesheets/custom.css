@@ -79,7 +79,15 @@ footer nav {
     padding: 0;
 }
 
-footer nav.round a, footer nav.round a:visited, footer nav.round a.hover {
+footer nav.round a{
+    color: #fff;
+}
+
+footer nav.round a:visited{
+    color: #fff;
+}
+
+footer nav.round a.hover {
     color: #fff;
 }
 
@@ -209,7 +217,7 @@ div.add_timespan {
     border: none;
     padding: 0;
     margin: 0;
-    width: 280px;
+    width: 270px;
     height: 80px;
     float: left;
 }
@@ -232,7 +240,7 @@ div.add_timespan {
 
 .headright {
     background: url("../images/headbg.jpg") repeat-x scroll 0 0 transparent;
-    width: 770px;
+    width: 780px;
     height: 80px;
     float: right;
 }
@@ -257,7 +265,7 @@ div.add_timespan {
 
 .headrightbottom {
     height: 40px;
-    width: 770px;
+    width: 780px;
     float: right;
     clear: right;
 }
@@ -358,7 +366,19 @@ div.empty_home {
     border: none;
 }
 
-fieldset.inputs fieldset.buttons input[type="submit"], .search_button {
+fieldset.inputs fieldset.buttons input{
+    width: 40px;
+    line-height: 22px;
+    height: 22px;
+    border: none;
+    background: #0eb3e3;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 0;
+}
+
+ input.search_button {
     width: 40px;
     line-height: 22px;
     height: 22px;
@@ -381,7 +401,7 @@ fieldset.buttons {
     background: #fff;
 }
 
-fieldset.buttons input[type='submit'] {
+fieldset.buttons input {
     margin: 20px auto;
 }
 
@@ -397,7 +417,7 @@ table.search_table, table.search_table tr {
     padding-left: 10px;
 }
 
-#purchase_table input[type="checkbox"] {
+#purchase_table input{
     width: 10px;
 }
 
