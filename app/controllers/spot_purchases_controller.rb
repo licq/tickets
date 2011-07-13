@@ -46,7 +46,6 @@ class SpotPurchasesController < ApplicationController
       format.pdf do
         ids = id_list(params[:reservation_ids])
         if ids.present?
-#          @reservations = @spot.reservations.where(:payment_method => "prepay").find(ids)
           @reservations = @spot.reservations.find(ids)
           @agent = Agent.find(@reservations[0].agent_id)
           @date = params[:date].empty? ? Date.today : params[:date]

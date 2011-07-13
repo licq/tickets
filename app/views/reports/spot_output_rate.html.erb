@@ -5,8 +5,8 @@
         <table class="search_table">
           <tr>
             <td class="report_date_select">
-              <span>年 <%= select_tag :year, options_for_select([[2011, 2011], [2010, 2010]], params[:year]) %></span>
-              <span>月 <%= select_tag :month, options_for_select([[2011, 2011]], params[:month]) %></span>
+              <span><%= select_tag :year, options_for_select([[2011, 2011], [2010, 2010]], params[:year]) %>年</span>
+              <span><%= select_tag :month, options_for_select([[2011, 2011]], params[:month]) %>月</span>
             </td>
             <td></td>
             <td>

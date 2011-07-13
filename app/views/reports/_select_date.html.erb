@@ -3,10 +3,10 @@
     <tr>
       <td>报表类型<%= select_tag :type, options_for_select([["日", "day"], ["周", "week"], ["月", "month"]], params[:type]), :id =>"output_report_type" %></td>
       <td class="report_date_select">
-        <span>年 <%= select_tag :year, options_for_select([[2011, 2011], [2010, 2010]], params[:year]) %></span>
-        <span>月 <%= select_tag :month, options_for_select([[2011, 2011]], params[:month]) %></span>
-        <span>日 <%= select_tag :day, options_for_select([[2011, 2011]], params[:day]) %></span>
-        <span>周 <%= select_tag :week, options_for_select([[2011, 2011]], params[:week]) %></span>
+        <span><%= select_tag :year, options_for_select([[2011, 2011], [2010, 2010]], params[:year]) %>年</span>
+        <span><%= select_tag :month, options_for_select([[2011, 2011]], params[:month]) %>月</span>
+        <span><%= select_tag :day, options_for_select([[2011, 2011]], params[:day]) %>日</span>
+        <span><%= select_tag :week, options_for_select([[2011, 2011]], params[:week]) %>周</span>
       </td>
       <td>
         <fieldset class="buttons">
