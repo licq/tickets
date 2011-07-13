@@ -14,7 +14,7 @@
     <td><%= @purchase_history.agent.name %>  </td>
     <td><%= @purchase_history.ticket_type %></td>
     <td><%= show_payment_method(@purchase_history.payment_method) %></td>
-    <td><%= @purchase_history.in_out %></td>
+    <td><%= "旅行社" + @purchase_history.in_out_for_agent %></td>
     <td><%= @purchase_history.price %></td>
     <td><%= @purchase_history.purchase_date %></td>
     <td><%= @purchase_history.user %></td>

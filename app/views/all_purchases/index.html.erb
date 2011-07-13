@@ -46,7 +46,7 @@
         <td><%= show_reservation_type_with(item.type) %></td>
         <td><%= show_payment_method(item.payment_method) %>  </td>
         <td><%= item.count_sum %></td>
-        <td><%= show_in_or_out_for_agent(item) %> </td>
+        <td><%= "旅行社" + show_in_or_out_for_agent(item) %> </td>
         <td><%= item.price_sum.to_i %></td>
         <td><%= link_to "查看", reservations_all_purchases_path(:spot_id => item.spot_id, :agent_id => item.agent_id, :type => item.type, :payment_method => item.payment_method, :date => @date, :spot_name => @spot_name, :agent_name=> @agent_name) %></td>
       </tr>

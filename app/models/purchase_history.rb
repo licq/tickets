@@ -12,8 +12,12 @@ class PurchaseHistory < ActiveRecord::Base
   belongs_to :spot
   belongs_to :agent
 
-  def in_out
+  def in_out_for_spot
     self.payment_method == "poa" ? "应付" : "应收"
+  end
+
+  def in_out_for_agent
+    self.payment_method == "poa" ? "应收" : "应付"
   end
 
   def ticket_type

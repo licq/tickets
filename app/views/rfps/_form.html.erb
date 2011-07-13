@@ -11,6 +11,10 @@
                   :as => :select, :label => "散客结算方式", :required => true, :include_blank => false %>
     </fieldset>
     <fieldset class="buttons">
-      <%= f.button :submit, @rfp.new_record? ? "开通": "修改" %>
+      <%if @rfp.new_record? %>
+        <%= f.button :submit, "开通预定", :confirm => "确认开通预定？" %>
+      <%else %>
+        <%= f.button :submit, "修改" %>
+      <% end %>
     </fieldset>
 <% end %>
