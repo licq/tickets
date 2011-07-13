@@ -1,4 +1,4 @@
-<div class="result_count">共找到<%= @reservations.total_count %>条记录</div>
+<div class="result_count">共找到<%= @reservations.total_count %>条记录(包括昨日未入园订单及明日待入园订单)</div>
 
 <%= paginate @reservations %>
 <table>

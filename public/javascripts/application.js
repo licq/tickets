@@ -398,7 +398,7 @@ function calculate_total_price_for_purchase() {
 
 function generate_purchase_report() {
     var checked_ids = "";
-    $.each($("#purchase_reservations_form tr input:checked"), function() {
+    $.each($("#purchase_reservations_form tr td input:checked"), function() {
         checked_ids += $(this).val() + ",";
     });
 

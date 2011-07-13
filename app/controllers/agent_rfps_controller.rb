@@ -32,6 +32,7 @@ class AgentRfpsController < ApplicationController
   def destroy
     @rfp = @agent.rfps.where(:spot_id => params[:id], :status => 'a').first
     @rfp.destroy
+    @agent.sent_messages.create!(:message_to => @rfp.spot, :content => "#{@agent.name}申请已撤销", :read => false)
     redirect_to applied_agent_spots_path, :notice => "撤销已成功"
   end
 
