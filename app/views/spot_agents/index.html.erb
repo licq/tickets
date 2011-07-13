@@ -1,4 +1,4 @@
-<% title "未开通预定旅行社列表" %>
+<% title "未开通预订旅行社列表" %>
 <div id="search">
   <%= simple_form_for @search, :url =>spot_agents_path do |f| %>
       <fieldset class="inputs">
@@ -42,7 +42,7 @@
         <td><%= agent.finance_phone %></td>
         <td><%= agent.admin.name %></td>
         <td><%= show_disabled agent.disabled %></td>
-        <td><%= link_to "直接开通预定", new_rfp_path(:agent_id => agent) %></td>
+        <td><%= link_to "直接开通预订", new_rfp_path(:agent_id => agent) %></td>
       </tr>
   <% end %>
 </table>

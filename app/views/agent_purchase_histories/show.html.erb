@@ -29,15 +29,15 @@
     <th>种类</th>
     <th>成人价(销售价/(结算价))</th>
     <th>儿童价(销售价/(结算价))</th>
-    <th>预定成人票</th>
-    <th>预定儿童票</th>
+    <th>预订成人票</th>
+    <th>预订儿童票</th>
     <th>实际成人票</th>
     <th>实际儿童票</th>
     <th>总价(销售价/(结算价))</th>
     <th>支付方式</th>
     <th>联系人</th>
     <th>联系电话</th>
-    <th>预定日期</th>
+    <th>预订日期</th>
   </tr>
   <% for reservation in @purchase_history.reservations %>
       <tr id="reservation<%= reservation.id %>_row" class=<%= cycle("even", "odd") %>>

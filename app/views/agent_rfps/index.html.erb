@@ -1,4 +1,4 @@
-<% title "可预定景区列表" %>
+<% title "可预订景区列表" %>
 
 <div id="search">
   <%= simple_form_for @search, :url => agent_rfps_path do |f| %>
@@ -18,7 +18,7 @@
   <% end %>
 </div>
 
-<%= button_to_link "查询未开通预定景区", agent_spots_path, :class=> "new_button"%>
+<%= button_to_link "查询未开通预订景区", agent_spots_path, :class=> "new_button"%>
 
 
 <div class="result_count">共找到<%= @rfps.total_count %>条记录</div>
@@ -49,7 +49,7 @@
         <td><%= rfp.spot.finance_phone %></td>
         <td><%= show_payment_method(rfp.individual_payment_method) %></td>
         <td><%= show_payment_method(rfp.team_payment_method) %></td>
-        <td><%= link_to "预定", new_reservation_path(:spot_name => rfp.spot.name) %></td>
+        <td><%= link_to "预订", new_reservation_path(:spot_name => rfp.spot.name) %></td>
       </tr>
   <% end %>
 </table>

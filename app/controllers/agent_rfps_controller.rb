@@ -20,7 +20,7 @@ class AgentRfpsController < ApplicationController
         @rfp = @agent.rfps.new(:spot_id => params[:spot_id], :from_spot => false, :status => "a")
         if @rfp.save
           @agent.sent_messages.create!(:message_to => @rfp.spot,
-                                      :content => "#{@agent.name}申请可以预定", :read => false)
+                                      :content => "#{@agent.name}申请可以预订", :read => false)
           flash[:notice] = "申请已成功"
         else
           flash[:notice] = "申请失败"

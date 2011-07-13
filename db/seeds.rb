@@ -407,9 +407,9 @@ Menu.create!(:name => "用户列表", :url => "users_path", :menu_group => spot_
 Menu.create!(:name => "新建角色", :url => "new_role_path", :menu_group => spot_menu_group3, :seq => 1)
 Menu.create!(:name => "角色列表", :url => "roles_path", :menu_group => spot_menu_group3, :seq => 2)
 
-Menu.create!(:name => "已开通预定", :url => "rfps_path", :menu_group => spot_menu_group4, :seq => 1)
+Menu.create!(:name => "已开通预订", :url => "rfps_path", :menu_group => spot_menu_group4, :seq => 1)
 Menu.create!(:name => "已申请待开通", :url => "applied_spot_agents_path", :menu_group => spot_menu_group4, :seq => 2)
-Menu.create!(:name => "未开通预定", :url => "spot_agents_path", :menu_group => spot_menu_group4, :seq => 3)
+Menu.create!(:name => "未开通预订", :url => "spot_agents_path", :menu_group => spot_menu_group4, :seq => 3)
 
 Menu.create!(:name => "订单列表", :url => "spot_reservations_path", :menu_group => spot_menu_group5, :seq => 1)
 Menu.create!(:name => "当日订单", :url => "today_spot_reservations_path", :menu_group => spot_menu_group5, :seq => 2)
@@ -443,9 +443,9 @@ Menu.create!(:name => "用户列表", :url => "agent_users_path", :menu_group =>
 Menu.create!(:name => "新建角色", :url => "new_agent_role_path", :menu_group => agent_menu_group2, :seq => 1)
 Menu.create!(:name => "角色列表", :url => "agent_roles_path", :menu_group => agent_menu_group2, :seq => 2)
 
-Menu.create!(:name => "可预定", :url => "agent_rfps_path", :menu_group => agent_menu_group3, :seq => 1)
-Menu.create!(:name => "已申请预定", :url => "applied_agent_spots_path", :menu_group => agent_menu_group3, :seq => 2)
-Menu.create!(:name => "未开通预定", :url => "agent_spots_path", :menu_group => agent_menu_group3, :seq => 3)
+Menu.create!(:name => "可预订", :url => "agent_rfps_path", :menu_group => agent_menu_group3, :seq => 1)
+Menu.create!(:name => "已申请预订", :url => "applied_agent_spots_path", :menu_group => agent_menu_group3, :seq => 2)
+Menu.create!(:name => "未开通预订", :url => "agent_spots_path", :menu_group => agent_menu_group3, :seq => 3)
 
 Menu.create!(:name => "新建订单", :url => "new_reservation_path", :menu_group => agent_menu_group4, :seq => 1)
 Menu.create!(:name => "订单列表", :url => "reservations_path", :menu_group => agent_menu_group4, :seq => 2)

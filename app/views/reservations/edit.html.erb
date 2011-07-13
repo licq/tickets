@@ -1,4 +1,4 @@
-<% title "修改门票预定" %>
+<% title "修改门票预订" %>
 
 <% if @reservation.is_individual? %>
     <%= simple_form_for @reservation, :url =>update_individual_reservation_path(@reservation), :method =>:post do |f| %>
