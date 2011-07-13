@@ -29,7 +29,7 @@ GEM
       activemodel (= 3.0.9)
       activesupport (= 3.0.9)
     activesupport (3.0.9)
-    annotate-models (1.0.4)
+    annotate (2.4.0)
     arel (2.0.10)
     bcrypt-ruby (2.1.4)
     bcrypt-ruby (2.1.4-x86-mingw32)
@@ -134,7 +134,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  annotate-models
+  annotate
   bcrypt-ruby
   excel_rails
   factory_girl_rails

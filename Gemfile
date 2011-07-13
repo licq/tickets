@@ -22,7 +22,7 @@ gem 'excel_rails'
 group :development do
   gem 'jquery-rails'
   gem 'nifty-generators'
-  gem 'annotate-models'
+  gem 'annotate'
 end
 group :development, :test do
   gem 'rspec-rails'
