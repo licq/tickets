@@ -1,7 +1,7 @@
 <fieldset class="inputs">
   <%= f.input :username, :hint => "只能包含数字，字母或下划线" %>
   <%= f.input :name %>
-  <%= f.association :role, :collection => @agent.roles %>
+  <%= f.association :role, :collection => @agent.roles, :include_blank => false %>
   <%= f.input :email %>
   <%= f.input :password, :hint => "不少于4位" %>
   <%= f.input :password_confirmation, :required => true %>

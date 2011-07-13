@@ -1,6 +1,6 @@
 <%= simple_form_for @season do |f| %>
       <%= f.input :name %>
-    <%= f.simple_fields_for :timespans do |tf| %>
+    <%= f.simple_fields_for :timespans, @season.timespans(true) do |tf| %>
         <%= render 'timespan_fields', :tf => tf %>
     <% end %>
     <div class="add_timespan"><%= link_to_add_fields "新增时间段", f, :timespans %></div>

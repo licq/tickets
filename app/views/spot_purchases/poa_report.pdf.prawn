@@ -8,7 +8,7 @@ prawn_document(:page_layout => :landscape) do |pdf|
            ["景区名称", @spot.name, "财务联系人", @spot.finance_contact, "财务联系电话", @spot.finance_phone, "", "", "",""],
            ["旅行社名称", @agent.name, "财务联系人", @agent.finance_contact, "财务联系电话", @agent.finance_phone, "", "", "",""],
            [""],
-           ["订单号", "团号", "入园时间", "联系人", "销售价/结算价", "预订人数", "总销售价/结算价", "实际入园人数", "实际总销售价/结算价","返佣"]]
+           ["订单号", "团号", "入园时间", "联系人", "销售价/结算价", "预订人数", "总销售价/结算价", "入园人数", "实际总销售价/结算价","返佣"]]
   items += @reservations.map do |reservation|
 
     [reservation.no, reservation.group_no, reservation.date, reservation.contact, "#{reservation.adult_sale_price}/#{reservation.adult_purchase_price}(#{reservation.child_sale_price}/#{reservation.child_purchase_price})",
