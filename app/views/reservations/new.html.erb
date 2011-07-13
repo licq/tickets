@@ -1,4 +1,4 @@
-<% title "门票预订" %>
+<% title "门票预定" %>
 
 <div id="search">
   <%= form_tag search_reservations_path do %>
@@ -56,7 +56,7 @@
                 <td><%= show_individual_child_price(price, ticket.id) %></td>
                 <td>
                   <% if (show_individual_adult_price(price, ticket.id)!='--') %>
-                      <%= link_to "预订", new_individual_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date],
+                      <%= link_to "预定", new_individual_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date],
                                                                          :payment_method => agent_price.individual_payment_method,
                                                                          :method => :get) %>
                   <% end %></td>
@@ -69,7 +69,7 @@
                   <td><%= show_team_child_price(price, ticket.id) %></td>
                   <td>
                     <% if (show_team_adult_price(price, ticket.id)!='--') %>
-                        <%= link_to "预订", new_team_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date],
+                        <%= link_to "预定", new_team_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date],
                                                                      :payment_method => agent_price.team_payment_method,
                                                                      :method => :get) %>
                     <% end %></td>

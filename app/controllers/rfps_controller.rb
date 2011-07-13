@@ -22,7 +22,7 @@ class RfpsController < ApplicationController
     @rfp.status = 'c'
     if @rfp.save
       @spot.sent_messages.create!(:message_to => Agent.find(params[:rfp][:agent_id]),
-                                  :content => "#{@spot.name}已经为您开通了预订", :read => false)
+                                  :content => "#{@spot.name}已经为您开通了预定", :read => false)
       redirect_to rfps_path, :notice => "创建已成功"
     else
       render :action => 'new'
@@ -47,7 +47,7 @@ class RfpsController < ApplicationController
     @rfp.destroy
 
     @spot.sent_messages.create!(:message_to => Agent.find(@rfp.agent_id),
-                                :content => "#{@spot.name}已经关闭了您的预订", :read => false)
+                                :content => "#{@spot.name}已经关闭了您的预定", :read => false)
     redirect_to rfps_url, :notice => "删除已成功."
   end
 
@@ -63,7 +63,7 @@ class RfpsController < ApplicationController
     @rfp.status = "c"
     if @rfp.save
       @spot.sent_messages.create!(:message_to => Agent.find(@rfp.agent_id),
-                                  :content => "#{@spot.name}已经通过了您的预订申请", :read => false)
+                                  :content => "#{@spot.name}已经通过了您的预定申请", :read => false)
       redirect_to applied_spot_agents_path, :notice => "接受已成功"
     else
       render :edit_accept
@@ -75,7 +75,7 @@ class RfpsController < ApplicationController
     @rfp.status = 'r'
     @rfp.save
     @spot.sent_messages.create!(:message_to => Agent.find(@rfp.agent_id),
-                                :content => "#{@spot.name}已经拒绝了您的预订申请", :read => false)
+                                :content => "#{@spot.name}已经拒绝了您的预定申请", :read => false)
     redirect_to applied_spot_agents_path, :notice => "拒绝已成功"
   end
 

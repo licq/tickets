@@ -183,7 +183,7 @@ zh:
       individual_rate: "散客价"
       agent_price: "旅行社价格"
       rfp: "价格关联"
-      reservation: "门票预订"
+      reservation: "门票预定"
       role: "角色"
       message: "消息"
     attributes:

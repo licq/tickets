@@ -96,7 +96,7 @@ class ReservationsController < ApplicationController
     @reservation.total_purchase_price =@reservation.book_purchase_price
 
     if @reservation.save
-      redirect_to reservations_url, :notice => "已预订成功."
+      redirect_to reservations_url, :notice => "已预定成功."
     else
       render :action => 'new_individual'
     end
@@ -110,7 +110,7 @@ class ReservationsController < ApplicationController
     @reservation.book_price =@reservation.calculate_price
     @reservation.total_price =@reservation.book_price
     if @reservation.save
-      redirect_to reservations_url, :notice => "已预订成功."
+      redirect_to reservations_url, :notice => "已预定成功."
     else
       render :action => 'create_team'
     end
@@ -146,7 +146,7 @@ class ReservationsController < ApplicationController
                                              :payment_method => params[:payment_method])
     price = @agent_price.price_for(params[:date])
     if (price[ticket.id].nil? || price[ticket.id][:individual_rate].nil?)
-      redirect_to reservations_url, :method => :post, :notice => "未设置价格，不能预订."
+      redirect_to reservations_url, :method => :post, :notice => "未设置价格，不能预定."
     else
       individual_rate =price[ticket.id][:individual_rate]
       @reservation.child_sale_price = individual_rate.child_sale_price
@@ -164,7 +164,7 @@ class ReservationsController < ApplicationController
                                        :payment_method => params[:payment_method])
     price = @agent_price.price_for(params[:date])
     if (price[ticket.id].nil? || price[ticket.id][:team_rate].nil?)
-      redirect_to reservations_url, :method => :post, :notice => "未设置价格，不能预订."
+      redirect_to reservations_url, :method => :post, :notice => "未设置价格，不能预定."
     else
       team_rate =price[ticket.id][:team_rate]
       @reservation.child_price = team_rate.child_price

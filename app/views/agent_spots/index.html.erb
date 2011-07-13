@@ -1,4 +1,4 @@
-<% title "未开通预订景区列表" %>
+<% title "未开通预定景区列表" %>
 <div id="search">
   <%= simple_form_for @search, :url =>agent_spots_path do |f| %>
       <fieldset class="inputs">
@@ -40,7 +40,7 @@
         <td><%= spot.business_phone %></td>
         <td><%= spot.finance_contact %></td>
         <td><%= spot.finance_phone %></td>
-        <td><%= link_to "申请开通预订", agent_rfps_path(:spot_id => spot), :method => :post, :remote => true %></td>
+        <td><%= link_to "申请开通预定", agent_rfps_path(:spot_id => spot), :method => :post, :remote => true %></td>
       </tr>
   <% end %>
 </table>
