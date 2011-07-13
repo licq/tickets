@@ -127,3 +127,7 @@ table input {
     display: block;
     font-style: italic;
 }
+
+.email_link a, .email_link a:link, .email_link a:visited{
+  color: #fff;
+}

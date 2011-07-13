@@ -525,3 +525,6 @@ table.search_table, table.search_table tr {
     clear: left;
 }
 
+.email_link a, .email_link a:link, .email_link a:visited{
+  color: #fff;
+}
