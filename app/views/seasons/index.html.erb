@@ -18,7 +18,7 @@
           <% end %>
         </td>
         <td><%= link_to "修改", edit_season_path(season) %>
-          <%= link_to "删除", season, :confirm => '你确认删除吗?', :method => :delete %>
+          <%= link_to "删除", season, :confirm => '删除后再添加淡旺季将需要重新设置门市价及旅行社价格，确认删除吗?', :method => :delete %>
         </td>
       </tr>
   <% end %>
