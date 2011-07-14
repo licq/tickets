@@ -417,7 +417,7 @@ Menu.create!(:name => "当日订单", :url => "today_spot_reservations_path", :m
 Menu.create!(:name => "产量统计", :url => "reports_spot_output_path", :menu_group => spot_menu_group6, :seq => 1)
 Menu.create!(:name => "产量同比环比", :url => "reports_spot_output_rate_path", :menu_group => spot_menu_group6, :seq => 2)
 Menu.create!(:name => "入园统计", :url => "reports_spot_checkin_path", :menu_group => spot_menu_group6, :seq => 3)
-Menu.create!(:name => "分销商销售业绩", :url => "reports_spot_agent_output_path", :menu_group => spot_menu_group6, :seq => 4)
+Menu.create!(:name => "分销商业绩", :url => "reports_spot_agent_output_path", :menu_group => spot_menu_group6, :seq => 4)
 Menu.create!(:name => "每月销售统计", :url => "reports_spot_month_reservations_path", :menu_group => spot_menu_group6, :seq => 5)
 
 

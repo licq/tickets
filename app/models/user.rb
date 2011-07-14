@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   before_save :prepare_password
 
   validates_presence_of :username
-  validates_uniqueness_of :username, :allow_blank => true
+  validates_uniqueness_of :username, :allow_blank => true, :case_sensitive => false
   validates_format_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "只能包含数字，字母或下划线"
   validates_presence_of :name
   validates_presence_of :password, :on => :create

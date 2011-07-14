@@ -10,6 +10,6 @@
     </fieldset>
 
     <fieldset class="buttons">
-      <%= f.button :submit %>
+      <%= f.button :submit, @ticket.new_record? ? "新增门票" : "修改门票" %>
     </fieldset>
 <% end %>
