@@ -1,7 +1,7 @@
 #encoding: utf-8
 prawn_document(:page_layout => :landscape) do |pdf|
   pdf.font "#{Prawn::BASEDIR}/data/fonts/gkai00mp.ttf"
-  pdf.text "#{@spot.name}分销商销售业绩报表(#{@start_time.to_date}~#{@end_time.to_date})",:size => 30
+  pdf.text "#{@spot.name}分销商业绩报表(#{@start_time.to_date}~#{@end_time.to_date})",:size => 30
 
   pdf.move_down 30
   items = @table.map do |line|

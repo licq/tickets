@@ -6,7 +6,7 @@ excel_document(:filename => "spot_agent_output.xls") do |workbook|
                                    :size => 18
   bold = Spreadsheet::Format.new :weight => :bold
 
-  sheet.row(0).push "#{@spot.name}分销商销售业绩报表(#{@start_time.to_date}~#{@end_time.to_date})"
+  sheet.row(0).push "#{@spot.name}分销商业绩报表(#{@start_time.to_date}~#{@end_time.to_date})"
   sheet.row(1).concat ["旅行社名称","订单总数", "成人总数", "儿童总数", "总价"]
 
   @table.each_with_index do |line, i|
