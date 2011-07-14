@@ -5,6 +5,8 @@ class Ticket < ActiveRecord::Base
 
   belongs_to :spot
   has_many :public_rates, :dependent => :delete_all
+  has_many :individual_rates, :dependent => :delete_all
+  has_many :team_rates, :dependent => :delete_all
   accepts_nested_attributes_for :public_rates
 
   def public_rate_for(season_name)
