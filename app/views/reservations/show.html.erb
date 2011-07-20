@@ -64,6 +64,11 @@
       <td class="textright">联系方式</td>
       <td class="textleft"><%= @reservation.phone %></td>
     </tr>
+
+	<tr>
+		<td class="textright">操作员</td>
+		<td colspan="3" class="textleft"><%= @reservation.user.name %></td>
+	</tr>
     <tr>
       <td class="textright">备注</td>
       <td colspan="3" class="textleft"><%= @reservation.note %></td>

@@ -4,10 +4,11 @@ class ReportsController < ApplicationController
   before_filter :set_spot, :only => [:spot_output, :generate_spot_output, :spot_output_rate, :generate_spot_output_rate,
                                      :spot_checkin, :spot_agent_output, :spot_month_reservations,
                                      :generate_spot_checkin, :generate_spot_agent_output, :generate_spot_month_reservations]
-  before_filter :set_agent, :only => [:agent_output, :agent_output_rate, :agent_checkin, :agent_spot_output,
-                                      :generate_agent_output, :generate_agent_output_rate, :generate_agent_checkin, :generate_agent_spot_output]
+  before_filter :set_agent, :only => [:agent_output, :agent_output_rate, :agent_checkin, :agent_spot_output,:agent_user_output,
+                                      :generate_agent_output, :generate_agent_output_rate, :generate_agent_checkin, :generate_agent_spot_output,
+                                      :generate_agent_user_output]
 
-  layout 'application', :except => [:generate_spot_output, :generate_spot_output_rate,
+  layout 'application', :except => [:generate_spot_output, :generate_spot_output_rate,:generate_agent_user_output,
                                     :generate_spot_checkin, :generate_spot_agent_output, :generate_spot_month_reservations,
                                     :generate_agent_output, :generate_agent_output_rate, :generate_agent_checkin, :generate_agent_spot_output]
 
@@ -28,6 +29,9 @@ class ReportsController < ApplicationController
   end
 
   def agent_output_rate
+  end
+  
+  def agent_user_output
   end
 
 
@@ -90,6 +94,11 @@ class ReportsController < ApplicationController
   def generate_agent_spot_output
     @start_time, @end_time = get_start_and_end_parameters
     @table = @agent.reservations.exclude_canceled.sum_spot_output_between(@start_time, @end_time)
+  end
+  
+  def generate_agent_user_output
+    @start_time, @end_time = get_start_and_end_parameters
+    @table = @agent.reservations.exclude_canceled.sum_user_output_between(@start_time, @end_time)
   end
 
   def generate_agent_output_rate

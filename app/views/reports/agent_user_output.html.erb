@@ -1,0 +1,7 @@
+<% title "操作员业绩报表" %>
+<div id="search">
+  <%= form_tag reports_generate_agent_user_output_path, :id => "output_report_form" do %>
+      <%= render :partial => 'select_date' %>
+  <% end %>
+</div>
+<div id="report"/>

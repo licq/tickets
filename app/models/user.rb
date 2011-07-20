@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password
   validates_length_of :password, :minimum => 4, :allow_blank => true
   belongs_to :role
+  has_many :reservations
 
   def self.authenticate(login, pass)
     user = find_by_username_and_deleted(login,false)

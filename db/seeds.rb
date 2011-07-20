@@ -456,4 +456,5 @@ Menu.create!(:name => "结算历史", :url => "agent_purchase_histories_path", :
 Menu.create!(:name => "产量统计", :url => "reports_agent_output_path", :menu_group => agent_menu_group6, :seq => 1)
 Menu.create!(:name => "产量同比环比", :url => "reports_agent_output_rate_path", :menu_group => agent_menu_group6, :seq => 2)
 Menu.create!(:name => "入园统计", :url => "reports_agent_checkin_path", :menu_group => agent_menu_group6, :seq => 3)
-Menu.create!(:name => "景区销售业绩", :url => "reports_agent_spot_output_path", :menu_group => agent_menu_group6, :seq => 4)
+Menu.create!(:name => "操作员业绩", :url => "reports_agent_user_output_path", :menu_group => spot_menu_group6, :seq => 4)
+Menu.create!(:name => "景区销售业绩", :url => "reports_agent_spot_output_path", :menu_group => agent_menu_group6, :seq => 5)

@@ -94,6 +94,7 @@ class ReservationsController < ApplicationController
     @reservation.book_purchase_price =@reservation.calculate_purchase_price
     @reservation.total_price =@reservation.book_price
     @reservation.total_purchase_price =@reservation.book_purchase_price
+    @reservation.user = current_user
 
     if @reservation.save
       redirect_to reservations_url, :notice => "已预订成功."
@@ -109,6 +110,7 @@ class ReservationsController < ApplicationController
     @reservation.status = :confirmed
     @reservation.book_price =@reservation.calculate_price
     @reservation.total_price =@reservation.book_price
+    @reservation.user = current_user
     if @reservation.save
       redirect_to reservations_url, :notice => "已预订成功."
     else
@@ -119,6 +121,7 @@ class ReservationsController < ApplicationController
 
   def update_individual
     @reservation = @agent.reservations.find(params[:id])
+    @reservation.user = current_user
     if @reservation.update_attributes(params[:individual_reservation])
       @reservation.save_total_price
       redirect_to reservations_url, :notice => "已修改成功."
@@ -129,6 +132,7 @@ class ReservationsController < ApplicationController
 
   def update_team
     @reservation = @agent.reservations.find(params[:id])
+    @reservation.user = current_user
     if @reservation.update_attributes(params[:team_reservation])
       @reservation.save_total_price
       redirect_to reservations_url, :notice => "已修改成功."

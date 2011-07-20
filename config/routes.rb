@@ -170,6 +170,8 @@ Tickets::Application.routes.draw do
   post 'reports/agent_checkin'
   get 'reports/agent_spot_output'
   post 'reports/agent_spot_output' 
+  get 'reports/agent_user_output'
+  post 'reports/agent_user_output' 
   
   get 'reports/generate_agent_output'
   post 'reports/generate_agent_output'
@@ -178,7 +180,9 @@ Tickets::Application.routes.draw do
   get 'reports/generate_agent_checkin'
   post 'reports/generate_agent_checkin'
   get 'reports/generate_agent_spot_output'
-  post 'reports/generate_agent_spot_output'
+  post 'reports/generate_agent_spot_output' 
+   get 'reports/generate_agent_user_output'
+  post 'reports/generate_agent_user_output'
 
   match 'user/edit' => 'users#edit', :as => :edit_current_user
   match 'signup' => 'users#new', :as => :signup

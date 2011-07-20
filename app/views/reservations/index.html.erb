@@ -29,6 +29,11 @@
             <td><%= f.input :contact_contains, :label => "联系人", :required => false %></td>
             <td><%= f.input :phone_contains, :label => "联系电话", :required => false %></td>
           </tr>
+		  
+		  <tr>
+		  	<td><%= f.input :user_name_contains, :label => "操作员", :required => false %></td>
+			<td></td>
+		  </tr>
           <tr>
             <td><%= f.input :with_status, :collection => [["", "全部"], ["confirmed", "已确认"], ["canceled", "已取消"], ["checkedin", "已入园"], ["outdated", "已过期"]],
                             :label_method => :last, :value_method => :first,
@@ -61,9 +66,9 @@
     <th>实际儿童票</th>
     <th>总价(销售价/(结算价))</th>
     <th>支付方式</th>
-    <th>联系人</th>
-    <th>联系电话</th>
+    <th>联系人<br>联系电话</th>
     <th>预订日期</th>
+	<th>操作员</th>
     <th>状态</th>
     <th>结算状态</th>
     <th>操作</th>
@@ -84,9 +89,9 @@
         <td><%= reservation.child_true_ticket_number %></td>
         <td><%= show_reservation_total_price(reservation) %></td>
         <td><%= show_reservation_payment_method(reservation) %></td>
-        <td><%= reservation.contact %></td>
-        <td><%= reservation.phone %></td>
+        <td><%= reservation.contact %><br><%= reservation.phone %></td>
         <td><%= date_format(reservation.created_at) %></td>
+		<td><%= reservation.user.name %></td>
         <td><%= reservation.status_name %></td>
         <td><%= reservation.paid_name %></td>
         <td>

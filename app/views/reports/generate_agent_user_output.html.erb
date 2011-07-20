@@ -1,0 +1,25 @@
+<table>
+  <tr>
+    <td>销售员</td>
+    <td>订单总数</td>
+    <td>成人总数</td>
+    <td>儿童总数</td>
+    <td>总价</td>
+  </tr>
+  <% @table.each do |r| %>
+      <tr class="<%= cycle("even", "odd") %>">
+        <td><%= r.user_name %></td>
+        <td><%= r.count_sum %></td>
+        <td><%= r.adult_ticket_sum.to_i %></td>
+        <td><%= r.child_ticket_sum.to_i %></td>
+        <td><%= r.price_sum.to_i %></td>
+      </tr>
+  <% end %>
+</table>
+
+<div class="bottom_links">
+  <%= button_to_new_window "PDF下载", reports_generate_agent_user_output_path(:format => "pdf", :type => params[:type],
+                                                                            :year => params[:year], :month => params[:month], :day => params[:day], :week => params[:week]) %>
+  <%= button_to_new_window "Excel下载", reports_generate_agent_user_output_path(:format => "xls", :type => params[:type],
+                                                                            :year => params[:year], :month => params[:month], :day => params[:day], :week => params[:week]) %>
+</div>

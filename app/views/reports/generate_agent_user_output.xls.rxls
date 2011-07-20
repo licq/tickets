@@ -1,0 +1,20 @@
+#encoding: utf-8
+excel_document(:filename => "agent_user_output.xls") do |workbook|
+  sheet = workbook.create_worksheet
+  format = Spreadsheet::Format.new :color => :blue,
+                                   :weight => :bold,
+                                   :size => 18
+  bold = Spreadsheet::Format.new :weight => :bold
+
+  sheet.row(0).push "#{@agent.name}操作员业绩报表(#{@start_time.to_date}~#{@end_time.to_date})"
+  sheet.row(1).concat ["操作员","订单总数", "成人总数", "儿童总数", "总价"]
+
+  @table.each_with_index do |line, i|
+    sheet.row(i + 2).concat [line.user_name, line.count_sum, line.adult_ticket_sum.to_i, line.child_ticket_sum.to_i, line.price_sum.to_i]
+  end
+
+  sheet.row(0).default_format = format
+  (@table.length + 1).times do |x|
+    sheet.row(x + 1).set_format(0, bold)
+  end
+end

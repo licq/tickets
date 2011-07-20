@@ -35,8 +35,8 @@
     <th>实际儿童票</th>
     <th>总价(销售价/(结算价))</th>
     <th>支付方式</th>
-    <th>联系人</th>
-    <th>联系电话</th>
+    <th>联系人<br>联系电话</th>
+    <th>操作员</th>
     <th>预订日期</th>
   </tr>
   <% for reservation in @purchase_history.reservations %>
@@ -55,8 +55,8 @@
         <td><%= reservation.child_true_ticket_number %></td>
         <td><%= show_reservation_total_price(reservation) %></td>
         <td><%= show_reservation_payment_method(reservation) %></td>
-        <td><%= reservation.contact %></td>
-        <td><%= reservation.phone %></td>
+        <td><%= reservation.contact %><br><%= reservation.phone %></td>
+        <td><%= reservation.user.name %></td>
         <td><%= date_format(reservation.created_at) %></td>
       </tr>
   <% end %>

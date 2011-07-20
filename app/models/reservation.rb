@@ -5,6 +5,7 @@ class Reservation < ActiveRecord::Base
   scope :exclude_canceled, where(:status.ne => "canceled")
   belongs_to :spot
   belongs_to :agent
+  belongs_to :user
   belongs_to :purchase_history
 
   validates :contact, :presence => true
@@ -115,6 +116,12 @@ class Reservation < ActiveRecord::Base
     select('spot_id,spots.name as spot_name,count(1) as count_sum, sum(adult_ticket_number) as adult_ticket_sum, sum(child_ticket_number) as child_ticket_sum,
                 sum(book_price) as price_sum').joins(:spot).group(:spot_id).where(:created_at => start_time..end_time).reorder(:spot_id)
 
+  end
+  
+  def self.sum_user_output_between(start_time,end_time)
+    select('user_id,users.name as user_name,count(1) as count_sum, sum(adult_ticket_number) as adult_ticket_sum, sum(child_ticket_number) as child_ticket_sum,
+                 sum(book_price) as price_sum').joins(:user).group(:user_id).where(:created_at => start_time..end_time).reorder(:user_id)
+    
   end
 
 
