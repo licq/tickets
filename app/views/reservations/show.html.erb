@@ -29,7 +29,7 @@
       <td class="textleft"> <%= @reservation.status_name %></td>
     </tr>
 
-    <tr>
+    <tr class="noprint">
       <td class="textright">成人价格(销售价/(结算价))</td>
       <td class="textleft"> <%= show_reservation_adult_price(@reservation) %></td>
       <td class="textright">儿童价格(销售价/(结算价))</td>
@@ -51,7 +51,7 @@
       <td class="textleft"> <%= @reservation.child_true_ticket_number %></td>
     </tr>
 
-    <tr>
+    <tr class="noprint">
       <td class="textright">总价(销售价/(结算价))</td>
       <td class="textleft"><%= show_reservation_total_price(@reservation) %></td>
       <td class="textright">支付方式</td>
@@ -65,10 +65,10 @@
       <td class="textleft"><%= @reservation.phone %></td>
     </tr>
 
-	<tr>
-		<td class="textright">操作员</td>
-		<td colspan="3" class="textleft"><%= @reservation.user.name %></td>
-	</tr>
+    <tr>
+      <td class="textright">操作员</td>
+      <td colspan="3" class="textleft"><%= @reservation.user.name %></td>
+    </tr>
     <tr>
       <td class="textright">备注</td>
       <td colspan="3" class="textleft"><%= @reservation.note %></td>
@@ -79,5 +79,5 @@
 
 <div class="bottom_links">
   <%= button_to_link "返回列表", reservations_path %>
-  <%= print_button %>
+  <input type="button" value="打印" onclick="$('.noprint').hide();window.print(); $('.noprint').show();return false;"></input>
 </div>
