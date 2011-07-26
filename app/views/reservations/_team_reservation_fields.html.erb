@@ -4,6 +4,9 @@
   <%= f.input :child_price, :as => :hidden %>
   <%= f.input :adult_price, :as => :hidden %>
   <%= f.input :payment_method, :as => :hidden %>
+  <% if f.object.new_record? %>
+      <%= f.input :date, :as => :hidden %>
+  <% end %>
   <div class="input string required"><label>景区</label><%= f.object.spot.name %></div>
   <div class="input string required"><label>门票</label> <%= f.object.ticket_name %></div>
   <% if f.object.new_record? %>
