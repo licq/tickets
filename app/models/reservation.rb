@@ -150,6 +150,10 @@ class Reservation < ActiveRecord::Base
                 sum(total_price-total_purchase_price)  as price_sum').joins(:spot, :agent).group(:spot_name, :agent_name, :type, :payment_method).where(:paid => false, :payment_method => 'poa', :type => "IndividualReservation", :status => "checkedin").reorder(:spot_id)
     (prepay_purchase_sum + poa_purchase_sum).sort_by(&:spot_name)
   end
+  
+  def self.used_contacts(search)
+    select('distinct(contact), phone').where(:contact.matches => "#{search}%")
+  end
 
 
 

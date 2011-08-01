@@ -72,6 +72,7 @@ Tickets::Application.routes.draw do
       get 'new_team'
       post 'create_individual'
       post 'create_team'
+      get 'used_contacts'
     end
     member do
       put 'update_individual'

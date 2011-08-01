@@ -186,5 +186,12 @@ class ReservationsController < ApplicationController
   def print
     @reservation = @agent.reservations.find(params[:id])
   end
+  
+  def used_contacts
+    respond_to do |format|
+      ActiveRecord::Base.include_root_in_json = false
+      format.json { render :text => @agent.reservations.used_contacts(params[:search]).to_json}
+    end
+  end
 
 end

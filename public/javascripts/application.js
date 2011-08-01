@@ -38,9 +38,9 @@ $(function() {
 				return false;
 			} else {
 				if(window.confirm("确认要将选择的订单设置为已结算吗？"))
-					return true;
+				return true;
 				else
-					return false;
+				return false;
 			}
 		});
 
@@ -54,6 +54,25 @@ $(function() {
 			"plugins" : [ "themes", "json_data", "ui", "checkbox" ],
 			"core" : {
 				"strings": { "loading" : "加载中"}
+			}
+		});
+
+		#("#reservation_contact").autocomplete({
+			source: function(request, response) {
+				$.get("/reservatioins/used_contacts.json",{data: "search=" + request.term},
+					function(data) {
+						response($.map(data, function(item) {
+							return {
+								label: item.phone,
+								value: item.contact
+							}
+						}))
+					}
+				);
+			},
+			minLength: 1,
+			select: function(event,ui){
+				alert("hello");
 			}
 		});
 
