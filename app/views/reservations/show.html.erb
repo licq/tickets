@@ -1,4 +1,4 @@
-<% title "#{@reservation.spot.name}订单明细" %>
+<% title "#{@reservation.spot.name}订单明细--旅行社任务单" %>
 <div class="print">
   <table class="show_table">
     <tr>
@@ -77,7 +77,7 @@
   </table>
 </div>
 
-<div class="bottom_links">
+<div class="bottom_links noprint">
   <%= button_to_link "返回列表", reservations_path %>
   <input type="button" value="打印" onclick="$('.noprint').hide();window.print(); $('.noprint').show();return false;"></input>
 </div>

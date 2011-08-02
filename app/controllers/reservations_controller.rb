@@ -2,6 +2,7 @@
 class ReservationsController < ApplicationController
 
   before_filter :set_agent
+  layout 'application', :except => [:print]
 
   def index
     condition = params[:search]

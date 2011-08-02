@@ -1,30 +1,30 @@
-<header>
-	<div class="headout">
-		<% logo = image_tag "headlogo.jpg", :alt => "景区网络营销系统", :class => "headlogoimg" %>
-		<% if current_user %>
-		<% if current_user.is_spot_user %>
-		<% logo = image_tag "jingdian.jpg", :alt => "景点业务合作平台", :class => "headlogoimg" %>
-		<% elsif current_user.is_agent_user %>
-		<% logo = image_tag "lvxingshe.jpg", :alt => "旅行社业务合作平台", :class => "headlogoimg" %>
-		<% end %>
-		<% end %>
-		<div class="headlogo"><%= logo %></div>
+<header class="noprint">
+  <div class="headout">
+    <% logo = image_tag "headlogo.jpg", :alt => "景区网络营销系统", :class => "headlogoimg" %>
+    <% if current_user %>
+        <% if current_user.is_spot_user %>
+            <% logo = image_tag "jingdian.jpg", :alt => "景点业务合作平台", :class => "headlogoimg" %>
+        <% elsif current_user.is_agent_user %>
+            <% logo = image_tag "lvxingshe.jpg", :alt => "旅行社业务合作平台", :class => "headlogoimg" %>
+        <% end %>
+    <% end %>
+    <div class="headlogo"><%= logo %></div>
 
-		<div class="headright">
-			<div class="headrighttop">
-				<% if logged_in? %>
-				<span style="font-size: 14px;font-weight: bold;"><%= show_agent_or_spot_name %></span>
-				<% if current_user.is_spot_user || current_user.is_agent_user %>
+    <div class="headright">
+      <div class="headrighttop">
+        <% if logged_in? %>
+            <span style="font-size: 14px;font-weight: bold;"><%= show_agent_or_spot_name %></span>
+            <% if current_user.is_spot_user || current_user.is_agent_user %>
 				<span><%= link_to "您有#{agent_or_spot_unread_message_count}条未读消息", messages_path %></span
-					<% end %>
-					欢迎您：<span style="font-weight: bold;"><%= current_user.name %></span>
-					<%= link_to "<span style='color:#fff;'>修改个人信息</span>".html_safe, edit_myself_user_path(current_user) %>
-					<%= link_to "登出", logout_path %>
-					<% end %>
-				</div>
-				<div class="headrightbottom">
-					<%= render 'layouts/navigation' %>
-				</div>
-			</div>
-		</div>
-	</header>
+            <% end %>
+            欢迎您：<span style="font-weight: bold;"><%= current_user.name %></span>
+            <%= link_to "<span style='color:#fff;'>修改个人信息</span>".html_safe, edit_myself_user_path(current_user) %>
+            <%= link_to "登出", logout_path %>
+        <% end %>
+      </div>
+      <div class="headrightbottom">
+        <%= render 'layouts/navigation' %>
+      </div>
+    </div>
+  </div>
+</header>
