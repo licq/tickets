@@ -26,8 +26,8 @@
     <span id="total_price_text"><%= f.object.total_price %></span>
   </div>
   <%= f.input :group_no %>
-  <%= f.input :contact %>
-  <%= f.input :phone %>
+  <%= f.input :contact, :input_html => {:id => "reservation_contact"} %>
+  <%= f.input :phone, :input_html => {:id => "reservation_phone"} %>
   <%= f.input :note %>
   <div class="input string required"><label>支付方式</label> <%= show_reservation_payment_method(@reservation) %></div>
 </fieldset>
