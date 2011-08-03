@@ -68,7 +68,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def can_edit
-    self.status == "confirmed"
+    self.status == "confirmed" && self.verified == false
   end
 
   def can_cancel

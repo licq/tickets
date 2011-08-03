@@ -7,7 +7,7 @@
           <tr>
             <td><%= f.input :spot_name_contains, :label => "景区", :required => false %></td>
             <td><%= f.input :payment_method_eq, :label => "支付方式", :required => false,
-                            :collection => [["poa", "门口现付"], ["prepay", "挂帐"]], :label_method => :last,
+                            :collection => [["poa", "门口现付"], ["prepay", "挂帐"],["预付","net"]], :label_method => :last,
                             :value_method => :first, :required => false %></td>
             <td>
               <fieldset class="buttons">

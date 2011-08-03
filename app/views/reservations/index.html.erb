@@ -70,6 +70,7 @@
     <th>预订日期</th>
 	<th>操作员</th>
     <th>状态</th>
+    <th>审核</th>
     <th>结算状态</th>
     <th>操作</th>
   </tr>
@@ -93,6 +94,7 @@
         <td><%= date_format(reservation.created_at) %></td>
 		<td><%= reservation.user.name %></td>
         <td><%= reservation.status_name %></td>
+        <td><%= show_reservation_verified(reservation)%></td>
         <td><%= reservation.paid_name %></td>
         <td>
           <% if (reservation.can_edit) %><%= link_to "修改", edit_reservation_path(reservation) %>

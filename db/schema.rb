@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110720131204) do
+ActiveRecord::Schema.define(:version => 20110803152936) do
 
   create_table "agent_prices", :force => true do |t|
     t.integer  "spot_id"
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(:version => 20110720131204) do
     t.integer  "purchase_history_id"
     t.text     "note"
     t.integer  "user_id"
+    t.boolean  "verified",                 :default => false
   end
 
   add_index "reservations", ["agent_id"], :name => "index_reservations_on_agent_id"

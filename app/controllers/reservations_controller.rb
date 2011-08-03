@@ -96,6 +96,7 @@ class ReservationsController < ApplicationController
     @reservation.total_price =@reservation.book_price
     @reservation.total_purchase_price =@reservation.book_purchase_price
     @reservation.user = current_user
+    set_verified(@reservation)
 
     if @reservation.save
       redirect_to reservations_url, :notice => "已预订成功."
@@ -112,6 +113,8 @@ class ReservationsController < ApplicationController
     @reservation.book_price =@reservation.calculate_price
     @reservation.total_price =@reservation.book_price
     @reservation.user = current_user
+    set_verified(@reservation)
+
     if @reservation.save
       redirect_to reservations_url, :notice => "已预订成功."
     else
@@ -192,6 +195,27 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       ActiveRecord::Base.include_root_in_json = false
       format.json { render :text => @agent.reservations.used_contacts(params[:search]).to_json}
+    end
+  end
+
+  def unverified
+    @reservations = @agent.reservations.where(:verified => false)
+  end
+
+  def verify
+    @reservation = @agent.reservations.find(params[:id])
+    @reservation.verified = true
+    @reservation.save!
+    redirect_to unverified_reservations_path
+  end
+
+
+  private
+  def set_verified(reservation)
+    if reservation.payment_method == "prepay"
+      reservation.verified = false
+    else
+      reservation.verified = true
     end
   end
 

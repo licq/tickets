@@ -109,19 +109,22 @@ module ApplicationHelper
         "门口现付"
       when "prepay" then
         "挂账"
+      when "net" then
+        "预付"
       else
         "--"
     end
   end
 
   def show_reservation_payment_method(reservation)
-    case reservation.payment_method
-      when "poa" then
-        "门口现付"
-      when "prepay" then
-        "挂账"
-      else
-        "--"
+    show_payment_method(reservation.payment_method)
+  end
+
+  def show_reservation_verified(reservation)
+    if reservation.payment_method == "prepay"
+       reservation.verified? ? "已审核" : "待审核"
+    else
+      "--"
     end
   end
 

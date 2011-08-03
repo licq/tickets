@@ -449,6 +449,7 @@ Menu.create!(:name => "未开通预订", :url => "agent_spots_path", :menu_group
 
 Menu.create!(:name => "新建订单", :url => "new_reservation_path", :menu_group => agent_menu_group4, :seq => 1)
 Menu.create!(:name => "订单列表", :url => "reservations_path", :menu_group => agent_menu_group4, :seq => 2)
+Menu.create!(:name => "待审核订单", :url => "unverified_reservations_path", :menu_group => agent_menu_group4, :seq => 3)
 
 Menu.create!(:name => "结算列表", :url => "agent_purchases_path", :menu_group => agent_menu_group5, :seq => 1)
 Menu.create!(:name => "结算历史", :url => "agent_purchase_histories_path", :menu_group => agent_menu_group5, :seq => 2)

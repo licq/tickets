@@ -3,14 +3,14 @@ class SpotReservationsController < ApplicationController
   before_filter :set_spot
 
   def index
-    @search = @spot.reservations.includes(:agent).search(params[:search])
+    @search = @spot.reservations.where(:verified => true).includes(:agent).search(params[:search])
     page = params[:page].to_i
     @reservations= @search.page(page)
   end
 
   def today
     page = params[:page].to_i
-    @reservations= @spot.reservations.includes(:agent).search_for_today(params[:search]).page(page)
+    @reservations= @spot.reservations.where(:verified => true).includes(:agent).search_for_today(params[:search]).page(page)
   end
 
   def edit

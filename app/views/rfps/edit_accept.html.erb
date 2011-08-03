@@ -4,10 +4,10 @@
     <fieldset class="inputs">
       <div class="right75" style="font-weight:bold;">旅行社<%= f.object.agent.name %></div>
       <%= f.association :agent_price, :collection => @rfp.spot.agent_prices, :include_blank => false %>
-      <%= f.input :team_payment_method, :collection => [["门口现付", "poa"], ["挂账", "prepay"]],
+      <%= f.input :team_payment_method, :collection => [["门口现付", "poa"], ["挂账", "prepay"],["预付","net"]],
                   :label_method => :first, :value_method => :last,
                   :as => :select, :label => "团队票结算方式", :required => false, :include_blank => false %>
-      <%= f.input :individual_payment_method, :collection => [["门口现付", "poa"], ["挂账", "prepay"]],
+      <%= f.input :individual_payment_method, :collection => [["门口现付", "poa"], ["挂账", "prepay"],["预付","net"]],
                   :label_method => :first, :value_method => :last,
                   :as => :select, :label => "散客票结算方式", :required => false, :include_blank => false %>
     </fieldset>
