@@ -18,6 +18,8 @@ gem 'prawn-format'
 gem 'prawn-layout'
 gem 'spreadsheet'
 gem 'excel_rails'
+gem 'activemerchant', :require => "active_merchant"
+gem 'activemerchant_patch_for_china', '0.1.6'
 
 group :development do
   gem 'jquery-rails'
