@@ -68,7 +68,18 @@ class Reservation < ActiveRecord::Base
   end
 
   def can_edit
-    self.status == "confirmed" && self.verified == false
+    if self.status == "confirmed"
+      case self.payment_method
+        when "poa"
+          true
+        when "prepay"
+          self.verified == false
+        when "net"
+          self.paid == false
+      end
+    else
+      false
+    end
   end
 
   def can_cancel
@@ -118,11 +129,11 @@ class Reservation < ActiveRecord::Base
                 sum(book_price) as price_sum').joins(:spot).group(:spot_id).where(:created_at => start_time..end_time).reorder(:spot_id)
 
   end
-  
-  def self.sum_user_output_between(start_time,end_time)
+
+  def self.sum_user_output_between(start_time, end_time)
     select('user_id,users.name as user_name,count(1) as count_sum, sum(adult_ticket_number) as adult_ticket_sum, sum(child_ticket_number) as child_ticket_sum,
                  sum(book_price) as price_sum').joins(:user).group(:user_id).where(:created_at => start_time..end_time).reorder(:user_id)
-    
+
   end
 
 
@@ -150,11 +161,10 @@ class Reservation < ActiveRecord::Base
                 sum(total_price-total_purchase_price)  as price_sum').joins(:spot, :agent).group(:spot_name, :agent_name, :type, :payment_method).where(:paid => false, :payment_method => 'poa', :type => "IndividualReservation", :status => "checkedin").reorder(:spot_id)
     (prepay_purchase_sum + poa_purchase_sum).sort_by(&:spot_name)
   end
-  
+
   def self.used_contacts(search)
     select('distinct(contact), phone').where(:contact.matches => "#{search}%")
   end
-
 
 
 end
