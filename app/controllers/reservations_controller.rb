@@ -118,7 +118,7 @@ class ReservationsController < ApplicationController
     if @reservation.save
       redirect_to reservations_url, :notice => "已预订成功."
     else
-      render :action => 'create_team'
+      render :action => 'new_team'
     end
   end
 
