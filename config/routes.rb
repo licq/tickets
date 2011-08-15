@@ -74,12 +74,15 @@ Tickets::Application.routes.draw do
       post 'create_team'
       get 'used_contacts'
       get 'unverified'
+      get 'done'
+      post 'notify'
     end
     member do
       put 'update_individual'
       put 'update_team'
       get 'print'
       put 'verify'
+      get 'pay'
     end
   end
 

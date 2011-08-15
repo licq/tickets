@@ -99,10 +99,26 @@ class ReservationsController < ApplicationController
     set_verified(@reservation)
 
     if @reservation.save
-      redirect_to reservations_url, :notice => "已预订成功."
+      if @reservation.payment_method == "net"
+        redirect_to pay_reservation_url(@reservation)
+      else
+        redirect_to reservations_url, :notice => "已预订成功."
+      end
     else
       render :action => 'new_individual'
     end
+  end
+
+  def pay
+    @reservation = @agent.reservations.find(params[:id])
+  end
+
+  def notify
+
+  end
+
+  def done
+
   end
 
   def create_team
@@ -116,7 +132,11 @@ class ReservationsController < ApplicationController
     set_verified(@reservation)
 
     if @reservation.save
-      redirect_to reservations_url, :notice => "已预订成功."
+      if @reservation.payment_method == "net"
+        redirect_to pay_reservation_url(@reservation)
+      else
+        redirect_to reservations_url, :notice => "已预订成功."
+      end
     else
       render :action => 'new_team'
     end
@@ -190,11 +210,11 @@ class ReservationsController < ApplicationController
   def print
     @reservation = @agent.reservations.find(params[:id])
   end
-  
+
   def used_contacts
     respond_to do |format|
       ActiveRecord::Base.include_root_in_json = false
-      format.json { render :text => @agent.reservations.used_contacts(params[:search]).to_json}
+      format.json { render :text => @agent.reservations.used_contacts(params[:search]).to_json }
     end
   end
 
