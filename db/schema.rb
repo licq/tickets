@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110803152936) do
+ActiveRecord::Schema.define(:version => 20110821120842) do
 
   create_table "agent_prices", :force => true do |t|
     t.integer  "spot_id"
@@ -202,6 +202,9 @@ ActiveRecord::Schema.define(:version => 20110803152936) do
     t.string   "business_phone"
     t.string   "finance_contact"
     t.string   "finance_phone"
+    t.string   "account"
+    t.string   "email"
+    t.string   "key"
   end
 
   add_index "spots", ["code"], :name => "index_spots_on_code", :unique => true

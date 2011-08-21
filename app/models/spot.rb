@@ -67,5 +67,17 @@ class Spot < ActiveRecord::Base
     public_rates.size == seasons.size * tickets.size
   end
 
+  def can_net?
+    self.account.present? && self.key.present? && self.email.present?
+  end
+
+  def available_payment_methods
+    if can_net?
+      [["门口现付", "poa"], ["挂账", "prepay"],["预付","net"]]
+    else
+      [["门口现付", "poa"], ["挂账", "prepay"]]
+    end
+  end
+
 
 end

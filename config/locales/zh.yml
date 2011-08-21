@@ -207,6 +207,9 @@ zh:
         admin: ""
         cities: ""
         disabled: "状态"
+        account: "支付宝合作者ID"
+        key: "安全校验码"
+        email: "支付宝卖家Email"
       agent:
         name: "旅行社名称"
         address: "地址"
