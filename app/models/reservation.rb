@@ -90,6 +90,10 @@ class Reservation < ActiveRecord::Base
     self.status == "confirmed" && self.date >= Date.today
   end
 
+  def need_pay?
+    self.payment_method == "net" && self.paid? == false
+  end
+
   def self.search_for_today(search)
     today_and_confirmed = where({:date.in => (Date.today - 1)..(Date.today + 1), :status.eq => :confirmed})
     if search

@@ -67,7 +67,9 @@
 
     <tr>
       <td class="textright">操作员</td>
-      <td colspan="3" class="textleft"><%= @reservation.user.name %></td>
+      <td class="textleft"><%= @reservation.user.name %></td>
+      <td class="textright">支付状态</td>
+      <td class="textleft"><%= show_reservation_paid(@reservation) %></td>
     </tr>
     <tr>
       <td class="textright">备注</td>

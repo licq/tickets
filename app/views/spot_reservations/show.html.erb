@@ -68,7 +68,9 @@
 
     <tr>
       <td class="textright">备注</td>
-      <td colspan="3" class="textleft"><%= @reservation.note %></td>
+      <td class="textleft"><%= @reservation.note %></td>
+      <td class="textright">支付状态</td>
+      <td class="textleft"><%= show_reservation_paid(@reservation) %></td>
     </tr>
 
   </table>

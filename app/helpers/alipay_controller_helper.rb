@@ -1,0 +1,2 @@
+module AlipayControllerHelper
+end

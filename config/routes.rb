@@ -1,5 +1,15 @@
 Tickets::Application.routes.draw do
 
+  resources :alipay do
+    member do
+      get "pay"
+    end
+    collection do
+      get "return"
+      post "notify"
+    end
+  end
+
   get "manuals/spot"
 
   get "manuals/agent"

@@ -99,26 +99,14 @@ class ReservationsController < ApplicationController
     set_verified(@reservation)
 
     if @reservation.save
-      if @reservation.payment_method == "net"
-        redirect_to pay_reservation_url(@reservation)
+      if @reservation.need_pay?
+        redirect_to pay_alipay_path(@reservation)
       else
         redirect_to reservations_url, :notice => "已预订成功."
       end
     else
       render :action => 'new_individual'
     end
-  end
-
-  def pay
-    @reservation = @agent.reservations.find(params[:id])
-  end
-
-  def notify
-
-  end
-
-  def done
-
   end
 
   def create_team
@@ -132,8 +120,8 @@ class ReservationsController < ApplicationController
     set_verified(@reservation)
 
     if @reservation.save
-      if @reservation.payment_method == "net"
-        redirect_to pay_reservation_url(@reservation)
+      if @reservation.need_pay?
+        redirect_to pay_alipay_path(@reservation)
       else
         redirect_to reservations_url, :notice => "已预订成功."
       end

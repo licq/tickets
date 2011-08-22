@@ -30,6 +30,7 @@
         <span><%= f.object.note.blank? ? "无" : f.object.note%></span>
       </div>
       <div class="input string required"><label>支付方式</label> <%= show_reservation_payment_method(@reservation) %></div>
+      <div class="input string required"><label>支付状态</label> <%= show_reservation_paid(@reservation) %></div>
     </fieldset>
     <fieldset class="buttons">
       <%= f.button :submit, "入园" %>
