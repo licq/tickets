@@ -21,11 +21,15 @@ class AlipayController < ApplicationController
 
     parameter["sign"] = calculate_sign(parameter, spot.key)
     parameter["sign_type"] = "MD5"
-    @link=create_url(parameter)
+    redirect_to create_url(parameter)
   end
 
   def return
-
+    reservation = Reservation.find(params[:out_trade_no])
+    if reservation.present? && verify_sign(params,reservation.spot.key)
+       reservation.paid= true
+      reservation.save!
+    end
   end
 
   def notify
@@ -34,8 +38,12 @@ class AlipayController < ApplicationController
 
   protected
 
-  def calculate_sign(parameter, spot_key)
-    sign((Hash[parameter.sort].map { |key, value| key + "=" + value }).join("&") + spot_key)
+  def verify_sign(params, spot_key)
+    calculate_sign(params.reject{|key,value| key =~ /^sign/},spot_key) == params[:sign]
+  end
+
+  def calculate_sign(params, spot_key)
+    sign((Hash[params.sort].map { |key, value| key + "=" + value }).join("&") + spot_key)
   end
 
   def create_url(parameter)

@@ -91,7 +91,11 @@ class Reservation < ActiveRecord::Base
   end
 
   def need_pay?
-    self.payment_method == "net" && self.paid? == false
+    !self.is_expired? && self.payment_method == "net" && self.paid? == false
+  end
+
+  def is_expired?
+    self.status == "confirmed" && self.date < Date.today
   end
 
   def self.search_for_today(search)
