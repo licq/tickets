@@ -18,6 +18,7 @@ gem 'prawn-format'
 gem 'prawn-layout'
 gem 'spreadsheet'
 gem 'excel_rails'
+gem 'nokogiri'
 
 group :development do
   gem 'jquery-rails'
