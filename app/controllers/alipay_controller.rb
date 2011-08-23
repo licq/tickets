@@ -25,37 +25,42 @@ class AlipayController < ApplicationController
   end
 
   def return
+    logger.info("received alipay return with " + params.join("&"))
     reservation = Reservation.find(params[:out_trade_no])
-    if reservation.present? && verify_sign(params,reservation.spot.key)
-       reservation.paid= true
-      reservation.save!
+    if reservation.present? && verify_sign(params, reservation.spot.key)
+      if params[:is_success] == "T"
+        reservation.paid= true
+        reservation.save!
+        redirect_to reservations_path,:notice => "支付已成功。"
+      end
+    else
+      redirect_to reservations_path, :notice => "支付失败，您可以选择重新支付。"
+    end
+
+    def notify
+      logger.info("received alipay return with " + params.join("&"))
+    end
+
+    protected
+
+    def verify_sign(params, spot_key)
+      calculate_sign(params.reject { |key, value| key =~ /^sign/ }, spot_key) == params[:sign]
+    end
+
+    def calculate_sign(params, spot_key)
+      sign((Hash[params.sort].map { |key, value| key + "=" + value }).join("&") + spot_key)
+    end
+
+    def create_url(parameter)
+      @@gateway + (parameter.map { |key, value| key + "=" + URI.escape(value) }).join("&")
+    end
+
+    def sign(prestr)
+      Digest::MD5.hexdigest(prestr)
+    end
+
+    def query_timestamp(account)
+      doc = Nokogiri::HTML(open(@@gateway + "service=query_timestamp&partner=" + account))
+      doc.at_css("encrypt_key").content
     end
   end
-
-  def notify
-
-  end
-
-  protected
-
-  def verify_sign(params, spot_key)
-    calculate_sign(params.reject{|key,value| key =~ /^sign/},spot_key) == params[:sign]
-  end
-
-  def calculate_sign(params, spot_key)
-    sign((Hash[params.sort].map { |key, value| key + "=" + value }).join("&") + spot_key)
-  end
-
-  def create_url(parameter)
-    @@gateway + (parameter.map { |key, value| key + "=" + URI.escape(value) }).join("&")
-  end
-
-  def sign(prestr)
-    Digest::MD5.hexdigest(prestr)
-  end
-
-  def query_timestamp(account)
-    doc = Nokogiri::HTML(open(@@gateway + "service=query_timestamp&partner=" + account))
-    doc.at_css("encrypt_key").content
-  end
-end
