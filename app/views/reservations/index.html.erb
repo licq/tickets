@@ -32,12 +32,14 @@
 
           <tr>
             <td><%= f.input :user_name_contains, :label => "操作员", :required => false %></td>
-            <td></td>
-          </tr>
-          <tr>
             <td><%= f.input :with_status, :collection => [["", "全部"], ["confirmed", "已确认"], ["canceled", "已取消"], ["checkedin", "已入园"], ["outdated", "已过期"]],
                             :label_method => :last, :value_method => :first,
                             :as => :select, :label => "状态", :required => false, :include_blank => false %></td>
+          </tr>
+          <tr>
+            <td><%= f.input :paid_eq, :collection => [["", "全部"], [true, "已支付"], [false, "未支付"]],
+                            :label_method => :last, :value_method => :first,
+                            :as => :select, :label => "支付状态", :required => false, :include_blank => false %></td>
             <td><%= f.input :paid_eq, :collection => [["", "全部"], [true, "已结算"], [false, "未结算"]],
                             :label_method => :last, :value_method => :first,
                             :as => :select, :label => "结算状态", :required => false, :include_blank => false %></td>
@@ -71,6 +73,7 @@
     <th>操作员</th>
     <th>状态</th>
     <th>审核</th>
+    <th>支付状态</th>
     <th>结算状态</th>
     <th>操作</th>
   </tr>
@@ -97,6 +100,7 @@
         <td><%= reservation.status_name %></td>
         <td><%= show_reservation_verified(reservation) %></td>
         <td><%= reservation.paid_name %></td>
+        <td><%= reservation.settled_name %></td>
         <td>
           <% if (reservation.need_pay?) %><%= link_to "支付", pay_alipay_path(reservation) %>
           <% end %>

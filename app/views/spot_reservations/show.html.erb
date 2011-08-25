@@ -67,10 +67,16 @@
     </tr>
 
     <tr>
+      <td class="textright">支付状态</td>
+      <td class="textleft"><%= @reservation.paid_name %></td>
+      <td class="textright">结算状态</td>
+      <td class="textleft"><%= @reservation.settled_name %></td>
+    </tr>
+
+    <tr>
       <td class="textright">备注</td>
       <td class="textleft"><%= @reservation.note %></td>
-      <td class="textright">支付状态</td>
-      <td class="textleft"><%= show_reservation_paid(@reservation) %></td>
+      <td></td><td></td>
     </tr>
 
   </table>

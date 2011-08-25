@@ -21,7 +21,6 @@
 	<th>操作员</th>
     <th>状态</th>
     <th>审核</th>
-    <th>结算状态</th>
     <th>操作</th>
   </tr>
   <% for reservation in @reservations %>
@@ -45,7 +44,6 @@
 		<td><%= reservation.user.name %></td>
         <td><%= reservation.status_name %></td>
         <td><%= show_reservation_verified(reservation)%></td>
-        <td><%= reservation.paid_name %></td>
         <td>
           <%= link_to "审核", verify_reservation_path(reservation),:method => "put", :confirm => "您确定审核通过吗？" %>
         </td>

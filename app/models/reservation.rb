@@ -59,13 +59,13 @@ class Reservation < ActiveRecord::Base
   end
 
   def settled_name
-    case self.settled?
-      when true
-        '已结算'
-      else
-        '未结算'
-    end
+    self.settled? ? '已结算' : '未结算'
   end
+
+  def paid_name
+    self.paid? ? '已支付' : '未支付'
+  end
+
 
   def can_edit
     if self.status == "confirmed"

@@ -22,7 +22,7 @@
             <td><%= f.input :date_less_than_or_equal_to, :label => "入园结束日期", :required => false, :input_html => {:class =>'reservation_end_datepicker'} %></td>
           </tr>
           <tr>
-            <td><%= f.input :start_book_date, :label => "预订起始日期", :required => false,:input_html => {:class =>'reservation_start_datepicker'} %></td>
+            <td><%= f.input :start_book_date, :label => "预订起始日期", :required => false, :input_html => {:class =>'reservation_start_datepicker'} %></td>
             <td><%= f.input :end_book_date, :label => "预订结束日期", :required => false, :input_html => {:class =>'reservation_end_datepicker'} %></td>
           </tr>
           <tr>
@@ -33,9 +33,15 @@
             <td><%= f.input :with_status, :collection => [["", "全部"], ["confirmed", "已确认"], ["canceled", "已取消"], ["checkedin", "已入园"], ["outdated", "已过期"]],
                             :label_method => :last, :value_method => :first,
                             :as => :select, :label => "状态", :required => false, :include_blank => false %></td>
-            <td><%= f.input :paid_eq, :collection => [["", "全部"], [true, "已结算"], [false, "未结算"]],
+            <td><%= f.input :paid_eq, :collection => [["", "全部"], [true, "已支付"], [false, "未支付"]],
+                            :label_method => :last, :value_method => :first,
+                            :as => :select, :label => "支付状态", :required => false, :include_blank => false %></td>
+          </tr>
+          <tr>
+            <td><%= f.input :settled_eq, :collection => [["", "全部"], [true, "已结算"], [false, "未结算"]],
                             :label_method => :last, :value_method => :first,
                             :as => :select, :label => "结算状态", :required => false, :include_blank => false %></td>
+            <td></td>
           </tr>
         </table>
       </fieldset>

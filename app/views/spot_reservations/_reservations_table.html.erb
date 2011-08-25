@@ -19,6 +19,7 @@
     <th>联系电话</th>
     <th>预订日期</th>
     <th>状态</th>
+    <th>支付状态</th>
     <th>结算状态</th>
   </tr>
   <% for reservation in reservations %>
@@ -43,6 +44,7 @@
         <td><%= date_format(reservation.created_at) %></td>
         <td><%= reservation.status_name %></td>
         <td><%= reservation.paid_name %></td>
+        <td><%= reservation.settled_name %></td>
       </tr>
   <% end %>
 </table>

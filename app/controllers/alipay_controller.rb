@@ -1,3 +1,4 @@
+#coding: utf-8
 require "open-uri"
 class AlipayController < ApplicationController
   @@gateway = "https://mapi.alipay.com/gateway.do?"

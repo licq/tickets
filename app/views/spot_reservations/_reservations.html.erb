@@ -16,6 +16,7 @@
     <th>总价</th>
     <th>支付方式</th>
     <th>支付状态</th>
+    <th>结算状态</th>
     <th>联系人</th>
     <th>联系电话</th>
     <th>预订日期</th>
@@ -36,7 +37,8 @@
         <td><%= reservation.child_ticket_number %></td>
         <td><%= show_reservation_total_price(reservation) %></td>
         <td><%= show_reservation_payment_method(reservation) %></td>
-        <td><%= show_reservation_paid(reservation) %></td>
+        <td><%= reservation.paid_name %></td>
+        <td><%= reservation.settled_name %></td>
         <td><%= reservation.contact %></td>
         <td><%= reservation.phone %></td>
         <td><%= date_format(reservation.created_at) %></td>

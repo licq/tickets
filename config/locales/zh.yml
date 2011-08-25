@@ -269,6 +269,11 @@ zh:
          total_price: "总价"
          group_no: "团号"
          note: "备注"
+         pay_id: "支付宝流水号"
+         pay_time: "支付时间"
+         paid: "支付状态"
+         settled: "结算状态"
+         verified: "审核状态"
       role:
          name: "名称"
       message:

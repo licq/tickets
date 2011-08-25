@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110825133651) do
+ActiveRecord::Schema.define(:version => 20110825151437) do
 
   create_table "agent_prices", :force => true do |t|
     t.integer  "spot_id"
