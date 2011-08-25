@@ -90,6 +90,7 @@ class ReservationsController < ApplicationController
     @reservation = IndividualReservation.new(params[:individual_reservation])
     @reservation.agent = @agent
     @reservation.paid = false
+    @reservation.settled = false
     @reservation.status = :confirmed
     @reservation.book_price =@reservation.calculate_price
     @reservation.book_purchase_price =@reservation.calculate_purchase_price
@@ -113,6 +114,7 @@ class ReservationsController < ApplicationController
     @reservation = TeamReservation.new(params[:team_reservation])
     @reservation.agent = @agent
     @reservation.paid = false
+    @reservation.settled= false
     @reservation.status = :confirmed
     @reservation.book_price =@reservation.calculate_price
     @reservation.total_price =@reservation.book_price
@@ -220,10 +222,10 @@ class ReservationsController < ApplicationController
 
   private
   def set_verified(reservation)
-    if reservation.payment_method == "prepay"
-      reservation.verified = false
-    else
+    if reservation.payment_method == "poa"
       reservation.verified = true
+    else
+      reservation.verified = false
     end
   end
 

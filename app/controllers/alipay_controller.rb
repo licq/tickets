@@ -14,7 +14,7 @@ class AlipayController < ApplicationController
         "subject" => spot.name + "--" + reservation.ticket_name,
         "out_trade_no" => reservation.no,
         "payment_type" => "1",
-        "total_fee" => "0.01",
+        "total_fee" => "0.01", #reservation.book_purchase_price
         "seller_email" => spot.email,
         "anti_phishing_key" => query_timestamp(spot.account)
     }
@@ -30,6 +30,9 @@ class AlipayController < ApplicationController
     if reservation.present? && verify_sign(params, reservation.spot.key)
       if params[:is_success] == "T"
         reservation.paid= true
+        reservation.verified = true
+        reservation.pay_id = params[:trade_no]
+        reservation.pay_time = params[:notify_time]
         reservation.save!
         redirect_to reservations_path, :notice => "支付已成功。"
       end
@@ -40,7 +43,19 @@ class AlipayController < ApplicationController
 
   def notify
     logger.info("received alipay return with " + params.join("&"))
-    render :text => "success"
+    reservation = Reservation.find(params[:out_trade_no])
+    if reservation.present? && verify_sign(params, reservation.spot.key)
+      if params[:is_success] == "T"
+        reservation.paid= true
+        reservation.verified = true
+        reservation.pay_id = params[:trade_no]
+        reservation.pay_time = params[:notify_time]
+        reservation.save!
+        render :text => "success"
+      else
+        render :text => "failure"
+      end
+    end
   end
 
   protected

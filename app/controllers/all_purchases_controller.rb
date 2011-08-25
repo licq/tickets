@@ -23,7 +23,7 @@ class AllPurchasesController < ApplicationController
     @agent_name = params[:agent_name]
     @spot = Spot.find(params[:spot_id])
     @agent = Agent.find(params[:agent_id])
-    @reservations = Reservation.where(:spot_id => params[:spot_id], :agent_id=> params[:agent_id], :payment_method => params[:payment_method], :type => params[:type], :paid => false, :status => "checkedin")
+    @reservations = Reservation.where(:spot_id => params[:spot_id], :agent_id=> params[:agent_id], :payment_method => params[:payment_method], :type => params[:type], :settled => false, :status => "checkedin")
     if @date.present?
       @reservations = @reservations.where(:date.lte => @date)
     end

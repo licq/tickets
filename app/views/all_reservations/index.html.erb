@@ -33,7 +33,7 @@
             <td> <%= f.input :with_status, :collection => [["", "全部"], ["confirmed", "已确认"], ["canceled", "已取消"], ["checkedin", "已入园"], ["outdated", "已过期"]],
                              :label_method => :last, :value_method => :first,
                              :as => :select, :label => "状态", :required => false, :include_blank => false %></td>
-            <td> <%= f.input :paid_eq, :collection => [["", "全部"], [true, "已结算"], [false, "未结算"]],
+            <td> <%= f.input :settled_eq, :collection => [["", "全部"], [true, "已结算"], [false, "未结算"]],
                              :label_method => :last, :value_method => :first,
                              :as => :select, :label => "结算状态", :required => false, :include_blank => false %> </td>
           </tr>
@@ -88,7 +88,7 @@
         <td><%= reservation.phone %></td>
         <td><%= date_format(reservation.created_at) %></td>
         <td><%= reservation.status_name %></td>
-        <td><%= reservation.paid_name %></td>
+        <td><%= reservation.settled_name %></td>
       </tr>
   <% end %>
 </table>

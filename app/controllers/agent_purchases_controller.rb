@@ -18,14 +18,14 @@ class AgentPurchasesController < ApplicationController
     @date = params[:date]
     @spot_name = params[:spot_name]
     @spot = Spot.find(params[:spot_id])
-    @reservations = @agent.reservations.where(:spot_id => params[:spot_id], :payment_method => params[:payment_method], :type => params[:type], :paid => false, :status => "checkedin")
+    @reservations = @agent.reservations.where(:spot_id => params[:spot_id], :payment_method => params[:payment_method], :type => params[:type], :settled => false, :status => "checkedin")
     if @date.present?
       @reservations = @reservations.where(:date.lte => @date)
     end
     @reservations
   end
 
-  def update_paid
+  def update_settled
     ids = id_list(params[:reservation_ids])
     if ids.present?
       PurchaseHistory.transaction do
@@ -34,7 +34,7 @@ class AgentPurchasesController < ApplicationController
         price = reservations.sum(&:total_price)-reservations.sum(&:total_purchase_price)
         purchase_history = @agent.purchase_histories.create(:purchase_date => Date.today, :user => current_user.name, :spot_id => spot_id, :is_individual => true, :payment_method => "poa", :price => price)
         purchase_history.save
-        @agent.reservations.where(:payment_method => "poa").update_all({:paid => true, :purchase_history_id => purchase_history}, :id => params[:reservation_ids])
+        @agent.reservations.where(:payment_method => "poa").update_all({:settled => true, :purchase_history_id => purchase_history}, :id => params[:reservation_ids])
       end
     end
     redirect_to agent_purchases_path({:date =>params[:date], :spot_name =>params[:spot_name]})

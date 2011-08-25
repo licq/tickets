@@ -36,7 +36,7 @@ Tickets::Application.routes.draw do
     collection do
       get "reservations"
       get "report"
-      put "update_paid"
+      put "update_settled"
     end
   end
 
@@ -50,7 +50,7 @@ Tickets::Application.routes.draw do
     collection do
       get "reservations"
       get "report"
-      put "update_paid"
+      put "update_settled"
     end
   end
 

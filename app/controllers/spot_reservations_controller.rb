@@ -34,10 +34,9 @@ class SpotReservationsController < ApplicationController
       @reservation.set_true_total_price
       @reservation.date = Date.today
       @reservation.status = :checkedin
+      @reservation.paid = true if @reservation.payment_method == 'poa'
       if (@reservation.type == 'TeamReservation' && @reservation.payment_method == 'poa')
-        @reservation.paid = true
-      else
-        @reservation.paid = false
+        @reservation.settled = true
       end
       @reservation.save!
       redirect_to today_spot_reservations_url, :notice => "已入园成功."
