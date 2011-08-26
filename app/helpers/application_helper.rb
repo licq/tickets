@@ -140,10 +140,6 @@ module ApplicationHelper
     end
   end
 
-  def show_reservation_paid(reservation)
-    reservation.paid? ? "已支付" : "未支付"
-  end
-
   def show_rfp_agent_price_name(rfp)
     rfp.agent_price && "#{rfp.agent_price.name}" ||"--"
   end
