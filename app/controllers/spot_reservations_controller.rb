@@ -27,7 +27,7 @@ class SpotReservationsController < ApplicationController
     @reservation = @spot.reservations.find(params[:id])
     if @reservation.update_attributes(params[:team_reservation] || params[:individual_reservation])
       if @reservation.adult_true_ticket_number.blank? || @reservation.adult_true_ticket_number == 0
-        @reservation.errors.add(:adult_true_ticket_number,"实到城人数必须大于0")
+        @reservation.errors.add(:adult_true_ticket_number,"实到成人数必须大于0")
         render :edit
         return
       end

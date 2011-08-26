@@ -37,10 +37,7 @@ $(function() {
             alert("至少选择一张订单");
             return false;
         } else {
-            if (window.confirm("确认要将选择的订单设置为已结算吗？"))
-                return true;
-            else
-                return false;
+            return window.confirm("确认要将选择的订单设置为已结算吗？");
         }
     });
 

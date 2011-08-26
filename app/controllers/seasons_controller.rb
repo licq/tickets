@@ -23,6 +23,8 @@ class SeasonsController < ApplicationController
           flash.now[:error] = "时间段#{overlaped_timespans[0]}与#{overlaped_timespans[1]}冲突"
           raise ActiveRecord::Rollback
         end
+      else
+        error_happened = true
       end
     end
     if error_happened
