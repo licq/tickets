@@ -1,5 +1,5 @@
 <div class="fields input string required " style="clear:left;">
-  <div style="display:inline; float:left;" class="input string required"><label class="string required">*开始日期</label><%= tf.text_field :from_date,{:readonly => "readonly",:class=>["start_datepicker","string","required"]}%></div>
-  <div style="display:inline;" class="input string required"><label class="string required">*结束日期</label><%= tf.text_field :to_date,{:readonly => "readonly",:class=>["end_datepicker","string","required"]}%></div>
+  <div style="display:inline; float:left;" class="input string required"><label class="string required">*开始日期</label><%= tf.text_field :from_date,{:class=>["start_datepicker","string","required"]}%></div>
+  <div style="display:inline;" class="input string required"><label class="string required">*结束日期</label><%= tf.text_field :to_date,{:class=>["end_datepicker","string","required"]}%></div>
   <%= link_to_remove "删除", tf %>
 </div>

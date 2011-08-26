@@ -28,6 +28,7 @@ class SeasonsController < ApplicationController
       end
     end
     if error_happened
+      flash.now[:error] =  "错误发生，可能日期格式不正确"
       render :action => 'new'
     else
       redirect_to seasons_path, :notice => "创建已成功."

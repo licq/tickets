@@ -14,7 +14,7 @@
   <% if f.object.new_record? %>
        <div class="input string required"><label>入园日期</label> <%= f.object.date %></div>
   <% else %>
-      <%= f.input :date, :required => true, :as => :string, :input_html => {:class => "book_datepicker", :readonly => "readonly"} %>
+      <%= f.input :date, :required => true, :as => :string, :input_html => {:class => "book_datepicker"} %>
   <% end %>
   <div class="input string required"><label>成人价</label><%= f.object.adult_sale_price %></div>
   <% unless f.object.child_sale_price.nil? %>

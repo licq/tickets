@@ -18,12 +18,12 @@
             <td> <%= f.input :agent_name_contains, :label => "旅行社名称", :required => false %></td>
           </tr>
           <tr>
-            <td> <%= f.input :date_greater_than_or_equal_to, :label => "入园起始日期", :required => false, :input_html => {:class =>'reservation_start_datepicker', :readonly => "readonly"} %></td>
-            <td> <%= f.input :date_less_than_or_equal_to, :label => "入园结束日期", :required => false, :input_html => {:class =>'reservation_end_datepicker' , :readonly => "readonly"} %></td>
+            <td> <%= f.input :date_greater_than_or_equal_to, :label => "入园起始日期", :required => false, :input_html => {:class =>'reservation_start_datepicker'} %></td>
+            <td> <%= f.input :date_less_than_or_equal_to, :label => "入园结束日期", :required => false, :input_html => {:class =>'reservation_end_datepicker'} %></td>
           </tr>
           <tr>
-            <td> <%= f.input :start_book_date, :label => "预订起始日期", :required => false, :input_html => {:class =>'reservation_start_datepicker', :readonly => "readonly"} %></td>
-            <td> <%= f.input :end_book_date, :label => "预订结束日期", :required => false, :input_html => {:class =>'reservation_end_datepicker' , :readonly => "readonly"} %></td>
+            <td> <%= f.input :start_book_date, :label => "预订起始日期", :required => false, :input_html => {:class =>'reservation_start_datepicker'} %></td>
+            <td> <%= f.input :end_book_date, :label => "预订结束日期", :required => false, :input_html => {:class =>'reservation_end_datepicker'} %></td>
           </tr>
           <tr>
             <td> <%= f.input :contact_contains, :label => "联系人", :required => false %></td>
