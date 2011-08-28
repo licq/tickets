@@ -150,7 +150,9 @@ class Reservation < ActiveRecord::Base
                 sum(total_purchase_price) as price_sum').joins(:agent).group(:agent_name, :type, :payment_method).where(:settled => false, :payment_method => 'prepay', :status => "checkedin").reorder(:agent_id)
     poa_purchase_sum = select('agent_id,agents.name as agent_name,type,payment_method,count(1) as count_sum,
                 sum(total_price-total_purchase_price)  as price_sum').joins(:agent).group(:agent_name, :type, :payment_method).where(:settled => false, :payment_method => 'poa', :type => "IndividualReservation", :status => "checkedin").reorder(:agent_id)
-    (prepay_purchase_sum + poa_purchase_sum).sort_by(&:agent_name)
+    net_purchase_sum = select('agent_id,agents.name as agent_name,type,payment_method,count(1) as count_sum,
+                sum(book_purchase_price-total_purchase_price)  as price_sum').joins(:agent).group(:agent_name, :type, :payment_method).where(:settled => false, :payment_method => 'net', :type => "IndividualReservation", :status => "checkedin").reorder(:agent_id)
+    (prepay_purchase_sum + poa_purchase_sum + net_purchase_sum.reject{|item| item.price_sum == 0}).sort_by(&:agent_name)
   end
 
   def self.sum_purchase_with_spots
@@ -158,7 +160,9 @@ class Reservation < ActiveRecord::Base
                 sum(total_purchase_price) as price_sum').joins(:spot).group(:spot_name, :type, :payment_method).where(:settled => false, :payment_method => 'prepay', :status => "checkedin").reorder(:spot_id)
     poa_purchase_sum = select('spot_id,spots.name as spot_name,type,payment_method,count(1) as count_sum,
                 sum(total_price-total_purchase_price)  as price_sum').joins(:spot).group(:spot_name, :type, :payment_method).where(:settled => false, :payment_method => 'poa', :type => "IndividualReservation", :status => "checkedin").reorder(:spot_id)
-    (prepay_purchase_sum + poa_purchase_sum).sort_by(&:spot_name)
+    net_purchase_sum = select('spot_id, spots.name as spot_name,type,payment_method,count(1) as count_sum,
+                  sum(book_purchase_price - total_purchase_price) as price_sum').joins(:spot).group(:spot_name, :type, :payment_method).where(:settled => false, :payment_method => 'net', :status => "checkedin").reorder(:spot_id)
+    (prepay_purchase_sum + poa_purchase_sum + net_purchase_sum).sort_by(&:spot_name)
   end
 
 
@@ -167,7 +171,9 @@ class Reservation < ActiveRecord::Base
                 sum(total_purchase_price) as price_sum').joins(:spot, :agent).group(:spot_name, :agent_name, :type, :payment_method).where(:settled => false, :payment_method => 'prepay', :status => "checkedin").reorder(:spot_id)
     poa_purchase_sum = select('spot_id,spots.name as spot_name,agent_id,agents.name as agent_name,type,payment_method,count(1) as count_sum,
                 sum(total_price-total_purchase_price)  as price_sum').joins(:spot, :agent).group(:spot_name, :agent_name, :type, :payment_method).where(:settled => false, :payment_method => 'poa', :type => "IndividualReservation", :status => "checkedin").reorder(:spot_id)
-    (prepay_purchase_sum + poa_purchase_sum).sort_by(&:spot_name)
+    net_purchase_sum = select('spot_id,spots.name as spot_name,agent_id,agents.name as agent_name,type,payment_method,count(1) as count_sum,
+                sum(book_purchase_price - total_purchase_price)  as price_sum').joins(:spot, :agent).group(:spot_name, :agent_name, :type, :payment_method).where(:settled => false, :payment_method => 'poa', :type => "IndividualReservation", :status => "checkedin").reorder(:spot_id)
+    (prepay_purchase_sum + poa_purchase_sum + net_purchase_sum).sort_by(&:spot_name)
   end
 
   def self.used_contacts(search)

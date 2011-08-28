@@ -51,18 +51,20 @@ class SpotPurchasesController < ApplicationController
           @date = params[:date].empty? ? Date.today : params[:date]
           @purchase_price = @reservations.sum(&:total_purchase_price)
           @is_individual = @reservations[0].type == "IndividualReservation"
-          @is_poa = @reservations[0].payment_method == "poa"
           @book_purchase_price = @reservations.sum(&:book_purchase_price)
           @adult_total_ticket_number = @reservations.sum(&:adult_ticket_number)
           @child_total_ticket_number = @reservations.sum(&:child_ticket_number)
           @adult_total_true_ticket_number = @reservations.sum(&:adult_true_ticket_number)
           @child_total_true_ticket_number = @reservations.sum(&:child_true_ticket_number)
-          if @is_poa
-            @price = @reservations.sum(&:total_price)
-            @book_price = @reservations.sum(&:book_price)
-            render "poa_report"
-          else
-            render "report"
+          case @reservations[0].payment_method
+            when "poa"
+              @price = @reservations.sum(&:total_price)
+              @book_price = @reservations.sum(&:book_price)
+              render "poa_report"
+            when "net"
+              render "net_report"
+            else
+              render "report"
           end
         end
       end

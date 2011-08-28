@@ -195,7 +195,7 @@ module ApplicationHelper
   end
 
   def show_in_or_out_for_spot(item)
-    if (item.payment_method == 'poa')
+    if (item.payment_method == 'poa' || item.payment_method == 'net')
       '应付'
     else
       '应收'
@@ -203,7 +203,7 @@ module ApplicationHelper
   end
 
   def show_in_or_out_for_agent(item)
-    if (item.payment_method == 'poa')
+    if (item.payment_method == 'poa' || item.payment_method == "net")
       '应收'
     else
       '应付'

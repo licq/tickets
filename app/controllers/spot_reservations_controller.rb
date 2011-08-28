@@ -27,7 +27,7 @@ class SpotReservationsController < ApplicationController
     @reservation = @spot.reservations.find(params[:id])
     if @reservation.update_attributes(params[:team_reservation] || params[:individual_reservation])
       if @reservation.adult_true_ticket_number.blank? || @reservation.adult_true_ticket_number == 0
-        @reservation.errors.add(:adult_true_ticket_number,"实到成人数必须大于0")
+        @reservation.errors.add(:adult_true_ticket_number, "实到成人数必须大于0")
         render :edit
         return
       end
@@ -37,6 +37,12 @@ class SpotReservationsController < ApplicationController
       @reservation.paid = true if @reservation.payment_method == 'poa'
       if (@reservation.type == 'TeamReservation' && @reservation.payment_method == 'poa')
         @reservation.settled = true
+      end
+
+      if (@reservation.payment_method == "net" && @reservation.book_purchase_price == @reservation.total_purchase_price)
+        @reservation.settled = true
+      else
+        @reservation.settled = false
       end
       @reservation.save!
       redirect_to today_spot_reservations_url, :notice => "已入园成功."
