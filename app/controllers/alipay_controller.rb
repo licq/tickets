@@ -28,20 +28,14 @@ class AlipayController < ApplicationController
   def return
     logger.info("received alipay return with " + params.inspect)
     reservation = Reservation.where(:no => params[:out_trade_no]).first
-    logger.info("reservation.where")
-    if reservation.present?
-      logger.info("reservation.present?")
-      if verify_sign(params, reservation.spot.key)
-        logger.error("reservation verify")
-        if params[:is_success] == "T"
-          logger.error("reservation success")
-          reservation.paid= true
-          reservation.verified = true
-          reservation.pay_id = params[:trade_no]
-          reservation.pay_time = params[:notify_time]
-          reservation.save!
-          redirect_to reservations_path, :notice => "支付已成功。"
-        end
+    if reservation.present? && verify_sign(params, reservation.spot.key)
+      if params[:is_success] == "T"
+        reservation.paid= true
+        reservation.verified = true
+        reservation.pay_id = params[:trade_no]
+        reservation.pay_time = params[:notify_time]
+        reservation.save!
+        redirect_to reservations_path, :notice => "支付已成功。"
       end
     else
       redirect_to reservations_path, :notice => "支付失败，您可以选择重新支付。"
@@ -68,13 +62,10 @@ class AlipayController < ApplicationController
   protected
 
   def verify_sign(params, spot_key)
-    logger.error(params.inspect)
-    calculate_sign(params.reject { |key, value| key.start_with?("sign") }, spot_key) == params[:sign]
+    calculate_sign(params.reject { |key, value| key.start_with?("sign") || key == "action" || key == "controller" }, spot_key) == params[:sign]
   end
 
   def calculate_sign(params, spot_key)
-    logger.error(params.inspect)
-    logger.error(spot_key)
     sign((Hash[params.sort].map { |key, value| key + "=" + value }).join("&") + spot_key)
   end
 
