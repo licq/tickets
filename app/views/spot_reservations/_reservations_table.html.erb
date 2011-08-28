@@ -20,6 +20,8 @@
     <th>状态</th>
     <th>支付状态</th>
     <th>结算状态</th>
+    <th>操作</th>
+
   </tr>
   <% for reservation in reservations %>
       <tr id="reservation<%= reservation.id %>_row" class=<%= cycle("even","odd") %>>
@@ -43,6 +45,7 @@
         <td><%= reservation.status_name %></td>
         <td><%= reservation.paid_name %></td>
         <td><%= reservation.settled_name %></td>
+        <td><%= link_to "重新入园", edit_spot_reservation_path(reservation) if reservation.can_edit_after_checkin %></td>
       </tr>
   <% end %>
 </table>

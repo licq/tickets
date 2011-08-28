@@ -82,6 +82,10 @@ class Reservation < ActiveRecord::Base
     end
   end
 
+  def can_edit_after_checkin
+    self.status = "checkedin" && self.date == Date.today
+  end
+
   def can_cancel
     is_confirmed?
   end
