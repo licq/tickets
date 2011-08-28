@@ -209,7 +209,8 @@ class ReservationsController < ApplicationController
   end
 
   def unverified
-    @reservations = @agent.reservations.where(:verified => false)
+    @search = @agent.reservations.where(:verified => false, :payment_method => "prepay").search(params[:search])
+    @reservations = @search.all
   end
 
   def verify

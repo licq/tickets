@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   def set_spot
-    if current_user && (current_user.type = "SpotAdmin" || current_user.type = "SpotOperator")
+    if current_user && (current_user.is_spot_user)
       @spot ||= current_user.spot
     else
       redirect_to '/'
@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_agent
-    if current_user && (current_user.type = "AgentOperator")
+    if current_user && (current_user.is_agent_user)
       @agent ||= current_user.agent
     else
       redirect_to '/'
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_system_admin
-    unless current_user && (current_user.type == "SystemAdmin")
+    unless current_user && (current_user.is_system_user)
       redirect_to '/'
     end
   end
