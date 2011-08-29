@@ -25,6 +25,13 @@ class SpotReservationsController < ApplicationController
 
   def update
     @reservation = @spot.reservations.find(params[:id])
+    if params[:adult_true_ticket_number].present? && params[:child_true_ticket_number].present?
+      if @reservation.adult_true_ticket_number < params[:adult_true_ticket_number] || @reservation.child_true_ticket_number < params[:child_true_ticket_number]
+        @reservation.errors.add("成人数和儿童数不能大于以前订单上的相应数值")
+        render :edit
+        return
+      end
+    end
     if @reservation.update_attributes(params[:team_reservation] || params[:individual_reservation])
       if @reservation.adult_true_ticket_number.blank? || @reservation.adult_true_ticket_number == 0
         @reservation.errors.add(:adult_true_ticket_number, "实到成人数必须大于0")
