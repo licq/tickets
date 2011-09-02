@@ -1,16 +1,3 @@
-# == Schema Information
-# Schema version: 20110405152243
-#
-# Table name: cities
-#
-#  id         :integer         not null, primary key
-#  code       :string(255)
-#  name       :string(255)
-#  pinyin     :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#
-
 class City < ActiveRecord::Base
   validates :name, :presence => true
   validates :code, :presence => true
@@ -23,3 +10,16 @@ class City < ActiveRecord::Base
     where(:name.matches % "#{word}%" | :pinyin.matches % "#{word}%")
   end
 end
+
+# == Schema Information
+#
+# Table name: cities
+#
+#  id         :integer(4)      not null, primary key
+#  code       :string(255)
+#  name       :string(255)
+#  pinyin     :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
