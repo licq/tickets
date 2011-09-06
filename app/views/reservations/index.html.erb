@@ -102,7 +102,7 @@
         <td><%= reservation.paid_name %></td>
         <td><%= reservation.settled_name %></td>
         <td>
-          <% if (reservation.need_pay?) %><%= link_to "支付", pay_alipay_path(reservation) %>
+          <% if (reservation.need_pay?) %><%= link_to "支付",  pay_alipay_path(reservation),:target => "_blank" %>
           <% end %>
           <% if (reservation.can_edit) %><%= link_to "修改", edit_reservation_path(reservation) %>
           <% end %>
