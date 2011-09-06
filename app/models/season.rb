@@ -12,3 +12,15 @@ class Season < ActiveRecord::Base
                                 :reject_if => lambda { |a| a[:from_date].blank? || a[:to_date].blank? },
                                 :allow_destroy => true
 end
+
+# == Schema Information
+#
+# Table name: seasons
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  spot_id    :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

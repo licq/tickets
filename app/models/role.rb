@@ -21,3 +21,13 @@ class Role < ActiveRecord::Base
     groups
   end
 end
+# == Schema Information
+#
+# Table name: roles
+#
+#  id            :integer(4)      not null, primary key
+#  name          :string(255)
+#  roleable_id   :integer(4)
+#  roleable_type :string(255)
+#
+

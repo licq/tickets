@@ -23,3 +23,20 @@ class Rfp < ActiveRecord::Base
   end
 
 end
+
+# == Schema Information
+#
+# Table name: rfps
+#
+#  id                        :integer(4)      not null, primary key
+#  agent_id                  :integer(4)
+#  spot_id                   :integer(4)
+#  agent_price_id            :integer(4)
+#  status                    :string(1)       default("a")
+#  from_spot                 :boolean(1)      default(FALSE)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  team_payment_method       :string(255)
+#  individual_payment_method :string(255)
+#
+

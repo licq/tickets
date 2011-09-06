@@ -29,3 +29,21 @@ class Agent < ActiveRecord::Base
   end
 
 end
+
+# == Schema Information
+#
+# Table name: agents
+#
+#  id               :integer(4)      not null, primary key
+#  name             :string(255)
+#  description      :text
+#  disabled         :boolean(1)      default(FALSE), not null
+#  created_at       :datetime
+#  updated_at       :datetime
+#  address          :string(255)
+#  business_contact :string(255)
+#  business_phone   :string(255)
+#  finance_contact  :string(255)
+#  finance_phone    :string(255)
+#
+

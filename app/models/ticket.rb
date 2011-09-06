@@ -14,3 +14,15 @@ class Ticket < ActiveRecord::Base
     selected_public_rates.empty? ? nil : selected_public_rates[0]
   end
 end
+
+# == Schema Information
+#
+# Table name: tickets
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  spot_id    :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
