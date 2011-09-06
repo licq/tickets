@@ -7,23 +7,23 @@ gem 'rails', '3.0.9'
 
 gem 'rake'
 gem 'sqlite3'
-gem 'kaminari'
-gem 'mysql2', '0.2.6'
-gem 'meta_where'
-gem 'meta_search'
-gem 'simple_form'
-gem 'flutie'
-gem 'prawn_rails'
-gem 'prawn-format'
-gem 'prawn-layout'
-gem 'spreadsheet'
-gem 'excel_rails'
-gem 'nokogiri'
+gem 'kaminari' #分页
+gem 'mysql2', '0.2.6' #舍弃了mysql驱动，使用mysql2。不过要设置为'< 0.3.0'，0.3版的mysql2是配合rails 3.1的。
+gem 'meta_where' #https://github.com/ernie/meta_where 准备移到 https://github.com/ernie/squeel
+gem 'meta_search' #https://github.com/ernie/meta_search
+gem 'simple_form' #http://doabit.iteye.com/blog/771110
+gem 'flutie'  #Basic, default styles for rails applications
+gem 'prawn_rails' #pdf
+gem 'prawn-format' #pdf
+gem 'prawn-layout' #pdf
+gem 'spreadsheet' #http://hlee.iteye.com/blog/356510    excel
+gem 'excel_rails' #excel
+gem 'nokogiri' #https://github.com/tenderlove/nokogiri  'HTML, XML, SAX, and Reader parser'
 
 group :development do
   gem 'jquery-rails'
   gem 'nifty-generators'
-  gem 'annotate'
+  gem 'annotate'  #https://github.com/ctran/annotate_models 'Annotate ActiveRecord models' usage:annotate --exclude tests,fixtures
 end
 group :development, :test do
   gem 'rspec-rails'
