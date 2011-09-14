@@ -15,9 +15,21 @@
 
 <div class="bottom_links">
   <%= button_to_new_window "PDF下载", reports_generate_spot_checkin_path(:format => "pdf", :type => params[:type],
-                                                                       :year => params[:year], :month => params[:month], :day => params[:day], :week => params[:week]) %>
+                                                                       :year => params[:year], :month => params[:month],
+                                                                       :day => params[:day], :week => params[:week],
+                                                                       :start_report_time => params[:start_report_time],
+                                                                       :end_report_time => params[:end_report_time],
+                                                                       :agent_name => params[:agent_name],
+                                                                       :group_no => params[:group_no]
+                                                                        ) %>
   <%= button_to_new_window "Excel下载", reports_generate_spot_checkin_path(:format => "xls", :type => params[:type],
-                                                                       :year => params[:year], :month => params[:month], :day => params[:day], :week => params[:week]) %>
+                                                                       :year => params[:year], :month => params[:month],
+                                                                       :day => params[:day], :week => params[:week],
+                                                                       :start_report_time => params[:start_report_time],
+                                                                       :end_report_time => params[:end_report_time],
+                                                                       :agent_name => params[:agent_name],
+                                                                       :group_no => params[:group_no]
+                                                                       ) %>
 </div>
 
 

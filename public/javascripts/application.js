@@ -245,6 +245,22 @@ function set_datepicker() {
             $(this).datepicker('option', 'minDate', $(start_picker).datepicker('getDate'));
         }
     });
+
+     $(".report_start_datepicker").datepicker({
+        changeYear: true ,
+        changeMonth: true,
+        numberOfMonths: 2
+    });
+
+    $(".report_end_datepicker").datepicker({
+        changeYear: true ,
+        changeMonth: true,
+        numberOfMonths: 2,
+        beforeShow: function(input, inst) {
+            var start_picker = $(this).closest("div").find(".report_start_datepicker");
+            $(this).datepicker('option', 'minDate', $(start_picker).datepicker('getDate'));
+        }
+    });
 }
 
 function remove_field(link) {
@@ -323,26 +339,47 @@ function init_output_report_condition() {
     change_month(today.month());
     $("#day").val(today.day());
 
+    var today_date = today.year() + "-" + today.month() + "-" + today.day();
+    $("#start_report_time").val(today_date);
+    $("#end_report_time").val(today_date);
+
 }
 
 function change_output_report_condition_fields(val) {
     switch (val) {
         case "day":
+            show_year();
             show_month();
             show_day();
             hide_week();
+            hide_date_range();
             break;
         case "month":
+            show_year();
             show_month();
             hide_day();
             hide_week();
+            hide_date_range();
             break;
         case "week":
+            show_year();
             show_week();
+            hide_month();
+            hide_day();
+            hide_date_range();
+            break;
+        case "date_range":
+            show_date_range();
+            hide_year();
+            hide_week();
             hide_month();
             hide_day();
             break;
     }
+}
+
+function show_year(){
+    $("#year").parent().show();
 }
 
 function show_month() {
@@ -356,6 +393,14 @@ function show_week() {
     $("#week").parent().show();
 }
 
+function show_date_range(){
+    $("#date_range").show();
+}
+
+function hide_year(){
+    $("#year").parent().hide();
+}
+
 function hide_month() {
     $("#month").parent().hide();
 }
@@ -364,6 +409,10 @@ function hide_day() {
 }
 function hide_week() {
     $("#week").parent().hide();
+}
+
+function hide_date_range(){
+    $("#date_range").hide();
 }
 
 function change_year(year) {
@@ -466,6 +515,5 @@ function menuFix() {
         }
     }
 }
-
 
 

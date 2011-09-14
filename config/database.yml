@@ -5,7 +5,7 @@ development:
   host: localhost
   database: tickets
   username: root
-  password: "123456"
+  password: "derbysoft"
   encoding: utf8
 
 # Warning: The database defined as "test" will be erased and
@@ -18,7 +18,9 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 5
-  timeout: 5000
+    adapter: mysql2
+    host: localhost
+    database: tickets
+    username: root
+    password: "derbysoft"
+    encoding: utf8

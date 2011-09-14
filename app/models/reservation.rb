@@ -1,7 +1,7 @@
 #coding: utf-8
 class Reservation < ActiveRecord::Base
 
-  default_scope order('id desc')
+  default_scope order('reservations.id desc')
   scope :exclude_canceled, where(:status.ne => "canceled")
   belongs_to :spot
   belongs_to :agent
@@ -137,7 +137,7 @@ class Reservation < ActiveRecord::Base
 
   def self.sum_spot_output_between(start_time, end_time)
 
-    select('spot_id,spots.name as spot_name,count(1) as count_sum, sum(adult_ticket_number) as adult_ticket_sum, sum(child_ticket_number) as child_ticket_sum,
+    select('reservations.spot_id,spots.name as spot_name,count(1) as count_sum, sum(adult_ticket_number) as adult_ticket_sum, sum(child_ticket_number) as child_ticket_sum,
                 sum(book_price) as price_sum').joins(:spot).group(:spot_id).where(:date => start_time..end_time).reorder(:spot_id)
 
   end

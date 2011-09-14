@@ -19,7 +19,19 @@
 
 <div class="bottom_links">
   <%= button_to_new_window "PDF下载", reports_generate_agent_output_rate_path(:format => "pdf", :type => params[:type],
-                                                                            :year => params[:year], :month => params[:month], :day => params[:day], :week => params[:week]) %>
+                                                                            :year => params[:year], :month => params[:month],
+                                                                            :day => params[:day], :week => params[:week],
+                                                                           :spot_name => params[:spot_name],
+                                                                           :group_no => params[:group_no],
+                                                                           :username => params[:username],
+                                                                           :userRealName => params[:userRealName]
+                                                                            ) %>
   <%= button_to_new_window "Excel下载", reports_generate_agent_output_rate_path(:format => "xls", :type => params[:type],
-                                                                            :year => params[:year], :month => params[:month], :day => params[:day], :week => params[:week]) %>
+                                                                            :year => params[:year], :month => params[:month],
+                                                                            :day => params[:day], :week => params[:week],
+                                                                           :spot_name => params[:spot_name],
+                                                                           :group_no => params[:group_no],
+                                                                           :username => params[:username],
+                                                                           :userRealName => params[:userRealName]
+                                                                            ) %>
 </div>

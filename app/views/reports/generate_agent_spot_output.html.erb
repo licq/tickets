@@ -16,10 +16,27 @@
       </tr>
   <% end %>
 </table>
-
+<% if @table.present? %>
 <div class="bottom_links">
   <%= button_to_new_window "PDF下载", reports_generate_agent_spot_output_path(:format => "pdf", :type => params[:type],
-                                                                            :year => params[:year], :month => params[:month], :day => params[:day], :week => params[:week]) %>
+                                                                            :year => params[:year], :month => params[:month],
+                                                                            :day => params[:day], :week => params[:week],
+                                                                           :start_report_time => params[:start_report_time],
+                                                                           :end_report_time => params[:end_report_time],
+                                                                           :spot_name => params[:spot_name],
+                                                                           :group_no => params[:group_no],
+                                                                           :username => params[:username],
+                                                                           :userRealName => params[:userRealName]
+                                                                            ) %>
   <%= button_to_new_window "Excel下载", reports_generate_agent_spot_output_path(:format => "xls", :type => params[:type],
-                                                                            :year => params[:year], :month => params[:month], :day => params[:day], :week => params[:week]) %>
+                                                                            :year => params[:year], :month => params[:month],
+                                                                            :day => params[:day], :week => params[:week],
+                                                                           :start_report_time => params[:start_report_time],
+                                                                           :end_report_time => params[:end_report_time],
+                                                                           :spot_name => params[:spot_name],
+                                                                           :group_no => params[:group_no],
+                                                                           :username => params[:username],
+                                                                           :userRealName => params[:userRealName]
+                                                                            ) %>
 </div>
+<% end %>
