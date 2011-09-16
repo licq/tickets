@@ -200,6 +200,19 @@ class ReportsController < ApplicationController
     if @agent_name.present?
        condition[:agent] = {:name.matches => "%#{@agent_name}%"}
     end
+    prepare_reservation_type_condition(condition)
+  end
+
+  def prepare_reservation_type_condition(condition)
+     if current_user.is_spot_price_all != true
+      if current_user.has_spot_team_price
+        condition[:reservations] = {:type.eq => "TeamReservation" }
+      end
+
+      if current_user.has_spot_individual_price
+        condition[:reservations] = {:type.eq => "IndividualReservation"}
+      end
+     end
     condition
   end
 

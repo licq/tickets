@@ -5,21 +5,13 @@ class ReservationsController < ApplicationController
   layout 'application', :except => [:print]
 
   def index
-    condition = params[:search]
-    if condition
-      if condition[:status_eq] == "confirmed"
-        condition[:date_lte] = Date.today
-      elsif condition[:status_eq] == "outdated"
-        condition[:status_eq] = "confirmed"
-        condition[:date_gt] = Date.today
-      end
-    end
-    @search = @agent.reservations.includes(:spot).search(condition)
+    @search = @agent.reservations.includes(:spot).search(prepare_index_condition)
     page = params[:page].to_i
     @reservations= @search.page(page)
     if (@reservations.all.empty?) && (page > 1)
       @reservations = @search.page(page -1)
     end
+
   end
 
   def new
@@ -32,6 +24,7 @@ class ReservationsController < ApplicationController
                                                                :spot_cities_name_contains => params[:city_name])
     page = params[:page].to_i
     @agent_prices= @search.page(page)
+    @row_span_size = current_user.is_spot_price_all ? 1 : 2
     render :action => 'new'
   end
 
@@ -209,9 +202,10 @@ class ReservationsController < ApplicationController
   end
 
   def unverified
-    @search = @agent.reservations.where(:verified => false, :payment_method => "prepay").search(params[:search])
+    @search = @agent.reservations.search(prepare_unverified_condition)
     @reservations = @search.all
   end
+
 
   def verify
     @reservation = @agent.reservations.find(params[:id])
@@ -228,6 +222,44 @@ class ReservationsController < ApplicationController
     else
       reservation.verified = false
     end
+  end
+
+  def prepare_index_condition
+    condition = params[:search]
+    if condition
+      if condition[:status_eq] == "confirmed"
+        condition[:date_lte] = Date.today
+      elsif condition[:status_eq] == "outdated"
+        condition[:status_eq] = "confirmed"
+        condition[:date_gt] = Date.today
+      end
+    else
+      condition = {}
+    end
+    prepare_reservation_type_condition(condition)
+  end
+
+  def prepare_unverified_condition
+    conditions = params[:search]
+    if conditions.nil?
+      conditions = {}
+    end
+    conditions[:verified_eq] = false
+    conditions[:payment_method_eq] = "prepay"
+    prepare_reservation_type_condition(conditions)
+  end
+
+  def prepare_reservation_type_condition(condition)
+    if current_user.is_spot_price_all != true
+      if current_user.has_spot_team_price
+        condition[:type_eq] = "TeamReservation"
+      end
+
+      if current_user.has_spot_individual_price
+        condition[:type_eq] = "IndividualReservation"
+      end
+    end
+    condition
   end
 
 end

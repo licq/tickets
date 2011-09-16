@@ -2,17 +2,10 @@ class AgentPurchasesController < ApplicationController
   before_filter :set_agent
 
   def index
-    @spot_name = params[:spot_name]
-    @date = params[:date]
-    condition = {}
-    if @spot_name.present?
-      condition[:spot] = {:name.matches => "%#{@spot_name}%"}
-    end
-    if @date.present?
-      condition[:date.lte] = @date
-    end
-    @table = @agent.reservations.joins(:spot).where(condition).sum_purchase_with_spots
+    @table = @agent.reservations.joins(:spot).where(prepare_index_condition).sum_purchase_with_spots
   end
+
+
 
   def reservations
     @date = params[:date]
@@ -81,6 +74,30 @@ class AgentPurchasesController < ApplicationController
   def id_list(id_string)
     id_string.present? ? id_string.split(",") : nil
   end
+  def prepare_index_condition
+    @spot_name = params[:spot_name]
+    @date = params[:date]
+    condition = {}
+    if @spot_name.present?
+      condition[:spot] = {:name.matches => "%#{@spot_name}%"}
+    end
+    if @date.present?
+      condition[:date.lte] = @date
+    end
+    prepare_reservation_type_condition(condition)
+  end
 
+  def prepare_reservation_type_condition(condition)
+     if current_user.is_spot_price_all != true
+      if current_user.has_spot_team_price
+        condition[:type.eq] = "TeamReservation"
+      end
+
+      if current_user.has_spot_individual_price
+        condition[:type.eq] = "IndividualReservation"
+      end
+     end
+    condition
+  end
 
 end

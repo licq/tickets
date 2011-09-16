@@ -9,7 +9,7 @@
               <%= text_field_tag :spot_name, params[:spot_name] %>
             </td>
             <td>城市名
-              <%= text_field_tag :city_name, params[:city_name],:id => "city_id" %>
+              <%= text_field_tag :city_name, params[:city_name], :id => "city_id" %>
             </td>
             <td colspan="2">
               <fieldset class="buttons">
@@ -41,40 +41,12 @@
         <th colspan="4">销售价/(结算价)</th>
         <th>操作</th>
       </tr>
-      <% for agent_price in @agent_prices %>
-          <tr>
-            <td rowspan=<%= 2*agent_price.spot.tickets.size %>><%= agent_price.spot.name %>
-              <br/>
-              所在城市:<%= agent_price.spot.city_names %></td>
-            <% for ticket in agent_price.spot.tickets %>
-                <% price = agent_price.price_for(@date) %>
-                <td rowspan="2"><%= ticket.name %></td>
-                <td>散客价(<%= show_payment_method(agent_price.individual_payment_method) %>)</td>
-                <td>成人价</td>
-                <td><%= show_individual_adult_price(price, ticket.id) %></td>
-                <td>儿童价</td>
-                <td><%= show_individual_child_price(price, ticket.id) %></td>
-                <td>
-                  <% if (show_individual_adult_price(price, ticket.id)!='--') %>
-                      <%= link_to "预订", new_individual_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date],
-                                                                         :payment_method => agent_price.individual_payment_method,
-                                                                         :method => :get) %>
-                  <% end %></td>
-                </tr>
-                <tr>
-                  <td>团队价(<%= show_payment_method(agent_price.team_payment_method) %>)</td>
-                  <td>成人价</td>
-                  <td><%= show_team_adult_price(price, ticket.id) %></td>
-                  <td>儿童价</td>
-                  <td><%= show_team_child_price(price, ticket.id) %></td>
-                  <td>
-                    <% if (show_team_adult_price(price, ticket.id)!='--') %>
-                        <%= link_to "预订", new_team_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date],
-                                                                     :payment_method => agent_price.team_payment_method,
-                                                                     :method => :get) %>
-                    <% end %></td>
-                </tr>
-            <% end %>
+      <% if current_user.is_spot_price_all %>
+          <%= render 'new_all_price_table' %>
+      <% elsif current_user.has_spot_team_price %>
+          <%= render 'new_team_price_table' %>
+      <% elsif current_user.has_spot_individual_price %>
+          <%= render 'new_individual_price_table' %>
       <% end %>
     </table>
 

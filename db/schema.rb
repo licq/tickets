@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110825151437) do
+ActiveRecord::Schema.define(:version => 20110915031632) do
 
   create_table "agent_prices", :force => true do |t|
     t.integer  "spot_id"
@@ -252,7 +252,8 @@ ActiveRecord::Schema.define(:version => 20110825151437) do
     t.integer  "spot_id"
     t.integer  "agent_id"
     t.integer  "role_id"
-    t.boolean  "deleted",       :default => false
+    t.boolean  "deleted",        :default => false
+    t.string   "spot_price_cat", :default => "team"
   end
 
   add_index "users", ["deleted"], :name => "index_users_on_deleted"

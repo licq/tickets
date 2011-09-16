@@ -1,0 +1,37 @@
+<% for agent_price in @agent_prices %>
+          <tr>
+            <td rowspan=<%= 2*agent_price.spot.tickets.size %>><%= agent_price.spot.name %>
+              <br/>
+              所在城市:<%= agent_price.spot.city_names %></td>
+            <% for ticket in agent_price.spot.tickets %>
+                <% price = agent_price.price_for(@date) %>
+                <td rowspan="2"><%= ticket.name %></td>
+                <td>散客价(<%= show_payment_method(agent_price.individual_payment_method) %>)</td>
+                <td>成人价</td>
+                <td><%= show_individual_adult_price(price, ticket.id) %></td>
+                <td>儿童价</td>
+                <td><%= show_individual_child_price(price, ticket.id) %></td>
+                <td>
+                  <% if (show_individual_adult_price(price, ticket.id)!='--') %>
+                      <%= link_to "预订", new_individual_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date],
+                                                                         :payment_method => agent_price.individual_payment_method,
+                                                                         :method => :get) %>
+                  <% end %>
+                </td>
+                </tr>
+                <tr>
+                  <td>团队价(<%= show_payment_method(agent_price.team_payment_method) %>)</td>
+                  <td>成人价</td>
+                  <td><%= show_team_adult_price(price, ticket.id) %></td>
+                  <td>儿童价</td>
+                  <td><%= show_team_child_price(price, ticket.id) %></td>
+                  <td>
+                    <% if (show_team_adult_price(price, ticket.id)!='--') %>
+                        <%= link_to "预订", new_team_reservations_path(:ticket => ticket, :agent_price => agent_price, :date =>params[:date],
+                                                                     :payment_method => agent_price.team_payment_method,
+                                                                     :method => :get) %>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+      <% end %>

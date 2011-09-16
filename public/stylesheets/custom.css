@@ -441,7 +441,7 @@ table.search_table, table.search_table tr {
 
 #nav a:link {
     color: #fff;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     text-decoration: none;
 }
@@ -449,7 +449,7 @@ table.search_table, table.search_table tr {
 #nav a:visited {
     text-decoration: none;
     color: #fff;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
 }
 
@@ -511,7 +511,7 @@ table.search_table, table.search_table tr {
 }
 
 #nav li ul a:hover {
-    color: #134f91;
+    color: #fff;
     text-decoration: none;
     font-weight: normal;
     background: #2f74c1;
