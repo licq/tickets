@@ -1,4 +1,5 @@
 class AllPurchasesController < ApplicationController
+  before_filter :check_system_admin
 
   def index
     @spot_name = params[:spot_name]

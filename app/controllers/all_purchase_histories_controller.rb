@@ -1,4 +1,5 @@
 class AllPurchaseHistoriesController < ApplicationController
+  before_filter :check_system_admin
 
   def index
     @search = PurchaseHistory
