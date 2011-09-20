@@ -20,9 +20,16 @@ excel_document(:filename => "agent_checkin.xls") do |workbook|
   bold = Spreadsheet::Format.new :weight => :bold
 
   sheet.row(0).push "#{@agent.name}入园报表(#{@start_time.to_date}~#{@end_time.to_date})"
-  sheet.row(1).concat ["订单总数", "成人总数", "儿童总数", "总价"]
-  sheet.row(2).concat [@table.count_sum, @table.adult_ticket_sum.to_i, @table.child_ticket_sum.to_i, @table.price_sum.to_i]
+
+  sheet.row(1).concat ["预订人数(成人/儿童)","入园日期","实际人数(成人/儿童)","总价(销售价/(结算价))","结算情况"]
+  @search.each_with_index do |line, i|
+    sheet.row(i + 2).concat ["#{line.adult_ticket_number}/#{line.child_ticket_number}", date_format(line.date), show_reservation_true_tickets_number(line), show_reservation_total_price(line), line.settled_name]
+  end
+
+
+  sheet.row(@search.length+2).concat ["订单总数", "成人总数", "儿童总数", "总价"]
+  sheet.row(@search.length+3).concat [@table.count_sum, @table.adult_ticket_sum.to_i, @table.child_ticket_sum.to_i, @table.price_sum.to_i]
 
   sheet.row(0).default_format = format
-  2.times do |x| sheet.row(x + 1).set_format(0, bold) end
+  (@search.length+3).times do |x| sheet.row(x + 1).set_format(0, bold) end
 end

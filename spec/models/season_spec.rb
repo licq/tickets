@@ -32,3 +32,15 @@ describe Season do
 
 
 end
+
+# == Schema Information
+#
+# Table name: seasons
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  spot_id    :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

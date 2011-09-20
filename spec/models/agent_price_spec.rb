@@ -46,3 +46,15 @@ describe AgentPrice do
   end
 
 end
+
+# == Schema Information
+#
+# Table name: agent_prices
+#
+#  id         :integer(4)      not null, primary key
+#  spot_id    :integer(4)
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

@@ -42,3 +42,16 @@ describe Timespan do
     Timespan.has_overlap([timespan1,timespan2]).should be_nil
   end
 end
+
+# == Schema Information
+#
+# Table name: timespans
+#
+#  id         :integer(4)      not null, primary key
+#  from_date  :date
+#  to_date    :date
+#  season_id  :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

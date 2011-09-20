@@ -1,0 +1,20 @@
+<div class="result_count">共找到<%= @reservationsTable.total_count %>条记录</div>
+<%= paginate @reservationsTable %>
+<table>
+  <tr>
+    <th>预订人数(成人/儿童)</th>
+    <th>入园日期</th>
+    <th>实际人数(成人/儿童)</th>
+    <th>总价(销售价/(结算价))</th>
+    <th>结算情况</th>
+  </tr>
+  <% for reservation in @reservationsTable %>
+      <tr id="user<%= reservation.id %>_row" class=<%= cycle("even", "odd") %>>
+        <td><%= reservation.adult_ticket_number %>/<%= reservation.child_ticket_number %></td>
+        <td> <%= reservation.date %>  </td>
+        <td><%= show_reservation_true_tickets_number(reservation) %></td>
+        <td><%= show_reservation_total_price(reservation) %></td>
+        <td><%= reservation.settled_name %></td>
+      </tr>
+  <% end %>
+</table>

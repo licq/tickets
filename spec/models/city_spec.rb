@@ -18,3 +18,16 @@ describe City do
     cities[0].code.should == @shanghai.code
   end
 end
+
+# == Schema Information
+#
+# Table name: cities
+#
+#  id         :integer(4)      not null, primary key
+#  code       :string(255)
+#  name       :string(255)
+#  pinyin     :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

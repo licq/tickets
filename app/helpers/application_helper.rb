@@ -91,6 +91,14 @@ module ApplicationHelper
     end
   end
 
+  def show_reservation_true_tickets_number(reservation)
+    if !reservation.adult_true_ticket_number.blank?
+      "#{reservation.adult_true_ticket_number}/(#{reservation.child_true_ticket_number})"
+    else
+      ""
+    end
+  end
+
   def show_reservation_book_total_price(reservation)
     if (reservation.is_individual?)
       "#{reservation.book_price}/(#{reservation.book_purchase_price})"

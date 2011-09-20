@@ -30,3 +30,15 @@ describe Ticket do
     ticket.public_rate_for("season1").adult_price.should == 100
   end
 end
+
+# == Schema Information
+#
+# Table name: tickets
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  spot_id    :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
