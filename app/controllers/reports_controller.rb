@@ -170,8 +170,8 @@ class ReportsController < ApplicationController
         start_date = DateTime.commercial(year, week, 1).beginning_of_day
         end_date = DateTime.commercial(year, week, 7).end_of_day
       when 'date_range'
-        start_date = params[:start_report_time]
-        end_date = params[:end_report_time]
+        start_date = DateTime.parse(params[:start_report_time]).beginning_of_day
+        end_date = DateTime.parse(params[:end_report_time]).end_of_day
     end
     return start_date, end_date
   end
