@@ -34,7 +34,7 @@ class ReservationsController < ApplicationController
     no_price = false
     if params[:date]
       if @reservation.is_individual?
-        individual_rate = AgentPrice.individual_price(@reservation.spot_id, @reservation.agent_id, params[:date])
+        individual_rate = AgentPrice.individual_price(@reservation.spot_id, @reservation.agent_id, @reservation.ticket_id,params[:date])
         if individual_rate
           if @reservation.child_ticket_number > 0 && (individual_rate.child_purchase_price.nil? || individual_rate.child_sale_price.nil?)
             no_price = true
@@ -53,7 +53,7 @@ class ReservationsController < ApplicationController
           no_price = true
         end
       else
-        team_rate = AgentPrice.team_price(@reservation.spot_id, @reservation.agent_id, params[:date])
+        team_rate = AgentPrice.team_price(@reservation.spot_id, @reservation.agent_id, @reservation.ticket_id,params[:date])
         if team_rate
           if @reservation.child_ticket_number > 0 && (team_rate.child_price.nil?)
             no_price = true
@@ -153,7 +153,7 @@ class ReservationsController < ApplicationController
     @agent_price = AgentPrice.find(params[:agent_price])
     ticket = Ticket.find(params[:ticket])
     @reservation = IndividualReservation.new(:agent => @agent,
-                                             :spot => @agent_price.spot, :ticket_name => ticket.name, :date => params[:date],
+                                             :spot => @agent_price.spot, :ticket => ticket, :ticket_name => ticket.name, :date => params[:date],
                                              :payment_method => params[:payment_method])
     price = @agent_price.price_for(params[:date])
     if (price[ticket.id].nil? || price[ticket.id][:individual_rate].nil?)
@@ -171,7 +171,7 @@ class ReservationsController < ApplicationController
     @agent_price = AgentPrice.find(params[:agent_price])
     ticket = Ticket.find(params[:ticket])
     @reservation = TeamReservation.new(:agent => @agent,
-                                       :spot => @agent_price.spot, :ticket_name => ticket.name, :date => params[:date],
+                                       :spot => @agent_price.spot, :ticket => ticket, :ticket_name => ticket.name, :date => params[:date],
                                        :payment_method => params[:payment_method])
     price = @agent_price.price_for(params[:date])
     if (price[ticket.id].nil? || price[ticket.id][:team_rate].nil?)

@@ -6,6 +6,7 @@ class Reservation < ActiveRecord::Base
   belongs_to :spot
   belongs_to :agent
   belongs_to :user
+  belongs_to :ticket
   belongs_to :purchase_history
 
   validates :contact, :presence => true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110915031632) do
+ActiveRecord::Schema.define(:version => 20110926150331) do
 
   create_table "agent_prices", :force => true do |t|
     t.integer  "spot_id"
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(:version => 20110915031632) do
     t.boolean  "settled"
     t.string   "pay_id"
     t.datetime "pay_time"
+    t.integer  "ticket_id"
   end
 
   add_index "reservations", ["agent_id"], :name => "index_reservations_on_agent_id"

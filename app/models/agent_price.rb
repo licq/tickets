@@ -43,20 +43,18 @@ class AgentPrice < ActiveRecord::Base
     result
   end
 
-  def self.individual_price(spot_id, agent_id, date)
+  def self.individual_price(spot_id, agent_id, ticket_id,date)
     rfp = Rfp.where(:spot_id => spot_id, :agent_id => agent_id).first
-    individual_rates = IndividualRate.joins(:season => :timespans).
-        where(:individual_rates => {:agent_price_id => rfp.agent_price_id},
-              :timespans => {:from_date.lte => date, :to_date.gte => date})
-    individual_rates.empty? ? nil : individual_rates[0]
+    IndividualRate.joins(:season => :timespans).
+        where(:individual_rates => {:agent_price_id => rfp.agent_price_id,:ticket_id => ticket_id},
+              :timespans => {:from_date.lte => date, :to_date.gte => date}).first
   end
 
-  def self.team_price(spot_id, agent_id, date)
+  def self.team_price(spot_id, agent_id, ticket_id,date)
     rfp = Rfp.where(:spot_id => spot_id, :agent_id => agent_id).first
-    team_rates = TeamRate.joins(:season => :timespans).
-        where(:team_rates => {:agent_price_id => rfp.agent_price_id},
-              :timespans => {:from_date.lte => date, :to_date.gte => date})
-    team_rates.empty? ? nil : team_rates[0]
+    TeamRate.joins(:season => :timespans).
+        where(:team_rates => {:agent_price_id => rfp.agent_price_id, :ticket_id => ticket_id},
+              :timespans => {:from_date.lte => date, :to_date.gte => date}).first
   end
 
   def exists(season, ticket)
