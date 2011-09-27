@@ -5,7 +5,7 @@
               所在城市:<%= agent_price.spot.city_names %></td>
             <% for ticket in agent_price.spot.tickets %>
                 <% price = agent_price.price_for(@date) %>
-                <td rowspan="2"><%= ticket.name %></td>
+                <td><%= ticket.name %></td>
                 <td>散客价(<%= show_payment_method(agent_price.individual_payment_method) %>)</td>
                 <td>成人价</td>
                 <td><%= show_individual_adult_price(price, ticket.id) %></td>
