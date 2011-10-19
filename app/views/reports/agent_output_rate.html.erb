@@ -5,40 +5,17 @@
       <fieldset class="inputs">
         <table class="search_table">
           <tr>
-            <td>
-              景区名称
-            </td>
-            <td>
-              <%= text_field_tag :spot_name, params[:spot_name] %>
-            </td>
-            <td>团号 </td>
-            <td><%= text_field_tag :group_no, params[:group_no] %></td>
-            <td rowspan="3">
-              <fieldset class="buttons">
-                <%= submit_tag "查询" %>
-              </fieldset>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              用户名
-            </td>
-            <td>
-              <%= text_field_tag :username, params[:username] %>
-            </td>
-            <td>用户姓名</td>
-            <td>
-              <%= text_field_tag :userRealName, params[:userRealName] %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              年月
-            </td>
+            <td class="report_condition_label">景区名称</td>
+            <td class="report_condition_input"><%= text_field_tag :spot_name, params[:spot_name] %></td>
+            <td class="report_condition_label">年月</td>
             <td class="report_date_select">
               <span><%= select_tag :year, options_for_select([[2011, 2011], [2010, 2010]], params[:year]) %>年</span>
               <span><%= select_tag :month, options_for_select([[2011, 2011]], params[:month]) %>月</span>
+            </td>
+            <td>
+              <fieldset class="buttons">
+                <%= submit_tag "查询" %>
+              </fieldset>
             </td>
           </tr>
         </table>

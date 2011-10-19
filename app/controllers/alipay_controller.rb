@@ -15,8 +15,8 @@ class AlipayController < ApplicationController
         "subject" => spot.name + "--" + reservation.ticket_name,
         "out_trade_no" => reservation.no,
         "payment_type" => "1",
-        "total_fee" => "0.01", #reservation.book_purchase_price
-        #"total_fee" => reservation.book_purchase_price,
+        #"total_fee" => "0.01", #reservation.book_purchase_price
+        "total_fee" => reservation.book_purchase_price,
         "seller_email" => spot.email,
         "anti_phishing_key" => query_timestamp(spot.account)
     }

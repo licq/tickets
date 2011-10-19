@@ -4,8 +4,8 @@
       <fieldset class="inputs">
         <table class="search_table">
           <tr>
-            <td>旅行社名称 <%= text_field_tag :agent_name,params[:agent_name] %> </td>
-            <td>团号 <%= text_field_tag :group_no,params[:group_no] %> </td>
+            <td class="report_condition_label">旅行社名称</td>
+            <td class="report_condition_input"><%= text_field_tag :agent_name,params[:agent_name] %> </td>
             <td class="report_date_select">
               <span><%= select_tag :year, options_for_select([[2011, 2011], [2010, 2010]], params[:year]) %>年</span>
               <span><%= select_tag :month, options_for_select([[2011, 2011]], params[:month]) %>月</span>

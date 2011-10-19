@@ -65,6 +65,16 @@ module ApplicationHelper
     end
   end
 
+  def show_group_no(group_no)
+    g_length =  group_no.length
+    if g_length < 6
+      (6-g_length).times do |t|
+        group_no = " ".concat(group_no)
+      end
+    end
+    group_no
+  end
+
   def show_reservation_adult_price(reservation)
     if (reservation.is_individual?)
       "#{reservation.adult_sale_price}/(#{reservation.adult_purchase_price})"
@@ -89,6 +99,7 @@ module ApplicationHelper
     else
       "#{reservation.total_price}"
     end
+    " "
   end
 
   def show_reservation_true_tickets_number(reservation)
@@ -130,7 +141,7 @@ module ApplicationHelper
 
   def show_reservation_verified(reservation)
     if reservation.payment_method == "prepay"
-       reservation.verified? ? "已审核" : "待审核"
+      reservation.verified? ? "已审核" : "待审核"
     else
       "--"
     end

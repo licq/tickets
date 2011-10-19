@@ -7,17 +7,21 @@ excel_document(:filename => "spot_month_reservations.xls") do |workbook|
   bold = Spreadsheet::Format.new :weight => :bold
 
   sheet.row(0).push "#{@spot.name}每月销售统计报表"
-  sheet.row(1).concat ["时间",@search]
-  sheet.row(2).concat ["旅行社名称","订单号","团号","入园日期","订单属性","人数","单价","总计","结算情况"]
-
-  @table.each_with_index do |line, i|
-    sheet.row(i + 3).concat [line.agent.name, line.no, line.group_no,date_format(line.date), show_reservation_type(line), "#{line.adult_ticket_number}/#{line.child_ticket_number}", show_reservation_adult_price(line), show_reservation_book_total_price(line),line.settled_name ]
+  sheet.row(1).concat ["时间",@search_time]
+  sheet.row(2).concat ["订单号","团号","旅行社","门票种类","入园日期","订单种类","成人价(销售价/(结算价))","儿童价(销售价/(结算价))","预订成人票","预订儿童票","实际成人票","实际儿童票","总价(销售价/(结算价))","支付方式","预订日期","入园状态","支付状态","结算状态"]
+  @search.each_with_index do |line, i|
+    sheet.row(i + 3).concat [line.no,line.group_no,"#{line.agent.name}",line.ticket_name, line.date,show_reservation_type(line),show_reservation_adult_price(line),show_reservation_child_price(line),line.adult_ticket_number,line.child_ticket_number, line.adult_true_ticket_number,line.child_true_ticket_number, show_reservation_total_price(line),show_reservation_payment_method(line),date_format(line.created_at),line.status_name,line.paid_name, line.settled_name]
   end
 
-  sheet.row(@table.length + 3).concat ["总计","","","","","#{@total_adult_ticket_number}/#{@total_child_ticket_number}","","#{@total_book_price}/#{@total_book_purchase_price}",""]
+
+  sheet.row(@search.length+3).concat ["旅行社名称","订单总数","","","","","","", "预订成人票", "预订儿童票","实际成人票","实际儿童票", "总价"]
+
+  @table.each_with_index do |line, i|
+    sheet.row(@search.length + i + 4).concat [line.agent_name, line.count_sum,"","","","","","", line.adult_ticket_sum.to_i, line.child_ticket_sum.to_i,line.adult_true_ticket_sum.to_i,line.child_true_ticket_sum.to_i, line.price_sum.to_i]
+  end
 
   sheet.row(0).default_format = format
-  (@table.length + 2).times do |x|
-    sheet.row(x + 2).set_format(0, bold)
+  (@search.length + @table.length + 4).times do |x|
+    sheet.row(x + 1).set_format(0, bold)
   end
 end

@@ -1,36 +1,69 @@
-<%= render 'reservation_report_detail_table' %>
+<%= render 'report_paginate' %>
 <table>
+  <%= render 'report_detail' %>
   <tr>
     <td>订单总数</td>
-    <td>成人总数</td>
-    <td>儿童总数</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>预订成人票</td>
+    <td>预订儿童票</td>
+    <td>实际成人票</td>
+    <td>实际儿童票</td>
     <td>总价</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
   </tr>
-  <tr class="<%= cycle("even", "odd") %>">
+  <tr class="even">
     <td><%= @table.count_sum %></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
     <td><%= @table.adult_ticket_sum.to_i %></td>
     <td><%= @table.child_ticket_sum.to_i %></td>
+    <td><%= @table.adult_true_ticket_sum.to_i %></td>
+    <td><%= @table.child_true_ticket_sum.to_i %></td>
     <td><%= @table.price_sum.to_i %></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
   </tr>
 </table>
+<% if @reservationsTable.present? %>
+    <div class="bottom_links">
+      <%= button_to_new_window "PDF下载", reports_generate_spot_checkin_path(:format => "pdf", :type => params[:type],
+                                                                           :year => params[:year], :month => params[:month],
+                                                                           :day => params[:day], :week => params[:week],
+                                                                           :start_report_time => params[:start_report_time],
+                                                                           :end_report_time => params[:end_report_time],
+                                                                           :agent_name => params[:agent_name],
+                                                                           :ticket_name => params[:ticket_name],
+                                                                           :reservation_type => params[:reservation_type]
+      ) %>
+      <%= button_to_new_window "Excel下载", reports_generate_spot_checkin_path(:format => "xls", :type => params[:type],
+                                                                             :year => params[:year], :month => params[:month],
+                                                                             :day => params[:day], :week => params[:week],
+                                                                             :start_report_time => params[:start_report_time],
+                                                                             :end_report_time => params[:end_report_time],
+                                                                             :agent_name => params[:agent_name],
+                                                                             :ticket_name => params[:ticket_name],
+                                                                             :reservation_type => params[:reservation_type]
+      ) %>
+    </div>
 
-<div class="bottom_links">
-  <%= button_to_new_window "PDF下载", reports_generate_spot_checkin_path(:format => "pdf", :type => params[:type],
-                                                                       :year => params[:year], :month => params[:month],
-                                                                       :day => params[:day], :week => params[:week],
-                                                                       :start_report_time => params[:start_report_time],
-                                                                       :end_report_time => params[:end_report_time],
-                                                                       :agent_name => params[:agent_name],
-                                                                       :group_no => params[:group_no]
-                                                                        ) %>
-  <%= button_to_new_window "Excel下载", reports_generate_spot_checkin_path(:format => "xls", :type => params[:type],
-                                                                       :year => params[:year], :month => params[:month],
-                                                                       :day => params[:day], :week => params[:week],
-                                                                       :start_report_time => params[:start_report_time],
-                                                                       :end_report_time => params[:end_report_time],
-                                                                       :agent_name => params[:agent_name],
-                                                                       :group_no => params[:group_no]
-                                                                       ) %>
-</div>
+<% end %>
 
 

@@ -116,15 +116,21 @@ class Reservation < ActiveRecord::Base
     where(:created_at => start_date..end_date)
   end
 
+   def self.date_between(start_date, end_date)
+    where(:date => start_date..end_date)
+  end
+
   def self.sum_output_between(start_time, end_time)
 
     select('count(1) as count_sum, sum(adult_ticket_number) as adult_ticket_sum, sum(child_ticket_number) as child_ticket_sum,
+                sum(adult_true_ticket_number) as adult_true_ticket_sum,sum(child_true_ticket_number) as child_true_ticket_sum,
                 sum(book_price) as price_sum').where(:created_at => start_time..end_time)[0]
 
   end
 
   def self.sum_checkin_between(start_time, end_time)
     select('count(1) as count_sum, sum(adult_true_ticket_number) as adult_ticket_sum, sum(child_true_ticket_number) as child_ticket_sum,
+                sum(adult_true_ticket_number) as adult_true_ticket_sum,sum(child_true_ticket_number) as child_true_ticket_sum,
                 sum(total_price) as price_sum').where(:date => start_time..end_time, :status => "checkedin")[0]
   end
 
@@ -132,6 +138,7 @@ class Reservation < ActiveRecord::Base
   def self.sum_agent_output_between(start_time, end_time)
 
     select('agent_id,agents.name as agent_name,count(1) as count_sum, sum(adult_ticket_number) as adult_ticket_sum, sum(child_ticket_number) as child_ticket_sum,
+                sum(adult_true_ticket_number) as adult_true_ticket_sum,sum(child_true_ticket_number) as child_true_ticket_sum,
                 sum(book_price) as price_sum').joins(:agent).group(:agent_id).where(:date => start_time..end_time).reorder(:agent_id)
 
   end
@@ -139,12 +146,14 @@ class Reservation < ActiveRecord::Base
   def self.sum_spot_output_between(start_time, end_time)
 
     select('reservations.spot_id,spots.name as spot_name,count(1) as count_sum, sum(adult_ticket_number) as adult_ticket_sum, sum(child_ticket_number) as child_ticket_sum,
+                sum(adult_true_ticket_number) as adult_true_ticket_sum,sum(child_true_ticket_number) as child_true_ticket_sum,
                 sum(book_price) as price_sum').joins(:spot).group(:spot_id).where(:date => start_time..end_time).reorder(:spot_id)
 
   end
 
   def self.sum_user_output_between(start_time, end_time)
     select('user_id,users.name as user_name,count(1) as count_sum, sum(adult_ticket_number) as adult_ticket_sum, sum(child_ticket_number) as child_ticket_sum,
+                sum(adult_true_ticket_number) as adult_true_ticket_sum,sum(child_true_ticket_number) as child_true_ticket_sum,
                  sum(book_price) as price_sum').joins(:user).group(:user_id).where(:created_at => start_time..end_time).reorder(:user_id)
 
   end
@@ -157,7 +166,7 @@ class Reservation < ActiveRecord::Base
                 sum(total_price-total_purchase_price)  as price_sum').joins(:agent).group(:agent_name, :type, :payment_method).where(:settled => false, :payment_method => 'poa', :type => "IndividualReservation", :status => "checkedin").reorder(:agent_id)
     net_purchase_sum = select('agent_id,agents.name as agent_name,type,payment_method,count(1) as count_sum,
                 sum(book_purchase_price-total_purchase_price)  as price_sum').joins(:agent).group(:agent_name, :type, :payment_method).where(:settled => false, :payment_method => 'net', :type => "IndividualReservation", :status => "checkedin").reorder(:agent_id)
-    (prepay_purchase_sum + poa_purchase_sum + net_purchase_sum.reject{|item| item.price_sum == 0}).sort_by(&:agent_name)
+    (prepay_purchase_sum + poa_purchase_sum + net_purchase_sum.reject { |item| item.price_sum == 0 }).sort_by(&:agent_name)
   end
 
   def self.sum_purchase_with_spots

@@ -8,14 +8,13 @@ excel_document(:filename => "agent_output.xls") do |workbook|
 
   sheet.row(0).push "#{@agent.name}产量报表(#{@start_time.to_date}~#{@end_time.to_date})"
 
-  sheet.row(1).concat ["预订人数(成人/儿童)","入园日期","实际人数(成人/儿童)","总价(销售价/(结算价))","结算情况"]
+  sheet.row(1).concat ["订单号","团号","景区","门票种类","入园日期","订单种类","成人价(销售价/(结算价))","儿童价(销售价/(结算价))","预订成人票","预订儿童票","实际成人票","实际儿童票","总价(销售价/(结算价))","支付方式","预订日期","入园状态","支付状态","结算状态"]
   @search.each_with_index do |line, i|
-    sheet.row(i + 2).concat ["#{line.adult_ticket_number}/#{line.child_ticket_number}", date_format(line.date), show_reservation_true_tickets_number(line), show_reservation_total_price(line), line.settled_name]
+    sheet.row(i + 2).concat [line.no,line.group_no,"#{line.spot.name}",line.ticket_name, line.date,show_reservation_type(line),show_reservation_adult_price(line),show_reservation_child_price(line),line.adult_ticket_number,line.child_ticket_number, line.adult_true_ticket_number,line.child_true_ticket_number, show_reservation_total_price(line),show_reservation_payment_method(line),date_format(line.created_at),line.status_name,line.paid_name, line.settled_name]
   end
 
-
-  sheet.row(@search.length+2).concat ["订单总数", "成人总数", "儿童总数", "总价"]
-  sheet.row(@search.length+3).concat [@table.count_sum, @table.adult_ticket_sum.to_i, @table.child_ticket_sum.to_i, @table.price_sum.to_i]
+  sheet.row(@search.length+2).concat ["订单总数","","","","","","","", "预订成人票", "预订儿童票", "实际成人票","实际儿童票","总价","","","","",""]
+  sheet.row(@search.length+3).concat [@table.count_sum,"","","","","","","", @table.adult_ticket_sum, @table.child_ticket_sum,@table.adult_true_ticket_sum,@table.child_true_ticket_sum, @table.price_sum,"","","","",""]
 
   sheet.row(0).default_format = format
   (@search.length+3).times do |x|

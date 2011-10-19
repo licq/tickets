@@ -8,9 +8,9 @@ excel_document(:filename => "spot_output_rate.xls") do |workbook|
 
   sheet.row(0).push "#{@spot.name}产量同比环比报表(#{@start_time.year}年#{@start_time.month}月)"
 
-  sheet.row(1).concat ["预订人数(成人/儿童)","入园日期","实际人数(成人/儿童)","总价(销售价/(结算价))","结算情况"]
+  sheet.row(1).concat ["订单号","团号","旅行社","门票种类","入园日期","订单种类","成人价(销售价/(结算价))","儿童价(销售价/(结算价))","预订成人票","预订儿童票","实际成人票","实际儿童票","总价(销售价/(结算价))","支付方式","预订日期","入园状态","支付状态","结算状态"]
   @search.each_with_index do |line, i|
-    sheet.row(i + 2).concat ["#{line.adult_ticket_number}/#{line.child_ticket_number}", date_format(line.date), show_reservation_true_tickets_number(line), show_reservation_total_price(line), line.settled_name]
+    sheet.row(i + 2).concat [line.no,line.group_no,"#{line.agent.name}",line.ticket_name, line.date,show_reservation_type(line),show_reservation_adult_price(line),show_reservation_child_price(line),line.adult_ticket_number,line.child_ticket_number, line.adult_true_ticket_number,line.child_true_ticket_number, show_reservation_total_price(line),show_reservation_payment_method(line),date_format(line.created_at),line.status_name,line.paid_name, line.settled_name]
   end
 
   sheet.row(@search.length+2).concat ["当月订单总数", "当月总价", "上月订单总数(环比)", "上月总价(环比)", "去年当月订单总数(同比)","去年当月总价(同比)"]

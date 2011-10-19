@@ -1,5 +1,6 @@
-<%= render 'reservation_report_detail_table' %>
+<%= render 'report_paginate' %>
 <table>
+  <%= render 'report_detail' %>
   <tr>
     <td>当月订单总数</td>
     <td>当月总价</td>
@@ -7,6 +8,18 @@
     <td>上月总价(环比)</td>
     <td>去年当月订单总数(同比)</td>
     <td>去年当月总价(同比)</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
   </tr>
   <tr class="even">
     <td><%= @table.count_sum %></td>
@@ -15,24 +28,31 @@
     <td><%= @prev_month_table.price_sum.to_i %>(<%= @prev_month_price_rate %>)</td>
     <td><%= @prev_year_table.count_sum %>(<%= @prev_year_count_rate %>)</td>
     <td><%= @prev_year_table.price_sum.to_i %>(<%= @prev_year_price_rate %>)</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
   </tr>
 </table>
-
+<% if @reservationsTable.present? %>
 <div class="bottom_links">
   <%= button_to_new_window "PDF下载", reports_generate_agent_output_rate_path(:format => "pdf", :type => params[:type],
                                                                             :year => params[:year], :month => params[:month],
                                                                             :day => params[:day], :week => params[:week],
-                                                                           :spot_name => params[:spot_name],
-                                                                           :group_no => params[:group_no],
-                                                                           :username => params[:username],
-                                                                           :userRealName => params[:userRealName]
+                                                                           :spot_name => params[:spot_name]
                                                                             ) %>
   <%= button_to_new_window "Excel下载", reports_generate_agent_output_rate_path(:format => "xls", :type => params[:type],
                                                                             :year => params[:year], :month => params[:month],
                                                                             :day => params[:day], :week => params[:week],
-                                                                           :spot_name => params[:spot_name],
-                                                                           :group_no => params[:group_no],
-                                                                           :username => params[:username],
-                                                                           :userRealName => params[:userRealName]
+                                                                           :spot_name => params[:spot_name]
                                                                             ) %>
 </div>
+<% end %>

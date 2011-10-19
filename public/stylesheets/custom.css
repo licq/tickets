@@ -79,11 +79,11 @@ footer nav {
     padding: 0;
 }
 
-footer nav.round a{
+footer nav.round a {
     color: #fff;
 }
 
-footer nav.round a:visited{
+footer nav.round a:visited {
     color: #fff;
 }
 
@@ -202,14 +202,13 @@ div.add_timespan {
     margin-left: 800px;
 }
 
-.ui-datepicker select.ui-datepicker-month{
+.ui-datepicker select.ui-datepicker-month {
     width: 30%;
 }
 
 .ui-datepicker select.ui-datepicker-year {
-  width: 35%;
+    width: 35%;
 }
-
 
 .headout {
     width: 1050px;
@@ -370,7 +369,7 @@ div.empty_home {
     border: none;
 }
 
-fieldset.inputs fieldset.buttons input{
+fieldset.inputs fieldset.buttons input {
     width: 40px;
     line-height: 22px;
     height: 22px;
@@ -382,7 +381,7 @@ fieldset.inputs fieldset.buttons input{
     margin: 0;
 }
 
- input.search_button {
+input.search_button {
     width: 40px;
     line-height: 22px;
     height: 22px;
@@ -414,14 +413,18 @@ table.search_table, table.search_table tr {
 }
 
 .report_date_select select {
-    width: 60px;
+    width: 75px;
+}
+
+.report_date_select {
+    text-align: left;
 }
 
 #main h1 {
     padding-left: 10px;
 }
 
-#purchase_table input{
+#purchase_table input {
     width: 10px;
 }
 
@@ -529,10 +532,22 @@ table.search_table, table.search_table tr {
     clear: left;
 }
 
-.email_link a, .email_link a:link, .email_link a:visited{
-  color: #fff;
+.email_link a, .email_link a:link, .email_link a:visited {
+    color: #fff;
 }
 
-.ui-datepicker-year{
-  width: 34px;
+.ui-datepicker-year {
+    width: 34px;
+}
+
+
+.report_condition_label {
+    width: 100px;
+    text-align: right;
+    margin: 2px 10px;
+}
+
+.report_condition_input {
+    text-align: left;
+    margin: 2px 10px;
 }

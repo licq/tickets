@@ -1,7 +1,7 @@
 <% title "景区销售业绩报表" %>
 <div id="search">
   <%= form_tag reports_generate_agent_spot_output_path, :id => "output_report_form" do %>
-      <%= render :partial => 'select_date' %>
+      <%= render 'distribution_condition' %>
   <% end %>
 </div>
 <div id="report"/>

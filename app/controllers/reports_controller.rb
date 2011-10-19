@@ -49,24 +49,30 @@ class ReportsController < ApplicationController
   end
 
   def generate_spot_month_reservations
+    #@start_time = get_start_parameters_by_rate
+    #@search = params[:year]+"年"+params[:month]+"月"
+    #@group_no = params[:group_no]
+    #@agent_name = params[:agent_name]
+    #condition = {}
+    #condition[:reservations] = {:created_at => @start_time..@start_time.end_of_month}
+    #if @group_no.present?
+    #  condition[:reservations] = {:group_no.matches => "%#{@group_no}%"}
+    #end
+    #if @agent_name.present?
+    #  condition[:agent] = {:name.matches => "%#{@agent_name}%"}
+    #end
+    ##@table = @spot.reservations.exclude_canceled.where(:created_at => @start_time..@start_time.end_of_month).reorder(:agent_id).all
+    #@table = @spot.reservations.joins(:agent).exclude_canceled.where(condition).reorder(:agent_id).all
+    #@total_adult_ticket_number = @table.sum(&:adult_ticket_number)
+    #@total_child_ticket_number = @table.sum(&:child_ticket_number)
+    #@total_book_price = @table.sum(&:book_price)
+    #@total_book_purchase_price = @table.sum(&:book_purchase_price)
+    @search_time = params[:year]+"年"+params[:month]+"月"
     @start_time = get_start_parameters_by_rate
-    @search = params[:year]+"年"+params[:month]+"月"
-    @group_no = params[:group_no]
-    @agent_name = params[:agent_name]
-    condition = {}
-    condition[:reservations] = {:created_at => @start_time..@start_time.end_of_month}
-    if @group_no.present?
-      condition[:reservations] = {:group_no.matches => "%#{@group_no}%"}
-    end
-    if @agent_name.present?
-      condition[:agent] = {:name.matches => "%#{@agent_name}%"}
-    end
-    #@table = @spot.reservations.exclude_canceled.where(:created_at => @start_time..@start_time.end_of_month).reorder(:agent_id).all
-    @table = @spot.reservations.joins(:agent).exclude_canceled.where(condition).reorder(:agent_id).all
-    @total_adult_ticket_number = @table.sum(&:adult_ticket_number)
-    @total_child_ticket_number = @table.sum(&:child_ticket_number)
-    @total_book_price = @table.sum(&:book_price)
-    @total_book_purchase_price = @table.sum(&:book_purchase_price)
+    @end_time = @start_time.end_of_month
+    condition = generate_common_report_condition
+    @reservationsTable = generate_spot_reservations_table_by_create(condition, @start_time, @end_time)
+    @table = @spot.reservations.joins(:agent).where(condition).exclude_canceled.sum_agent_output_between(@start_time, @end_time)
   end
 
 
@@ -78,64 +84,66 @@ class ReportsController < ApplicationController
 
   def generate_spot_output
     @start_time, @end_time = get_start_and_end_parameters
-    condition = generate_common_agent_condition
-    @reservationsTable = generate_spot_reservations_table(condition, @start_time, @end_time)
+    condition = generate_common_report_condition
+    @reservationsTable = generate_spot_reservations_table_by_create(condition, @start_time, @end_time)
     @table = @spot.reservations.joins(:agent).where(condition).exclude_canceled.sum_output_between(@start_time, @end_time)
   end
 
 
   def generate_agent_output
     @start_time, @end_time = get_start_and_end_parameters
-    condition = generate_common_agent_condition
-    @reservationsTable = generate_reservations_table(condition, @start_time, @end_time)
-    @table = @agent.reservations.joins(:spot).joins(:user).where(condition).sum_output_between(@start_time, @end_time)
+    condition = generate_common_report_condition
+    @reservationsTable = generate_reservations_table_by_create(condition, @start_time, @end_time)
+    @table = @agent.reservations.joins(:spot).joins(:user).where(condition).exclude_canceled.sum_output_between(@start_time, @end_time)
   end
 
 
   def generate_spot_checkin
     @start_time, @end_time = get_start_and_end_parameters
-    condition = generate_common_agent_condition
+    condition = generate_common_report_condition
     checkin_condition = condition;
-    checkin_condition[:reservations] = {:status.eq => "checkedin"}
-    @reservationsTable = generate_spot_reservations_table(checkin_condition, @start_time, @end_time)
+    checkin_condition[0].concat(" and reservations.status = :checkin_status ")
+    checkin_condition[1][:checkin_status] = "checkedin"
+    @reservationsTable = generate_spot_reservations_table_by_create(checkin_condition, @start_time, @end_time)
     @table = @spot.reservations.joins(:agent).where(condition).exclude_canceled.sum_checkin_between(@start_time, @end_time)
   end
 
   def generate_agent_checkin
     @start_time, @end_time = get_start_and_end_parameters
-    condition = generate_common_agent_condition
+    condition = generate_common_report_condition
     checkin_condition = condition;
-    checkin_condition[:reservations] = {:status.eq => "checkedin"}
-   @reservationsTable = generate_reservations_table(checkin_condition, @start_time, @end_time)
+    checkin_condition[0].concat(" and reservations.status = :checkin_status ")
+    checkin_condition[1][:checkin_status] = "checkedin"
+    @reservationsTable = generate_reservations_table_by_date(checkin_condition, @start_time, @end_time)
 
     @table = @agent.reservations.joins(:spot).joins(:user).where(condition).exclude_canceled.sum_checkin_between(@start_time, @end_time)
   end
 
   def generate_spot_agent_output
     @start_time, @end_time = get_start_and_end_parameters
-    condition = generate_common_agent_condition
-    @reservationsTable = generate_spot_reservations_table(condition, @start_time, @end_time)
-    @table = @spot.reservations.joins(:agent).where(generate_common_agent_condition).exclude_canceled.sum_agent_output_between(@start_time, @end_time)
+    condition = generate_common_report_condition
+    @reservationsTable = generate_spot_reservations_table_by_date(condition, @start_time, @end_time)
+    @table = @spot.reservations.joins(:agent).where(generate_common_report_condition).exclude_canceled.sum_agent_output_between(@start_time, @end_time)
   end
 
   def generate_agent_spot_output
     @start_time, @end_time = get_start_and_end_parameters
-    condition = generate_common_agent_condition
-    @reservationsTable = generate_reservations_table(condition, @start_time, @end_time)
-    @table = @agent.reservations.joins(:user).where(generate_common_agent_condition).exclude_canceled.sum_spot_output_between(@start_time, @end_time)
+    condition = generate_common_report_condition
+    @reservationsTable = generate_reservations_table_by_date(condition, @start_time, @end_time)
+    @table = @agent.reservations.joins(:user).where(condition).exclude_canceled.sum_spot_output_between(@start_time, @end_time)
   end
 
   def generate_agent_user_output
     @start_time, @end_time = get_start_and_end_parameters
-    condition = generate_common_agent_condition
-    @reservationsTable = generate_reservations_table(condition, @start_time, @end_time)
+    condition = generate_common_report_condition
+    @reservationsTable = generate_reservations_table_by_create(condition, @start_time, @end_time)
     @table = @agent.reservations.joins(:spot).joins(:user).where(condition).exclude_canceled.sum_user_output_between(@start_time, @end_time)
   end
 
   def generate_agent_output_rate
     @start_time = get_start_parameters_by_rate
-    condition = generate_common_agent_condition
-    @reservationsTable = generate_reservations_table(condition, @start_time, @start_time.end_of_month)
+    condition = generate_common_report_condition
+    @reservationsTable = generate_reservations_table_by_create(condition, @start_time, @start_time.end_of_month)
 
     @table = @agent.reservations.joins(:spot).joins(:user).where(condition).exclude_canceled.sum_output_between(@start_time, @start_time.end_of_month)
     @prev_month_table = @agent.reservations.joins(:spot).joins(:user).where(condition).exclude_canceled.sum_output_between(@start_time.prev_month, @start_time.end_of_month.prev_month)
@@ -145,8 +153,8 @@ class ReportsController < ApplicationController
 
   def generate_spot_output_rate
     @start_time = get_start_parameters_by_rate
-    condition =  generate_common_agent_condition
-    @reservationsTable = generate_spot_reservations_table(condition,@start_time,@start_time.end_of_month)
+    condition = generate_common_report_condition
+    @reservationsTable = generate_spot_reservations_table_by_create(condition, @start_time, @start_time.end_of_month)
     @table = @spot.reservations.joins(:agent).where(condition).exclude_canceled.sum_output_between(@start_time, @start_time.end_of_month)
     @prev_month_table = @spot.reservations.joins(:agent).where(condition).exclude_canceled.sum_output_between(@start_time.prev_month, @start_time.end_of_month.prev_month)
     @prev_year_table = @spot.reservations.joins(:agent).where(condition).exclude_canceled.sum_output_between(@start_time.prev_year, @start_time.end_of_month.prev_year)
@@ -200,29 +208,79 @@ class ReportsController < ApplicationController
     end
   end
 
-  def generate_common_agent_condition
-    @spot_name = params[:spot_name]
-    @group_no = params[:group_no]
-    @userRealName = params[:userRealName]
-    @username = params[:username]
+  def generate_common_report_condition
+    where_sql = " 1=1 ";
+    where_params = {};
+    condition = [where_sql, where_params]
     @agent_name = params[:agent_name]
-    condition = {}
-    if @spot_name.present?
-      condition[:spot] = {:name.matches => "%#{@spot_name}%"}
-    end
-    if @userRealName.present?
-      condition[:users] = {:name.matches => "%#{@userRealName}%"}
-    end
-    if @username.present?
-      condition[:users] = {:username.matches => "%#{@username}%"}
-    end
-    if @group_no.present?
-      condition[:reservations] = {:group_no.matches => "%#{@group_no}%"}
-    end
     if @agent_name.present?
-      condition[:agent] = {:name.matches => "%#{@agent_name}%"}
+      where_sql.concat(" and agents.name like :agent_name ")
+      where_params[:agent_name] = "%#{@agent_name}%";
     end
-    prepare_reservation_type_condition(condition)
+    @spot_name = params[:spot_name]
+    if @spot_name.present?
+      where_sql.concat(" and spots.name like :spot_name ")
+      where_params[:spot_name] = "%#{@spot_name}%";
+    end
+    @group_no = params[:group_no]
+    if @group_no.present?
+      where_sql.concat(" and reservations.group_no like :group_no ")
+      where_params[:group_no] = "%#{@group_no}%";
+    end
+    @reservation_no = params[:reservation_no]
+    if @reservation_no.present?
+      where_sql.concat(" and reservations.no like :reservation_no ")
+      where_params[:reservation_no] = "%#{@reservation_no}%";
+    end
+    @ticket_name = params[:ticket_name]
+    if @ticket_name.present?
+      where_sql.concat(" and reservations.ticket_name like :ticket_name ")
+      where_params[:ticket_name] = "%#{@ticket_name}%";
+    end
+    @userRealName = params[:userRealName]
+    if @userRealName.present?
+      where_sql.concat(" and users.name like :userRealName ")
+      where_params[:userRealName] = "%#{@userRealName}%"
+    end
+    @username = params[:username]
+    if @username.present?
+      where_sql.concat(" and users.username like :username ")
+      where_params[:username] = "%#{@username}%"
+    end
+    @reservation_type = params[:reservation_type]
+    if  @reservation_type.present?
+      where_sql.concat(" and reservations.type = :reservation_type ")
+      where_params[:reservation_type] = @reservation_type
+    end
+    @reservation_status = params[:reservation_status]
+    if  @reservation_status.present?
+      where_sql.concat(" and reservations.status = :reservation_status ")
+      if @reservation_status == "confirmed"
+        where_sql.concat(" and reservations.date >= :current_date ")
+        where_params[:current_date] = Date.today
+        where_params[:reservation_status] = "confirmed"
+      elsif @reservation_status == "outdated"
+        where_sql.concat(" and reservations.date < :current_date ")
+        where_params[:current_date] = Date.today
+        where_params[:reservation_status] = "confirmed"
+      else
+        where_params[:reservation_status] = @reservation_status
+      end
+    else
+      where_sql.concat(" and reservations.status != :reservation_status ")
+      where_params[:reservation_status] = "canceled"
+    end
+    @paid_status = params[:paid_status]
+    if  @paid_status.present?
+      where_sql.concat(" and reservations.paid = :paid_status ")
+      where_params[:paid_status] = @paid_status
+    end
+    @payment_method = params[:payment_method]
+    if  @payment_method.present?
+      where_sql.concat(" and reservations.payment_method = :payment_method ")
+      where_params[:payment_method] = @payment_method
+    end
+    condition
   end
 
   def prepare_reservation_type_condition(condition)
@@ -238,16 +296,28 @@ class ReportsController < ApplicationController
     condition
   end
 
-  def generate_reservations_table(condition, start_time, end_time)
+  def generate_reservations_table_by_create(condition, start_time, end_time)
     page = params[:page].to_i
-    @search = @agent.reservations.joins(:spot).joins(:user).where(condition).exclude_canceled.day_between(start_time, end_time);
+    @search = @agent.reservations.joins(:spot).joins(:user).where(condition).day_between(start_time, end_time);
     @search.page(page);
   end
 
-   def generate_spot_reservations_table(condition, start_time, end_time)
+  def generate_reservations_table_by_date(condition, start_time, end_time)
+    page = params[:page].to_i
+    @search = @agent.reservations.joins(:spot).joins(:user).where(condition).date_between(start_time, end_time);
+    @search.page(page);
+  end
+
+  def generate_spot_reservations_table_by_create(condition, start_time, end_time)
     page = params[:page].to_i
     @search = @spot.reservations.joins(:agent).where(condition).exclude_canceled.day_between(start_time, end_time);
     @search.page(page);
-   end
+  end
+
+  def generate_spot_reservations_table_by_date(condition, start_time, end_time)
+    page = params[:page].to_i
+    @search = @spot.reservations.joins(:agent).where(condition).exclude_canceled.date_between(start_time, end_time);
+    @search.page(page);
+  end
 
 end

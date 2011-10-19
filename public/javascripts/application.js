@@ -73,8 +73,8 @@ $(function() {
         },
         minLength: 1,
         select: function(event, ui) {
-            $.each($.myglobals.used_contacts, function(){
-                if(this.contact == ui.item.value){
+            $.each($.myglobals.used_contacts, function() {
+                if (this.contact == ui.item.value) {
                     $("#reservation_phone").val(this.phone);
                 }
             });
@@ -182,7 +182,28 @@ $(function() {
         });
         return false;
     });
+    $("#report_paginate span a").live("click", function() {
+        report_paginate($(this));
+        return false;
+    });
 
+
+    function report_paginate(obj) {
+        var page_url_arr = obj.attr("href").split("?");
+        var page_uri = page_url_arr[0];
+        var page_params = page_url_arr[1].split("&");
+        var params = {};
+        for (i = 0; i < page_params.length; i++) {
+            var param = page_params[i];
+            var param_temp = param.split("=");
+            params[param_temp[0]] = param_temp[1];
+        }
+        $.post(page_uri, params, function(data) {
+            $("#report").html(data);
+        });
+
+
+    }
 
     $("#purchase_reservations_form :checkbox").click(calculate_total_price_for_purchase);
 
@@ -246,7 +267,7 @@ function set_datepicker() {
         }
     });
 
-     $(".report_start_datepicker").datepicker({
+    $(".report_start_datepicker").datepicker({
         changeYear: true ,
         changeMonth: true,
         numberOfMonths: 2
@@ -378,7 +399,7 @@ function change_output_report_condition_fields(val) {
     }
 }
 
-function show_year(){
+function show_year() {
     $("#year").parent().show();
 }
 
@@ -393,11 +414,11 @@ function show_week() {
     $("#week").parent().show();
 }
 
-function show_date_range(){
+function show_date_range() {
     $("#date_range").show();
 }
 
-function hide_year(){
+function hide_year() {
     $("#year").parent().hide();
 }
 
@@ -411,7 +432,7 @@ function hide_week() {
     $("#week").parent().hide();
 }
 
-function hide_date_range(){
+function hide_date_range() {
     $("#date_range").hide();
 }
 
