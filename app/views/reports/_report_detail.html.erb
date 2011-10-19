@@ -1,0 +1,56 @@
+<tr>
+  <td colspan="18" height="50px" style="text-align: left;">订单明细</td>
+</tr>
+<tr>
+  <th>订单号</th>
+  <th>团号</th>
+  <% if current_user.is_spot_user %>
+      <th>旅行社</th>
+  <% elsif current_user.is_agent_user %>
+      <th>景区</th>
+  <% end %>
+  <th>门票种类</th>
+  <th>入园日期</th>
+  <th>订单种类</th>
+  <th>成人价(销售价/(结算价))</th>
+  <th>儿童价(销售价/(结算价))</th>
+  <th>预订成人票</th>
+  <th>预订儿童票</th>
+  <th>实际成人票</th>
+  <th>实际儿童票</th>
+  <th>总价(销售价/(结算价))</th>
+  <th>支付方式</th>
+  <th>预订日期</th>
+  <th>入园状态</th>
+  <th>支付状态</th>
+  <th>结算状态</th>
+</tr>
+<% for reservation in @reservationsTable %>
+    <tr id="user<%= reservation.id %>_row" class=<%= cycle("even", "odd") %>>
+      <td><%= reservation.no %></td>
+      <td><%= reservation.group_no %></td>
+      <% if current_user.is_spot_user %>
+          <td><%= reservation.agent.name %></td>
+      <% elsif current_user.is_agent_user %>
+          <td><%= reservation.spot.name %></td>
+      <% end %>
+      <td><%= reservation.ticket_name %></td>
+      <td><%= reservation.date %></td>
+      <td><%= show_reservation_type(reservation) %></td>
+      <td> <%= show_reservation_adult_price(reservation) %> </td>
+      <td> <%= show_reservation_child_price(reservation) %></td>
+      <td><%= reservation.adult_ticket_number %></td>
+      <td><%= reservation.child_ticket_number %></td>
+      <td><%= reservation.adult_true_ticket_number %></td>
+      <td><%= reservation.child_true_ticket_number %></td>
+      <td><%= show_reservation_total_price(reservation) %></td>
+      <td><%= show_reservation_payment_method(reservation) %></td>
+      <td><%= date_format(reservation.created_at) %></td>
+      <td><%= reservation.status_name %></td>
+      <td><%= reservation.paid_name %></td>
+      <td><%= reservation.settled_name %></td>
+    </tr>
+<% end %>
+<tr>
+  <td colspan="18" height="50px" style="text-align: left;">订单总计</td>
+</tr>

@@ -1,0 +1,69 @@
+<fieldset class="inputs">
+  <table class="search_table">
+    <tr>
+      <% if current_user.is_agent_user %>
+          <td class="report_condition_label">景区名称</td>
+          <td class="report_condition_input"><%= text_field_tag :spot_name, params[:spot_name] %></td>
+      <% else %>
+          <td class="report_condition_label">旅行社名称</td>
+          <td class="report_condition_input"><%= text_field_tag :agent_name, params[:agent_name] %></td>
+      <% end %>
+      <td class="report_condition_label">团号</td>
+      <td class="report_condition_input"><%= text_field_tag :group_no, params[:group_no] %></td>
+      <td rowspan="6" align="center">
+        <fieldset class="buttons">
+          <%= submit_tag "查询" %>
+        </fieldset>
+      </td>
+    </tr>
+    <tr>
+      <td class="report_condition_label">订单号</td>
+      <td class="report_condition_input"><%= text_field_tag :reservation_no, params[:reservation_no] %></td>
+      <td class="report_condition_label">门票种类</td>
+      <td class="report_condition_input"><%= text_field_tag :ticket_name, params[:ticket_name] %></td>
+    </tr>
+    <% if current_user.is_agent_user %>
+    <tr>
+      <td class="report_condition_label">用户名</td>
+      <td class="report_condition_input"><%= text_field_tag :username, params[:username] %></td>
+      <td class="report_condition_label">用户姓名</td>
+      <td class="report_condition_input"><%= text_field_tag :userRealName, params[:userRealName] %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <td class="report_condition_label">订单种类</td>
+      <td class="report_condition_input">
+        <% if current_user.is_spot_price_all %>
+            <%= select_tag :reservation_type, options_for_select([["全部", ""], ["散客", "IndividualReservation"], ["团队", "TeamReservation"]], params[:reservation_type]), :id =>"reservation_type" %>
+        <% elsif current_user.has_spot_team_price %>
+            <%= select_tag :reservation_type, options_for_select([["团队", "TeamReservation"]], params[:reservation_type]), :id =>"reservation_type" %>
+        <% elsif current_user.has_spot_individual_price %>
+            <%= select_tag :reservation_type, options_for_select([["散客", "IndividualReservation"]], params[:reservation_type]), :id =>"reservation_type" %>
+        <% end %>
+      </td>
+      <td class="report_condition_label">订单状态</td>
+      <td class="report_condition_input"><%= select_tag :reservation_status, options_for_select([["全部", ""], ["已确认", "confirmed"], ["已入园", "checkedin"], ["已过期", "outdated"]], params[:reservation_status]), :id =>"reservation_status" %></td>
+    </tr>
+    <tr>
+      <td class="report_condition_label">结算状态</td>
+      <td class="report_condition_input"><%= select_tag :paid_status, options_for_select([["全部", ""], ["已结算", "1"], ["未结算", "0"]], params[:paid_status]), :id =>"paid_status" %></td>
+      <td class="report_condition_label">支付方式</td>
+      <td class="report_condition_input"><%= select_tag :payment_method, options_for_select([["全部", ""], ["挂账", "prepay"], ["现付", "poa"], ["预付", "net"]], params[:payment_method]), :id =>"payment_method" %></td>
+    </tr>
+    <tr>
+      <td class="report_condition_label">报表类型</td>
+      <td class="report_date_select" colspan="3" >
+        <%= select_tag :type, options_for_select([["日", "day"], ["周", "week"], ["月", "month"], ["日期范围", "date_range"]], params[:type]), :id =>"output_report_type" %>
+        <span><%= select_tag :year, options_for_select([[2011, 2011], [2010, 2010]], params[:year]) %>年</span>
+        <span><%= select_tag :month, options_for_select([[2011, 2011]], params[:month]) %>月</span>
+        <span><%= select_tag :day, options_for_select([[2011, 2011]], params[:day]) %>日</span>
+        <span><%= select_tag :week, options_for_select([[2011, 2011]], params[:week]) %>周</span>
+        <span id="date_range" style="width: 450px">
+          <abbr title="required">*</abbr> <%= text_field_tag :start_report_time, @start_time, {:class => 'report_start_datepicker', :readonly => 'readonly', :width=>'100px'} %>
+          ~
+          <abbr title="required">*</abbr> <%= text_field_tag :end_report_time, @end_time, {:class => 'report_end_datepicker', :readonly => 'readonly', :width=>'100px'} %>
+        </span>
+      </td>
+    </tr>
+  </table>
+</fieldset>

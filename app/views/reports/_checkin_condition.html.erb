@@ -1,0 +1,48 @@
+<fieldset class="inputs">
+  <table class="search_table">
+    <tr>
+      <% if current_user.is_agent_user %>
+          <td class="report_condition_label">景区名称</td>
+          <td class="report_condition_input"><%= text_field_tag :spot_name, params[:spot_name] %></td>
+      <% else %>
+          <td class="report_condition_label">旅行社名称</td>
+          <td class="report_condition_input"><%= text_field_tag :agent_name, params[:agent_name] %></td>
+      <% end %>
+      <td class="report_condition_label">门票种类</td>
+      <td class="report_condition_input"><%= text_field_tag :ticket_name, params[:ticket_name] %></td>
+      <td rowspan="3" align="center">
+        <fieldset class="buttons">
+          <%= submit_tag "查询" %>
+        </fieldset>
+      </td>
+    </tr>
+    <tr>
+      <td class="report_condition_label">订单种类</td>
+      <td class="report_condition_input" colspan="3">
+        <% if current_user.is_spot_price_all %>
+            <%= select_tag :reservation_type, options_for_select([["全部", ""], ["散客", "IndividualReservation"], ["团队", "TeamReservation"]], params[:reservation_type]), :id =>"reservation_type" %>
+        <% elsif current_user.has_spot_team_price %>
+            <%= select_tag :reservation_type, options_for_select([["团队", "TeamReservation"]], params[:reservation_type]), :id =>"reservation_type" %>
+        <% elsif current_user.has_spot_individual_price %>
+            <%= select_tag :reservation_type, options_for_select([["散客", "IndividualReservation"]], params[:reservation_type]), :id =>"reservation_type" %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td class="report_condition_label">报表类型</td>
+      <td colspan="3" class="report_date_select">
+        <%= select_tag :type, options_for_select([["日", "day"], ["周", "week"], ["月", "month"], ["日期范围", "date_range"]], params[:type]), :id =>"output_report_type" %>
+        <span><%= select_tag :year, options_for_select([[2011, 2011], [2010, 2010]], params[:year]) %>年</span>
+        <span><%= select_tag :month, options_for_select([[2011, 2011]], params[:month]) %>月</span>
+        <span><%= select_tag :day, options_for_select([[2011, 2011]], params[:day]) %>日</span>
+        <span><%= select_tag :week, options_for_select([[2011, 2011]], params[:week]) %>周</span>
+
+        <span id="date_range" style="width: 500px">
+          <abbr title="required">*</abbr> <%= text_field_tag :start_report_time, @start_time, {:class => 'report_start_datepicker', :readonly => 'readonly', :width=>'100px'} %>
+          ~
+          <abbr title="required">*</abbr> <%= text_field_tag :end_report_time, @end_time, {:class => 'report_end_datepicker', :readonly => 'readonly', :width=>'100px'} %>
+        </span>
+      </td>
+    </tr>
+  </table>
+</fieldset>
